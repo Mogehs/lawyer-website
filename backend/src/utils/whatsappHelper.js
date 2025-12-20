@@ -33,34 +33,56 @@ class WhatsAppHelper {
 
     try {
       // Notify assigned lawyer
-      if (lawyerData && lawyerData.phone) {
-        const lawyerResult = await notifyLawyerAssignment(
-          lawyerData,
-          caseNumber,
-          clientName,
-          caseDetails
-        );
-        results.push({
-          type: "lawyer",
-          success: true,
-          recipient: lawyerData.name,
-        });
+      if (lawyerData) {
+        try {
+          const lawyerResult = await notifyLawyerAssignment(
+            lawyerData,
+            caseNumber,
+            clientName,
+            caseDetails
+          );
+          results.push({
+            type: "lawyer",
+            recipient: lawyerData.name,
+            email: lawyerResult?.email,
+            whatsapp: lawyerResult?.whatsapp,
+          });
+          console.log(`✅ Lawyer notification sent to ${lawyerData.name}`);
+        } catch (error) {
+          console.error(`⚠️ Failed to notify lawyer ${lawyerData.name}:`, error.message);
+          results.push({
+            type: "lawyer",
+            recipient: lawyerData.name,
+            error: error.message,
+          });
+        }
       }
 
       // Notify secretary about the assignment
-      if (secretaryData && secretaryData.phone) {
-        const secretaryResult = await notifySecretaryAssignment(
-          secretaryData,
-          caseNumber,
-          lawyerData?.name || "Assigned Lawyer",
-          clientName,
-          caseDetails
-        );
-        results.push({
-          type: "secretary",
-          success: true,
-          recipient: secretaryData.name,
-        });
+      if (secretaryData) {
+        try {
+          const secretaryResult = await notifySecretaryAssignment(
+            secretaryData,
+            caseNumber,
+            lawyerData?.name || "Assigned Lawyer",
+            clientName,
+            caseDetails
+          );
+          results.push({
+            type: "secretary",
+            recipient: secretaryData.name,
+            email: secretaryResult?.email,
+            whatsapp: secretaryResult?.whatsapp,
+          });
+          console.log(`✅ Secretary notification sent to ${secretaryData.name}`);
+        } catch (error) {
+          console.error(`⚠️ Failed to notify secretary ${secretaryData.name}:`, error.message);
+          results.push({
+            type: "secretary",
+            recipient: secretaryData.name,
+            error: error.message,
+          });
+        }
       }
 
       // Auto-schedule hearing reminders if hearing date is provided
@@ -70,28 +92,38 @@ class WhatsAppHelper {
         if (secretaryData?.phone) recipients.push(secretaryData);
 
         if (recipients.length > 0) {
-          whatsappScheduler.scheduleHearingReminders({
-            caseNumber,
-            hearingDate: caseDetails.hearingDate,
-            hearingTime: caseDetails.hearingTime,
-            recipients,
-            caseDetails,
-          });
-          results.push({
-            type: "hearing_reminders",
-            success: true,
-            scheduled: true,
-          });
+          try {
+            whatsappScheduler.scheduleHearingReminders({
+              caseNumber,
+              hearingDate: caseDetails.hearingDate,
+              hearingTime: caseDetails.hearingTime,
+              recipients,
+              caseDetails,
+            });
+            results.push({
+              type: "hearing_reminders",
+              success: true,
+              scheduled: true,
+            });
+            console.log(`✅ Hearing reminders scheduled for case ${caseNumber}`);
+          } catch (error) {
+            console.error(`⚠️ Failed to schedule hearing reminders:`, error.message);
+            results.push({
+              type: "hearing_reminders",
+              error: error.message,
+            });
+          }
         }
       }
 
+      console.log(`📊 Case assignment notification completed. Results:`, results);
       return {
         success: true,
-        message: "Case assignment notifications sent successfully",
+        message: "Case assignment notification process completed",
         results,
       };
     } catch (error) {
-      console.error("Error in case assignment notification:", error);
+      console.error("❌ Error in case assignment notification:", error);
       return {
         success: false,
         error: error.message,

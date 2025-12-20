@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { X } from "lucide-react";
 import ClientInfoForm from "./ClientInfoForm";
 import CaseDetailsForm from "./CaseDetailsForm";
@@ -14,6 +14,9 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
   const [step, setStep] = useState(1);
   const prevOpenState = useRef(false);
   const [selectedClientId, setSelectedClientId] = useState(null);
+
+  // Memoize caseData ID to prevent unnecessary re-renders
+  const caseId = useMemo(() => caseData?._id || caseData?.id, [caseData]);
 
   const [clientInfo, setClientInfo] = useState({
     name: "",
@@ -79,12 +82,27 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
 
     // Update ref for next render
     prevOpenState.current = isOpen;
-  }, [isOpen, caseData]);
+  }, [isOpen, caseId]); // Use caseId instead of caseData
 
   const handleClientChange = (e) =>
     setClientInfo({ ...clientInfo, [e.target.name]: e.target.value });
   const handleCaseChange = (e) =>
     setCaseInfo({ ...caseInfo, [e.target.name]: e.target.value });
+
+  // Memoize the callback to prevent recreation on every render
+  const handleClientSelect = useCallback((clientId) => {
+    setSelectedClientId(clientId);
+  }, []);
+
+  // Memoize document change handler to prevent infinite loop in DocumentDetailsForm
+  const handleDocumentChange = useCallback((e) => {
+    if (e.target.name === "documents") {
+      setCaseInfo((prev) => ({
+        ...prev,
+        documents: e.target.value,
+      }));
+    }
+  }, []);
 
   const [createCase, { isLoading: isCreating }] = useCreateCaseMutation();
   const [updateCase, { isLoading: isUpdating }] = useUpdateCaseMutation();
@@ -262,7 +280,7 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
             <ClientInfoForm
               clientInfo={clientInfo}
               onChange={handleClientChange}
-              onClientSelect={setSelectedClientId}
+              onClientSelect={handleClientSelect}
               selectedClientId={selectedClientId}
             />
           )}
@@ -278,14 +296,7 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
           {step === 3 && (
             <DocumentDetailsForm
               caseInfo={caseInfo}
-              onChange={(e) => {
-                if (e.target.name === "documents") {
-                  setCaseInfo((prev) => ({
-                    ...prev,
-                    documents: e.target.value,
-                  }));
-                }
-              }}
+              onChange={handleDocumentChange}
             />
           )}
         </div>

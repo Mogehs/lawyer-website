@@ -172,9 +172,14 @@ export const sendWhatsAppNotification = async (phoneNumber, message) => {
 
 export const sendEmailNotification = async (email, subject, message) => {
   try {
-    await sendMail({ email, subject, text: message });
+    const result = await sendMail({ email, subject, text: message });
+    if (!result.success) {
+      console.warn(`⚠️ Email notification failed for ${email}:`, result.error);
+    }
+    return result;
   } catch (error) {
-    console.error("Email notification failed:", error);
+    console.error("❌ Email notification error:", error.message);
+    return { success: false, error: error.message };
   }
 };
 
@@ -206,15 +211,24 @@ export const notifyLawyerAssignment = async (
     `📱 Please log into the system to review case details and begin preparation.\n\n` +
     `📞 For urgent matters, contact the secretary immediately.`;
 
-  await sendEmailNotification(
+  const results = {
+    email: null,
+    whatsapp: null,
+  };
+
+  // Try email notification (non-blocking)
+  results.email = await sendEmailNotification(
     lawyer.email,
     "New Case Assignment",
     emailMessage
   );
 
+  // Try WhatsApp notification (non-blocking)
   if (lawyer.phone) {
-    await sendWhatsAppMessage(lawyer.phone, whatsappMessage);
+    results.whatsapp = await sendWhatsAppMessage(lawyer.phone, whatsappMessage);
   }
+
+  return results;
 };
 
 export const notifySecretaryAssignment = async (
@@ -244,15 +258,24 @@ export const notifySecretaryAssignment = async (
     `• Coordinate with lawyer\n\n` +
     `💻 Access the dashboard for complete case details.`;
 
-  await sendEmailNotification(
+  const results = {
+    email: null,
+    whatsapp: null,
+  };
+
+  // Try email notification (non-blocking)
+  results.email = await sendEmailNotification(
     secretary.email,
     "Case Assignment Update",
     emailMessage
   );
 
+  // Try WhatsApp notification (non-blocking)
   if (secretary.phone) {
-    await sendWhatsAppMessage(secretary.phone, whatsappMessage);
+    results.whatsapp = await sendWhatsAppMessage(secretary.phone, whatsappMessage);
   }
+
+  return results;
 };
 
 export const notifyHearingReminder = async (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useGetAllClientsQuery } from "../../api/secretaryApi";
 
 const ClientInfoForm = ({
@@ -10,22 +10,29 @@ const ClientInfoForm = ({
   const { data: clientsData } = useGetAllClientsQuery();
   const [useExistingClient, setUseExistingClient] = useState(false);
   const [selectedClientId, setSelectedClientId] = useState("");
+  const isInitialMount = useRef(true);
 
-  // Sync with parent when selectedClientId changes
-  useEffect(() => {
-    if (onClientSelect) {
-      onClientSelect(selectedClientId || null);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedClientId]);
-
-  // If parent provides selectedClientId, sync with it
+  // Only sync with parent on initial mount or when parent value actually changes
   useEffect(() => {
     if (parentSelectedClientId && parentSelectedClientId !== selectedClientId) {
       setSelectedClientId(parentSelectedClientId);
       setUseExistingClient(true);
     }
-  }, [parentSelectedClientId, selectedClientId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [parentSelectedClientId]); // Exclude selectedClientId to prevent circular dependency
+
+  // Notify parent when local selection changes (but not on initial mount)
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    if (onClientSelect) {
+      onClientSelect(selectedClientId || null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedClientId]); // onClientSelect is now memoized in parent, safe to exclude
 
   const handleClientSelect = (e) => {
     const clientId = e.target.value;

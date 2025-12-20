@@ -265,42 +265,50 @@ export const createCase = asyncHandler(async (req, res) => {
       const lawyer = await User.findById(assignedLawyer);
       const secretary = await User.findById(req.user._id);
 
-      // Format phone numbers (remove + and ensure proper format)
-      const formatPhone = (phone) => {
-        if (!phone) return null;
-        return phone.replace(/^\+/, "").replace(/\D/g, "");
-      };
+      if (!lawyer) {
+        console.warn("⚠️ Lawyer not found for notification");
+      } else if (!secretary) {
+        console.warn("⚠️ Secretary not found for notification");
+      } else {
+        // Format phone numbers (remove + and ensure proper format)
+        const formatPhone = (phone) => {
+          if (!phone) return null;
+          return phone.replace(/^\+/, "").replace(/\D/g, "");
+        };
 
-      await WhatsAppHelper.notifyNewCaseAssignment({
-        lawyerData: {
-          name: lawyer.name,
-          email: lawyer.email,
-          phone: formatPhone(lawyer.phone),
-        },
-        secretaryData: {
-          name: secretary.name,
-          email: secretary.email,
-          phone: formatPhone(secretary.phone),
-        },
-        caseNumber: caseNumber,
-        clientName: client.name,
-        caseDetails: {
-          courtName: "To be determined",
-          caseType: caseType,
-          priority: "Normal",
-          assignedDate: new Date().toLocaleDateString(),
-        },
-      });
+        const notificationResult = await WhatsAppHelper.notifyNewCaseAssignment({
+          lawyerData: {
+            name: lawyer.name,
+            email: lawyer.email,
+            phone: formatPhone(lawyer.phone),
+          },
+          secretaryData: {
+            name: secretary.name,
+            email: secretary.email,
+            phone: formatPhone(secretary.phone),
+          },
+          caseNumber: caseNumber,
+          clientName: client.name,
+          caseDetails: {
+            courtName: "To be determined",
+            caseType: caseType,
+            priority: "Normal",
+            assignedDate: new Date().toLocaleDateString(),
+          },
+        });
 
-      console.log(
-        "WhatsApp notifications sent for new case creation with lawyer assignment"
-      );
+        console.log(
+          `📬 Notification process completed for case ${caseNumber}:`,
+          notificationResult.message
+        );
+      }
     } catch (whatsappError) {
       console.error(
-        "WhatsApp notification failed during case creation:",
+        "⚠️ Notification failed during case creation (non-critical):",
         whatsappError.message
       );
-      // Don't fail the main operation if WhatsApp fails
+      console.error("Stack:", whatsappError.stack);
+      // Don't fail the main operation if notification fails - this is non-critical
     }
   }
 

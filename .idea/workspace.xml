@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b35c61da-95aa-4246-87b7-c8fababd0f21" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/aws-iam-policy.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/serverless.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/setup-aws.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/setup-aws.ps1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/controllers/case.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/controllers/payment.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/controllers/session.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/AuditLog.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/LegalCase.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/Memorandum.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/Payment.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/Session.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/WhatsAppLog.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/lambda.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/schedulers/whatsappSchedulerLambda.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/scripts/preDeployCheck.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/features/secretary/secretary.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/secretary/secretary.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/utils/notifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/utils/notifications.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/utils/sendMail.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/utils/sendMail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/utils/whatsappHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/utils/whatsappHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/AddCase.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/AddCase.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/ClientInfoForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/ClientInfoForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/DocumentDetailsForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/DocumentDetailsForm.jsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/backend/package.json" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="36vDyAfFvqRwFxwKON3Ze6YTLJK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-c7e53b3be11b-JavaScript-WS-253.28294.332" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b35c61da-95aa-4246-87b7-c8fababd0f21" name="Changes" comment="" />
+      <created>1765878404915</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765878404915</updated>
+      <workItem from="1765878407834" duration="901000" />
+      <workItem from="1765879614082" duration="57000" />
+      <workItem from="1765885009171" duration="2952000" />
+      <workItem from="1765888605794" duration="331000" />
+      <workItem from="1765916366210" duration="5195000" />
+      <workItem from="1765965045616" duration="41000" />
+      <workItem from="1766268902340" duration="430000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

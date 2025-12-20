@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Upload,
   FileText,
@@ -14,9 +14,15 @@ const DocumentDetailsForm = ({ caseInfo, onChange }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [uploadingFiles, setUploadingFiles] = useState(false);
   const fileInputRef = useRef(null);
+  const isInitialMount = useRef(true);
 
-  // Update parent when documents change
-  React.useEffect(() => {
+  // Update parent when documents change (skip initial mount)
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
     if (onChange) {
       onChange({
         target: {
@@ -25,7 +31,8 @@ const DocumentDetailsForm = ({ caseInfo, onChange }) => {
         },
       });
     }
-  }, [documents, onChange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [documents]); // onChange is now memoized in parent, safe to exclude
 
   // Upload file to backend API which will handle Cloudinary upload
   const uploadFileToBackend = async (file) => {

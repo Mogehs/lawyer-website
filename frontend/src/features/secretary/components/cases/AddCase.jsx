@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import { X } from "lucide-react";
-import ClientInfoForm from "./ClientInfoForm";
+import React, { useState, useEffect, useMemo } from "react";
+import { X, Search } from "lucide-react";
 import CaseDetailsForm from "./CaseDetailsForm";
 import DocumentDetailsForm from "./DocumentDetailsForm";
 import {
@@ -11,21 +10,12 @@ import {
 import { toast } from "react-toastify";
 
 const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
-  const [step, setStep] = useState(1);
-  const prevOpenState = useRef(false);
   const [selectedClientId, setSelectedClientId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Memoize caseData ID to prevent unnecessary re-renders
   const caseId = useMemo(() => caseData?._id || caseData?.id, [caseData]);
 
-  const [clientInfo, setClientInfo] = useState({
-    name: "",
-    contact: "",
-    email: "",
-    nationalId: "",
-    address: "",
-    additionalInformation: "",
-  });
 
   const [caseInfo, setCaseInfo] = useState({
     caseType: "",
@@ -38,13 +28,12 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
     documents: [],
   });
 
-  // Only run when modal transitions from closed to open
+  // Reset state when modal opens/closes
   useEffect(() => {
-    // Detect when modal just opened
-    if (isOpen && !prevOpenState.current) {
+    if (isOpen) {
       if (caseData) {
-        setClientInfo({ ...caseData.client });
-        // When editing, use assignedLawyerId for the dropdown value
+        // Editing existing case
+        setSelectedClientId(caseData.client?._id || null);
         setCaseInfo({
           ...caseData.case,
           assignedLawyer:
@@ -57,15 +46,9 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
             "",
         });
       } else {
-        // Reset for new case
-        setClientInfo({
-          name: "",
-          contact: "",
-          email: "",
-          nationalId: "",
-          address: "",
-          additionalInformation: "",
-        });
+        // Creating new case - reset everything
+        setSelectedClientId(null);
+        setSearchQuery("");
         setCaseInfo({
           caseType: "",
           description: "",
@@ -77,45 +60,51 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
           documents: [],
         });
       }
-      setStep(1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, caseId]);
 
-    // Update ref for next render
-    prevOpenState.current = isOpen;
-  }, [isOpen, caseId]); // Use caseId instead of caseData
-
-  const handleClientChange = (e) =>
-    setClientInfo({ ...clientInfo, [e.target.name]: e.target.value });
   const handleCaseChange = (e) =>
     setCaseInfo({ ...caseInfo, [e.target.name]: e.target.value });
 
-  // Memoize the callback to prevent recreation on every render
-  const handleClientSelect = useCallback((clientId) => {
-    setSelectedClientId(clientId);
-  }, []);
-
-  // Memoize document change handler to prevent infinite loop in DocumentDetailsForm
-  const handleDocumentChange = useCallback((e) => {
+  const handleDocumentChange = (e) => {
     if (e.target.name === "documents") {
       setCaseInfo((prev) => ({
         ...prev,
         documents: e.target.value,
       }));
     }
-  }, []);
+  };
 
   const [createCase, { isLoading: isCreating }] = useCreateCaseMutation();
   const [updateCase, { isLoading: isUpdating }] = useUpdateCaseMutation();
   const { data: clientsData } = useGetAllClientsQuery();
 
-  const handleNext = () => setStep(step + 1);
-  const handleBack = () => setStep(step - 1);
+  // Filter clients based on search query
+  const filteredClients = useMemo(() => {
+    if (!clientsData?.clients) return [];
+    if (!searchQuery.trim()) return clientsData.clients;
+
+    const query = searchQuery.toLowerCase();
+    return clientsData.clients.filter(
+      (client) =>
+        client.name?.toLowerCase().includes(query) ||
+        client.email?.toLowerCase().includes(query) ||
+        client.contactNumber?.toLowerCase().includes(query) ||
+        client.nationalId?.toLowerCase().includes(query)
+    );
+  }, [clientsData, searchQuery]);
+
+  // Get selected client details
+  const selectedClient = useMemo(() => {
+    if (!selectedClientId || !clientsData?.clients) return null;
+    return clientsData.clients.find((c) => c._id === selectedClientId);
+  }, [selectedClientId, clientsData]);
 
   const handleSubmit = async () => {
     try {
       if (caseData) {
-        // Update existing case - use _id from MongoDB
-        // Note: approvingLawyer is NOT updated - it's set only during creation
+        // Update existing case
         const updatePayload = {
           id: caseData._id || caseData.id,
           data: {
@@ -125,28 +114,12 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
             documents: caseInfo.documents,
           },
         };
-        console.log("📤 Update Payload:", updatePayload);
         await updateCase(updatePayload).unwrap();
         toast.success("Case updated successfully!");
       } else {
-        // Create new case - requires clientId
-        let clientId = selectedClientId;
-
-        // If no client selected from dropdown, try to find by email/contact
-        if (!clientId) {
-          const existingClient = clientsData?.clients?.find(
-            (c) =>
-              c.email === clientInfo.email ||
-              c.contactNumber === clientInfo.contact
-          );
-          clientId = existingClient?._id;
-        }
-
-        // If still no client, show error
-        if (!clientId) {
-          toast.error(
-            "Please select an existing client or create a new client first from the Clients page."
-          );
+        // Create new case - validate client selection
+        if (!selectedClientId) {
+          toast.error("Please select a client from the list");
           return;
         }
 
@@ -157,16 +130,23 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
         }
 
         if (!caseInfo.assignedLawyer) {
-          toast.error("Please assign a lawyer to the case");
+          toast.error("Please assign a draft lawyer to the case");
           return;
         }
 
-        // Create the case with assigned lawyer only
+        if (!caseInfo.approvingLawyer) {
+          toast.error("Please assign an approving lawyer to the case");
+          return;
+        }
+
+        // Create the case
         await createCase({
-          clientId,
+          clientId: selectedClientId,
           caseType: caseInfo.caseType,
           caseDescription: caseInfo.description,
           assignedLawyer: caseInfo.assignedLawyer,
+          approvingLawyer: caseInfo.approvingLawyer,
+          stage: caseInfo.stage,
           documents: caseInfo.documents || [],
         }).unwrap();
         toast.success(
@@ -176,6 +156,7 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
       onAddCase();
       onClose();
       setSelectedClientId(null);
+      setSearchQuery("");
     } catch (error) {
       toast.error(error?.data?.message || "Failed to save case");
     }
@@ -185,151 +166,151 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] flex flex-col">
+      <div className="bg-white rounded-lg shadow-2xl w-full max-w-5xl max-h-[95vh] flex flex-col">
         {/* Fixed Header */}
-        <div className="bg-[#A48C65] px-4 py-3 rounded-t-lg">
+        <div className="bg-gradient-to-r from-[#BCB083] to-[#A48C65] px-6 py-4 rounded-t-lg">
           <div className="flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-white">
+            <h2 className="text-xl font-bold text-white">
               {caseData ? "Edit Case" : "Add New Case"}
             </h2>
             <button
               onClick={onClose}
-              className="p-1 hover:bg-[#7A6B3A] rounded transition"
+              className="p-2 hover:bg-white/20 rounded-lg transition"
             >
-              <X className="w-4 h-4 text-white" />
+              <X className="w-5 h-5 text-white" />
             </button>
-          </div>
-
-          {/* Mini Step Indicator */}
-          <div className="flex items-center justify-center mt-3 space-x-2">
-            {/* Step 1 */}
-            <div className="flex items-center">
-              <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-medium ${
-                  step >= 1
-                    ? "bg-white text-slate-800"
-                    : "bg-[#BCB083] text-black"
-                }`}
-              >
-                1
-              </div>
-              <span
-                className={`ml-1.5 text-[10px] ${
-                  step >= 1 ? "text-white" : "text-white"
-                }`}
-              >
-                Client
-              </span>
-            </div>
-
-            {/* Connector */}
-            <div
-              className={`w-6 h-0.5 ${step >= 2 ? "bg-white" : "bg-white"}`}
-            ></div>
-
-            {/* Step 2 */}
-            <div className="flex items-center">
-              <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-medium ${
-                  step >= 2
-                    ? "bg-white text-slate-800"
-                    : "bg-slate-600 text-white"
-                }`}
-              >
-                2
-              </div>
-              <span
-                className={`ml-1.5 text-[10px] ${
-                  step >= 2 ? "text-white" : "text-white"
-                }`}
-              >
-                Case
-              </span>
-            </div>
-
-            {/* Connector */}
-            <div
-              className={`w-6 h-0.5 ${step >= 3 ? "bg-white" : "bg-white"}`}
-            ></div>
-
-            {/* Step 3 */}
-            <div className="flex items-center">
-              <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-medium ${
-                  step >= 3
-                    ? "bg-white text-slate-800"
-                    : "bg-slate-600 text-white"
-                }`}
-              >
-                3
-              </div>
-              <span
-                className={`ml-1.5 text-[10px] ${
-                  step >= 3 ? "text-white" : "text-white"
-                }`}
-              >
-                Documents
-              </span>
-            </div>
           </div>
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto px-6 py-4">
-          {step === 1 && (
-            <ClientInfoForm
-              clientInfo={clientInfo}
-              onChange={handleClientChange}
-              onClientSelect={handleClientSelect}
-              selectedClientId={selectedClientId}
-            />
-          )}
+        <div className="flex-1 overflow-y-auto px-6 py-6">
+          {/* Client Selection Section */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-800 mb-3">
+              Select Client
+            </h3>
 
-          {step === 2 && (
+            {/* Search Bar */}
+            <div className="relative mb-4">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <input
+                type="text"
+                placeholder="Search by name, email, phone, or national ID..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              />
+            </div>
+
+            {/* Client Selection Grid */}
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 max-h-48 overflow-y-auto">
+              {filteredClients.length === 0 ? (
+                <p className="text-center text-gray-500 py-4">
+                  {searchQuery ? "No clients found matching your search" : "No clients available"}
+                </p>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {filteredClients.map((client) => (
+                    <div
+                      key={client._id}
+                      onClick={() => setSelectedClientId(client._id)}
+                      className={`p-3 border-2 rounded-lg cursor-pointer transition-all ${
+                        selectedClientId === client._id
+                          ? "border-[#A48C65] bg-[#A48C65]/10"
+                          : "border-gray-200 hover:border-[#A48C65]/50 bg-white"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <p className="font-semibold text-gray-800">{client.name}</p>
+                          <p className="text-sm text-gray-600">{client.email}</p>
+                          <p className="text-sm text-gray-500">{client.contactNumber}</p>
+                        </div>
+                        {selectedClientId === client._id && (
+                          <div className="w-5 h-5 rounded-full bg-[#A48C65] flex items-center justify-center">
+                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Selected Client Info */}
+            {selectedClient && (
+              <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-sm font-semibold text-gray-700 mb-2">Selected Client:</p>
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <span className="text-gray-600">Name:</span>
+                    <span className="ml-2 font-medium text-gray-800">{selectedClient.name}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-600">Email:</span>
+                    <span className="ml-2 font-medium text-gray-800">{selectedClient.email}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-600">Phone:</span>
+                    <span className="ml-2 font-medium text-gray-800">{selectedClient.contactNumber}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-600">National ID:</span>
+                    <span className="ml-2 font-medium text-gray-800">{selectedClient.nationalId}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Case Details Section */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-800 mb-3">
+              Case Details
+            </h3>
             <CaseDetailsForm
               caseInfo={caseInfo}
               onChange={handleCaseChange}
               isEditMode={!!caseData}
             />
-          )}
+          </div>
 
-          {step === 3 && (
+          {/* Documents Section */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-3">
+              Documents
+            </h3>
             <DocumentDetailsForm
               caseInfo={caseInfo}
               onChange={handleDocumentChange}
             />
-          )}
+          </div>
         </div>
-        {/* Fixed Footer */}
-        <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4 rounded-b-2xl">
-          <div className="flex justify-between">
-            {step > 1 && (
-              <button
-                onClick={handleBack}
-                className="px-6 py-2 bg-[#BCB083] text-gray-700 rounded-lg hover:bg-[#A48C65] transition-colors hover:text-white"
-              >
-                Back
-              </button>
-            )}
 
+        {/* Fixed Footer */}
+        <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4 rounded-b-lg">
+          <div className="flex justify-end gap-3">
             <button
-              onClick={step === 3 ? handleSubmit : handleNext}
-              disabled={isCreating || isUpdating}
-              className={`px-6 py-2 bg-[#A48C65] text-white rounded-lg hover:bg-[#A48C65] transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-                step === 1 ? "ml-auto" : ""
-              }`}
+              onClick={onClose}
+              className="px-6 py-2.5 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
             >
-              {step === 3 ? (
-                isCreating || isUpdating ? (
-                  <span className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Saving...
-                  </span>
-                ) : (
-                  "Save Case"
-                )
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmit}
+              disabled={isCreating || isUpdating || (!caseData && !selectedClientId)}
+              className="px-6 py-2.5 bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white rounded-lg hover:from-[#A48C65] hover:to-[#8B7355] transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+            >
+              {isCreating || isUpdating ? (
+                <span className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Saving...
+                </span>
               ) : (
-                "Next"
+                caseData ? "Update Case" : "Create Case"
               )}
             </button>
           </div>

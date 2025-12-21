@@ -1,160 +1,174 @@
-import { useEffect, useState } from 'react'
-import { FiChevronRight, FiTrash2 } from 'react-icons/fi'
-import StatusPill from './StatusPill'
+import { Eye, Trash2, FileText } from 'lucide-react';
+import StatusPill from './StatusPill';
 
 export default function ApprovedLawyerCasesTable({
   cases,
   openModal,
   openDeleteModal
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setSidebarOpen(window.innerWidth >= 1024)
+  // Get the actual stage name from the case stages array
+  const getCurrentStageName = (caseItem) => {
+    if (caseItem.stages && caseItem.stages.length > 0) {
+      const currentStageIndex = caseItem.currentStage || 0;
+      return caseItem.stages[currentStageIndex]?.stageType || "Main";
     }
-
-    const handleSidebarToggle = () => {
-      const sidebar = document.querySelector('aside')
-      if (sidebar) {
-        const isOpen = sidebar.classList.contains('w-64')
-        setSidebarOpen(isOpen)
-      }
-    }
-
-    window.addEventListener('resize', handleResize)
-    const interval = setInterval(handleSidebarToggle, 120)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      clearInterval(interval)
-    }
-  }, [])
-
-  // Stage conversion (0,1,2 → Main, Appeal, Cassation)
-  const convertStage = (stageNum) => {
-    const stages = ["Main", "Appeal", "Cassation"]
-    return stages[stageNum] || "Unknown"
-  }
-
+    return "Main";
+  };
 
   // Show empty state if no cases
   if (!cases || cases.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+      <div className="bg-white rounded-lg shadow-md border border-gray-200 p-12 text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
-          <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
+          <FileText className="w-8 h-8 text-gray-400" />
         </div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">No Cases to Review</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">No Cases Assigned</h3>
         <p className="text-sm text-gray-500">
-          There are no pending cases assigned to you for approval at this time.
+          There are no cases assigned to you for review at this time.
         </p>
       </div>
     );
   }
 
   return (
-    <div
-      className={`bg-white w-[320px] text-[#24344f] shadow-2xl rounded-2xl border border-[#fe9a00]/20 overflow-hidden transition-all duration-300 ${sidebarOpen ? "lg:w-[980px] md:w-[500px]" : "lg:w-[1200px] md:w-[680px]"
-        }`}
-    >
-      <div className='block'>
-        <div className='overflow-x-auto '>
-          <table className='w-full table-auto text-sm min-w-[700px] border-collapse'>
-            <thead className='bg-[#A48C65] text-white sticky top-0 z-10'>
-              <tr>
-                {[
-                  'Case #',
-                  'Client Name',
-                  'Phone',
-                  'Case Type',
-                  'Stage',
-                  'Secretary',
-                  'Lawyer',
-                  'Status',
-                  'Actions'
-                ].map(h => (
-                  <th
-                    key={h}
-                    className='p-4 text-sm font-semibold uppercase whitespace-nowrap'
-                  >
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-
-            <tbody className='divide-y divide-slate-200'>
-              {cases.map((c, idx) => (
-                <tr
-                  key={c._id}
-                  className={`${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'
-                    } hover:bg-slate-100 transition`}
-                >
-                  {/* Case number */}
-                  <td className='p-4 font-semibold whitespace-nowrap'>
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full">
+          <thead className="bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white">
+            <tr>
+              <th className="px-4 py-3 text-left text-sm font-semibold">
+                Case #
+              </th>
+              <th className="px-4 py-3 text-left text-sm font-semibold">
+                Client
+              </th>
+              <th className="px-4 py-3 text-left text-sm font-semibold hidden lg:table-cell">
+                Contact
+              </th>
+              <th className="px-4 py-3 text-left text-sm font-semibold">
+                Case Type
+              </th>
+              <th className="px-4 py-3 text-left text-sm font-semibold hidden xl:table-cell">
+                Stage
+              </th>
+              <th className="px-4 py-3 text-left text-sm font-semibold">
+                Secretary
+              </th>
+              <th className="px-4 py-3 text-left text-sm font-semibold hidden xl:table-cell">
+                Draft Lawyer
+              </th>
+              <th className="px-4 py-3 text-left text-sm font-semibold">
+                Status
+              </th>
+              <th className="px-4 py-3 text-right text-sm font-semibold">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            {cases.map((c) => (
+              <tr
+                key={c._id}
+                className="hover:bg-gray-50 transition-colors"
+              >
+                {/* Case Number */}
+                <td className="px-4 py-4 whitespace-nowrap">
+                  <span className="inline-flex items-center gap-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm">
+                    <FileText size={14} />
                     {c.caseNumber}
-                  </td>
+                  </span>
+                </td>
 
-                  {/* Client Name */}
-                  <td className='p-4 whitespace-nowrap'>
-                    {c.clientId?.name}
-                  </td>
+                {/* Client Name */}
+                <td className="px-4 py-4">
+                  <div className="text-sm font-medium text-gray-900">
+                    {c.clientId?.name || 'N/A'}
+                  </div>
+                </td>
 
-                  {/* Phone */}
-                  <td className='p-4 whitespace-nowrap'>
+                {/* Phone */}
+                <td className="px-4 py-4 whitespace-nowrap hidden lg:table-cell">
+                  <div className="text-sm text-gray-600">
                     {c.clientId?.contactNumber || '—'}
-                  </td>
+                  </div>
+                </td>
 
-                  {/* Case Type */}
-                  <td className='p-4 whitespace-nowrap'>{c.caseType}</td>
+                {/* Case Type */}
+                <td className="px-4 py-4 whitespace-nowrap">
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    {c.caseType}
+                  </span>
+                </td>
 
-                  {/* Stage */}
-                  <td className='p-4 whitespace-nowrap'>
-                    <StatusPill status={convertStage(c.currentStage)} />
-                  </td>
+                {/* Stage */}
+                <td className="px-4 py-4 whitespace-nowrap hidden xl:table-cell">
+                  <StatusPill status={getCurrentStageName(c)} />
+                </td>
 
-                  {/* Secretary */}
-                  <td className='p-4 whitespace-nowrap'>
-                    {c.secretary?.name}
-                  </td>
+                {/* Secretary */}
+                <td className="px-4 py-4 whitespace-nowrap">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 h-8 w-8 bg-purple-100 rounded-full flex items-center justify-center">
+                      <span className="text-xs font-semibold text-purple-600">
+                        {c.secretary?.name?.charAt(0) || 'S'}
+                      </span>
+                    </div>
+                    <div className="ml-3">
+                      <div className="text-sm font-medium text-gray-900">
+                        {c.secretary?.name || 'N/A'}
+                      </div>
+                    </div>
+                  </div>
+                </td>
 
-                  {/* Lawyer */}
-                  <td className='p-4 whitespace-nowrap'>
-                    {c.assignedLawyer?.name}
-                  </td>
+                {/* Draft Lawyer */}
+                <td className="px-4 py-4 whitespace-nowrap hidden xl:table-cell">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 h-8 w-8 bg-indigo-100 rounded-full flex items-center justify-center">
+                      <span className="text-xs font-semibold text-indigo-600">
+                        {c.assignedLawyer?.name?.charAt(0) || 'L'}
+                      </span>
+                    </div>
+                    <div className="ml-3">
+                      <div className="text-sm font-medium text-gray-900">
+                        {c.assignedLawyer?.name || 'Unassigned'}
+                      </div>
+                    </div>
+                  </div>
+                </td>
 
-                  {/* Status */}
-                  <td className='p-4 whitespace-nowrap'>
-                    <StatusPill status={c.status} />
-                  </td>
+                {/* Status */}
+                <td className="px-4 py-4 whitespace-nowrap">
+                  <StatusPill status={c.status} />
+                </td>
 
-                  {/* Actions */}
-                  <td className='p-4 whitespace-nowrap flex justify-end gap-2'>
+                {/* Actions */}
+                <td className="px-4 py-4 whitespace-nowrap text-right">
+                  <div className="flex justify-end gap-2">
                     <button
                       onClick={() => openModal(c)}
-                      className='inline-flex items-center px-3 py-2 bg-slate-800 text-white rounded hover:bg-slate-700 gap-1'
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#A48C65] text-white text-xs font-medium rounded-lg hover:bg-[#8B7355] transition-colors shadow-sm"
+                      title="View Case Details"
                     >
-                      <FiChevronRight /> Open
+                      <Eye size={14} />
+                      <span className="hidden sm:inline">View</span>
                     </button>
 
                     <button
                       onClick={() => openDeleteModal(c)}
-                      className='inline-flex items-center px-3 py-2 bg-[#A48C65] text-white rounded hover:bg-[#8B6F3E] gap-1'
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-500 text-white text-xs font-medium rounded-lg hover:bg-red-600 transition-colors shadow-sm"
+                      title="Delete Case"
                     >
-                      <FiTrash2 />
+                      <Trash2 size={14} />
+                      <span className="hidden sm:inline">Delete</span>
                     </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-
-          </table>
-        </div>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-
     </div>
-  )
+  );
 }

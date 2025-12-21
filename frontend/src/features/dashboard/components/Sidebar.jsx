@@ -54,6 +54,7 @@ const Sidebar = () => {
     { name: "Overview", icon: <LayoutDashboard size={22} />, },
     { name: "All Cases", icon: <FolderOpen size={22} />, path: "all-cases" },
     { name: "Pending Signatures", icon: <FileCheck size={22} />, path: "pending-signatures" },
+    { name: "Pending Sessions", icon: <FileCheck size={22} />, path: "pending-sessions" },
     { name: "Archive", icon: <Archive size={22} />, path: "archive" },
     { name: "Reports", icon: <BarChart3 size={22} />, path: "reports" },
     { name: "Reminders", icon: <Bell size={22} />, path: "reminders" },

@@ -7,6 +7,7 @@ import Archive from "../../features/dashboard/pages/Archive";
 import RoleProtectedRoute from "../middlewares/RoleProtectedRoute";
 import UsersPage from "../../features/dashboard/pages/Users.jsx";
 import PendingSignatureCases from "../../features/dashboard/pages/PendingSignatureCases";
+import DirectorPendingSessions from "../../features/dashboard/pages/DirectorPendingSessions";
 
 export const adminRoutes = {
     path: "director",
@@ -19,6 +20,7 @@ export const adminRoutes = {
         { index: true, element: <AdminDashboard /> },
         { path: "all-cases", element: <AllCases /> },
         { path: "pending-signatures", element: <PendingSignatureCases /> },
+        { path: "pending-sessions", element: <DirectorPendingSessions /> },
         { path: "archive", element: <Archive /> },
         { path: "reports", element: <ReportsAndAnalytics /> },
         { path: "reminders", element: <RemindersPage /> },

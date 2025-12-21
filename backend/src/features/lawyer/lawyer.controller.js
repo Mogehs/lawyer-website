@@ -495,9 +495,6 @@ export const getPendingApprovals = asyncHandler(async (req, res) => {
 
   const query = {
     approvingLawyer: req.user._id,
-    status: {
-      $in: ["Assigned", "UnderReview", "PendingApproval", "PendingSignature"],
-    },
     archived: false,
   };
 

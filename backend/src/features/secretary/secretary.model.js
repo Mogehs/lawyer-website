@@ -7,10 +7,75 @@ const documentSchema = new mongoose.Schema({
   uploadedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
+// Session Schema for court hearings/sessions
+const sessionSchema = new mongoose.Schema({
+  sessionNumber: { type: Number, required: true },
+  sessionDate: { type: Date, required: true },
+  sessionTime: { type: String },
+  location: { type: String },
+  notes: { type: String },
+  status: {
+    type: String,
+    enum: ["UPCOMING", "IN_PROGRESS", "PENDING_SIGNATURE", "COMPLETED", "CANCELLED"],
+    default: "UPCOMING",
+  },
+
+  // Memorandum requirements - set by Approving Lawyer
+  memorandumRequired: { type: Boolean, default: false },
+  supportingDocumentsRequired: { type: Boolean, default: false },
+
+  // Approval by Approving Lawyer
+  reviewedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  reviewedAt: { type: Date },
+  reviewNotes: { type: String },
+
+  // Memorandum prepared by Draft Lawyer
+  memorandum: {
+    content: { type: String },
+    fileUrl: { type: String },
+    preparedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    preparedAt: { type: Date },
+    status: {
+      type: String,
+      enum: ["PENDING", "SUBMITTED", "APPROVED", "REJECTED"],
+      default: "PENDING",
+    },
+    feedback: { type: String },
+  },
+
+  // Documents for this session
+  documents: [documentSchema],
+
+  // Director signature and final approval
+  directorApproval: {
+    approvedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    approvedAt: { type: Date },
+    signatureUrl: { type: String },
+    additionalDocuments: [documentSchema],
+    notes: { type: String },
+  },
+  isReadyForSubmission: { type: Boolean, default: false }, // Set by director after signing
+
+  // Locking mechanism
+  isLocked: { type: Boolean, default: true }, // Locked until approving lawyer reviews
+  unlockedFor: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Draft lawyer who can work
+
+  // Session completion
+  outcome: { type: String }, // "ADJOURNED", "FINALIZED", "DISMISSED", etc.
+  reasonForAdjournment: { type: String },
+  nextSessionDate: { type: Date },
+  completedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  completedAt: { type: Date },
+
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+});
+
 const caseStageSchema = new mongoose.Schema({
   stageType: {
     type: String,
-    enum: ["Main", "Appeal", "Cassation"],
+    enum: ["Main", "Appeal", "Cassation", "Execution", "Initial Review"],
     required: true,
   },
   stageNumber: { type: Number, required: true },
@@ -117,6 +182,7 @@ const caseSchema = new mongoose.Schema(
     },
     stages: [caseStageSchema],
     currentStage: { type: Number, default: 0 },
+    sessions: [sessionSchema], // Court sessions/hearings
     directorSignature: {
       signedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
       signedAt: Date,

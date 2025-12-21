@@ -120,6 +120,22 @@ export const directorApi = createApi({
             }),
             invalidatesTags: ["director"],
         }),
+        getPendingSessions: builder.query({
+            query: () => ({
+                url: `/pending-sessions`,
+                method: "GET",
+            }),
+            providesTags: ["director"],
+        }),
+
+        approveSessionForSubmission: builder.mutation({
+            query: ({ caseId, sessionId, body }) => ({
+                url: `/cases/${caseId}/sessions/${sessionId}/approve`,
+                method: "POST",
+                body,
+            }),
+            invalidatesTags: ["director"],
+        }),
     }),
 });
 
@@ -137,4 +153,6 @@ export const {
     useGetPendingSignatureQuery,
     useUpdateStatusReadyForSubmissionMutation,
     useDeleteCaseMutation,
+    useGetPendingSessionsQuery,
+    useApproveSessionForSubmissionMutation,
 } = directorApi;

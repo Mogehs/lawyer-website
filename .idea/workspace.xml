@@ -4,34 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b35c61da-95aa-4246-87b7-c8fababd0f21" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/aws-iam-policy.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/serverless.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/setup-aws.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/setup-aws.ps1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/controllers/case.controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/controllers/payment.controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/controllers/session.controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/AuditLog.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/LegalCase.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/Memorandum.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/Payment.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/Session.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/features/case-management/models/WhatsAppLog.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/lambda.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/schedulers/whatsappSchedulerLambda.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/scripts/preDeployCheck.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+    <list default="true" id="780871ed-b9c2-45fb-9d83-0b338d82a245" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/features/dashboard/director.session.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/features/secretary/session.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/utils/paymentValidation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/features/dashboard/pages/DirectorPendingSessions.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/features/lawyer/pages/LawyerSessionsPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/AddSessionModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/features/dashboard/director.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/dashboard/director.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/features/lawyer/lawyer.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/lawyer/lawyer.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/features/lawyer/lawyer.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/lawyer/lawyer.routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/features/secretary/secretary.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/secretary/secretary.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/utils/notifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/utils/notifications.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/utils/sendMail.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/utils/sendMail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/utils/whatsappHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/utils/whatsappHelper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/features/secretary/secretary.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/secretary/secretary.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/features/secretary/secretary.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/secretary/secretary.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layouts/ApprovedLawyerLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layouts/ApprovedLawyerLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/routes/ApprovedLawyerRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/routes/ApprovedLawyerRoutes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/routes/DirectorRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/routes/DirectorRoutes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/routes/LawyerRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/routes/LawyerRoutes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/api/approvedLawyerApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/api/approvedLawyerApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/ApprovedLawyerPage/ApprovedLawyerCasesTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/ApprovedLawyerPage/ApprovedLawyerCasesTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/ApprovedLawyerPage/ApprovedLawyerViewModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/ApprovedLawyerPage/ApprovedLawyerViewModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/Topbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/Topbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/pages/ApprovedLawyerPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/pages/ApprovedLawyerPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/dashboard/api/directorApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/dashboard/api/directorApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/dashboard/components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/dashboard/components/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/lawyer/api/lawyerApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/lawyer/api/lawyerApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/lawyer/components/SideBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/lawyer/components/SideBar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/api/secretaryApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/api/secretaryApi.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/AddCase.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/AddCase.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/ClientInfoForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/ClientInfoForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/CaseDetailsForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/CaseDetailsForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/CaseTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/CaseTable.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/DocumentDetailsForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/DocumentDetailsForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/pages/CaseManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/pages/CaseManagement.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,14 +47,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/backend/package.json" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
 }</component>
-  <component name="ProjectId" id="36vDyAfFvqRwFxwKON3Ze6YTLJK" />
+  <component name="ProjectId" id="3781nUGyyqnri2Ef6iESdnW5cfO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -67,6 +70,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2025.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -79,18 +83,14 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b35c61da-95aa-4246-87b7-c8fababd0f21" name="Changes" comment="" />
-      <created>1765878404915</created>
+      <changelist id="780871ed-b9c2-45fb-9d83-0b338d82a245" name="Changes" comment="" />
+      <created>1766270052500</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1765878404915</updated>
-      <workItem from="1765878407834" duration="901000" />
-      <workItem from="1765879614082" duration="57000" />
-      <workItem from="1765885009171" duration="2952000" />
-      <workItem from="1765888605794" duration="331000" />
-      <workItem from="1765916366210" duration="5195000" />
-      <workItem from="1765965045616" duration="41000" />
-      <workItem from="1766268902340" duration="430000" />
+      <updated>1766270052500</updated>
+      <workItem from="1766270054619" duration="1775000" />
+      <workItem from="1766271944733" duration="22000" />
+      <workItem from="1766271980539" duration="7838000" />
     </task>
     <servers />
   </component>

@@ -33,6 +33,12 @@ import {
   deleteReminder,
   updateCourtCaseId,
 } from "./secretary.controller.js";
+import {
+  createSession,
+  getSessions,
+  updateSession,
+  deleteSession,
+} from "./session.controller.js";
 import { loginRequired } from "../../utils/loginRequired.js";
 import {
   uploadCaseDocuments as uploadCaseDocsMulter,
@@ -78,6 +84,12 @@ router.post(
 );
 router.post("/cases/:id/archive", archiveCase);
 router.post("/cases/:id/notes", addCaseNote);
+
+// Session Management Routes
+router.post("/cases/:caseId/sessions", createSession);
+router.get("/cases/:caseId/sessions", getSessions);
+router.put("/cases/:caseId/sessions/:sessionId", updateSession);
+router.delete("/cases/:caseId/sessions/:sessionId", deleteSession);
 
 router.get("/archive", getArchivedCases);
 router.get("/reminders", getReminders);

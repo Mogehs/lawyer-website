@@ -6,7 +6,7 @@ import {
   Edit,
   Bell,
   Calendar,
-  UserPlus,
+  Calendar as Calendar2,
   FileText,
   MoreVertical,
 } from "lucide-react";
@@ -21,6 +21,7 @@ const CaseTable = ({
   onScheduleHearing,
   onAssignLawyer,
   onUpdateCourtCaseId,
+  onManageSessions,
 }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
 
@@ -92,16 +93,10 @@ const CaseTable = ({
         color: "text-indigo-600 hover:bg-indigo-50",
       },
       {
-        icon: Calendar,
-        label: "Update Hearing Date",
-        onClick: () => onScheduleHearing?.(caseItem),
-        color: "text-cyan-600 hover:bg-cyan-50",
-      },
-      {
-        icon: UserPlus,
-        label: "Assign Lawyer",
-        onClick: () => onAssignLawyer?.(caseItem),
-        color: "text-purple-600 hover:bg-purple-50",
+        icon: Calendar2,
+        label: "Manage Sessions",
+        onClick: () => onManageSessions?.(caseItem),
+        color: "text-teal-600 hover:bg-teal-50",
       },
       {
         icon: Bell,
@@ -159,22 +154,16 @@ const CaseTable = ({
                 const Icon = action.icon;
                 return (
                   <React.Fragment key={index}>
-                    {action.divider && <div className="my-1 border-t border-gray-100" />}
+                    {action.divider && <div className="border-t my-1" />}
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        if (!action.disabled) {
-                          action.onClick();
-                          setOpenDropdown(null);
-                        }
+                        if (!action.disabled) action.onClick();
+                        setOpenDropdown(null);
                       }}
-                      disabled={action.disabled}
-                      className={`w-full flex items-center gap-2 px-3 py-2 text-xs font-medium transition-colors text-left ${action.color} ${
-                        action.disabled ? 'opacity-50 cursor-not-allowed' : ''
-                      }`}
-                    >
-                      <Icon size={14} />
-                      <span>{action.label}</span>
+                      className={`w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center gap-3 ${action.color} ${action.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                      <Icon size={16} />
+                      <span className="text-sm">{action.label}</span>
                     </button>
                   </React.Fragment>
                 );
@@ -205,13 +194,6 @@ const CaseTable = ({
       {/* Mobile Card View */}
       <div className="block md:hidden divide-y divide-gray-100">
         {cases.map((c) => {
-          const hearingDate =
-            c.stages &&
-            c.stages.length > 0 &&
-            c.stages[c.stages.length - 1].hearingDate
-              ? c.stages[c.stages.length - 1].hearingDate
-              : c.case.hearingDate || "Not Set";
-
           return (
             <div
               key={c._id || c.id}
@@ -258,16 +240,6 @@ const CaseTable = ({
                     {c.case.assignedLawyer || <span className="text-gray-400 italic">Unassigned</span>}
                   </p>
                 </div>
-                <div>
-                  <p className="text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-0.5">Hearing</p>
-                  <p className="text-gray-900 font-medium">
-                    {hearingDate === "Not Set" ? (
-                      <span className="text-gray-400 italic">Not Set</span>
-                    ) : (
-                      new Date(hearingDate).toLocaleDateString()
-                    )}
-                  </p>
-                </div>
               </div>
 
               <div className="flex justify-end pt-2 border-t border-gray-100">
@@ -306,12 +278,6 @@ const CaseTable = ({
               <th className="px-4 py-3 text-left text-[10px] font-semibold text-gray-600 uppercase tracking-wider">
                 Status
               </th>
-              <th className="px-4 py-3 text-left text-[10px] font-semibold text-gray-600 uppercase tracking-wider hidden xl:table-cell">
-                Lawyer
-              </th>
-              <th className="px-4 py-3 text-left text-[10px] font-semibold text-gray-600 uppercase tracking-wider hidden xl:table-cell">
-                Hearing
-              </th>
               <th className="px-4 py-3 text-right text-[10px] font-semibold text-gray-600 uppercase tracking-wider w-16">
 
               </th>
@@ -323,14 +289,6 @@ const CaseTable = ({
                 c.case.stages && c.case.stages.length > 0
                   ? c.case.stages[c.case.stages.length - 1].stage
                   : c.case.stage || "N/A";
-
-              // Get hearing date from the last stage if available
-              const hearingDate =
-                c.stages && c.stages.length > 0
-                  ? c.stages[c.stages.length - 1].hearingDate ||
-                    c.case.hearingDate ||
-                    "Not Set"
-                  : c.case.hearingDate || "Not Set";
 
               return (
                 <tr
@@ -376,18 +334,6 @@ const CaseTable = ({
                     >
                       {c.case.status}
                     </span>
-                  </td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700 hidden xl:table-cell">
-                    {c.case.assignedLawyer || <span className="text-gray-400 italic">Unassigned</span>}
-                  </td>
-                  <td className="px-4 py-4 whitespace-nowrap hidden xl:table-cell">
-                    {hearingDate === "Not Set" ? (
-                      <span className="text-gray-400 text-xs italic">Not Set</span>
-                    ) : (
-                      <span className="text-sm text-gray-700">
-                        {new Date(hearingDate).toLocaleDateString()}
-                      </span>
-                    )}
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap text-right">
                     <ActionDropdown

@@ -152,40 +152,18 @@ const DocumentDetailsForm = ({ caseInfo, onChange }) => {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {/* Validation Status */}
-      <div
-        className={`p-2 rounded border ${
-          documents.length >= 3
-            ? "bg-green-50 border-green-200 text-green-800"
-            : "bg-yellow-50 border-yellow-200 text-yellow-800"
-        }`}
-      >
-        <div className="flex items-center gap-1.5">
-          {documents.length >= 3 ? (
-            <CheckCircle size={14} className="text-green-600" />
-          ) : (
-            <AlertCircle size={14} className="text-yellow-600" />
-          )}
-          <span className="font-medium text-xs">
-            {documents.length} / 3 documents uploaded
-          </span>
-        </div>
-        <p className="text-[10px] mt-0.5">
-          {documents.length >= 3
-            ? "Minimum requirement met."
-            : `Need ${3 - documents.length} more.`}
-        </p>
-      </div>
+
 
       {/* Upload Area */}
       <div
-        className={`border-2 border-dashed rounded p-4 text-center transition-all ${
+        className={`border-2 border-dashed rounded-lg p-8 text-center transition-all ${
           uploadingFiles ? 'cursor-wait opacity-75' : 'cursor-pointer'
         } ${
           isDragging
-            ? "border-blue-400 bg-[#BCB083]"
-            : "border-slate-300 bg-slate-50 hover:bg-slate-100"
+            ? "border-[#A48C65] bg-[#A48C65]/10"
+            : "border-gray-300 bg-gray-50 hover:bg-gray-100 hover:border-[#A48C65]/50"
         }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -194,22 +172,22 @@ const DocumentDetailsForm = ({ caseInfo, onChange }) => {
       >
         {uploadingFiles ? (
           <>
-            <Loader2 className="w-8 h-8 text-blue-500 mx-auto mb-2 animate-spin" />
-            <p className="text-blue-600 mb-1 font-medium text-xs">
+            <Loader2 className="w-12 h-12 text-[#A48C65] mx-auto mb-3 animate-spin" />
+            <p className="text-[#A48C65] mb-2 font-semibold text-base">
               Uploading files to cloud storage...
             </p>
-            <p className="text-[10px] text-slate-500">
+            <p className="text-sm text-gray-500">
               Please wait, this may take a moment
             </p>
           </>
         ) : (
           <>
-            <Upload className="w-8 h-8 text-slate-400 mx-auto mb-2" />
-            <p className="text-slate-600 mb-1 font-medium text-xs">
-              Drag and drop or click to upload
+            <Upload className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+            <p className="text-gray-700 mb-2 font-semibold text-base">
+              Drag and drop files here or click to browse
             </p>
-            <p className="text-[10px] text-slate-500">
-              PDF, DOC, DOCX, JPG, PNG (Max 10MB)
+            <p className="text-sm text-gray-500">
+              Supported formats: PDF, DOC, DOCX, JPG, PNG (Max 10MB each)
             </p>
           </>
         )}
@@ -226,12 +204,12 @@ const DocumentDetailsForm = ({ caseInfo, onChange }) => {
 
       {/* Error Messages */}
       {errors.length > 0 && (
-        <div className="bg-red-50 border border-red-200 rounded p-2">
-          <div className="flex items-center gap-1.5 text-red-800 mb-1">
-            <AlertCircle size={14} />
-            <h4 className="font-semibold text-xs">Please fix:</h4>
+        <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
+          <div className="flex items-center gap-2 text-red-800 mb-2">
+            <AlertCircle size={20} />
+            <h4 className="font-semibold text-base">Upload Errors:</h4>
           </div>
-          <ul className="text-[10px] text-red-700 space-y-0.5">
+          <ul className="text-sm text-red-700 space-y-1 ml-7">
             {errors.map((error, index) => (
               <li key={index}>• {error}</li>
             ))}
@@ -241,28 +219,28 @@ const DocumentDetailsForm = ({ caseInfo, onChange }) => {
 
       {/* Uploaded Documents List */}
       {documents.length > 0 && (
-        <div className="space-y-2">
-          <h3 className="text-xs font-semibold text-slate-800 flex items-center gap-1.5">
-            <FileText size={14} className="text-blue-600" />
+        <div className="space-y-3">
+          <h3 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+            <FileText size={20} className="text-[#A48C65]" />
             Uploaded Documents ({documents.length})
           </h3>
 
-          <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-3">
             {documents.map((doc, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between p-2 bg-white border border-slate-200 rounded hover:shadow-sm transition"
+                className="flex items-center justify-between p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-[#A48C65]/50 hover:shadow-md transition-all"
               >
-                <div className="flex items-center gap-2 flex-1 min-w-0">
-                  <span className="text-lg">{getFileIcon(doc.name)}</span>
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <span className="text-2xl">{getFileIcon(doc.name)}</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-slate-800 truncate">
+                    <p className="text-sm font-medium text-gray-800 truncate">
                       {doc.name}
                     </p>
-                    <p className="text-[10px] text-slate-500">
+                    <p className="text-sm text-gray-500">
                       {doc.file
-                        ? `${(doc.file.size / 1024 / 1024).toFixed(2)}MB`
-                        : "Uploaded"}
+                        ? `${(doc.file.size / 1024 / 1024).toFixed(2)} MB`
+                        : "Successfully uploaded"}
                     </p>
                   </div>
                 </div>
@@ -272,10 +250,10 @@ const DocumentDetailsForm = ({ caseInfo, onChange }) => {
                     e.stopPropagation();
                     removeDocument(index);
                   }}
-                  className="p-1 text-red-500 hover:bg-red-50 rounded transition"
-                  title="Remove"
+                  className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                  title="Remove document"
                 >
-                  <Trash2 size={14} />
+                  <Trash2 size={18} />
                 </button>
               </div>
             ))}
@@ -283,18 +261,7 @@ const DocumentDetailsForm = ({ caseInfo, onChange }) => {
         </div>
       )}
 
-      {/* Instructions */}
-      <div className="bg-blue-50 border border-blue-200 rounded p-2">
-        <h4 className="font-semibold text-[#A48C65] mb-1 flex items-center gap-1.5 text-xs">
-          <AlertCircle size={12} />
-          Required
-        </h4>
-        <ul className="text-[10px] text-[#A48C65] space-y-0.5">
-          <li>• At least 3 documents mandatory</li>
-          <li>• PDF, Word, Images supported</li>
-          <li>• Max 10MB per file</li>
-        </ul>
-      </div>
+
     </div>
   );
 };

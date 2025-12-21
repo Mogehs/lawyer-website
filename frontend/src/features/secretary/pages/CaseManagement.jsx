@@ -10,6 +10,7 @@ import AddReminderModal from "../components/cases/AddReminderModal";
 import AddHearingDateModal from "../components/cases/AddHearingDateModal";
 import AssignLawyerModal from "../components/cases/AssignLawyerModal";
 import UpdateCourtCaseIdModal from "../components/cases/UpdateCourtCaseIdModal";
+import AddSessionModal from "../components/cases/AddSessionModal";
 import {
   useGetAllCasesQuery,
   useArchiveCaseMutation,
@@ -43,6 +44,7 @@ const CaseManagement = () => {
   const [hearingCase, setHearingCase] = useState(null);
   const [assignLawyerCase, setAssignLawyerCase] = useState(null);
   const [courtCaseIdCase, setCourtCaseIdCase] = useState(null);
+  const [sessionCase, setSessionCase] = useState(null); // For session management
 
 
   // Transform API data to component format
@@ -225,6 +227,7 @@ const CaseManagement = () => {
           onScheduleHearing={(caseData) => setHearingCase(caseData)}
           onAssignLawyer={(caseData) => setAssignLawyerCase(caseData)}
           onUpdateCourtCaseId={(caseData) => setCourtCaseIdCase(caseData)}
+          onManageSessions={(caseData) => setSessionCase(caseData)}
         />
       )}
 
@@ -270,6 +273,13 @@ const CaseManagement = () => {
         isOpen={!!courtCaseIdCase}
         onClose={() => setCourtCaseIdCase(null)}
         caseData={courtCaseIdCase}
+      />
+
+      {/* SESSION MANAGEMENT MODAL */}
+      <AddSessionModal
+        isOpen={!!sessionCase}
+        onClose={() => setSessionCase(null)}
+        caseId={sessionCase?._id}
       />
 
       <AddCase

@@ -7,7 +7,7 @@ export const approvedLawyerApi = createApi({
         baseUrl: `${BACKEND_URL}/api/lawyer`,
         credentials: "include",
     }),
-    tagTypes: ['Cases'],
+    tagTypes: ['Cases', 'Sessions'],
 
     endpoints: (builder) => ({
         // GET: Pending Approvals
@@ -37,6 +37,25 @@ export const approvedLawyerApi = createApi({
             invalidatesTags: ['Cases'],
         }),
 
+        // Session Review Endpoints
+        reviewSession: builder.mutation({
+            query: ({ caseId, sessionId, reviewData }) => ({
+                url: `/cases/${caseId}/sessions/${sessionId}/review`,
+                method: 'POST',
+                body: reviewData,
+            }),
+            invalidatesTags: ['Sessions', 'Cases'],
+        }),
+
+        reviewMemorandum: builder.mutation({
+            query: ({ caseId, sessionId, reviewData }) => ({
+                url: `/cases/${caseId}/sessions/${sessionId}/memorandum/review`,
+                method: 'POST',
+                body: reviewData,
+            }),
+            invalidatesTags: ['Sessions', 'Cases'],
+        }),
+
     }),
 });
 
@@ -44,4 +63,6 @@ export const {
     usePendingApprovalsQuery,
     useUpdateCaseApprovalMutation,
     useRequestModificationBALMutation,
+    useReviewSessionMutation,
+    useReviewMemorandumMutation,
 } = approvedLawyerApi;

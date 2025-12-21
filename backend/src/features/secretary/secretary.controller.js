@@ -5,6 +5,7 @@ import { customError } from "../../utils/customError.js";
 import WhatsAppHelper from "../../utils/whatsappHelper.js";
 import sendMail from "../../utils/sendMail.js";
 import { caseRegistrationTemplate } from "../../utils/emailTemplates/caseRegistrationTemplate.js";
+import { validateClientPaymentStatus, getClientPaymentSummary } from "../../utils/paymentValidation.js";
 
 export const createClient = asyncHandler(async (req, res) => {
   const { name, contactNumber, email, address, nationalId, additionalInfo } =
@@ -187,12 +188,25 @@ export const createCase = asyncHandler(async (req, res) => {
     documents,
     assignedLawyer,
     approvingLawyer,
+    stage,
   } = req.body;
 
   const client = await Client.findById(clientId);
   if (!client) {
     throw new customError("Client not found", 404);
   }
+
+  // 🆕 PAYMENT VALIDATION - Check if client has paid before creating case
+  const paymentValidation = await validateClientPaymentStatus(clientId);
+
+  if (!paymentValidation.isValid) {
+    throw new customError(
+      `Cannot create case: ${paymentValidation.message}`,
+      400
+    );
+  }
+
+  console.log(`✅ Payment validation passed: ${paymentValidation.message}`);
 
   // Validate lawyer if provided
   if (assignedLawyer) {
@@ -210,6 +224,20 @@ export const createCase = asyncHandler(async (req, res) => {
     }
   }
 
+  // Map frontend stage names to backend stageType
+  const stageMapping = {
+    "Main Case": "Main",
+    "Appeal": "Appeal",
+    "Cassation": "Cassation",
+    "Execution": "Execution",
+    "Initial Review": "Initial Review",
+  };
+
+  const stageType = stage ? stageMapping[stage] || "Main" : "Main";
+
+  console.log(`📋 Stage received from frontend: "${stage}"`);
+  console.log(`📋 Mapped to stageType: "${stageType}"`);
+
   const caseCount = await Case.countDocuments();
   const caseNumber = `CASE-${Date.now()}-${caseCount + 1}`;
 
@@ -224,7 +252,7 @@ export const createCase = asyncHandler(async (req, res) => {
     secretary: req.user._id,
     stages: [
       {
-        stageType: "Main",
+        stageType: stageType,
         stageNumber: 1,
         status: "InProgress",
       },

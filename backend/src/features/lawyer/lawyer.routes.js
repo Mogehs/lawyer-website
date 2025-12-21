@@ -23,6 +23,13 @@ import {
   requestModificationBAL,
   deleteCase,
 } from "./lawyer.controller.js";
+import {
+  reviewSession,
+  uploadSessionMemorandum,
+  reviewMemorandum,
+  completeSession,
+  getMyAssignedSessions,
+} from "../secretary/session.controller.js";
 import { loginRequired } from "../../utils/loginRequired.js";
 import {
   uploadMemorandum,
@@ -57,6 +64,15 @@ router.get("/cases/:id/timeline", getCaseTimeline);
 router.get("/pending-approvals", getPendingApprovals);
 router.post("/pending-approvals/:id", updateStatusPendingSignature);
 router.post("/request-modification/:id", requestModificationBAL);
+router.delete("/delete-case/:id", deleteCase);
+
+// Session Management Routes for Lawyers
+router.get("/my-sessions", getMyAssignedSessions); // Draft lawyer gets their unlocked sessions
+router.post("/cases/:caseId/sessions/:sessionId/review", reviewSession); // Approving lawyer reviews session
+router.post("/cases/:caseId/sessions/:sessionId/memorandum", uploadSessionMemorandum); // Draft lawyer uploads memorandum
+router.post("/cases/:caseId/sessions/:sessionId/memorandum/review", reviewMemorandum); // Approving lawyer reviews memorandum
+router.post("/cases/:caseId/sessions/:sessionId/complete", completeSession); // Draft lawyer completes/cancels session
+
 router.get("/archive", getMyArchive);
 router.get("/hearings", getUpcomingHearings);
 router.get("/reminders", getMyReminders);

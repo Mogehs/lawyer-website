@@ -1,19 +1,22 @@
-
 import { ChevronDown, LogOut, User } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useNavigate } from "react-router-dom";
 import { clearProfile, selectUserProfile } from "../../auth/authSlice";
 import { useLogoutMutation } from "../../auth/api/authApi";
 
 const Topbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
-  const dispatch = useDispatch();
-  const user = useSelector(selectUserProfile);
   const navigate = useNavigate();
-  const [logout, { isLoading }] = useLogoutMutation();
+  const dispatch = useDispatch();
 
+  const userProfile = useSelector(selectUserProfile);
+
+  // Logout mutation
+  const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
+
+  // Close dropdown when clicking outside or pressing Escape
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.target.closest(".dropdown-container")) setDropdownOpen(false);
@@ -39,7 +42,7 @@ const Topbar = () => {
     const handleSidebarToggle = () => {
       const sidebar = document.querySelector("aside");
       if (sidebar) {
-        const isOpen = sidebar.classList.contains("w-64");
+        const isOpen = sidebar.classList.contains("w-52");
         setSidebarOpen(isOpen);
       }
     };
@@ -52,87 +55,97 @@ const Topbar = () => {
     };
   }, []);
 
+  // Handle logout
   const handleLogout = async () => {
     try {
       await logout().unwrap();
       dispatch(clearProfile());
       navigate("/login");
     } catch (error) {
-      console.error("Logout error:", error);
-      // Clear profile and navigate even if API fails
+      console.error("Logout failed:", error);
       dispatch(clearProfile());
       navigate("/login");
     }
-  }
+  };
 
+  const userName = userProfile?.name || "User";
+  const userEmail = userProfile?.email || "user@example.com";
+  const userRole = userProfile?.role || "Approved Lawyer";
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 h-16 sm:h-20
+      className={`fixed top-0 right-0 h-16
       bg-gradient-to-r from-[#BCB083] to-[#A48C65]
-      shadow-md border-b border-white/10
-      flex  justify-end items-center
-      px-4 sm:px-6 md:px-10 md:z-[40]
+      shadow-md border-b border-white
+      flex items-center justify-between
+      px-4 z-40
       transition-all duration-300 ease-in-out
-      lg:left-${sidebarOpen ? "64" : "20"} lg:right-0
+      ${sidebarOpen ? "left-52" : "left-14"}
       `}
     >
-
-
+      {/* Title */}
+      <div className="flex items-center">
+        <h2 className="text-lg font-semibold text-white">
+          Lawyer Portal
+        </h2>
+      </div>
 
       {/* Profile Dropdown */}
       <div className="relative dropdown-container">
         <button
           onClick={() => setDropdownOpen(!isDropdownOpen)}
-          className="flex items-center gap-3 p-1.5 rounded-2xl 
-               bg-white/80 hover:bg-white 
-               border border-white/10
-               shadow-sm hover:shadow-md
-               transition-all duration-200"
+          className="flex items-center gap-2 p-2 rounded-lg
+             bg-white hover:bg-gray-50
+             border border-gray-200
+             transition-all duration-200"
         >
           <img
-            src="https://ui-avatars.com/api/?name=Michael+Smith&background=3b82f6&color=fff&bold=true&size=128"
-            alt="Director Avatar"
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-[#A48C65] shadow-sm object-cover"
+            src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
+              userName
+            )}&background=3b82f6&color=fff&bold=true&size=128`}
+            alt="User Avatar"
+            className="w-9 h-9 rounded-full border-2 border-blue-500 object-cover"
           />
           <div className="hidden sm:block text-left">
-            <p className="text-sm font-semibold text-[#494C52]">{user?.name ? user.name : ""}</p>
-            <p className="text-xs text-slate-500">{user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : ""}</p>
+            <p className="text-sm font-semibold text-gray-800">{userName}</p>
+            <p className="text-xs text-gray-500 capitalize">{userRole}</p>
           </div>
           <ChevronDown
-            size={14}
-            className={`text-slate-500 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""
-              }`}
+            size={16}
+            className={`text-gray-600 transition-transform duration-200 ${
+              isDropdownOpen ? "rotate-180" : ""
+            }`}
           />
         </button>
 
         {/* Dropdown Menu */}
         {isDropdownOpen && (
-          <div
-            className="absolute right-0 mt-3 w-52 bg-white/95 border border-blue-100 
-                 rounded-2xl shadow-xl py-3 z-50 backdrop-blur-xl"
-          >
-            <div className="px-4 py-2 border-b border-white/10">
-              <p className="text-xs text-[#494C52]">Signed in as</p>
-              <p className="text-sm font-semibold text-[#494C52] truncate">
-                michaelsmith@gmail.com
+          <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-xl py-2 z-50">
+            <div className="px-4 py-2 border-b border-gray-100">
+              <p className="text-xs text-gray-500">Signed in as</p>
+              <p className="text-sm font-semibold text-gray-800 truncate">
+                {userEmail}
               </p>
             </div>
 
-            <div className="py-2">
-              <NavLink to="/my-profile" className="flex items-center gap-3 w-full px-4 py-2 text-[#494C52]  hover:text-[#A48C65] transition-colors duration-200 text-sm font-medium">
-                <User size={16} /> My Profile
-              </NavLink>
+            <div className="py-1">
+              <Link
+                to="/my-profile"
+                className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <User size={16} />
+                My Profile
+              </Link>
             </div>
 
-            <div className="border-t border-white/10 pt-2">
+            <div className="border-t border-gray-100 pt-1">
               <button
                 onClick={handleLogout}
-                disabled={isLoading}
-                className="flex items-center gap-3 w-full px-4 py-2 text-[#494C52]  hover:text-[#A48C65] transition-colors duration-200 text-sm font-medium"
+                disabled={isLoggingOut}
+                className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
               >
                 <LogOut size={16} />
-                {isLoading ? "Logging out..." : "Sign Out"}
+                {isLoggingOut ? "Logging out..." : "Sign Out"}
               </button>
             </div>
           </div>

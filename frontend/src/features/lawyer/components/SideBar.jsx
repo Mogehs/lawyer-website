@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Scale,
+  Calendar,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -34,6 +35,7 @@ const Sidebar = () => {
   const links = [
     { name: "Overview", icon: <Home size={16} />, path: "." },
     { name: "My Cases", icon: <FileText size={16} />, path: "my-cases" },
+    { name: "My Sessions", icon: <Calendar size={16} />, path: "sessions" },
     { name: "Archive", icon: <Archive size={16} />, path: "archive" },
     { name: "Notifications", icon: <Bell size={16} />, path: "notifications" },
   ];

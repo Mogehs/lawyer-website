@@ -1,18 +1,17 @@
 import { useState, useMemo, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
+import { FileText } from "lucide-react";
 import { toast } from "react-toastify";
 
 import ApprovedLawyerCasesTable from "../components/ApprovedLawyerPage/ApprovedLawyerCasesTable";
 import ApprovedLawyerViewModal from "../components/ApprovedLawyerPage/ApprovedLawyerViewModal";
 import ModificationModal from "../components/ApprovedLawyerPage/ModificationModal";
 import DeleteModal from "../components/ApprovedLawyerPage/DeleteModal";
-import { usePendingApprovalsQuery, useRequestModificationBALMutation, useUpdateCaseApprovalMutation } from "../api/approvedLawyerApi";
+import { usePendingApprovalsQuery, useRequestModificationBALMutation } from "../api/approvedLawyerApi";
 export default function ApprovedLawyerPage() {
   const { data, error, isLoading } = usePendingApprovalsQuery();
-  const [updateCaseApproval] = useUpdateCaseApprovalMutation();
   const [requestModificationBAL] = useRequestModificationBALMutation();
 
-  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
   const [cases, setCases] = useState([]);
 
   const [selectedCase, setSelectedCase] = useState(null);
@@ -34,26 +33,6 @@ export default function ApprovedLawyerPage() {
     }
   }, [data]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setSidebarOpen(window.innerWidth >= 1024);
-    };
-
-    const handleSidebarToggle = () => {
-      const sidebar = document.querySelector("aside");
-      if (sidebar) {
-        setSidebarOpen(sidebar.classList.contains("w-64"));
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    const interval = setInterval(handleSidebarToggle, 100);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      clearInterval(interval);
-    };
-  }, []);
 
   const filteredCases = useMemo(() => {
     return cases.filter((c) => {
@@ -88,24 +67,11 @@ export default function ApprovedLawyerPage() {
     setIsDeleteModalOpen(false);
   };
 
-  const handleApproval = (id, status, note = "") => {
-    updateCaseApproval({
-      caseId: id,
-      approvalData: { status, note },
-    });
-
-    closeModal();
-    closeModificationModal();
-  };
-
   const sendModificationRequest = async() => {
     const msg =
       modificationMessage.trim() === ""
         ? "Modification requested"
         : modificationMessage;
-
-    console.log("message for modification....", msg);
-    console.log("selected case....", selectedCase._id);
 
     const res = await requestModificationBAL({
       id: selectedCase._id,
@@ -114,9 +80,6 @@ export default function ApprovedLawyerPage() {
     toast.success(res?.data?.message || "Modification request sent.");
     closeModal();
     closeModificationModal();
-
-    // FIXED HERE
-    // handleApproval(selectedCase._id, "Modification Requested", msg);
   };
 
 
@@ -125,48 +88,60 @@ export default function ApprovedLawyerPage() {
     closeDeleteModal();
   };
 
-  if (isLoading)
-    return <p className="mt-20 text-center text-xl font-semibold">Loading...</p>;
-
-  if (error)
+  if (isLoading) {
     return (
-      <p className="mt-20 text-center text-red-500 text-xl">
-        Failed to load data.
-      </p>
+      <div className="flex justify-center items-center h-full">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#A48C65]"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
     );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <div className="text-red-600 flex items-center gap-2">
+          <p className="text-center text-red-500 text-xl">Failed to load data.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div
-      className={`mt-20 min-h-screen px-3 mr-20 sm:px-4 md:px-6 lg:px-2 py-3 sm:py-4 md:py-5 transition-all duration-300 ease-in-out ${sidebarOpen ? "lg:ml-64 md:ml-64" : "lg:ml-20 md:ml-14"
-        }`}
-    >
-      <h1 className="text-2xl sm:text-3xl font-bold text-[#494C52]">
-        Memorandums Management
-      </h1>
-      <p className="text-gray-600 mt-2 text-sm sm:text-base mb-4">
-        Manage and review all case memorandums efficiently.
-      </p>
-
-      {/* SEARCH + FILTER */}
-      <div className="flex flex-col sm:flex-row gap-4 mb-6 items-center w-full">
-        <div className="relative flex-1 w-full md:w-[200px]">
-          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#494C52] text-lg" />
-          <input
-            type="text"
-            placeholder="Search by case #, client name, email, or phone..."
-            className="w-full lg:w-[680px] pl-12 pr-4 py-3 border border-gray-300 rounded-xl shadow shadow-[#494C52] text-gray-700 placeholder-[#494C52]
-              focus:outline-none focus:ring-2 focus:ring-[#A48C65] focus:border-[#A48C65] transition-all duration-300"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+            <FileText size={28} className="text-[#A48C65]" />
+            Case Management
+          </h1>
+          <p className="text-sm text-gray-600 mt-1">Review and approve cases assigned to you by the secretary.</p>
         </div>
+      </div>
 
-        <div className="w-full sm:w-48">
+      {/* Filters */}
+      <div className="bg-white rounded-lg shadow-md p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* SEARCH */}
+          <div className="relative">
+            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+            <input
+              type="text"
+              placeholder="Search by case #, client name, email, or phone..."
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+
+          {/* FILTER STAGE */}
           <select
             value={filterStage}
             onChange={(e) => setFilterStage(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm text-[#494C52]
-              focus:outline-none focus:ring-2 focus:ring-[#A48C65] focus:border-[#A48C65] transition-all duration-300"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
           >
             <option value="">All Stages</option>
             {STAGES.map((s) => (
@@ -191,7 +166,6 @@ export default function ApprovedLawyerPage() {
           selectedCase={selectedCase}
           closeModal={closeModal}
           openModificationModal={openModificationModal}
-          handleApproval={handleApproval}
         />
       )}
 

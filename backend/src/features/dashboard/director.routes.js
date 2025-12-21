@@ -1,6 +1,7 @@
 import express from "express";
 import { loginRequired } from "../../utils/loginRequired.js";
 import { addUser, deleteCase, deleteUser, getAllArchivedCases, getAllCases, getAllReminders, getAllUsers, getPendingSignature, updateStatusReadyForSubmission, updateUserRole, userStats, getPendingSignatureCases, approveWithSignedDocument } from "./director.controller.js";
+import { getPendingSessions, approveSessionForSubmission } from "./director.session.controller.js";
 import { allowedRoles } from "../../utils/allowedRoles.js";
 import { uploadMemorandum } from "../../middleware/upload.js";
 
@@ -22,4 +23,7 @@ router.get("/pending-signature-cases", getPendingSignatureCases);
 router.post("/approve-signed/:id", uploadMemorandum.single('memorandum'), approveWithSignedDocument);
 router.delete("/delete-case/:id", deleteCase);
 
+// Session Management Routes
+router.get("/pending-sessions", getPendingSessions);
+router.post("/cases/:caseId/sessions/:sessionId/approve", approveSessionForSubmission);
 export default router;

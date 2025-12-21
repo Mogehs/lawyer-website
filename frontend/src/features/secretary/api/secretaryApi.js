@@ -16,6 +16,7 @@ export const secretaryApi = createApi({
     "ActivityLogs",
     "DashboardStats",
     "Reminders",
+    "Sessions",
   ],
   endpoints: (builder) => ({
     // ==================== CLIENT ENDPOINTS ====================
@@ -301,6 +302,38 @@ export const secretaryApi = createApi({
         method: "GET",
       }),
     }),
+
+    // ==================== SESSION ENDPOINTS ====================
+    createSession: builder.mutation({
+      query: ({ caseId, sessionData }) => ({
+        url: `/cases/${caseId}/sessions`,
+        method: "POST",
+        body: sessionData,
+      }),
+      invalidatesTags: ["Sessions", "Cases"],
+    }),
+    getSessions: builder.query({
+      query: (caseId) => ({
+        url: `/cases/${caseId}/sessions`,
+        method: "GET",
+      }),
+      providesTags: ["Sessions"],
+    }),
+    updateSession: builder.mutation({
+      query: ({ caseId, sessionId, data }) => ({
+        url: `/cases/${caseId}/sessions/${sessionId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Sessions", "Cases"],
+    }),
+    deleteSession: builder.mutation({
+      query: ({ caseId, sessionId }) => ({
+        url: `/cases/${caseId}/sessions/${sessionId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Sessions", "Cases"],
+    }),
   }),
 });
 
@@ -350,4 +383,10 @@ export const {
   useGetRecentCasesQuery,
   useGetQuickStatsQuery,
   useGetLawyersQuery,
+
+  // Session management hooks
+  useCreateSessionMutation,
+  useGetSessionsQuery,
+  useUpdateSessionMutation,
+  useDeleteSessionMutation,
 } = secretaryApi;

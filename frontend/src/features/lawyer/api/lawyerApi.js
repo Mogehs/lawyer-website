@@ -18,6 +18,7 @@ export const lawyerApi = createApi({
     "Reminders",
     "Timeline",
     "PendingApprovals",
+    "Sessions",
   ],
   endpoints: (builder) => ({
     // ==================== DASHBOARD ====================
@@ -263,6 +264,30 @@ export const lawyerApi = createApi({
       }),
       providesTags: ["DashboardStats"],
     }),
+
+    // ==================== SESSION MANAGEMENT ====================
+    getMyAssignedSessions: builder.query({
+      query: () => "/lawyer/my-sessions",
+      providesTags: ["Sessions"],
+    }),
+
+    completeSession: builder.mutation({
+      query: ({ caseId, sessionId, completionData }) => ({
+        url: `/lawyer/cases/${caseId}/sessions/${sessionId}/complete`,
+        method: "POST",
+        body: completionData,
+      }),
+      invalidatesTags: ["Sessions", "Cases"],
+    }),
+
+    uploadSessionMemorandum: builder.mutation({
+      query: ({ caseId, sessionId, memorandumData }) => ({
+        url: `/lawyer/cases/${caseId}/sessions/${sessionId}/memorandum`,
+        method: "POST",
+        body: memorandumData,
+      }),
+      invalidatesTags: ["Sessions", "Cases"],
+    }),
   }),
 });
 
@@ -312,6 +337,11 @@ export const {
   // Notifications
   useGetNotificationsQuery,
   useMarkNotificationAsReadMutation,
+
+  // Session Management
+  useGetMyAssignedSessionsQuery,
+  useCompleteSessionMutation,
+  useUploadSessionMemorandumMutation,
 
   // Backward compatibility - deprecated
   useLawyerCasesQuery,

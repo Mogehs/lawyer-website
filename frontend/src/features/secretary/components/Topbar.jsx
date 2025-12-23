@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearProfile, selectUserProfile } from "../../auth/authSlice";
 import { useLogoutMutation } from "../../auth/api/authApi";
+import GoogleTranslate from "../../../components/common/GoogleTranslator";
 
 const Topbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -91,7 +92,9 @@ const Topbar = () => {
       </div>
 
       {/* Profile Dropdown */}
-      <div className="flex items-center">{/* Profile Dropdown */}
+      <div className="flex items-center gap-4">
+        {/* Profile Dropdown */}
+        <GoogleTranslate />
         <div className="relative dropdown-container">
           <button
             onClick={() => setDropdownOpen(!isDropdownOpen)}

@@ -1,43 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="780871ed-b9c2-45fb-9d83-0b338d82a245" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/features/dashboard/director.session.controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/features/secretary/session.controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/utils/paymentValidation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/features/dashboard/pages/DirectorPendingSessions.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/features/lawyer/pages/LawyerSessionsPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/AddSessionModal.jsx" afterDir="false" />
+    <list default="true" id="b4b6755c-df1a-4f77-81f5-eb245108bc66" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/features/dashboard/director.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/dashboard/director.routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/features/lawyer/lawyer.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/lawyer/lawyer.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/features/lawyer/lawyer.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/lawyer/lawyer.routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/features/secretary/secretary.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/secretary/secretary.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/features/secretary/secretary.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/secretary/secretary.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/features/secretary/secretary.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/features/secretary/secretary.routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layouts/ApprovedLawyerLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layouts/ApprovedLawyerLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/routes/ApprovedLawyerRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/routes/ApprovedLawyerRoutes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/routes/DirectorRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/routes/DirectorRoutes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/routes/LawyerRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/routes/LawyerRoutes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/api/approvedLawyerApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/api/approvedLawyerApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/ApprovedLawyerPage/ApprovedLawyerCasesTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/ApprovedLawyerPage/ApprovedLawyerCasesTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/ApprovedLawyerPage/ApprovedLawyerViewModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/ApprovedLawyerPage/ApprovedLawyerViewModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/Topbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/components/Topbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/pages/ApprovedLawyerPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/approvedlawyer/pages/ApprovedLawyerPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/dashboard/api/directorApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/dashboard/api/directorApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/dashboard/components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/dashboard/components/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/lawyer/api/lawyerApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/lawyer/api/lawyerApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/lawyer/components/SideBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/lawyer/components/SideBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/api/secretaryApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/api/secretaryApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/AddCase.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/AddCase.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/CaseDetailsForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/CaseDetailsForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/CaseTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/CaseTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/DocumentDetailsForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/components/cases/DocumentDetailsForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/features/secretary/pages/CaseManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/features/secretary/pages/CaseManagement.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,33 +18,27 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 1
-}</component>
-  <component name="ProjectId" id="3781nUGyyqnri2Ef6iESdnW5cfO" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="37CCxwBbPDOdeUn6AF08SSR4gi3" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2025.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "main",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -83,14 +48,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="780871ed-b9c2-45fb-9d83-0b338d82a245" name="Changes" comment="" />
-      <created>1766270052500</created>
+      <changelist id="b4b6755c-df1a-4f77-81f5-eb245108bc66" name="Changes" comment="" />
+      <created>1766397917188</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1766270052500</updated>
-      <workItem from="1766270054619" duration="1775000" />
-      <workItem from="1766271944733" duration="22000" />
-      <workItem from="1766271980539" duration="7838000" />
+      <updated>1766397917188</updated>
+      <workItem from="1766397919889" duration="52000" />
     </task>
     <servers />
   </component>

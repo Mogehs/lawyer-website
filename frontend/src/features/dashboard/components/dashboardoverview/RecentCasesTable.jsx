@@ -47,14 +47,14 @@ console.log(recentCases)
 
         <div className="relative w-full sm:w-64">
           <Search
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#BCB083] opacity-80"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#0B1F3B] opacity-80"
             size={18}
           />
           <input
             type="text"
             placeholder="Search cases..."
-            className="w-full bg-[#fff] text-black placeholder-black border border-[#BCB083] rounded-lg py-2 pl-10 pr-4 text-sm 
-                       focus:outline-none focus:ring-2 focus:ring-[#BCB083] transition-all duration-300"
+            className="w-full bg-[#fff] text-black placeholder-black border border-[#0B1F3B] rounded-lg py-2 pl-10 pr-4 text-sm 
+                       focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] transition-all duration-300"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -64,7 +64,7 @@ console.log(recentCases)
       {/* Desktop Table */}
       <div className="hidden md:block overflow-hidden border border-gray-100 rounded-xl">
         <table className="w-full text-sm">
-          <thead className="bg-[#A48C65] text-white">
+          <thead className="bg-[#0B1F3B] text-white">
             <tr>
               <th className="text-left py-3 px-5 font-semibold">Case Number</th>
               <th className="text-left py-3 px-5 font-semibold">Client</th>
@@ -78,7 +78,7 @@ console.log(recentCases)
             {filteredCases.map((caseItem, index) => (
               <tr
                 key={index}
-                className="hover:bg-[#fe9a00]/5 transition-all duration-200"
+                className=""
               >
                 <td className="py-4 px-5 text-[#1c283c]/80 font-medium font-mono">
                   {caseItem.caseNumber}
@@ -155,7 +155,7 @@ console.log(recentCases)
         <p className="text-sm text-gray-500">
           Showing <b>{filteredCases.length}</b> of <b>{recentCases.length}</b> cases
         </p>
-        <Link to="all-cases" className="flex items-center gap-2 text-sm font-medium text-[#A48C65] hover:text-[#BCB083] transition-all">
+        <Link to="all-cases" className="flex items-center gap-2 text-sm font-medium text-[#0B1F3B]">
           View All Cases
           <ArrowRight size={16} />
         </Link>

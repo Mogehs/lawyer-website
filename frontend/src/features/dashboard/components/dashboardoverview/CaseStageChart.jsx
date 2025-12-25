@@ -24,7 +24,7 @@ const CaseStageChart = () => {
     ([name, value]) => ({
       name,
       value,
-      color: statusColors[name] || "#A48C65",
+      color: statusColors[name] || "#0B1F3B",
     })
   );
 
@@ -76,7 +76,7 @@ const CaseStageChart = () => {
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#A48C65",
+                    backgroundColor: "#0B1F3B",
                     borderRadius: "10px",
                     border: "1px solid #e5e7eb",
                     color: "#fff",
@@ -118,7 +118,7 @@ const CaseStageChart = () => {
                 </div>
                 <div className="h-2 sm:h-2.5 bg-gray-200 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-[#decf9c] to-[#A48C65] rounded-full transition-all duration-1000"
+                    className="h-full bg-[#0B1F3B] rounded-full transition-all duration-1000"
                     style={{
                       width: `${(lawyer.cases / Math.max(...lawyerPerformance.map(l => l.cases))) * 100}%`,
                      

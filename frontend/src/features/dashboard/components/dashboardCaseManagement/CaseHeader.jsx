@@ -46,8 +46,8 @@ const CasesHeader = ({
             placeholder="Search cases..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-[#fff] text-black placeholder-black border border-[#BCB083] rounded-lg py-2 pl-10 pr-4 text-sm 
-                       focus:outline-none focus:ring-2 focus:ring-[#BCB083] transition-all duration-300"
+            className="w-full bg-[#fff] text-black placeholder-black border border-[#e0c35b] rounded-lg py-2 pl-10 pr-4 text-sm 
+                       focus:outline-none focus:ring-2 focus:ring-[#eace6a] transition-all duration-300"
           />
         </div>
 

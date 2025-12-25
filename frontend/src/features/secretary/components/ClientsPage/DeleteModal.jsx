@@ -13,7 +13,7 @@ export default function DeleteModal({
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-[10000] p-4">
       <div className="bg-white rounded-lg shadow-lg max-w-sm w-full">
-        <div className="bg-[#A48C65] px-4 py-3 rounded-t-lg border-b border-[#ffff]">
+        <div className="bg-[#0B1F3B] px-4 py-3 rounded-t-lg border-b border-[#ffff]">
           <h2 className="text-sm font-semibold text-white">Confirm Delete</h2>
         </div>
         <div className="p-4">
@@ -27,14 +27,14 @@ export default function DeleteModal({
           <button
             onClick={onClose}
             disabled={isDeleting}
-            className="px-3 py-1.5 rounded border border-slate-300 hover:bg-[#A48C65] hover:text-white text-xs text-slate-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 rounded border border-slate-300 hover:bg-[#0B1F3B] hover:text-white text-xs text-slate-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Cancel
           </button>
           <button
             onClick={onDelete}
             disabled={isDeleting}
-            className="px-3 py-1.5 rounded bg-[#A48C65] hover:bg-[#ffff] hover:text-[#A48C65] text-white text-xs hover:border-[#A48C65]  border transition  disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5"
+            className="px-3 py-1.5 rounded bg-[#0B1F3B] hover:bg-[#ffff] hover:text-[#0B1F3B] text-white text-xs hover:border-[#0B1F3B]  border transition  disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5"
           >
             {isDeleting ? (
               <>

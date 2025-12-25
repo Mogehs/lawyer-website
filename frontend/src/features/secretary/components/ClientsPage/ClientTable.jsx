@@ -86,31 +86,31 @@ export default function ClientTable({
         <td className="px-3 py-2 text-[10px] font-medium text-slate-600">
           {c._id?.slice(-6) || c.id}
         </td>
-        <td className="px-3 py-2 text-xs text-slate-800">{c.name}</td>
-        <td className="px-3 py-2 text-xs text-slate-700 hidden lg:table-cell">
+        <td className="px-3 py-2 text-sm text-slate-800">{c.name}</td>
+        <td className="px-3 py-2 text-sm text-slate-700 hidden lg:table-cell">
           {c.email}
         </td>
-        <td className="px-3 py-2 text-xs text-slate-700">{c.contactNumber}</td>
-        <td className="px-3 py-2 text-xs text-slate-700 hidden xl:table-cell">
+        <td className="px-3 py-2 text-sm text-slate-700">{c.contactNumber}</td>
+        <td className="px-3 py-2 text-sm text-slate-700 hidden xl:table-cell">
           {c.nationalId}
         </td>
-        <td className="px-3 py-2 text-xs text-slate-700 hidden lg:table-cell truncate max-w-[150px]">
+        <td className="px-3 py-2 text-sm text-slate-700 hidden lg:table-cell truncate max-w-[150px]">
           {c.address}
         </td>
-        <td className="px-3 py-2 text-xs text-slate-700 hidden xl:table-cell truncate max-w-[150px]">
+        <td className="px-3 py-2 text-sm text-slate-700 hidden xl:table-cell truncate max-w-[150px]">
           {c.additionalInfo || "-"}
         </td>
         <td className="px-3 py-2">
           <div className="flex justify-end gap-1">
             <button
-              className="p-1 text-[#A48C65] hover:text-[#A48C65]  rounded transition-colors"
+              className="p-1 text-[#0B1F3B] hover:text-[#0B1F3B]  rounded transition-colors"
               onClick={() => handleEditClick(c)}
               title="Edit"
             >
               <Edit size={16} />
             </button>
             <button
-              className="p-1 text-[#A48C65] hover:text-[#A48C65]  rounded transition-colors"
+              className="p-1 text-[#0B1F3B] hover:text-[#0B1F3B]  rounded transition-colors"
               onClick={() => handleDeleteClick(c)}
               title="Delete"
             >
@@ -188,7 +188,7 @@ export default function ClientTable({
     <div className="bg-white rounded shadow-sm border border-slate-200 overflow-hidden mt-4">
       <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full bg-white rounded-lg overflow-hidden">
-          <thead className="bg-[#A48C65]  text-white hidden md:table-header-group">
+          <thead className="bg-[#0B1F3B]  text-white hidden md:table-header-group">
             <tr>
               {[
                 { label: "ID", class: "" },

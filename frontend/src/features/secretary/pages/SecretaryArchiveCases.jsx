@@ -41,11 +41,11 @@ const SecretaryArchiveCases = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[225px]">
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <Archive size={28} className="text-[#A48C65]" />
+        <h2 className="text-2xl font-bold text-[#0B1F3B] flex items-center gap-2">
+          <Archive size={28} className="text-[#0B1F3B]" />
           Archive
         </h2>
         <p className="text-sm text-gray-600 mt-1">
@@ -55,13 +55,13 @@ const SecretaryArchiveCases = () => {
 
       {/* Search */}
       <div className="relative mb-4 max-w-md">
-        <Search className="absolute left-2 top-2 text-[#A48C65]" size={14} />
+        <Search className="absolute left-2 top-2 text-[#0B1F3B]" size={14} />
         <input
           type="text"
           placeholder="Search by client or case number..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="pl-8 py-1.5 pr-2 w-full border border-[#A48C65] rounded bg-slate-50 focus:ring-1 focus:ring-[#A48C65] focus:border-[#A48C65] outline-none text-xs text-slate-800"
+          className="pl-8 py-1.5 pr-2 w-full border border-[#0B1F3B] rounded bg-slate-50 focus:ring-1 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] outline-none text-xs text-slate-800"
         />
       </div>
 

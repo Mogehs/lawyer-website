@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGetPendingSessionsQuery, useApproveSessionForSubmissionMutation } from '../api/directorApi';
-import { Download, Upload, FileText } from 'lucide-react';
+import { Download, Upload } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { lawyerApi } from '../../lawyer/api/lawyerApi';
@@ -46,7 +46,6 @@ export default function DirectorPendingSessions() {
       setNotes('');
       setUploadingFor(null);
       refetch();
-      // Invalidate lawyer sessions cache so assigned lawyers immediately see the session
       dispatch(lawyerApi.util.invalidateTags(['Sessions']));
     } catch (err) {
       toast.error(err?.data?.message || 'Failed to approve session');
@@ -58,31 +57,41 @@ export default function DirectorPendingSessions() {
   if (isError) return <div className="text-red-600">Failed to load pending sessions</div>;
 
   return (
-    <div className="space-y-6 lg:ml-22 pt-22 p-6">
-      <div className="flex items-center  justify-between">
-        <h1 className="text-2xl text-[#0B1F3B] font-bold">Pending Sessions for Signature</h1>
-        <div className="text-sm text-gray-600">{pendingSessions.length} pending</div>
+    <div className="space-y-6 lg:ml-[190px] pt-16 px-4 sm:px-6 md:px-8 lg:px-10">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+        <h1 className="text-2xl sm:text-3xl text-[#0B1F3B] font-bold">Pending Sessions for Signature</h1>
+        <div className="text-sm text-gray-600 mt-1 sm:mt-0">{pendingSessions.length} pending</div>
       </div>
 
       {pendingSessions.length === 0 ? (
         <div className="p-6 bg-white rounded-lg shadow-sm text-center">No pending sessions</div>
       ) : (
-        <div className="grid gap-4">
+        <div className="flex flex-col gap-4">
           {pendingSessions.map(({ session, case: caseInfo }) => (
-            <div key={session._id} className="bg-white p-4 rounded-lg border">
-              <div className="flex items-start justify-between">
+            <div key={session._id} className="bg-white p-4 rounded-lg border w-full">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 md:gap-0">
                 <div>
-                  <h3 className="font-semibold text-[#0B1F3B]">{caseInfo.caseNumber} — Session #{session.sessionNumber}</h3>
+                  <h3 className="font-semibold text-[#0B1F3B]">
+                    {caseInfo.caseNumber} — Session #{session.sessionNumber}
+                  </h3>
                   <p className="text-sm text-[#0B1F3B]">Client: {caseInfo.clientId?.name}</p>
                 </div>
-                <div className="text-sm text-gray-500">{new Date(session.createdAt).toLocaleString()}</div>
+                <div className="text-sm text-gray-500">
+                  {new Date(session.createdAt).toLocaleString()}
+                </div>
               </div>
 
               <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+                {/* Memorandum */}
                 <div>
                   <p className="text-xs text-gray-500">Memorandum</p>
                   {session.memorandum?.fileUrl ? (
-                    <a href={session.memorandum.fileUrl} className="text-blue-600 hover:underline flex items-center gap-2" target="_blank" rel="noreferrer">
+                    <a
+                      href={session.memorandum.fileUrl}
+                      className="text-blue-600 hover:underline flex items-center gap-2"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <Download size={14} /> Download
                     </a>
                   ) : (
@@ -90,19 +99,35 @@ export default function DirectorPendingSessions() {
                   )}
                 </div>
 
+                {/* Upload */}
                 <div>
                   <p className="text-xs text-gray-500">Upload Signature / Final Document</p>
-                  <input type="file" accept=".pdf,.png,.jpg" onChange={handleFileSelect} className="mt-2" />
+                  <input
+                    type="file"
+                    accept=".pdf,.png,.jpg"
+                    onChange={handleFileSelect}
+                    className="mt-2 w-full max-w-full"
+                  />
                 </div>
 
+                {/* Notes */}
                 <div>
                   <p className="text-xs text-gray-500">Notes</p>
-                  <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className="w-full rounded-md border px-3 py-2 mt-2" />
+                  <textarea
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    rows={3}
+                    className="w-full max-w-full rounded-md border px-3 py-2 mt-2"
+                  />
                 </div>
               </div>
 
-              <div className="mt-3 flex gap-2 justify-end">
-                <button onClick={() => handleApprove(caseInfo._id, session._id)} disabled={uploadingFor === session._id} className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg">
+              <div className="mt-3 flex flex-col sm:flex-row sm:justify-end gap-2">
+                <button
+                  onClick={() => handleApprove(caseInfo._id, session._id)}
+                  disabled={uploadingFor === session._id}
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg w-full sm:w-auto"
+                >
                   {uploadingFor === session._id ? 'Uploading...' : (<><Upload size={14} /> Approve & Mark Ready</>)}
                 </button>
               </div>

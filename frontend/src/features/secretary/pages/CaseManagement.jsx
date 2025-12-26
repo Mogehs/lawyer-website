@@ -174,20 +174,20 @@ const CaseManagement = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[220px]">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">
+          <h2 className="text-2xl font-bold text-[#0B1F3B]">
             Case Management
           </h2>
-          <p className="text-sm text-gray-600 mt-1">
+          <p className="text-sm text-[#0B1F3B] mt-1">
             {filteredCases.length} case{filteredCases.length !== 1 ? "s" : ""} found
           </p>
         </div>
         <button
           onClick={handleOpenAddModal}
-          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] hover:from-[#A48C65] hover:to-[#8B7355] text-white rounded-lg font-medium transition-all duration-200 shadow-md"
+          className="flex items-center gap-2 px-4 py-2 bg-[#0B1F3B]  text-white rounded-lg font-medium transition-all duration-200 shadow-md"
         >
           <Plus size={20} />
           Add Case

@@ -4,17 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearProfile, selectUserProfile } from "../../auth/authSlice";
 import { useLogoutMutation } from "../../auth/api/authApi";
-import GoogleTranslate from "../../../components/common/GoogleTranslator";
 
 const Topbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const userProfile = useSelector(selectUserProfile);
 
-  // Logout mutation
   const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
 
   // Close dropdown when clicking outside or pressing Escape
@@ -33,30 +29,6 @@ const Topbar = () => {
     };
   }, []);
 
-  // Watch for sidebar changes
-  useEffect(() => {
-    const handleResize = () => {
-      const desktop = window.innerWidth >= 1024;
-      setSidebarOpen(desktop);
-    };
-
-    const handleSidebarToggle = () => {
-      const sidebar = document.querySelector("aside");
-      if (sidebar) {
-        const isOpen = sidebar.classList.contains("w-52");
-        setSidebarOpen(isOpen);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    const interval = setInterval(handleSidebarToggle, 100);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      clearInterval(interval);
-    };
-  }, []);
-
-  // Handle logout
   const handleLogout = async () => {
     try {
       await logout().unwrap();
@@ -74,62 +46,48 @@ const Topbar = () => {
   const userRole = userProfile?.role || "Secretary";
 
   return (
-    <header
-      className={`fixed top-0 right-0 h-16
-      bg-[#0B1F3B]
-      shadow-md border-b border-white
-      flex items-center justify-between
-      px-4 z-40
-      transition-all duration-300 ease-in-out
-      ${sidebarOpen ? "left-52" : "left-14"}
-      `}
-    >
+    <header className="fixed top-0 left-0 right-0 h-16 bg-[#0B1F3B] shadow-md border-b border-white flex items-center justify-between px-4 sm:px-6 md:px-8 z-40">
       {/* Title */}
-      <div className="flex items-center">
-        <h2 className="text-lg font-semibold text-white">
+      <div className="flex-1 text-center sm:text-left">
+        <h2 className="text-base lg:ml-60 sm:text-lg font-semibold text-white truncate">
           Secretary Dashboard
         </h2>
       </div>
 
       {/* Profile Dropdown */}
-      <div className="flex items-center gap-4">
-        {/* Profile Dropdown */}
-        <GoogleTranslate />
+      <div className="flex items-center gap-2 sm:gap-4">
         <div className="relative dropdown-container">
           <button
             onClick={() => setDropdownOpen(!isDropdownOpen)}
-            className="flex items-center gap-2 p-2 rounded-lg
-               bg-white hover:bg-gray-50
-               border border-gray-200
-               transition-all duration-200"
+            className="flex items-center gap-1 sm:gap-2 p-1 sm:p-2 rounded-lg bg-white hover:bg-gray-50 border border-gray-200 transition-all duration-200"
           >
             <img
               src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
                 userName
               )}&background=11408b&color=fff&bold=true&size=128`}
               alt={`${userName} Avatar`}
-              className="w-8 h-8 rounded-full object-cover"
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover"
             />
-            <div className="hidden md:block text-left">
-              <p className="text-sm font-semibold text-gray-800">{userName}</p>
-              <p className="text-xs text-gray-500 capitalize">{userRole}</p>
+            <div className="hidden sm:flex flex-col text-left">
+              <p className="text-xs sm:text-sm font-semibold text-gray-800 truncate">
+                {userName}
+              </p>
+              <p className="text-[10px] sm:text-xs text-gray-500 capitalize truncate">
+                {userRole}
+              </p>
             </div>
             <ChevronDown
-              size={16}
-              className={`text-gray-500 transition-transform duration-200 ${
+              size={14}
+              className={`text-gray-500 cursor-pointer transition-transform duration-200 ${
                 isDropdownOpen ? "rotate-180" : ""
               }`}
             />
           </button>
 
-          {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div
-              className="absolute right-0 mt-2 w-48 bg-white border border-gray-200
-               rounded-lg shadow-lg py-2 z-50"
-            >
-              <div className="px-4 py-2 border-b border-gray-200">
-                <p className="text-xs text-gray-500">Signed in as</p>
+            <div className="absolute right-0 mt-2 w-40 sm:w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-50">
+              <div className="px-3 py-2 border-b border-gray-200">
+                <p className="text-xs text-gray-500 truncate">Signed in as</p>
                 <p className="text-sm font-semibold text-gray-800 truncate">
                   {userEmail}
                 </p>
@@ -138,10 +96,10 @@ const Topbar = () => {
               <div className="py-1">
                 <Link
                   to="/my-profile"
-                  className="flex items-center gap-2 w-full px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-[#A48C65] transition-colors duration-200 text-sm font-medium"
+                  className="flex items-center gap-2 w-full px-3 sm:px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-[#A48C65] transition-colors duration-200 text-sm font-medium"
                   onClick={() => setDropdownOpen(false)}
                 >
-                  <User size={16} /> My Profile
+                  <User size={14} /> My Profile
                 </Link>
               </div>
 
@@ -149,9 +107,9 @@ const Topbar = () => {
                 <button
                   onClick={handleLogout}
                   disabled={isLoggingOut}
-                  className="flex items-center gap-2 w-full px-4 py-2 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-2 w-full px-3 sm:px-4 py-2 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <LogOut size={16} />
+                  <LogOut size={14} />
                   {isLoggingOut ? "Signing Out..." : "Sign Out"}
                 </button>
               </div>

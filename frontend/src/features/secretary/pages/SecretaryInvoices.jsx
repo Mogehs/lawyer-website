@@ -79,20 +79,20 @@ const SecretaryInvoices = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[220px]">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-            <FileText size={28} className="text-[#A48C65]" />
+          <h1 className="text-2xl font-bold text-[#0B1F3B] flex items-center gap-2">
+            <FileText size={28} className="text-[#0B1F3B]" />
             Client Invoices
           </h1>
-          <p className="text-sm text-gray-600 mt-1">فواتير العملاء</p>
+          <p className="text-sm text-[#0B1F3B] mt-1">فواتير العملاء</p>
         </div>
 
         <Link
           to="/invoices/create"
-          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] hover:from-[#A48C65] hover:to-[#8B7355] text-white rounded-lg font-medium transition-all duration-200 shadow-md"
+          className="flex items-center gap-2 px-4 py-2 bg-[#0B1F3B]  text-white rounded-lg font-medium transition-all duration-200 shadow-md"
         >
           <Plus size={20} />
           Create Invoice
@@ -113,7 +113,7 @@ const SecretaryInvoices = () => {
               placeholder="Search invoices..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
 
@@ -121,7 +121,7 @@ const SecretaryInvoices = () => {
           <select
             value={filters.status}
             onChange={(e) => setFilters({ ...filters, status: e.target.value, page: 1 })}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           >
             <option value="">All Status</option>
             <option value="paid">Paid</option>
@@ -135,7 +135,7 @@ const SecretaryInvoices = () => {
             type="date"
             value={filters.startDate}
             onChange={(e) => setFilters({ ...filters, startDate: e.target.value, page: 1 })}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           />
 
           {/* End Date */}
@@ -143,14 +143,14 @@ const SecretaryInvoices = () => {
             type="date"
             value={filters.endDate}
             onChange={(e) => setFilters({ ...filters, endDate: e.target.value, page: 1 })}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           />
         </div>
 
         {(filters.status || filters.startDate || filters.endDate) && (
           <button
             onClick={() => setFilters({ status: "", startDate: "", endDate: "", page: 1, limit: 10 })}
-            className="mt-3 text-sm text-[#A48C65] hover:underline"
+            className="mt-3 text-sm text-[#0B1F3B] hover:underline"
           >
             Clear Filters
           </button>
@@ -161,13 +161,13 @@ const SecretaryInvoices = () => {
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         {isLoading ? (
           <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A48C65]"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0B1F3B]"></div>
           </div>
         ) : filteredInvoices.length > 0 ? (
           <>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white">
+                <thead className="bg-[#0B1F3B] text-white">
                   <tr>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
                       Invoice #

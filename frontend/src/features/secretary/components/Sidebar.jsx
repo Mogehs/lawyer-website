@@ -8,6 +8,7 @@ import {
   FileText,
   Menu,
   X,
+  LogOut, // ✅ Add LogOut icon
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -15,35 +16,24 @@ import { clearProfile } from "../../auth/authSlice";
 import { useLogoutMutation } from "../../auth/api/authApi";
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(window.innerWidth >= 1024);
-  const navigate = useNavigate();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
-  const [logout] = useLogoutMutation();
+  const navigate = useNavigate();
+  const [logout, { isLoading }] = useLogoutMutation();
 
-  // ✅ Secretary-specific menu items
   const links = [
-    { name: "Overview", icon: <Home size={16} />, path: "." },
-    { name: "Clients", icon: <Users size={16} />, path: "clients" },
-    { name: "Cases", icon: <Scale size={16} />, path: "case-management" },
-    { name: "Invoices", icon: <FileText size={16} />, path: "invoices" },
-    { name: "Reminders", icon: <Bell size={16} />, path: "reminders" },
-    {
-      name: "Archive",
-      icon: <FolderArchive size={16} />,
-      path: "archive-cases",
-    },
+    { name: "Overview", icon: <Home size={20} />, path: "/" },
+    { name: "Clients", icon: <Users size={20} />, path: "clients" },
+    { name: "Cases", icon: <Scale size={20} />, path: "case-management" },
+    { name: "Invoices", icon: <FileText size={20} />, path: "invoices" },
+    { name: "Reminders", icon: <Bell size={20} />, path: "reminders" },
+    { name: "Archive", icon: <FolderArchive size={20} />, path: "archive-cases" },
   ];
-
-  const toggleSidebar = () => setIsOpen(!isOpen);
 
   const handleLogout = async () => {
     try {
       await logout().unwrap();
-      dispatch(clearProfile());
-      navigate("/login");
-    } catch (error) {
-      console.error("Logout error:", error);
-      // Clear profile and navigate even if API fails
+    } finally {
       dispatch(clearProfile());
       navigate("/login");
     }
@@ -53,74 +43,86 @@ const Sidebar = () => {
     <>
       {/* Mobile Menu Button */}
       <button
-        onClick={toggleSidebar}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white shadow-md"
+        onClick={() => setMobileOpen(true)}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md"
       >
-        {isOpen ? <X size={20} /> : <Menu size={20} />}
+        <Menu size={22} />
       </button>
+
+      {/* Mobile Overlay */}
+      {mobileOpen && (
+        <div
+          onClick={() => setMobileOpen(false)}
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
+        />
+      )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-40 bg-[#0B1F3B] backdrop-blur-xl text-white border-r border-blue-100 shadow-lg transition-all duration-300 ease-in-out ${
-          isOpen ? "w-52" : "w-14"
-        } overflow-hidden`}
+        className={`fixed top-0 left-0 h-full z-50 flex flex-col
+          bg-[#0B1F3B] border-r border-blue-100 shadow-lg
+          transition-transform duration-300 ease-in-out
+          w-56
+          ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
+          lg:translate-x-0`}
       >
+        {/* Mobile Close Button */}
+        <button
+          onClick={() => setMobileOpen(false)}
+          className="lg:hidden absolute top-4 right-4 text-white"
+        >
+          <X size={22} />
+        </button>
+
         {/* Header */}
-        <div className="h-16 flex items-center justify-center border-b border-blue-100 px-2">
-          {isOpen ? (
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-white rounded-lg shadow-sm">
-                <Scale className="text-[#0B1F3B]" size={20} />
-              </div>
-              <div>
-                <h1 className="text font-semibold text-white">Secretary</h1>
-                <p className="text-[12px] text-slate-200">Case Management</p>
-              </div>
-            </div>
-          ) : (
-            <div className="p-1.5 bg-[#A48C65] rounded-lg shadow-sm">
-              <Scale className="text-white" size={20} />
-            </div>
-          )}
+        <div className="flex items-center gap-3 px-5 py-3 border-b border-blue-100">
+          <div className="p-2 bg-white rounded-xl shadow-md transition-all duration-300 hover:scale-110 hover:rotate-3">
+            <Scale size={24} className="text-[#0B1F3B]" />
+          </div>
+          <div>
+            <h2 className="text-sm font-lg text-white">
+              Secretary Dashboard
+            </h2>
+            <p className="text-xs text-blue-200">
+              Case Management
+            </p>
+          </div>
         </div>
 
-        {/* Navigation Links */}
-        <nav className="mt-6 px-2">
+        {/* Navigation */}
+        <nav className="flex-1 py-4 overflow-y-auto">
           {links.map((link, i) => (
             <NavLink
               key={i}
               to={link.path}
-              end={link.path === "."}
+              onClick={() => setMobileOpen(false)}
               className={({ isActive }) =>
-                `flex items-center my-5 gap-3 px-3 py-3 mb-1 rounded-md transition-all duration-200 ${
-                  isActive
-                    ? "bg-white text-[#0B1F3B] font-medium shadow-sm"
-                    : "text-white hover:bg-white/80 hover:text-[#0B1F3B]"
-                }`
+                `flex items-center gap-3 px-5 py-2 mx-2 my-1 rounded-lg
+                 transition-all duration-300
+                 ${isActive
+                   ? "bg-white text-[#0B1F3B] shadow-lg font-medium"
+                   : "text-white hover:bg-white hover:text-[#0B1F3B]"}`
               }
             >
               {link.icon}
-              {isOpen && <span className=" font-medium">{link.name}</span>}
+              <span className="text-sm font-medium">{link.name}</span>
             </NavLink>
           ))}
         </nav>
 
-        {/* Toggle Button for Desktop */}
-        <button
-          onClick={toggleSidebar}
-          className="hidden lg:flex absolute bottom-4 right-2 p-1.5 rounded-md bg-white text-[#0B1F3B] transition-colors shadow-sm"
-        >
-          {isOpen ? <X size={16} /> : <Menu size={16} />}
-        </button>
+        {/* Logout */}
+        <div className="px-4 mb-4 mt-auto">
+          <button
+            onClick={handleLogout}
+            className="flex items-center cursor-pointer gap-3 px-4 py-3 w-full rounded-lg text-white bg-red-500 hover:bg-red-600 transition-all duration-300"
+          >
+            <LogOut size={20} />
+            <span className="text-sm font-medium">
+              {isLoading ? "Logging Out..." : "Logout"}
+            </span>
+          </button>
+        </div>
       </aside>
-
-      {/* Overlay for Mobile */}
-      {isOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={toggleSidebar}
-        />
-      )}
     </>
   );
 };

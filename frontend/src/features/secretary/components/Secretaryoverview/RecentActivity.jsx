@@ -3,34 +3,41 @@ import React from "react";
 
 export default function RecentActivity({ recentActivities }) {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-3">
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-2xl font-semibold text-[#0B1F3B]">
+    <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-4">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg sm:text-xl font-semibold text-[#0B1F3B]">
           Recent Activity
         </h3>
-        <span className="text-md text-[#0B1F3B] bg-slate-50 px-2 py-0.5 rounded">
+        <span className="text-sm text-[#0B1F3B] bg-slate-50 px-3 py-1 rounded-full font-medium">
           Last 24 hours
         </span>
       </div>
 
+      {/* Activity List */}
       {recentActivities && recentActivities.length > 0 ? (
-        <ul className="space-y-2">
-          {recentActivities.map((a) => (
+        <ul className="space-y-3">
+          {recentActivities.map((activity) => (
             <li
-              key={a._id || a.id}
-              className="flex items-start space-x-2 pb-2 border-b border-slate-100 last:border-b-0 last:pb-0"
+              key={activity._id || activity.id}
+              className="flex items-start gap-3 p-2 rounded-lg hover:bg-[#F5F7FA] transition-colors duration-200"
             >
-              <div className="w-1.5 h-1.5 bg-[#0B1F3B] rounded-full mt-2.5 shrink-0"></div>
+              {/* Timeline Dot */}
+              <div className="flex-shrink-0 mt-1">
+                <div className="w-3 h-3 bg-[#0B1F3B] rounded-full border-2 border-white shadow-md"></div>
+              </div>
+
+              {/* Activity Content */}
               <div className="flex-1">
-                <p className="text-slate-600 text-md">{a.activity}</p>
-                <p className="text-[#0B1F3B] text-[10px] mt-0.5">{a.time}</p>
+                <p className="text-sm text-slate-700 font-medium">{activity.activity}</p>
+                <p className="text-xs text-slate-400 mt-0.5">{activity.time}</p>
               </div>
             </li>
           ))}
         </ul>
       ) : (
         <div className="text-center py-6">
-          <p className="text-slate-600 text-xs">No recent activity</p>
+          <p className="text-slate-500 text-sm">No recent activity</p>
         </div>
       )}
     </div>

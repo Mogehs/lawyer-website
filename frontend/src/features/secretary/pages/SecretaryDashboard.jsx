@@ -79,13 +79,13 @@ const SecretaryDashboard = () => {
   const recentActivities = activityData?.activities || [];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[240px]">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-800">
+        <h1 className="text-2xl font-bold text-[#0B1F3B]">
           Overview
         </h1>
-        <p className="text-sm text-gray-600 mt-1">
+        <p className="text-sm text-[#0B1F3B] mt-1">
           Manage cases, documents, and client information
         </p>
       </div>

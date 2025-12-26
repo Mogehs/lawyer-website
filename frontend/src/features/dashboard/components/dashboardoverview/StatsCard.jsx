@@ -68,11 +68,11 @@ const StatsCard = () => {
           key={index}
           className="relative rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-[#1E1E1E] bg-[#F5F7FA]"
         >
-          <div className="p-5 h-[160px] flex flex-col justify-between">
+          <div className="px-5 py-2 h-[160px] flex flex-col justify-between">
             {/* Header */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-3 rounded-lg bg-white/20 backdrop-blur-sm">
+                <div className=" rounded-lg bg-white/20 backdrop-blur-sm">
                   {stat.icon}
                 </div>
                 <h3 className="text-sm  sm:text-base font-semibold">

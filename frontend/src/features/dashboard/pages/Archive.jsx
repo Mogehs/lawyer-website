@@ -1,4 +1,3 @@
-// src/pages/Archive.jsx
 import React, { useState, useEffect } from 'react';
 import ArchiveFilters from '../components/DashboardArchive/ArchiveFilters';
 import ArchiveTable from '../components/DashboardArchive/ArchiveTable';
@@ -14,11 +13,9 @@ const Archive = () => {
     date: "",
     status: ""
   });
-
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const [limit] = useState(10);
 
-  // API Query with search & filters
   const { data, isLoading, isError, refetch } = useGetAllArchieveQuery({
     page,
     limit,
@@ -50,7 +47,6 @@ const Archive = () => {
     };
   }, []);
 
-  // Modals
   const openViewModal = (archive) => {
     setSelectedArchive(archive);
     setViewModalOpen(true);
@@ -67,22 +63,21 @@ const Archive = () => {
   };
   const handleDeleteConfirm = () => {
     if (archiveToDelete) {
-      // You may call API to delete from backend
       closeModals();
-      refetch(); // Refresh data after delete
+      refetch();
     }
   };
 
-  // Filters
-  const handleFilterChange = (key, value) => setFilters(prev => ({ ...prev, [key]: value }));
-  const clearFilters = () => setFilters({ searchClient: "", searchCaseId: "", stage: "", date: "", status: "" });
+  const handleFilterChange = (key, value) =>
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  const clearFilters = () =>
+    setFilters({ searchClient: "", searchCaseId: "", stage: "", date: "", status: "" });
 
-  // CSV Export
   const exportToCSV = () => {
     const headers = ["Archive ID", "Case ID", "Client", "Stage", "Lawyer", "Submitted On", "Status", "Description"];
     const csvContent = [
       headers.join(","),
-      ...archives.map(archive => {
+      ...archives.map((archive) => {
         const finalStage = archive.stages?.[archive.stages.length - 1] || {};
         return [
           archive.archiveId,
@@ -108,43 +103,65 @@ const Archive = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  if (isLoading) return <p className="text-center text-[#494C52] mt-20">Loading archived cases...</p>;
-  if (isError) return <p className="text-center text-[#BCB083] mt-20">Failed to load archived cases.</p>;
+  if (isLoading)
+    return <p className="text-center text-[#494C52] mt-20">Loading archived cases...</p>;
+  if (isError)
+    return <p className="text-center text-[#BCB083] mt-20">Failed to load archived cases.</p>;
 
   return (
-    <div className={`max-w-6xl min-h-screen transition-all duration-300 ease-in-out mt-16 sm:px-2 md:px-6 lg:px-2 py-3 sm:py-4 md:py-5 ${sidebarOpen ? 'lg:ml-64 md:ml-64' : 'lg:ml-20 md:ml-15'}`}>
+    <div className={`min-h-screen transition-all duration-300 ease-in-out pt-16 px-3 sm:px-4 md:px-6 lg:px-10
+      ${sidebarOpen ? 'lg:ml-64 md:ml-64' : 'lg:ml-50 md:ml-15'}
+    `}>
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 pl-5">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
         <div>
-          <h2 className="text-4xl font-extrabold text-[#0B1F3B]">Archived Cases</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1F3B]">Archived Cases</h2>
           <p className="text-slate-600 mt-1">{archives.length} case{archives.length !== 1 ? 's' : ''} found</p>
         </div>
-        <div className="flex gap-3 mt-4 lg:mt-0">
-          <button onClick={exportToCSV} className="flex items-center gap-2 px-4 py-2  text-[#0B1F3B] font-medium rounded-lg   bg-white border border-[#A48C65] hover:bg-[#0B1F3B]  hover:text-white transition-all duration-200 ">
+        <div className="flex flex-wrap gap-2 mt-2 md:mt-0">
+          <button
+            onClick={exportToCSV}
+            className="flex items-center gap-2 px-4 py-2 text-[#0B1F3B] font-medium rounded-lg bg-white border border-[#A48C65] hover:bg-[#0B1F3B] hover:text-white transition-all duration-200"
+          >
             Export CSV
           </button>
-          <button onClick={() => setShowFilters(!showFilters)} className="flex items-center gap-2 px-4 py-2 bg-[#1C283C] text-[#fe9800e5] rounded-lg hover:bg-[#0B1F3B] hover:text-white transition-colors lg:hidden">
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className="flex items-center gap-2 px-4 py-2 bg-[#1C283C] text-[#fe9800e5] rounded-lg hover:bg-[#0B1F3B] hover:text-white transition-colors md:hidden"
+          >
             Filters
           </button>
         </div>
       </div>
 
       {/* Filters */}
-      <ArchiveFilters filters={filters} onFilterChange={handleFilterChange} onClearFilters={clearFilters} showFilters={showFilters} />
+      <ArchiveFilters
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        onClearFilters={clearFilters}
+        showFilters={showFilters}
+      />
 
       {/* Table */}
-      <ArchiveTable archives={archives} onView={openViewModal} onDelete={openDeleteModal} sidebarOpen={sidebarOpen} />
+      <div className="overflow-x-auto">
+        <ArchiveTable
+          archives={archives}
+          onView={openViewModal}
+          onDelete={openDeleteModal}
+          sidebarOpen={sidebarOpen}
+        />
+      </div>
 
       {/* Modals */}
       <ArchiveViewModal isOpen={isViewModalOpen} archive={selectedArchive} onClose={closeModals} />
       <ArchiveDeleteModal isOpen={isDeleteModalOpen} archive={archiveToDelete} onClose={closeModals} onConfirm={handleDeleteConfirm} />
 
       {/* Pagination */}
-      <div className="flex justify-end gap-2 mt-6">
+      <div className="flex flex-wrap justify-end gap-2 mt-6">
         <button
           disabled={page <= 1}
           onClick={() => setPage(prev => Math.max(prev - 1, 1))}
-          className="px-4 py-2 bg-white border border-[#a48c654f] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200  rounded disabled:opacity-50"
+          className="px-4 py-2 bg-white border border-[#a48c654f] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 rounded disabled:opacity-50"
         >
           Previous
         </button>
@@ -152,7 +169,7 @@ const Archive = () => {
         <button
           disabled={page >= totalPages}
           onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
-          className="px-4 py-2 bg-white border border-[#a48c654f] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200  disabled:opacity-50"
+          className="px-4 py-2 bg-white border border-[#a48c654f] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 rounded disabled:opacity-50"
         >
           Next
         </button>

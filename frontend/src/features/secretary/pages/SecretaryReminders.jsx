@@ -54,11 +54,11 @@ const SecretaryReminders = () => {
 
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[240px]">
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <Bell size={28} className="text-[#A48C65]" />
+        <h2 className="text-2xl font-bold text-[#0B1F3B] flex items-center gap-2">
+          <Bell size={28} className="text-[#0B1F3B]" />
           Reminders
         </h2>
         <p className="text-sm text-gray-600 mt-1">
@@ -69,7 +69,7 @@ const SecretaryReminders = () => {
       {/* Loading & Error States */}
       {isLoading && (
         <div className="text-center py-8">
-          <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-[#A48C65]"></div>
+          <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-[#0B1F3B]"></div>
           <p className="text-xs text-slate-500 mt-2">Loading reminders...</p>
         </div>
       )}
@@ -113,12 +113,12 @@ const SecretaryReminders = () => {
             <div
               key={reminder._id}
               className={`p-2.5 rounded bg-white shadow-sm border-l-2 ${
-                reminder.isOverdue ? "border-red-500" : "border-[#A48C65]"
+                reminder.isOverdue ? "border-red-500" : "border-[#0B1F3B]"
               } flex items-start gap-2 hover:shadow-md transition`}
             >
               <div
                 className={`mt-0.5 ${
-                  reminder.isOverdue ? "text-red-600" : "text-[#A48C65]"
+                  reminder.isOverdue ? "text-red-600" : "text-[#0B1F3B]"
                 }`}
               >
                 {getIcon(reminder.reminderType, reminder.isOverdue)}
@@ -146,7 +146,7 @@ const SecretaryReminders = () => {
                   <button
                     onClick={() => handleDeleteReminder(reminder._id)}
                     disabled={isDeleting}
-                    className="p-1 text-slate-600 hover:text-[#A48C65] hover:bg-red-50 rounded transition shrink-0 ml-2"
+                    className="p-1 text-slate-600 hover:text-[#0B1F3B] hover:bg-red-50 rounded transition shrink-0 ml-2"
                     title="Delete"
                   >
                     <Trash2 size={14} />

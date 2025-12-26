@@ -3,7 +3,7 @@ import { Eye, Trash2 } from "lucide-react";
 const CasesTable = ({ cases, onView, onDelete, sidebarOpen }) => {
   return (
     <div
-      className={`bg-white w-[320px] text-[#24344f] shadow-2xl rounded-2xl
+      className={`bg-white max-w-4xl text-[#24344f] shadow-2xl rounded-t-xl
         border border-[#0B1F3B]/20 overflow-hidden
         transition-all duration-300
         ${sidebarOpen ? "lg:w-[980px] md:w-[440px]" : "lg:w-full md:w-[640px]"}

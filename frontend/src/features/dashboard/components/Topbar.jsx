@@ -67,7 +67,7 @@ const Topbar = () => {
 
   return (
     <header
-      className={`fixed top-0 z-3 left-0 right-0 h-16 sm:h-20
+      className={`fixed top-0 z-3 left-0 right-0 h-16 sm:h-16
       bg-[#0B1F3B]
       shadow-md border-b border-b border-[#ffff] bor
       flex items-center justify-between
@@ -78,7 +78,7 @@ const Topbar = () => {
     >
       {/* Left Quick Stats */}
       <div className={`flex items-center gap-6 sm:gap-8  ${sidebarOpen ? "ml-20 md:ml-[300px]" : "ml-15 md:ml-[130px]"}`}>
-        <div className="text-right sm:text-center">
+        <div className="text-right lg:ml-20 sm:text-center">
           <p className="text-sm  text-wrap sm:text-xs text-white">Active Cases</p>
           <p className="text-lg font-semibold text-slate-200">24</p>
         </div>

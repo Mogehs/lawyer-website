@@ -29,14 +29,14 @@ const ClientsPage = () => {
   }, [clientsData]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[220px]">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">
+          <h2 className="text-2xl font-bold text-[#0B1F3B]">
             Client Management
           </h2>
-          <p className="text-sm text-gray-600 mt-1">
+          <p className="text-sm text-[#0B1F3B] mt-1">
             Manage client information and records
           </p>
         </div>

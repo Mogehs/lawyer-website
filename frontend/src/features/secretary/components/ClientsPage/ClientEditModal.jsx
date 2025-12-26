@@ -32,13 +32,13 @@ export default function ClientEditModal({
     <div className="fixed inset-0 z-[10000] flex justify-center items-center bg-black/50 backdrop-blur-sm p-4">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="bg-[#A48C65] px-4 py-3 rounded-t-lg border-b border-[#fff] flex justify-between items-center">
+        <div className="bg-[#0B1F3B] px-4 py-3 rounded-t-lg border-b border-[#fff] flex justify-between items-center">
           <h2 className="text-sm font-semibold text-white">
             {isCreating ? "Add New Client" : "Edit Client"}
           </h2>
           <button
             onClick={onClose}
-            className="text-white hover:bg-[#8C7A4B] rounded p-1 transition"
+            className="text-white hover:bg-[#0B1F3B] rounded p-1 transition"
           >
             <X size={16} />
           </button>
@@ -60,7 +60,7 @@ export default function ClientEditModal({
                 }
                 placeholder="Enter client name"
                 required
-                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#A48C65] text-xs"
+                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#0B1F3B] text-xs"
               />
             </div>
 
@@ -77,7 +77,7 @@ export default function ClientEditModal({
                 }
                 placeholder="Enter email address"
                 required
-                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#A48C65] text-xs"
+                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#0B1F3B] text-xs"
               />
             </div>
 
@@ -94,7 +94,7 @@ export default function ClientEditModal({
                 }
                 placeholder="Enter contact number"
                 required
-                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#A48C65] text-xs"
+                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#0B1F3B] text-xs"
               />
             </div>
 
@@ -110,7 +110,7 @@ export default function ClientEditModal({
                   setFormData({ ...formData, nationalId: e.target.value })
                 }
                 placeholder="Enter national ID"
-                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#A48C65] text-xs"
+                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#0B1F3B] text-xs"
               />
             </div>
 
@@ -126,7 +126,7 @@ export default function ClientEditModal({
                   setFormData({ ...formData, address: e.target.value })
                 }
                 placeholder="Enter address"
-                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#A48C65] text-xs"
+                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#0B1F3B] text-xs"
               />
             </div>
 
@@ -142,7 +142,7 @@ export default function ClientEditModal({
                   setFormData({ ...formData, additionalInfo: e.target.value })
                 }
                 placeholder="Enter any details"
-                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#A48C65] text-xs resize-y"
+                className="w-full border border-slate-200 rounded px-2 py-1.5 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-[#0B1F3B] text-xs resize-y"
               ></textarea>
             </div>
           </div>
@@ -152,13 +152,13 @@ export default function ClientEditModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-3 py-1.5 rounded border border-slate-300 hover:bg-[#A48C65] hover:text-white transition text-xs text-slate-700"
+              className="px-3 py-1.5 rounded border border-slate-300 hover:bg-[#0B1F3B] hover:text-white transition text-xs text-slate-700"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-3 py-1.5 rounded bg-[#A48C65] hover:bg-[#ffff] hover:text-[#A48C65] text-white text-xs hover:border-[#A48C65] border transition"
+              className="px-3 py-1.5 rounded bg-[#0B1F3B] hover:bg-[#ffff] hover:text-[#0B1F3B] text-white text-xs hover:border-[#0B1F3B] border transition"
             >
               Save
             </button>

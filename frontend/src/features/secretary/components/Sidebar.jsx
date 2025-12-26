@@ -61,7 +61,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-40 bg-gradient-to-b from-blue-50 to-indigo-50/80 backdrop-blur-xl text-slate-700 border-r border-blue-100 shadow-lg transition-all duration-300 ease-in-out ${
+        className={`fixed lg:static inset-y-0 left-0 z-40 bg-[#0B1F3B] backdrop-blur-xl text-white border-r border-blue-100 shadow-lg transition-all duration-300 ease-in-out ${
           isOpen ? "w-52" : "w-14"
         } overflow-hidden`}
       >
@@ -69,12 +69,12 @@ const Sidebar = () => {
         <div className="h-16 flex items-center justify-center border-b border-blue-100 px-2">
           {isOpen ? (
             <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-[#A48C65] rounded-lg shadow-sm">
-                <Scale className="text-white" size={20} />
+              <div className="p-1.5 bg-white rounded-lg shadow-sm">
+                <Scale className="text-[#0B1F3B]" size={20} />
               </div>
               <div>
-                <h1 className="text-sm font-semibold text-[#494C52]">Secretary</h1>
-                <p className="text-[10px] text-slate-500">Case Management</p>
+                <h1 className="text font-semibold text-white">Secretary</h1>
+                <p className="text-[12px] text-slate-200">Case Management</p>
               </div>
             </div>
           ) : (
@@ -92,15 +92,15 @@ const Sidebar = () => {
               to={link.path}
               end={link.path === "."}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2 mb-1 rounded-md transition-all duration-200 ${
+                `flex items-center my-5 gap-3 px-3 py-3 mb-1 rounded-md transition-all duration-200 ${
                   isActive
-                    ? "bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white font-medium shadow-sm"
-                    : "text-slate-700 hover:bg-white/80 hover:text-[#A48C65]"
+                    ? "bg-white text-[#0B1F3B] font-medium shadow-sm"
+                    : "text-white hover:bg-white/80 hover:text-[#0B1F3B]"
                 }`
               }
             >
               {link.icon}
-              {isOpen && <span className="text-xs font-medium">{link.name}</span>}
+              {isOpen && <span className=" font-medium">{link.name}</span>}
             </NavLink>
           ))}
         </nav>
@@ -108,7 +108,7 @@ const Sidebar = () => {
         {/* Toggle Button for Desktop */}
         <button
           onClick={toggleSidebar}
-          className="hidden lg:flex absolute bottom-4 right-2 p-1.5 rounded-md bg-[#A48C65] hover:bg-[#BCB083] text-white transition-colors shadow-sm"
+          className="hidden lg:flex absolute bottom-4 right-2 p-1.5 rounded-md bg-white text-[#0B1F3B] transition-colors shadow-sm"
         >
           {isOpen ? <X size={16} /> : <Menu size={16} />}
         </button>

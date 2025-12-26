@@ -13,14 +13,14 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
         className="relative bg-white rounded-lg shadow-lg w-full max-w-md flex flex-col"
       >
         {/* Header */}
-        <div className="flex items-center bg-[#A48C65] justify-between p-3 rounded-t-lg">
+        <div className="flex items-center bg-[#0B1F3B] justify-between p-3 rounded-t-lg">
           <h3 className="text-sm font-semibold flex items-center gap-1.5 text-white">
             <Trash2 className="w-4 h-4" />
             Delete Case
           </h3>
           <button
             onClick={onClose}
-            className="text-slate-300 bg-[#bfac8c] hover:text-black transition-colors p-1"
+            className="text-[#0B1F3B] rounded-lg bg-white hover:text-black transition-colors p-1"
           >
             <X className="w-4 h-4" />
           </button>
@@ -30,7 +30,7 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
         <div className="space-y-3 p-4">
           <div className="flex items-start gap-2">
             <AlertTriangle
-              className="text-[#A48C65] flex-shrink-0 mt-0.5"
+              className="text-[#0B1F3B] flex-shrink-0 mt-0.5"
               size={16}
             />
             <div>
@@ -66,7 +66,7 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
 
           <div className="bg-red-50 border border-red-200 rounded p-2">
             <p className="text-[10px] text-slate-700 leading-relaxed">
-              <span className="font-semibold text-[#A48C65]">Warning:</span> This
+              <span className="font-semibold text-[#0B1F3B]">Warning:</span> This
               action is irreversible. All case data will be permanently deleted.
             </p>
           </div>
@@ -82,7 +82,7 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
           </button>
           <button
             onClick={onConfirm}
-            className="flex items-center gap-1 px-3 py-1 bg-[#A48C65] text-white rounded text-xs font-medium hover:bg-[#8B754E] transition"
+            className="flex items-center gap-1 px-3 py-1 bg-[#0B1F3B] text-white rounded text-xs font-medium hover:bg-white hover:text-[#0B1F3B] transition"
           >
             <Trash2 className="w-3 h-3" />
             Delete

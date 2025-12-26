@@ -31,7 +31,7 @@ const CaseDetailsForm = ({ caseInfo, onChange }) => {
             name="caseType"
             value={caseInfo.caseType}
             onChange={onChange}
-            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent transition-all shadow-sm hover:border-[#A48C65]"
+            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent transition-all shadow-sm hover:border-[#0B1F3B]"
             required
           >
             <option value="">Select Case Type</option>
@@ -53,7 +53,7 @@ const CaseDetailsForm = ({ caseInfo, onChange }) => {
             name="assignedLawyer"
             value={caseInfo.assignedLawyer}
             onChange={onChange}
-            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent transition-all shadow-sm hover:border-[#A48C65] disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent transition-all shadow-sm hover:border-[#0B1F3B] disabled:bg-gray-100 disabled:cursor-not-allowed"
             required
             disabled={loadingLawyers}
           >
@@ -98,7 +98,7 @@ const CaseDetailsForm = ({ caseInfo, onChange }) => {
             name="approvingLawyer"
             value={caseInfo.approvingLawyer}
             onChange={onChange}
-            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent transition-all shadow-sm hover:border-[#A48C65] disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent transition-all shadow-sm hover:border-[#0B1F3B] disabled:bg-gray-100 disabled:cursor-not-allowed"
             required
             disabled={loadingLawyers}
           >
@@ -143,7 +143,7 @@ const CaseDetailsForm = ({ caseInfo, onChange }) => {
             name="status"
             value={caseInfo.status}
             onChange={onChange}
-            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent transition-all shadow-sm hover:border-[#A48C65]"
+            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent transition-all shadow-sm hover:border-[#0B1F3B]"
             required
           >
             <option value="Pending">Pending</option>
@@ -164,7 +164,7 @@ const CaseDetailsForm = ({ caseInfo, onChange }) => {
             name="stage"
             value={caseInfo.stage}
             onChange={onChange}
-            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent transition-all shadow-sm hover:border-[#A48C65]"
+            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent transition-all shadow-sm hover:border-[#0B1F3B]"
             required
           >
             <option value="Main Case">Main Case</option>
@@ -187,7 +187,7 @@ const CaseDetailsForm = ({ caseInfo, onChange }) => {
           value={caseInfo.description}
           onChange={onChange}
           rows="4"
-          className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent transition-all shadow-sm hover:border-[#A48C65] resize-y"
+          className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent transition-all shadow-sm hover:border-[#0B1F3B] resize-y"
           required
         />
       </div>

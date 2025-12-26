@@ -297,7 +297,7 @@ const CaseTable = ({
                 >
                   <td className="px-4 py-4 whitespace-nowrap">
                     {c.case.courtCaseId ? (
-                      <span className="inline-flex items-center gap-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm">
+                      <span className="inline-flex items-center gap-2 bg-[#0B1F3B] text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm">
                         <FileText size={14} />
                         {c.case.courtCaseId}
                       </span>

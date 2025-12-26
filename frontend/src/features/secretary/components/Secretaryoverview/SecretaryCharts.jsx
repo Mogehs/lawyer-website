@@ -14,13 +14,13 @@ import {
 } from "recharts";
 
 export default function SecretaryCharts({ caseTypeData, pendingDocsData }) {
-  const pieColors = ["#A48C65", "#475569", "#94a3b8"];
+  const pieColors = ["#0B1F3B", "#0B1F3B", ""];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-4">
       {/* Pie Chart */}
       <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-3">
-        <h3 className="text-lg font-semibold text-slate-800 mb-3">
+        <h3 className="text-lg font-semibold text-[#0B1F3B] mb-3">
           Cases by Type
         </h3>
         <ResponsiveContainer width="100%" height={180}>
@@ -62,7 +62,7 @@ export default function SecretaryCharts({ caseTypeData, pendingDocsData }) {
           >
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="#BCB083"
+              stroke="#0B1F3B"
               vertical={false}
             />
             <XAxis
@@ -71,20 +71,20 @@ export default function SecretaryCharts({ caseTypeData, pendingDocsData }) {
               angle={-30}
               textAnchor="end"
               height={10}
-              stroke="#A48C65"
+              stroke="#0B1F3B"
             />
-            <YAxis fontSize={10} width={30} stroke="#A48C65"/>
+            <YAxis fontSize={10} width={30} stroke="#0B1F3B"/>
             <Tooltip
               contentStyle={{
                 backgroundColor: "#fff",
-                border: "1px solid #BCB083",
+                border: "1px solid #0B1F3B",
                 borderRadius: "6px",
                 fontSize: "11px",
               }}
             />
             <Bar
               dataKey="count"
-              fill="#A48C65"
+              fill="#0B1F3B"
               radius={[3, 3, 0, 0]}
               barSize={35}
             />

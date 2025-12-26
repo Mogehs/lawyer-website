@@ -20,10 +20,10 @@ const CasesHeader = ({
     >
       {/* ===== Left Section ===== */}
       <div className="text-center md:text-left">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#494C52] tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#0B1F3B] tracking-tight">
           All Cases
         </h1>
-        <p className="text-gray-600 mt-1 text-sm sm:text-base">
+        <p className="text-[#0B1F3B] mt-1 text-sm sm:text-base">
           View, search, and manage all client cases.
         </p>
       </div>
@@ -46,17 +46,17 @@ const CasesHeader = ({
             placeholder="Search cases..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-[#fff] text-black placeholder-black border border-[#e0c35b] rounded-lg py-2 pl-10 pr-4 text-sm 
-                       focus:outline-none focus:ring-2 focus:ring-[#eace6a] transition-all duration-300"
+            className="w-full bg-[#fff] text-black placeholder-black border border-[#0B1F3B] rounded-lg py-2 pl-10 pr-4 text-sm 
+                       focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] transition-all duration-300"
           />
         </div>
 
         {/* Filter Dropdown */}
         <select
           className="bg-white text-gray-800 
-                     border border-[#A48C65]/40 rounded-lg 
+                     border border-[#0B1F3B]/40 rounded-lg 
                      px-3 py-2 w-full sm:w-auto
-                     focus:outline-none focus:ring-2 focus:ring-[#A48C65] 
+                     focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] 
                      transition-all duration-300"
           value={filterStage}
           onChange={(e) => setFilterStage(e.target.value)}

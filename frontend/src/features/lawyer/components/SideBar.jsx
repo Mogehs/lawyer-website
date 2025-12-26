@@ -73,8 +73,8 @@ const Sidebar = () => {
       <button
         onClick={toggleSidebar}
         className={`fixed top-4 p-2 rounded-lg shadow-md z-50
-          bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white
-          hover:from-[#A48C65] hover:to-[#8B7355]
+          bg-[white] text-[#0B1F3B]
+          
           transition-all duration-300
           ${isDesktop ? (isOpen ? "left-48" : "left-10") : isOpen ? "left-48" : "left-4"}
         `}
@@ -85,7 +85,7 @@ const Sidebar = () => {
       {/* Sidebar */}
       <aside
         className={`fixed lg:static inset-y-0 left-0 z-40
-        bg-gradient-to-b from-blue-50 to-indigo-50/80 backdrop-blur-xl
+        bg-[#0B1F3B] backdrop-blur-xl
         text-slate-700 border-r border-blue-100 shadow-lg
         transition-all duration-300 ease-in-out
         flex flex-col
@@ -96,17 +96,17 @@ const Sidebar = () => {
         <div className="h-16 flex items-center justify-center border-b border-blue-100 px-2">
           {isOpen ? (
             <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-[#A48C65] rounded-lg shadow-sm">
-                <Scale size={20} className="text-white" />
+              <div className="p-1.5 bg-[white] rounded-lg shadow-sm">
+                <Scale size={20} className="text-[#0B1F3B]" />
               </div>
               <div>
-                <h1 className="text-sm font-semibold text-[#494C52]">Lawyer Portal</h1>
-                <p className="text-[10px] text-slate-500">Case Management</p>
+                <h1 className="text-sm font-semibold text-[#f8f8fa]">Lawyer Portal</h1>
+                <p className="text-[10px] text-[white]">Case Management</p>
               </div>
             </div>
           ) : (
-            <div className="p-1.5 bg-[#A48C65] rounded-lg shadow-sm">
-              <Scale size={20} className="text-white" />
+            <div className="p-1.5 bg-[white] rounded-lg shadow-sm">
+              <Scale size={20} className="text-[#0B1F3B]" />
             </div>
           )}
         </div>
@@ -123,8 +123,8 @@ const Sidebar = () => {
                   isOpen ? "gap-3" : "justify-center"
                 } ${
                   isActive
-                    ? "bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white font-medium shadow-sm"
-                    : "text-slate-700 hover:bg-white/80 hover:text-[#A48C65]"
+                    ? "bg-white text-[#0B1F3B] font-medium shadow-sm"
+                    : "text-white hover:bg-white hover:text-[#0B1F3B] hover:shadow-sm"
                 }`
               }
             >
@@ -141,7 +141,7 @@ const Sidebar = () => {
           <button
             onClick={handleLogout}
             className={`flex w-full items-center px-3 py-2 rounded-md
-              text-slate-600 hover:text-red-600 hover:bg-red-50
+              text-white hover:text-red-600 hover:bg-red-50
               transition-all duration-200 ${
                 isOpen ? "gap-3" : "justify-center"
               }`}

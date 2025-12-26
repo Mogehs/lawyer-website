@@ -58,9 +58,9 @@ export default function DirectorPendingSessions() {
   if (isError) return <div className="text-red-600">Failed to load pending sessions</div>;
 
   return (
-    <div className="space-y-6 p-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Pending Sessions for Signature</h1>
+    <div className="space-y-6 lg:ml-22 pt-22 p-6">
+      <div className="flex items-center  justify-between">
+        <h1 className="text-2xl text-[#0B1F3B] font-bold">Pending Sessions for Signature</h1>
         <div className="text-sm text-gray-600">{pendingSessions.length} pending</div>
       </div>
 
@@ -72,8 +72,8 @@ export default function DirectorPendingSessions() {
             <div key={session._id} className="bg-white p-4 rounded-lg border">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="font-semibold">{caseInfo.caseNumber} — Session #{session.sessionNumber}</h3>
-                  <p className="text-sm text-gray-600">Client: {caseInfo.clientId?.name}</p>
+                  <h3 className="font-semibold text-[#0B1F3B]">{caseInfo.caseNumber} — Session #{session.sessionNumber}</h3>
+                  <p className="text-sm text-[#0B1F3B]">Client: {caseInfo.clientId?.name}</p>
                 </div>
                 <div className="text-sm text-gray-500">{new Date(session.createdAt).toLocaleString()}</div>
               </div>

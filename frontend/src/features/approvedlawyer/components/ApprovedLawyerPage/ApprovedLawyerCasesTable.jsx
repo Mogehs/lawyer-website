@@ -34,7 +34,7 @@ export default function ApprovedLawyerCasesTable({
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white">
+          <thead className="bg-[#0B1F3B] text-white">
             <tr>
               <th className="px-4 py-3 text-left text-sm font-semibold">
                 Case #
@@ -73,7 +73,7 @@ export default function ApprovedLawyerCasesTable({
               >
                 {/* Case Number */}
                 <td className="px-4 py-4 whitespace-nowrap">
-                  <span className="inline-flex items-center gap-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm">
+                  <span className="inline-flex items-center gap-2 bg-[#0B1F3B] text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm">
                     <FileText size={14} />
                     {c.caseNumber}
                   </span>
@@ -147,7 +147,7 @@ export default function ApprovedLawyerCasesTable({
                   <div className="flex justify-end gap-2">
                     <button
                       onClick={() => openModal(c)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#A48C65] text-white text-xs font-medium rounded-lg hover:bg-[#8B7355] transition-colors shadow-sm"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0B1F3B] text-white text-xs font-medium rounded-lg hover:bg-[#0B1F3B] transition-colors shadow-sm"
                       title="View Case Details"
                     >
                       <Eye size={14} />

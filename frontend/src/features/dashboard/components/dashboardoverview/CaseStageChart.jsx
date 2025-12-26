@@ -46,7 +46,7 @@ const CaseStageChart = () => {
     <div className="bg-white mt-10 p-5 sm:p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full space-y-8">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <h2 className="text-xl sm:text-2xl font-bold text-[#494C52]">
+        <h2 className="text-xl sm:text-2xl font-bold text-[#0B1F3B]">
           Managing Director Overview
         </h2>
       </div>
@@ -55,7 +55,7 @@ const CaseStageChart = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-6">
         {/* Left - Donut Chart */}
         <div className="bg-[#f9fafb] p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center">
-          <h3 className="text-base sm:text-lg font-semibold text-[#494C52] mb-4">
+          <h3 className="text-base sm:text-lg font-semibold text-[#0B1F3B] mb-4">
             Case Distribution
           </h3>
           <div className="w-full h-[250px] sm:h-[280px] md:h-[300px]">
@@ -79,7 +79,7 @@ const CaseStageChart = () => {
                     backgroundColor: "#0B1F3B",
                     borderRadius: "10px",
                     border: "1px solid #e5e7eb",
-                    color: "#fff",
+                    color: "#",
                   }}
                 />
               </PieChart>

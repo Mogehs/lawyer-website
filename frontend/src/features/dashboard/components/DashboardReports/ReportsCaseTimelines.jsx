@@ -27,11 +27,11 @@ const ReportsCaseTimelines = () => {
   ];
 
   return (
-    <div className="bg-white  p-6 rounded-xl shadow-lg shadow-[#BCB083] border border-[#f4f6f8] mt-8">
+    <div className="bg-white  p-6 rounded-xl shadow-lg shadow-[#0B1F3B] border border-[#f4f6f8] mt-8">
       {/* Header */}
       <div className="flex items-center gap-2 mb-4">
-        <CalendarDays className="text-[#A48C65]" />
-        <h2 className="text-lg font-semibold text-[#494C52]">
+        <CalendarDays className="text-[#0B1F3B]" />
+        <h2 className="text-lg font-semibold text-[#0B1F3B]">
           Case Timelines & Durations
         </h2>
       </div>
@@ -39,7 +39,7 @@ const ReportsCaseTimelines = () => {
       {/* Desktop Table View */}
       <div className="hidden lg:block overflow-x-auto">
         <table className="w-full text-sm text-left text-[#494C52]">
-          <thead className="bg-[#A48C65] text-white uppercase text-xs">
+          <thead className="bg-[#0B1F3B] text-white uppercase text-xs">
             <tr>
               <th className="px-4 py-3">Case No</th>
               <th className="px-4 py-3">Stage</th>
@@ -58,7 +58,7 @@ const ReportsCaseTimelines = () => {
                 <td className="px-4 py-3">{item.stage}</td>
                 <td className="px-4 py-3">{item.start}</td>
                 <td className="px-4 py-3">{item.end}</td>
-                <td className="px-4 py-3 text-[#A48C65] font-semibold">
+                <td className="px-4 py-3 text-[#0B1F3B] font-semibold">
                   {item.duration}
                 </td>
               </tr>

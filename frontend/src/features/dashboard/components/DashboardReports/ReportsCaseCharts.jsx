@@ -25,13 +25,13 @@ const ReportsCaseCharts = () => {
     { lawyer: "Sara", cases: 8 },
   ];
 
-  const COLORS = ["#A48C65", "#494C52", "#BCB083"];
+  const COLORS = ["#0B1F3B", "#494C52", "#A4"];
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
       {/* Case Distribution by Stage */}
-      <div className="bg-white shadow-[#BCB083] p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
-        <h2 className="text-base sm:text-lg font-semibold mb-4 text-[#494C52]">
+      <div className="bg-white shadow-[#0B1F3B] p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 className="text-base sm:text-lg font-semibold mb-4 text-[#0B1F3B]">
           Case Distribution by Stage
         </h2>
         <div className="h-56 sm:h-64 md:h-72">
@@ -56,8 +56,8 @@ const ReportsCaseCharts = () => {
       </div>
 
       {/* Lawyer Performance */}
-      <div className="bg-white shadow-[#BCB083] p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
-        <h2 className="text-base sm:text-lg font-semibold mb-4 text-[#494C52]">
+      <div className="bg-white shadow-[#0B1F3B] p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 className="text-base sm:text-lg font-semibold mb-4 text-[#0B1F3B]">
           Lawyer Performance
         </h2>
         <div className="h-56 sm:h-64 md:h-72">
@@ -66,7 +66,7 @@ const ReportsCaseCharts = () => {
               <XAxis dataKey="lawyer" tick={{ fontSize: 12 }} />
               <YAxis tick={{ fontSize: 12 }} />
               <Tooltip />
-              <Bar dataKey="cases" fill="#A48C65" radius={[5, 5, 0, 0]} />
+              <Bar dataKey="cases" fill="#0B1F3B" radius={[5, 5, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

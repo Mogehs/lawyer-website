@@ -13,10 +13,10 @@ const OverviewHeader = () => {
     >
       {/* ===== Left Section ===== */}
       <div className="text-center md:text-left">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#494C52] tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#0B1F3B] tracking-tight">
         Overview
         </h1>
-        <p className="text-gray-600 mt-1 text-sm sm:text-base">
+        <p className="text-[#0B1F3B] mt-1 text-sm sm:text-base">
         A complete view of your firm’s cases and activities.
         </p>
       </div>

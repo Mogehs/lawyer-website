@@ -150,13 +150,13 @@ const LawyerSessionsPage = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">My Assigned Sessions</h1>
+          <h1 className="text-2xl text-[#0B1F3B] font-bold text-gray-900">My Assigned Sessions</h1>
           <p className="text-gray-600 mt-1">Sessions unlocked for you to work on</p>
         </div>
         <div className="flex items-center gap-3">
           <button onClick={() => refetch()} className="px-3 py-2 bg-white border rounded">Refresh</button>
           <button onClick={() => setShowDebug((s) => !s)} className="px-3 py-2 bg-white border rounded">{showDebug? 'Hide' : 'Show'} Debug</button>
-          <div className="px-4 py-2 bg-[#A48C65] text-white rounded-lg font-semibold">
+          <div className="px-4 py-2 bg-[#0B1F3B] text-white rounded-lg font-semibold">
             {sessions.length} Active Session{sessions.length !== 1 ? "s" : ""}
           </div>
         </div>
@@ -192,7 +192,7 @@ const LawyerSessionsPage = () => {
                 className="bg-white rounded-lg shadow-md border-2 border-gray-200 overflow-hidden"
               >
                 {/* Card Header */}
-                <div className="bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white px-6 py-4">
+                <div className="bg-[#0B1F3B] text-white px-6 py-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="text-lg font-bold">Session #{session.sessionNumber}</h3>
@@ -225,7 +225,7 @@ const LawyerSessionsPage = () => {
                   {/* Session Details */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="flex items-center gap-2">
-                      <Calendar size={16} className="text-[#A48C65]" />
+                      <Calendar size={16} className="text-[#0B1F3B]" />
                       <div>
                         <p className="text-xs text-gray-500">Date</p>
                         <p className="text-sm font-medium text-gray-900">
@@ -239,7 +239,7 @@ const LawyerSessionsPage = () => {
                     </div>
                     {session.sessionTime && (
                       <div className="flex items-center gap-2">
-                        <Clock size={16} className="text-[#A48C65]" />
+                        <Clock size={16} className="text-[#0B1F3B]" />
                         <div>
                           <p className="text-xs text-gray-500">Time</p>
                           <p className="text-sm font-medium text-gray-900">{session.sessionTime}</p>
@@ -248,7 +248,7 @@ const LawyerSessionsPage = () => {
                     )}
                     {session.location && (
                       <div className="flex items-center gap-2">
-                        <MapPin size={16} className="text-[#A48C65]" />
+                        <MapPin size={16} className="text-[#0B1F3B]" />
                         <div>
                           <p className="text-xs text-gray-500">Location</p>
                           <p className="text-sm font-medium text-gray-900">{session.location}</p>
@@ -258,8 +258,8 @@ const LawyerSessionsPage = () => {
                   </div>
 
                   {/* Requirements */}
-                  <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                    <p className="text-sm font-semibold text-amber-900 mb-2">
+                  <div className="p-4 bg-[#0B1F3B]/5  rounded-lg">
+                    <p className="text-sm font-semibold text-[#0B1F3B] mb-2">
                       Requirements from Approving Lawyer:
                     </p>
                     <div className="space-y-1">
@@ -288,7 +288,7 @@ const LawyerSessionsPage = () => {
                     <div className="border-t border-gray-200 pt-4">
                       {uploadingForSession === session._id ? (
                         <div className="space-y-4 p-4 bg-blue-50 rounded-lg">
-                          <h4 className="font-semibold text-gray-900">Upload Memorandum</h4>
+                          <h4 className="font-semibold ">Upload Memorandum</h4>
 
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">

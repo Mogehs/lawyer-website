@@ -75,7 +75,7 @@ const StatsCard = () => {
                 <div className="p-3 rounded-lg bg-white/20 backdrop-blur-sm">
                   {stat.icon}
                 </div>
-                <h3 className="text-sm sm:text-base font-semibold">
+                <h3 className="text-sm  sm:text-base font-semibold">
                   {stat.title}
                 </h3>
               </div>
@@ -98,7 +98,7 @@ const StatsCard = () => {
 
             {/* Value */}
             <div>
-              <p className="text-2xl sm:text-3xl font-bold">
+              <p className="text-2xl text-[#0B1F3B] sm:text-3xl font-bold">
                 {stat.value}
               </p>
               <p className="text-xs sm:text-sm text-[#6B7280]">

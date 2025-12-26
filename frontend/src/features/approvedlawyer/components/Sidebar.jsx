@@ -45,14 +45,14 @@ const Sidebar = () => {
       {/* Mobile Menu Button */}
       <button
         onClick={toggleSidebar}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white shadow-md"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-[#0B1F3B] text-white shadow-md"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-40 bg-gradient-to-b from-blue-50 to-indigo-50/80 backdrop-blur-xl text-slate-700 border-r border-blue-100 shadow-lg transition-all duration-300 ease-in-out ${
+        className={`fixed lg:static inset-y-0 left-0 z-40 bg-[#0B1F3B] backdrop-blur-xl text-slate-700 border-r border-blue-100 shadow-lg transition-all duration-300 ease-in-out ${
           isOpen ? "w-52" : "w-14"
         } overflow-hidden`}
       >
@@ -60,16 +60,16 @@ const Sidebar = () => {
         <div className="h-16 flex items-center justify-center border-b border-blue-100 px-2">
           {isOpen ? (
             <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-[#A48C65] rounded-lg shadow-sm">
-                <Scale className="text-white" size={20} />
+              <div className="p-1.5 bg-[white] rounded-lg shadow-sm">
+                <Scale className="text-[#0B1F3B]" size={20} />
               </div>
               <div>
-                <h1 className="text-sm font-semibold text-[#494C52]">Lawyer Portal</h1>
-                <p className="text-[10px] text-slate-500">Case Management</p>
+                <h1 className="text-sm font-semibold text-[#f8f9fd]">Lawyer Portal</h1>
+                <p className="text-[10px] text-white">Case Management</p>
               </div>
             </div>
           ) : (
-            <div className="p-1.5 bg-[#A48C65] rounded-lg shadow-sm">
+            <div className="p-1.5 bg-[#0B1F3B] rounded-lg shadow-sm">
               <Scale className="text-white" size={20} />
             </div>
           )}
@@ -86,8 +86,8 @@ const Sidebar = () => {
                 `flex items-center gap-3 px-4 py-3 rounded-lg mx-2 my-1 transition-all duration-200
                   ${
                     isActive
-                      ? "bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white font-medium shadow-sm"
-                      : "text-slate-700 hover:bg-white/80 hover:text-[#A48C65] hover:shadow-sm"
+                      ? "bg-[white] text-[#0B1F3B] font-medium shadow-sm"
+                      : "text-slate-700 hover:bg-white/80 hover:text-[#0B1F3B] hover:shadow-sm"
                   }
                   ${isOpen ? "justify-start" : "justify-center"}
                 `
@@ -104,7 +104,7 @@ const Sidebar = () => {
           <button
             onClick={handleLogout}
             disabled={isLoading}
-            className={`flex w-full items-center gap-3 px-4 py-3 text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200
+            className={`flex w-full items-center gap-3 px-4 py-3 text-white hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200
               ${isOpen ? "justify-start" : "justify-center"}
             `}
           >

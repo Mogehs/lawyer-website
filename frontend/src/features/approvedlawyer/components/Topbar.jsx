@@ -75,7 +75,7 @@ const Topbar = () => {
   return (
     <header
       className={`fixed top-0 right-0 h-16
-      bg-gradient-to-r from-[#BCB083] to-[#A48C65]
+      bg-[#0B1F3B]
       shadow-md border-b border-white
       flex items-center justify-between
       px-4 z-40

@@ -142,7 +142,7 @@ console.log(recentCases)
             <p className="text-xs text-gray-500 mb-2">{caseItem.clientId?.email}</p>
             <div className="flex items-center justify-between mt-2 text-sm">
               <span className="text-[#1c283c]/70">{caseItem.caseType}</span>
-              <button className="text-[#A48C65] hover:text-[#1c283c] text-xs font-medium flex items-center gap-1">
+              <button className="text-[#0B1F3B] hover:text-[#1c283c] text-xs font-medium flex items-center gap-1">
                 View <ArrowRight size={12} />
               </button>
             </div>

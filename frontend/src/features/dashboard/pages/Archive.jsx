@@ -116,14 +116,14 @@ const Archive = () => {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 pl-5">
         <div>
-          <h2 className="text-4xl font-extrabold text-[#494C52]">Archived Cases</h2>
+          <h2 className="text-4xl font-extrabold text-[#0B1F3B]">Archived Cases</h2>
           <p className="text-slate-600 mt-1">{archives.length} case{archives.length !== 1 ? 's' : ''} found</p>
         </div>
         <div className="flex gap-3 mt-4 lg:mt-0">
-          <button onClick={exportToCSV} className="flex items-center gap-2 px-4 py-2  text-[#494C52] font-medium rounded-lg   bg-white border border-[#A48C65] hover:bg-[#A48C65]  hover:text-white transition-all duration-200 ">
+          <button onClick={exportToCSV} className="flex items-center gap-2 px-4 py-2  text-[#0B1F3B] font-medium rounded-lg   bg-white border border-[#A48C65] hover:bg-[#0B1F3B]  hover:text-white transition-all duration-200 ">
             Export CSV
           </button>
-          <button onClick={() => setShowFilters(!showFilters)} className="flex items-center gap-2 px-4 py-2 bg-[#1C283C] text-[#fe9800e5] rounded-lg hover:bg-[#FE9A00] hover:text-white transition-colors lg:hidden">
+          <button onClick={() => setShowFilters(!showFilters)} className="flex items-center gap-2 px-4 py-2 bg-[#1C283C] text-[#fe9800e5] rounded-lg hover:bg-[#0B1F3B] hover:text-white transition-colors lg:hidden">
             Filters
           </button>
         </div>
@@ -144,7 +144,7 @@ const Archive = () => {
         <button
           disabled={page <= 1}
           onClick={() => setPage(prev => Math.max(prev - 1, 1))}
-          className="px-4 py-2 bg-white border border-[#a48c654f] text-gray-800 hover:bg-[#A48C65] hover:text-white transition-all duration-200  rounded disabled:opacity-50"
+          className="px-4 py-2 bg-white border border-[#a48c654f] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200  rounded disabled:opacity-50"
         >
           Previous
         </button>
@@ -152,7 +152,7 @@ const Archive = () => {
         <button
           disabled={page >= totalPages}
           onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
-          className="px-4 py-2 bg-white border border-[#a48c654f] text-gray-800 hover:bg-[#A48C65] hover:text-white transition-all duration-200  disabled:opacity-50"
+          className="px-4 py-2 bg-white border border-[#a48c654f] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200  disabled:opacity-50"
         >
           Next
         </button>

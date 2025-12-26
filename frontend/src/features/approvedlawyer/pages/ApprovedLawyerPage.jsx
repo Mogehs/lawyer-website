@@ -92,7 +92,7 @@ export default function ApprovedLawyerPage() {
     return (
       <div className="flex justify-center items-center h-full">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#A48C65]"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#0B1F3B]"></div>
           <p className="mt-4 text-gray-600">Loading...</p>
         </div>
       </div>
@@ -115,7 +115,7 @@ export default function ApprovedLawyerPage() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-            <FileText size={28} className="text-[#A48C65]" />
+            <FileText size={28} className="text-[#0B1F3B]" />
             Case Management
           </h1>
           <p className="text-sm text-gray-600 mt-1">Review and approve cases assigned to you by the secretary.</p>
@@ -131,7 +131,7 @@ export default function ApprovedLawyerPage() {
             <input
               type="text"
               placeholder="Search by case #, client name, email, or phone..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -141,7 +141,7 @@ export default function ApprovedLawyerPage() {
           <select
             value={filterStage}
             onChange={(e) => setFilterStage(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           >
             <option value="">All Stages</option>
             {STAGES.map((s) => (

@@ -138,8 +138,8 @@ const UsersPage = () => {
   return (
     <div className={`min-h-screen px-3 sm:px-4 md:px-6 lg:px-2 py-3 sm:py-4 md:py-25 transition-all duration-300 ease-in-out mt-14 md:mt-0 ${sidebarOpen ? "lg:ml-64 md:ml-64" : "lg:ml-20 md:ml-15"}`}>
       <div className="text-center md:text-left">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#494C52] tracking-tight">Team Management</h1>
-        <p className="text-[#494C52] mt-1 text-sm sm:text-base">Manage your team members, roles, and access permissions.</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#0B1F3B] tracking-tight">Team Management</h1>
+        <p className="text-[#0B1F3B] mt-1 text-sm sm:text-base">Manage your team members, roles, and access permissions.</p>
       </div>
 
       <UserStats stats={stats} />

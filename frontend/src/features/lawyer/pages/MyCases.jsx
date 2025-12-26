@@ -118,7 +118,7 @@ export default function MyCases() {
          {/* Header */}
          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
-               <h2 className="text-2xl font-bold text-gray-800">
+               <h2 className="text-2xl font-bold text-[#0B1F3B]">
                   My Assigned Cases
                </h2>
                <p className="text-sm text-gray-600 mt-1">
@@ -138,7 +138,7 @@ export default function MyCases() {
                      onChange={(e) => setSearch(e.target.value)}
                      placeholder="Search cases..."
                      className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300
-                        focus:ring-2 focus:ring-[#A48C65] focus:border-transparent focus:outline-none
+                        focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent focus:outline-none
                         transition-all duration-200"
                   />
                </div>
@@ -148,7 +148,7 @@ export default function MyCases() {
                   onClick={() => setStatusFilter("")}
                   className={`px-2.5 py-1 text-[10px] rounded transition-all ${
                      !statusFilter
-                        ? "bg-[#A48C65] text-white"
+                        ? "bg-[#0B1F3B] text-white"
                         : "bg-white border border-slate-300 text-slate-600 hover:bg-slate-50"
                   }`}
                >
@@ -160,7 +160,7 @@ export default function MyCases() {
                      onClick={() => setStatusFilter(status)}
                      className={`px-2.5 py-1 text-[10px] rounded transition-all ${
                         statusFilter === status
-                           ? "bg-[#A48C65] text-white"
+                           ? "bg-[#0B1F3B] text-white"
                            : "bg-white border border-slate-300 text-slate-600 hover:bg-slate-50"
                      }`}
                   >
@@ -187,7 +187,7 @@ export default function MyCases() {
                         <div className="flex justify-between items-start">
                            <div className="flex-1">
                               {c.courtCaseId && c.courtCaseId !== "—" ? (
-                                 <span className="inline-flex items-center gap-1.5 bg-[#BCB083] text-[#6B5838] px-2.5 py-1 rounded text-xs font-bold border-2 border-[#A48C65]">
+                                 <span className="inline-flex items-center gap-1.5 bg-[#0B1F3B] text-[#faf8f6] px-2.5 py-1 rounded text-xs font-bold border-2 border-[#A48C65]">
                                     <FiFileText size={12} />
                                     {c.courtCaseId}
                                  </span>
@@ -227,7 +227,7 @@ export default function MyCases() {
 
                         <button
                            onClick={() => openCase(c)}
-                           className="w-full p-1.5 bg-slate-100 text-[#A48C65] rounded transition-colors text-xs font-medium"
+                           className="w-full p-1.5 bg-slate-100 text-[#0B1F3B] rounded transition-colors text-xs font-medium"
                         >
                            View Details
                         </button>
@@ -238,7 +238,7 @@ export default function MyCases() {
                {/* Desktop/Tablet Table */}
                <div className="hidden md:block overflow-x-auto max-w-full">
                   <table className="w-full bg-white rounded-lg overflow-hidden">
-                     <thead className="bg-[#A48C65] text-white border-b border-slate-200">
+                     <thead className="bg-[#0B1F3B] text-white border-b border-slate-200">
                         <tr>
                            <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide text-white whitespace-nowrap">
                               Court Case ID
@@ -271,7 +271,7 @@ export default function MyCases() {
                            <tr key={c.id} className="border-t border-slate-100 hover:bg-slate-50 transition-colors duration-150">
                               <td className="px-4 py-3 whitespace-nowrap">
                                  {c.courtCaseId && c.courtCaseId !== "—" ? (
-                                    <span className="inline-flex items-center gap-1.5 bg-[#BCB083] text-[#6B5838] px-3 py-1.5 rounded text-sm font-bold border-2 border-[#A48C65]">
+                                    <span className="inline-flex items-center gap-1.5 bg-[#0B1F3B] text-[#fbfbfa] px-3 py-1.5 rounded text-sm font-bold border-2 border-[#0B1F3B]/50">
                                        <FiFileText size={14} />
                                        {c.courtCaseId}
                                     </span>
@@ -302,7 +302,7 @@ export default function MyCases() {
                                  <div className="flex justify-center">
                                     <button
                                        onClick={() => openCase(c)}
-                                       className="p-1.5 bg-slate-100 text-[#A48C65] rounded hover:bg-slate-200 transition-colors"
+                                       className="p-1.5 bg-slate-100 text-[#0B1F3B] rounded hover:bg-slate-200 transition-colors"
                                        title="View Details"
                                     >
                                        <FiEye size={14} />

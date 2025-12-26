@@ -2,12 +2,12 @@ import React from "react";
 
 const UserTable = ({ users, updateStatus, updateRole, onView, onDelete, roles }) => {
   return (
-    <div className="bg-white text-[#24344f] shadow-xl rounded-2xl border border-[#fe9a00]/20 overflow-hidden">
+    <div className="bg-white text-[#24344f] shadow-xl rounded-2xl border border-[#0B1F3B]/20 overflow-hidden">
       {/* Desktop Table */}
       <div className="hidden lg:block">
         <div className="overflow-x-auto">
           <table className="min-w-full text-sm">
-            <thead className="bg-[#A48C65] text-white uppercase tracking-wide text-xs font-semibold">
+            <thead className="bg-[#0B1F3B] text-white uppercase tracking-wide text-xs font-semibold">
               <tr className="text-left whitespace-nowrap">
                 <th className="py-3 px-4">Name</th>
                 <th className="py-3 px-4">Role</th>
@@ -22,7 +22,7 @@ const UserTable = ({ users, updateStatus, updateRole, onView, onDelete, roles })
               {users.map((u, idx) => (
                 <tr
                   key={u._id} // ✅ use MongoDB _id
-                  className={`${idx % 2 === 0 ? "bg-[#bcb08356]" : "bg-white"} hover:bg-slate-100 transition whitespace-nowrap`}
+                  className={`${idx % 2 === 0 ? "bg-[blue]/5" : "bg-white"} hover:bg-slate-100 transition whitespace-nowrap`}
                 >
                   <td className="py-3 px-4 font-semibold">{u.name}</td>
                   <td className="py-3 px-4">
@@ -54,13 +54,13 @@ const UserTable = ({ users, updateStatus, updateRole, onView, onDelete, roles })
                   <td className="py-3 px-4 flex gap-2 justify-center">
                     <button
                       onClick={() => onView(u)}
-                      className="bg-[#A48C65] text-white px-3 py-1 rounded-md hover:bg-transparent border hover:text-[#494C52] hover:border-[#A48C65] transition text-sm"
+                      className="bg-[#0B1F3B] text-white px-3 py-1 rounded-md hover:bg-transparent border hover:text-[#494C52] hover:border-[#0B1F3B] transition text-sm"
                     >
                       View
                     </button>
                     <button
                       onClick={() => onDelete(u._id)}
-                      className="bg-[#A48C65] text-white px-3 py-1 rounded-md hover:bg-transparent border hover:text-[#494C52] hover:border-[#A48C65] transition text-sm"
+                      className="bg-[#0B1F3B] text-white px-3 py-1 rounded-md hover:bg-transparent border hover:text-[#494C52] hover:border-[#0B1F3B] transition text-sm"
                     >
                       Delete
                     </button>

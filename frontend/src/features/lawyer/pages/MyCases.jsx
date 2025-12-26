@@ -114,7 +114,7 @@ export default function MyCases() {
    }
 
    return (
-      <div className="space-y-6">
+      <div className="space-y-6 lg:ml-[220px]">
          {/* Header */}
          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>

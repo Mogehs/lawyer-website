@@ -146,7 +146,7 @@ const LawyerSessionsPage = () => {
   }
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-6 p-6 lg:ml-[220px]">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>

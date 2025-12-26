@@ -44,7 +44,7 @@ export default function LawyerArchive() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[220px]">
       <ArchiveHeader caseCount={filteredCases.length} />
 
       <ArchiveSearch search={search} onSearchChange={setSearch} />

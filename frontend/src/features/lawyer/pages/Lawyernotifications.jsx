@@ -88,7 +88,7 @@ export default function LawyerNotifications() {
    if (isError) {
       return (
          <div
-            className={`min-h-screen transition-all duration-300 ease-in-out pt-16 px-2 py-3 sm:px-3 sm:py-4 mt-8 ${sidebarOpen ? "md:ml-52 ml-0" : "md:ml-14 ml-0"
+            className={`min-h-screen transition-all duration-300 ease-in-out pt-16 px-2 py-3 sm:px-3 sm:py-4 mt-8 ${sidebarOpen ? "md:ml-52 ml-0" : "md:ml-14 ml-0 "
                }`}
          >
             <div className="bg-red-50 p-3 rounded border border-red-200">
@@ -114,12 +114,12 @@ export default function LawyerNotifications() {
       <div
          className={`min-h-screen
                  px-3 sm:px-4 mt-12 md:px-6 lg:px-2
-                 py-3 sm:py-4 md:py-5 
+                 py-3 sm:py-4 md:py-5 lg:ml-[220px]
                  transition-all duration-300 ease-in-out
               ${sidebarOpen ? 'lg:ml-64 md:ml-64' : 'lg:ml-20 md:ml-15'}`}
       >
          {/* Header - Compact */}
-         <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between mb-3 gap-2">
+         <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between mb-3 gap-2 ">
             <div>
                <h2 className="text-2xl md:text-3xl font-bold text-[#A48D66]">
                   Notifications

@@ -5,7 +5,7 @@ import StatCards from "../components/LawyerOverview/StatCards";
 
 const LawyerOverview = () => {
    return (
-      <div className="space-y-6">
+      <div className="space-y-6 lg:ml-[220px]">
          {/* Title & Subtitle */}
          <div>
             <h1 className="text-2xl text-[#0B1F3B] font-bold ">

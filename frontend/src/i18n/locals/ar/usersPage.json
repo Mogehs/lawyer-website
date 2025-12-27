@@ -1,0 +1,19 @@
+{
+  "pageTitle": "إدارة الفريق",
+  "pageSubtitle": "قم بإدارة أعضاء الفريق، الأدوار، وصلاحيات الوصول.",
+  "passwordMismatch": "كلمتا المرور غير متطابقتين",
+  "searchPlaceholder": "البحث بالاسم أو البريد الإلكتروني",
+  "addButton": "إضافة مستخدم",
+  "roles": {
+    "director": "المدير العام",
+    "secretary": "السكرتير",
+    "lawyer": "محامي",
+    "approvingLawyer": "محامي معتمد"
+  },
+  "stats": {
+    "totalUsers": "إجمالي المستخدمين",
+    "lawyers": "المحامون",
+    "approvingLawyers": "المحامون المعتمدون",
+    "activeUsers": "المستخدمون النشطون"
+  }
+}

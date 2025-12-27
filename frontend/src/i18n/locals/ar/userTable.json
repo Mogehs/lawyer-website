@@ -1,0 +1,19 @@
+{
+  "tableHeaders": {
+    "name": "الاسم",
+    "role": "الدور",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "status": "الحالة",
+    "assignedCases": "القضايا المخصصة",
+    "actions": "الإجراءات"
+  },
+  "status": {
+    "active": "نشط",
+    "inactive": "غير نشط"
+  },
+  "actions": {
+    "view": "عرض",
+    "delete": "حذف"
+  }
+}

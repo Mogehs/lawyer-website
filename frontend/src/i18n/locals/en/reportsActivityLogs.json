@@ -1,0 +1,7 @@
+{
+  "title": "Recent Activity Logs",
+  "submitted": "Case {{case}} submitted by {{name}}",
+  "appealAdded": "Appeal added for Case {{case}}",
+  "reminderUpdated": "Reminder updated by {{name}}",
+  "hearingScheduled": "Hearing scheduled for Case {{case}}"
+}

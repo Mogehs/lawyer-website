@@ -1,0 +1,19 @@
+{
+  "pageTitle": "Team Management",
+  "pageSubtitle": "Manage your team members, roles, and access permissions.",
+  "passwordMismatch": "Passwords do not match",
+  "searchPlaceholder": "Search by name or email",
+  "addButton": "Add User",
+  "roles": {
+    "director": "Managing Director",
+    "secretary": "Secretary",
+    "lawyer": "Lawyer",
+    "approvingLawyer": "Approving Lawyer"
+  },
+  "stats": {
+    "totalUsers": "Total Users",
+    "lawyers": "Lawyers",
+    "approvingLawyers": "Approving Lawyers",
+    "activeUsers": "Active Users"
+  }
+}

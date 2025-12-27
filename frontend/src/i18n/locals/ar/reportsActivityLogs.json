@@ -1,0 +1,7 @@
+{
+  "title": "سجل الأنشطة الأخيرة",
+  "submitted": "تم تقديم القضية {{case}} بواسطة {{name}}",
+  "appealAdded": "تمت إضافة استئناف للقضية {{case}}",
+  "reminderUpdated": "تم تحديث التذكير بواسطة {{name}}",
+  "hearingScheduled": "تم تحديد جلسة للقضية {{case}}"
+}

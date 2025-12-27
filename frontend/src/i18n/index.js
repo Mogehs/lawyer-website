@@ -39,6 +39,20 @@ import ar_archive from "./locals/ar/archive.json";
 import en_archive from "./locals/en/archive.json";
 import en_reportsHeader from "./locals/en/reportsHeader.json";
 import ar_reportsHeader from "./locals/ar/reportsHeader.json";
+import ar_reportsStats from "./locals/ar/reportsStats.json";
+import en_reportsStats from "./locals/en/reportsStats.json";
+import en_reportsCaseCharts from "./locals/en/reportsCaseCharts.json";
+import ar_reportsCaseCharts from "./locals/ar/reportsCaseCharts.json";
+import ar_reportsCaseTimelines from "./locals/ar/reportsCaseTimelines.json";
+import en_reportsCaseTimelines from "./locals/en/reportsCaseTimelines.json";
+import en_reportsActivityLogs from "./locals/en/reportsActivityLogs.json";
+import ar_reportsActivityLogs from "./locals/ar/reportsActivityLogs.json";
+import ar_remindersHeader from "./locals/ar/remindersHeader.json";
+import en_remindersHeader from "./locals/en/remindersHeader.json";
+import en_usersPage from "./locals/en/usersPage.json";
+import ar_usersPage from "./locals/ar/usersPage.json";
+import ar_userTable from "./locals/ar/userTable.json";
+import en_userTable from "./locals/en/userTable.json";
 
 
 const resources = {
@@ -58,6 +72,13 @@ const resources = {
     directorpendingsessions: en_directorpendingsessions,
     archive: en_archive,
     reportsHeader: en_reportsHeader,
+    reportsStats: en_reportsStats,
+    reportsCaseCharts: en_reportsCaseCharts,
+    reportsCaseTimelines: en_reportsCaseTimelines,
+    reportsActivityLogs: en_reportsActivityLogs,
+    remindersHeader: en_remindersHeader,
+    usersPage: en_usersPage,
+    userTable: en_userTable,
   },
   ar: {
     topbar: ar_topbar,
@@ -75,6 +96,13 @@ const resources = {
     directorpendingsessions: ar_directorpendingsessions,
     archive: ar_archive,
     reportsHeader: ar_reportsHeader,
+    reportsStats: ar_reportsStats,
+    reportsCaseCharts: ar_reportsCaseCharts,
+    reportsCaseTimelines: ar_reportsCaseTimelines,
+    reportsActivityLogs: ar_reportsActivityLogs,
+    remindersHeader: ar_remindersHeader,
+    usersPage: ar_usersPage,
+    userTable: ar_userTable,
   }
 };
 

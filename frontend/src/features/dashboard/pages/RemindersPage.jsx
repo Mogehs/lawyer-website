@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import i18n from "../../.../../../i18n/index";
+
 import RemindersTable from "../components/DashboardReminders/RemindersTable";
 import RemindersConfirmationModal from "../components/DashboardReminders/RemindersConfirmationModal";
 import RemindersHeader from "../components/DashboardReminders/RemindersHeader";
@@ -11,6 +14,9 @@ import {
 } from "../api/reminderApi";
 
 const RemindersPage = () => {
+  const { t } = useTranslation();
+  const isRTL = i18n.language === "ar";
+
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -33,31 +39,29 @@ const RemindersPage = () => {
   const reminders = data?.reminders || [];
   const totalPages = data?.totalPages || 1;
 
+  // Sidebar sync
   useEffect(() => {
     const handleResize = () => {
-      const desktop = window.innerWidth >= 1024;
-      setSidebarOpen(desktop);
+      setSidebarOpen(window.innerWidth >= 1024);
     };
 
     const handleSidebarToggle = () => {
-      const sidebar = document.querySelector('aside');
+      const sidebar = document.querySelector("aside");
       if (sidebar) {
-        const isOpen = sidebar.classList.contains('w-64');
-        setSidebarOpen(isOpen);
+        setSidebarOpen(sidebar.classList.contains("w-64"));
       }
     };
 
-    window.addEventListener('resize', handleResize);
-
+    window.addEventListener("resize", handleResize);
     const interval = setInterval(handleSidebarToggle, 100);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       clearInterval(interval);
     };
   }, []);
 
-  // Add reminder handler
+  // Add reminder
   const handleAddReminder = async (newReminder) => {
     try {
       await createReminder(newReminder).unwrap();
@@ -71,20 +75,23 @@ const RemindersPage = () => {
     } catch (error) {
       setModal({
         show: true,
-        message: `Failed to add reminder: ${error.data?.message || error.message}`,
+        message: `Failed to add reminder: ${
+          error.data?.message || error.message
+        }`,
         type: "error",
       });
     }
   };
 
-  // Action buttons (View / Mark Complete)
+  // Actions
   const handleAction = async (action, reminder) => {
     if (action === "View") {
       setModal({
         show: true,
-        message: `Case: ${reminder.caseName}\nLawyer: ${reminder.lawyer}\nDate: ${new Date(
-          reminder.date
-        ).toLocaleDateString()}\nStatus: ${reminder.isCompleted ? "Completed" : "Pending"}`,
+        message: `Case: ${reminder.caseName}
+Lawyer: ${reminder.lawyer}
+Date: ${new Date(reminder.date).toLocaleDateString()}
+Status: ${reminder.isCompleted ? "Completed" : "Pending"}`,
         type: "info",
       });
     }
@@ -101,15 +108,14 @@ const RemindersPage = () => {
       } catch (error) {
         setModal({
           show: true,
-          message: `Failed to mark complete: ${error.data?.message || error.message}`,
+          message: `Failed to mark complete: ${
+            error.data?.message || error.message
+          }`,
           type: "error",
         });
       }
     }
   };
-
-  // Pagination handler
-  const handlePageChange = (newPage) => setPage(newPage);
 
   if (isLoading)
     return <p className="text-center mt-20">Loading reminders...</p>;
@@ -123,11 +129,14 @@ const RemindersPage = () => {
 
   return (
     <div
-      className={`min-h-screen
-        px-3 sm:px-4 md:px-6 lg:px-2
-        py-3 sm:py-4 md:py-5 
+      className={`
+        min-h-screen
+        px-3 sm:px-4 md:px-6 lg:px-10
+        py-3 sm:py-4 md:py-5
         transition-all duration-300 ease-in-out
-        ${sidebarOpen ? " md:ml-64 lg:ml-64" : "lg:ml-55 md:ml-15"}`}
+        ${isRTL ? "text-right" : "text-left"}
+       ${isRTL ? "lg:mr-[190px] text-right" : "lg:ml-[190px] text-left"}
+      `}
     >
       {/* Header */}
       <RemindersHeader
@@ -142,7 +151,7 @@ const RemindersPage = () => {
         onAction={handleAction}
         page={page}
         totalPages={totalPages}
-        onPageChange={handlePageChange}
+        onPageChange={setPage}
       />
 
       {/* Add Reminder Modal */}

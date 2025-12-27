@@ -11,7 +11,7 @@ import RoleProtectedRoute from "../middlewares/RoleProtectedRoute";
 export const AccountantRoutes = {
   path: "accountant",
   element: (
-    <RoleProtectedRoute allowedRoles={["accountant", "director"]}>
+    <RoleProtectedRoute allowedRoles={["accountant", "director", "secretary"]}>
       <AccountantLayout />
     </RoleProtectedRoute>
   ),
@@ -26,4 +26,3 @@ export const AccountantRoutes = {
     { path: "expenses/create", element: <CreateExpense /> },
   ],
 };
-

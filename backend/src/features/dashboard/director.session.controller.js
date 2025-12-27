@@ -88,6 +88,10 @@ export const approveSessionForSubmission = asyncHandler(async (req, res) => {
   };
 
   session.isReadyForSubmission = true;
+  
+  // Update case status to ReadyForSubmission
+  caseData.status = "ReadyForSubmission";
+  
   // Unlock the session for the assigned draft lawyer so they can complete it
   try {
     if (caseData.assignedLawyer) {

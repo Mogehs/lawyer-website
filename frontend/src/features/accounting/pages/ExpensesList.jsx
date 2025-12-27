@@ -39,7 +39,7 @@ const ExpensesList = () => {
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "USD",
+      currency: "QAR",
     }).format(amount || 0);
   };
 

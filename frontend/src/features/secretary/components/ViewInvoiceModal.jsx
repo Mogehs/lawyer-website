@@ -1,4 +1,4 @@
-import { X, FileText, User, Calendar, DollarSign } from "lucide-react";
+import { X, FileText, User, Calendar, Coins } from "lucide-react";
 
 const ViewInvoiceModal = ({ invoice, isOpen, onClose }) => {
   if (!isOpen || !invoice) return null;
@@ -7,7 +7,7 @@ const ViewInvoiceModal = ({ invoice, isOpen, onClose }) => {
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "USD",
+      currency: "QAR",
     }).format(amount || 0);
   };
 
@@ -114,7 +114,7 @@ const ViewInvoiceModal = ({ invoice, isOpen, onClose }) => {
           {/* Financial Details */}
           <div className="pt-4">
             <div className="flex items-center gap-2 mb-3">
-              <DollarSign size={18} className="text-[#0B1F3B]" />
+              <Coins size={18} className="text-[#0B1F3B]" />
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
                 Financial Details
               </h3>

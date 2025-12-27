@@ -3,7 +3,7 @@ import {
   FileText,
   CreditCard,
   TrendingDown,
-  DollarSign,
+  Coins,
   Menu,
   X,
   LogOut,
@@ -100,7 +100,7 @@ const Sidebar = () => {
         {/* Header */}
         <div className="h-16 flex items-center gap-3 px-4 border-b border-blue-100">
           <div className="p-2 bg-white rounded-lg shadow-sm">
-            <DollarSign size={22} className="text-[#0B1F3B]" />
+            <Coins size={22} className="text-[#0B1F3B]" />
           </div>
           <div>
             <h1 className="text-sm font-semibold text-white">Accounting</h1>

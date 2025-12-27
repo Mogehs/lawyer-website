@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  DollarSign,
+  Coins,
   TrendingDown,
   TrendingUp,
   AlertCircle,
@@ -26,7 +26,7 @@ const AccountingDashboard = () => {
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "USD",
+      currency: "QAR",
     }).format(amount || 0);
   };
 
@@ -126,7 +126,7 @@ const AccountingDashboard = () => {
         <div className="bg-[#F5F7FA] rounded-lg p-6 text-[#0B1F3B] shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <TrendingUp size={24} className="text-[#1E1E1E]"/>
-            <DollarSign size={32} className=" text-[#0B1F3B]" />
+            <Coins size={32} className=" text-[#0B1F3B]" />
           </div>
           <h3 className="text-sm font-medium opacity-90">Total Income</h3>
           <p className="text-3xl font-bold mt-2">
@@ -139,7 +139,7 @@ const AccountingDashboard = () => {
         <div className="bg-[#F5F7FA] rounded-lg p-6 text-[#0B1F3B] shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <TrendingDown size={24} className="text-[#1E1E1E]"/>
-            <DollarSign size={32} className=" text-[#0B1F3B]" />
+            <Coins size={32} className=" text-[#0B1F3B]" />
           </div>
           <h3 className="text-sm font-medium opacity-90">Total Expenses</h3>
           <p className="text-3xl font-bold mt-2">
@@ -162,7 +162,7 @@ const AccountingDashboard = () => {
             ) : (
               <TrendingDown size={24} className="text-[#1E1E1E]"/>
             )}
-            <DollarSign size={32} className=" text-[#0B1F3B]" />
+            <Coins size={32} className=" text-[#0B1F3B]" />
           </div>
           <h3 className="text-sm font-medium opacity-90">Net Profit</h3>
           <p className="text-3xl font-bold mt-2">

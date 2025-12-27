@@ -74,7 +74,7 @@ const PendingSignatureCases = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A48C65]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0B1F3B]"></div>
       </div>
     );
   }
@@ -92,7 +92,7 @@ const PendingSignatureCases = () => {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <FileText size={28} className="text-[#A48C65]" />
+          <FileText size={28} className="text-[#0B1F3B]" />
           Pending Signature Cases
         </h1>
         <p className="text-sm text-gray-600 mt-1">
@@ -294,7 +294,7 @@ const PendingSignatureCases = () => {
         <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full">
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white px-6 py-4 flex items-center justify-between rounded-t-xl">
+            <div className="bg-[#0B1F3B] text-white px-6 py-4 flex items-center justify-between rounded-t-xl">
               <div className="flex items-center gap-2">
                 <Upload size={24} />
                 <h2 className="text-lg font-semibold">Upload Signed Document</h2>
@@ -326,7 +326,7 @@ const PendingSignatureCases = () => {
                 <select
                   value={selectedStage}
                   onChange={(e) => setSelectedStage(parseInt(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
                 >
                   {selectedCase.stages?.map((stage, index) => (
                     <option key={index} value={index}>
@@ -345,7 +345,7 @@ const PendingSignatureCases = () => {
                   type="file"
                   accept="application/pdf"
                   onChange={handleFileSelect}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
                 />
                 {signedDocument && (
                   <p className="text-xs text-green-600 mt-2 flex items-center gap-1">

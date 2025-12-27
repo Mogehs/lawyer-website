@@ -147,7 +147,7 @@ export default function ApprovedLawyerCasesTable({
                   <div className="flex justify-end gap-2">
                     <button
                       onClick={() => openModal(c)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0B1F3B] text-white text-xs font-medium rounded-lg hover:bg-[#0B1F3B] transition-colors shadow-sm"
+                      className="inline-flex cursor-pointer items-center gap-1.5 px-3 py-1.5 bg-[#0B1F3B] text-white text-xs font-medium rounded-lg hover:bg-[#0B1F3B] transition-colors shadow-sm"
                       title="View Case Details"
                     >
                       <Eye size={14} />
@@ -156,7 +156,7 @@ export default function ApprovedLawyerCasesTable({
 
                     <button
                       onClick={() => openDeleteModal(c)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-500 text-white text-xs font-medium rounded-lg hover:bg-red-600 transition-colors shadow-sm"
+                      className="inline-flex cursor-pointer items-center gap-1.5 px-3 py-1.5 bg-red-500 text-white text-xs font-medium rounded-lg hover:bg-red-600 transition-colors shadow-sm"
                       title="Delete Case"
                     >
                       <Trash2 size={14} />

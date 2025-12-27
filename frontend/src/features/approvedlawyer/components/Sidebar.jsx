@@ -64,7 +64,7 @@ const Sidebar = () => {
                 <Scale className="text-[#0B1F3B]" size={20} />
               </div>
               <div>
-                <h1 className="text-sm font-semibold text-[#f8f9fd]">Lawyer Portal</h1>
+                <h1 className="text-sm font-semibold text-[#f8f9fd]">Approving Lawyer</h1>
                 <p className="text-[10px] text-white">Case Management</p>
               </div>
             </div>

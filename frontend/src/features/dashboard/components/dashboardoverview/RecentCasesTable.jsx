@@ -63,7 +63,7 @@ console.log(recentCases)
 
       {/* Desktop Table */}
       <div className="hidden md:block overflow-hidden border border-gray-100 rounded-xl">
-        <table className="w-full text-sm">
+        <table className="w-full text-sm text-nowrap">
           <thead className="bg-[#0B1F3B] text-white">
             <tr>
               <th className="text-left py-3 px-5 font-semibold">Case Number</th>

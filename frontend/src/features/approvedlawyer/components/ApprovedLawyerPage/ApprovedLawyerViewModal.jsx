@@ -127,14 +127,14 @@ export default function ApprovedLawyerViewModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white px-6 py-5 flex justify-between items-center">
+        <div className="bg-[#0B1F3B] text-white px-6 py-5 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-white/20 rounded-lg">
               <Scale size={24} />
             </div>
             <div>
               <h2 className="text-xl font-bold">{selectedCase.caseType} Case</h2>
-              <p className="text-sm text-white/90 flex items-center gap-2 mt-1">
+              <p className="text-sm text-white/90 flex  items-center gap-2 mt-1">
                 <FileText size={14} />
                 {selectedCase.caseNumber}
               </p>
@@ -142,7 +142,7 @@ export default function ApprovedLawyerViewModal({
           </div>
           <button
             onClick={closeModal}
-            className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+            className="p-2 hover:bg-white/20 cursor-pointer rounded-lg transition-colors"
           >
             <X size={20} />
           </button>
@@ -153,7 +153,7 @@ export default function ApprovedLawyerViewModal({
           {/* Client Information Card */}
           <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border-b border-gray-200">
             <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <User size={20} className="text-[#A48C65]" />
+              <User size={20} className="text-[#0B1F3B]" />
               Client Information
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -178,7 +178,7 @@ export default function ApprovedLawyerViewModal({
           {/* Case Team Card */}
           <div className="p-6 border-b border-gray-200">
             <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Briefcase size={20} className="text-[#A48C65]" />
+              <Briefcase size={20} className="text-[#0B1F3B]" />
               Case Team
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -213,7 +213,7 @@ export default function ApprovedLawyerViewModal({
           <div className="p-6 border-b border-gray-200">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Current Stage</h3>
             <div className="flex items-center gap-3">
-              <div className="px-4 py-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white rounded-lg font-semibold shadow-md">
+              <div className="px-4 py-2 bg-[#0B1F3B] text-white rounded-lg font-semibold shadow-md">
                 {currentStageName}
               </div>
               <span className="text-sm text-gray-600">
@@ -225,7 +225,7 @@ export default function ApprovedLawyerViewModal({
           {/* Sessions Section */}
           <div className="p-6 border-b border-gray-200">
             <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Calendar size={20} className="text-[#A48C65]" />
+              <Calendar size={20} className="text-[#0B1F3B]" />
               Court Sessions ({sessions.length})
             </h3>
 
@@ -252,7 +252,7 @@ export default function ApprovedLawyerViewModal({
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-600 mb-3">
                       <div className="flex items-center gap-2">
-                        <Calendar size={14} className="text-[#A48C65]" />
+                        <Calendar size={14} className="text-[#0B153B]" />
                         <span>
                           {new Date(session.sessionDate).toLocaleDateString("en-US", {
                             year: "numeric",
@@ -332,13 +332,13 @@ export default function ApprovedLawyerViewModal({
                             <div className="flex gap-2">
                               <button
                                 onClick={() => setReviewingSession(null)}
-                                className="px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded-lg hover:bg-gray-300 transition-colors"
+                                className="px-4 py-2 cursor-pointer bg-gray-200 text-gray-700 text-sm rounded-lg hover:bg-gray-300 transition-colors"
                               >
                                 Cancel
                               </button>
                               <button
                                 onClick={() => handleReviewSession(session._id)}
-                                className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white text-sm rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md"
+                                className="px-4 py-2 cursor-pointer bg-gradient-to-r from-green-500 to-green-600 text-white text-sm rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md"
                               >
                                 <Unlock size={14} className="inline mr-1" />
                                 Approve & Unlock
@@ -348,7 +348,7 @@ export default function ApprovedLawyerViewModal({
                         ) : (
                           <button
                             onClick={() => setReviewingSession(session._id)}
-                            className="w-full px-4 py-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white text-sm font-medium rounded-lg hover:from-[#A48C65] hover:to-[#8B7355] transition-all shadow-md"
+                            className="w-full px-4 py-2 bg-[#0B1538] text-white text-sm font-medium rounded-lg  transition-all shadow-md"
                           >
                             Review Session
                           </button>
@@ -443,12 +443,12 @@ export default function ApprovedLawyerViewModal({
           {/* Documents Section */}
           <div className="p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <FileText size={20} className="text-[#A48C65]" />
+              <FileText size={20} className="text-[#0B1F3B]" />
               Case Documents
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1  gap-4">
               {/* General Documents */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <div className="bg-gray-50 border w-full border-gray-200 rounded-lg p-4">
                 <h4 className="font-semibold text-gray-900 mb-3 text-sm">General Documents</h4>
                 {selectedCase.documents?.length > 0 ? (
                   <div className="space-y-2">
@@ -472,7 +472,7 @@ export default function ApprovedLawyerViewModal({
               </div>
 
               {/* Memorandums */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              {/* <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
                 <h4 className="font-semibold text-gray-900 mb-3 text-sm">Memorandums</h4>
                 {selectedCase.memorandums?.length > 0 ? (
                   <div className="space-y-2">
@@ -493,7 +493,7 @@ export default function ApprovedLawyerViewModal({
                 ) : (
                   <p className="text-sm text-gray-500 italic">No memorandums uploaded yet.</p>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -501,19 +501,19 @@ export default function ApprovedLawyerViewModal({
         {/* Footer - Sticky */}
         <div className="border-t border-gray-200 bg-white px-6 py-4 flex justify-between items-center gap-4">
           <button
-            className="px-6 py-2.5 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+            className="px-6 py-2.5 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 cursor-pointer font-medium transition-colors"
             onClick={closeModal}
           >
             Close
           </button>
 
           <div className="flex gap-3">
-            <button
-              className="flex items-center gap-2 px-6 py-2.5 bg-amber-500 text-white rounded-lg hover:bg-amber-600 font-medium transition-colors shadow-md"
+            {/* <button
+              className="flex items-center cursor-pointer gap-2 px-6 py-2.5 bg-amber-500 text-white rounded-lg hover:bg-amber-600 font-medium transition-colors shadow-md"
               onClick={openModificationModal}
             >
               Request Modification
-            </button>
+            </button> */}
 
             {/* Approve Case button removed - approving lawyer approves sessions only */}
           </div>

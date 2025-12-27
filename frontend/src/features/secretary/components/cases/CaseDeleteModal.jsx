@@ -20,7 +20,7 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
           </h3>
           <button
             onClick={onClose}
-            className="text-[#0B1F3B] rounded-lg bg-white hover:text-black transition-colors p-1"
+            className="text-[#0B1F3B] cursor-pointer rounded-lg bg-white hover:text-black transition-colors p-1"
           >
             <X className="w-4 h-4" />
           </button>
@@ -76,13 +76,13 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
         <div className="flex justify-end gap-2 px-4 py-2 border-t border-slate-200 bg-slate-50 rounded-b-lg">
           <button
             onClick={onClose}
-            className="px-3 py-1 border border-slate-300 text-slate-700 rounded text-xs hover:bg-white transition"
+            className="px-3 py-1 border cursor-pointer border-slate-300 text-slate-700 rounded text-xs hover:bg-white transition"
           >
             Cancel
           </button>
           <button
             onClick={onConfirm}
-            className="flex items-center gap-1 px-3 py-1 bg-[#0B1F3B] text-white rounded text-xs font-medium hover:bg-white hover:text-[#0B1F3B] transition"
+            className="flex items-center cursor-pointer gap-1 px-3 py-1 bg-[#0B1F3B] text-white rounded text-xs font-medium hover:bg-white hover:text-[#0B1F3B] transition"
           >
             <Trash2 className="w-3 h-3" />
             Delete

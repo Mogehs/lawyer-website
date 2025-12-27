@@ -6,7 +6,7 @@ const DeleteConfirmationModal = ({ caseItem, onConfirm, onCancel }) => {
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[9999]">
-      <div className="bg-white rounded-2xl shadow-2xl w-[90%] max-w-md p-6 relative text-center border border-[#fe9a00]/30">
+      <div className="bg-white rounded-2xl shadow-2xl w-[90%] max-w-md p-6 relative text-center border border-[#0B1F3B]/30">
         {/* Close Button */}
         <button
           onClick={onCancel}
@@ -17,10 +17,10 @@ const DeleteConfirmationModal = ({ caseItem, onConfirm, onCancel }) => {
 
         <div className="flex flex-col items-center gap-4">
           <div className="bg-red-100 p-4 rounded-full">
-            <Trash2 className="w-8 h-8 text-[#A48C65]" />
+            <Trash2 className="w-8 h-8 text-[#0B1F3]" />
           </div>
 
-          <h2 className="text-lg font-semibold text-[#A48C65]">
+          <h2 className="text-lg font-semibold text-[#0B1F3B]">
             Delete Case {caseItem.caseNumber}?
           </h2>
           <p className="text-gray-600 text-sm">
@@ -36,7 +36,7 @@ const DeleteConfirmationModal = ({ caseItem, onConfirm, onCancel }) => {
             </button>
             <button
               onClick={() => onConfirm(caseItem)}
-              className="px-4 py-2 rounded-full bg-white border border-[#A48C65] text-gray-800 hover:bg-[#A48C65] hover:text-white transition-all duration-200"
+              className="px-4 py-2 rounded-full bg-white border border-[#0B1F3B] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200"
             >
               Delete
             </button>

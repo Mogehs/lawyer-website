@@ -11,7 +11,7 @@ const FeedbackModal = ({ onCancel, onSubmit }) => {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
-        className="relative bg-[#E1E1E2] text-white rounded-2xl shadow-2xl w-full max-w-md p-8 border border-[#fe9a00]/20"
+        className="relative bg-[#E1E1E2] text-white rounded-2xl shadow-2xl w-full max-w-md p-8 border border-[#0B1F3B]/20"
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-4">

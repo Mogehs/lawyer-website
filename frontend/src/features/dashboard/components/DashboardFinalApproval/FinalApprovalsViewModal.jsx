@@ -24,7 +24,7 @@ const FinalApprovalsViewModal = ({
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.25, ease: 'easeOut' }}
-        className='relative bg-white/60 text-[#162030] rounded-2xl shadow-2xl w-full max-w-lg p-8 border border-[#fe9a00]/20 overflow-y-auto max-h-[90vh]'
+        className='relative bg-white/60 text-[#162030] rounded-2xl shadow-2xl w-full max-w-lg p-8 border border-[#0B1F3B]/20 overflow-y-auto max-h-[90vh]'
       >
         {/* Close Button */}
         <button
@@ -38,7 +38,7 @@ const FinalApprovalsViewModal = ({
         <div className='flex items-center gap-3 mb-6'>
           <ArrowLeft
             onClick={onClose}
-            className='cursor-pointer text-[#A48C65]  w-5 h-5 transition'
+            className='cursor-pointer text-[#0B1F3B]  w-5 h-5 transition'
           />
           <h3 className='text-xl font-semibold text-[#162030]'>
             Case Details —{' '}

@@ -117,11 +117,11 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
       <div className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-xl shadow-2xl">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white px-6 py-4 flex justify-between items-center">
+        <div className="bg-[#0B1F3B] text-white px-6 py-4 flex justify-between items-center">
           <h2 className="text-xl font-bold">Session Management</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+            className="p-2 hover:bg-white/20 cursor-pointer rounded-lg transition-colors"
           >
             <X size={20} />
           </button>
@@ -129,9 +129,9 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
 
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-180px)]">
           {/* Create Session Form */}
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 mb-6 border-2 border-[#A48C65]">
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 mb-6 border-2 border-[#0B1F3B]">
             <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Plus size={20} className="text-[#A48C65]" />
+              <Plus size={20} className="text-[#0B1F3B]" />
               Create New Session
             </h3>
 
@@ -232,13 +232,13 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
 
           {/* Existing Sessions */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <h3 className="text-lg font-semibold text-[#0B1F3B] mb-4">
               Existing Sessions ({sessions.length})
             </h3>
 
             {loadingSessions ? (
               <div className="text-center py-8">
-                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#A48C65]"></div>
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#0B1F3B]"></div>
                 <p className="mt-2 text-gray-600">Loading sessions...</p>
               </div>
             ) : sessions.length === 0 ? (
@@ -251,7 +251,7 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
                 {sessions.map((session) => (
                   <div
                     key={session._id}
-                    className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-[#A48C65] transition-all"
+                    className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-[#0B1F3B] transition-all"
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
@@ -264,7 +264,7 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-600">
                           <div className="flex items-center gap-2">
-                            <Calendar size={14} className="text-[#A48C65]" />
+                            <Calendar size={14} className="text-[#0B1F3B]" />
                             <span>
                               {new Date(session.sessionDate).toLocaleDateString("en-US", {
                                 year: "numeric",
@@ -275,13 +275,13 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
                           </div>
                           {session.sessionTime && (
                             <div className="flex items-center gap-2">
-                              <Clock size={14} className="text-[#A48C65]" />
+                              <Clock size={14} className="text-[#0B1F3B]" />
                               <span>{session.sessionTime}</span>
                             </div>
                           )}
                           {session.location && (
                             <div className="flex items-center gap-2">
-                              <MapPin size={14} className="text-[#A48C65]" />
+                              <MapPin size={14} className="text-[#0B1F3B]" />
                               <span>{session.location}</span>
                             </div>
                           )}
@@ -326,7 +326,7 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
                       <button
                         onClick={() => handleDelete(session._id)}
                         disabled={session.status !== "UPCOMING"}
-                        className="ml-4 px-3 py-1.5 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="ml-4 px-3 py-1.5 cursor-pointer bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         title={session.status !== "UPCOMING" ? "Cannot delete completed/cancelled sessions" : "Delete session"}
                       >
                         Delete
@@ -343,7 +343,7 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
         <div className="border-t border-gray-200 bg-white px-6 py-4">
           <button
             onClick={onClose}
-            className="w-full py-2.5 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+            className="w-full py-2.5 cursor-pointer border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
           >
             Close
           </button>

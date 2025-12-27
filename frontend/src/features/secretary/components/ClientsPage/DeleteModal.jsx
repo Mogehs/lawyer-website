@@ -27,14 +27,14 @@ export default function DeleteModal({
           <button
             onClick={onClose}
             disabled={isDeleting}
-            className="px-3 py-1.5 rounded border border-slate-300 hover:bg-[#0B1F3B] hover:text-white text-xs text-slate-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 cursor-pointer rounded border border-slate-300 hover:bg-[#0B1F3B] hover:text-white text-xs text-slate-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Cancel
           </button>
           <button
             onClick={onDelete}
             disabled={isDeleting}
-            className="px-3 py-1.5 rounded bg-[#0B1F3B] hover:bg-[#ffff] hover:text-[#0B1F3B] text-white text-xs hover:border-[#0B1F3B]  border transition  disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5"
+            className="px-3 py-1.5 rounded cursor-pointer bg-[#0B1F3B] hover:bg-[#ffff] hover:text-[#0B1F3B] text-white text-xs hover:border-[#0B1F3B]  border transition  disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5"
           >
             {isDeleting ? (
               <>

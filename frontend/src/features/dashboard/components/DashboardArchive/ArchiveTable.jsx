@@ -4,7 +4,7 @@ import { Eye, Trash, Download } from "lucide-react";
 const ArchiveTable = ({ archives, onView, onDelete, sidebarOpen }) => {
   if (!archives.length) {
     return (
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 text-center text-[#494C52]">
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 text-center text-[#0B1F3B] border border-[#0B1F3B]/20">
         <div className="flex flex-col items-center justify-center">
           <div className="text-4xl mb-2">📁</div>
           <p className="text-lg font-medium">No archived cases found</p>

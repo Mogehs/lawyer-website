@@ -21,14 +21,14 @@ export default function DeleteModal({ selectedCase, isOpen, closeModal, handleDe
 
         <div className="flex flex-col sm:flex-row justify-end gap-3">
           <button
-            className="px-5 py-2 sm:py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+            className="px-5 py-2 sm:py-3 cursor-pointer bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
             onClick={closeModal}
           >
             Cancel
           </button>
 
           <button
-            className="px-5 py-2 sm:py-3 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            className="px-5 py-2 sm:py-3 bg-red-600 cursor-pointer text-white rounded-lg hover:bg-red-700"
             onClick={() => handleDelete(selectedCase?._id)}
           >
             Delete

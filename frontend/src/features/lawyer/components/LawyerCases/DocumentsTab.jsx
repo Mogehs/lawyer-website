@@ -115,7 +115,7 @@ export default function DocumentsTab({
             <button
               onClick={handleUploadClick}
               disabled={isUploading}
-              className="inline-flex items-center gap-1 bg-white border border-slate-300 px-2 py-1 rounded text-[10px] hover:bg-[#A48C65] hover:text-white disabled:opacity-50"
+              className="inline-flex items-center gap-1 bg-white border border-slate-300 px-2 py-1 rounded text-[10px] cursor-pointer hover:bg-[#0B1F3B] hover:text-white disabled:opacity-50"
             >
               <FiUpload size={12} /> Choose
             </button>

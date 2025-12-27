@@ -99,7 +99,7 @@ const InvoicesList = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[220px]">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
@@ -143,7 +143,7 @@ const InvoicesList = () => {
           <select
             value={filters.status}
             onChange={(e) => setFilters({ ...filters, status: e.target.value, page: 1 })}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           >
             <option value="">All Status</option>
             <option value="paid">Paid</option>
@@ -188,7 +188,7 @@ const InvoicesList = () => {
         ) : filteredInvoices.length > 0 ? (
           <>
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full text-nowrap">
                 <thead className="bg-[#0B1F3B] text-white">
                   <tr>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
@@ -256,7 +256,7 @@ const InvoicesList = () => {
                         <div className="flex items-center justify-center gap-2">
                           <button
                             onClick={() => setSelectedInvoice(invoice)}
-                            className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-1.5 cursor-pointer text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             title="View"
                           >
                             <Eye size={18} />
@@ -329,7 +329,6 @@ const InvoicesList = () => {
           </div>
         )}
       </div>
-
       {/* View Invoice Modal */}
       <ViewInvoiceModal
         invoice={selectedInvoice}

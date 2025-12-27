@@ -53,7 +53,7 @@ const ClientsPage = () => {
             setIsCreatingNew(true);
             setShowForm(true);
           }}
-          className="flex items-center gap-2 px-4 py-2 bg-[#0B1F3B] hover:from-[#A48C65] hover:to-[#0B1F3B] text-white rounded-lg font-medium transition-all duration-200 shadow-md"
+          className="flex items-center gap-2 px-4 py-2 bg-[#0B1F3B] hover:from-[#A48C65] hover:to-[#0B1F3B] cursor-pointer text-white rounded-lg font-medium transition-all duration-200 shadow-md"
         >
           <Plus size={20} />
           Add Client

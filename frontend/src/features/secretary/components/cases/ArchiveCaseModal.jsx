@@ -13,14 +13,14 @@ const ArchiveCaseModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
         className="relative bg-white rounded-lg shadow-lg w-full max-w-md flex flex-col"
       >
         {/* Header */}
-        <div className="flex items-center bg-[#A48C65] justify-between p-3 rounded-t-lg">
+        <div className="flex items-center bg-[#0B1F3B] justify-between p-3 rounded-t-lg">
           <h3 className="text-sm font-semibold flex items-center gap-1.5 text-white">
             <Archive className="w-4 h-4" />
             Archive Case
           </h3>
           <button
             onClick={onClose}
-            className="text-white hover:text-white hover:bg-[#8B754E] transition-colors p-1 rounded"
+            className="text-white hover:text-white hover:bg-[#0B1F3B] cursor-pointer transition-colors p-1 rounded"
           >
             <X className="w-4 h-4" />
           </button>
@@ -30,7 +30,7 @@ const ArchiveCaseModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
         <div className="space-y-3 p-4">
           <div className="flex items-start gap-2">
             <Archive
-              className="text-[#A48C65] flex-shrink-0 mt-0.5"
+              className="text-[#0B1F3B] flex-shrink-0 mt-0.5"
               size={16}
             />
             <div>
@@ -67,7 +67,7 @@ const ArchiveCaseModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
           <div className="bg-purple-50 border border-purple-200 rounded p-2">
             <div className="flex items-start gap-1.5">
               <AlertCircle
-                className="text-[#A48C65] flex-shrink-0"
+                className="text-[#0B1F3B] flex-shrink-0"
                 size={12}
               />
               <ul className="text-[10px] text-slate-700 space-y-0.5">
@@ -83,13 +83,13 @@ const ArchiveCaseModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
         <div className="flex justify-end gap-2 px-4 py-2 border-t border-slate-200 bg-slate-50 rounded-b-lg">
           <button
             onClick={onClose}
-            className="px-3 py-1 border border-slate-300 text-slate-700 rounded text-xs hover:bg-white transition"
+            className="px-3 py-1 cursor-pointer border border-slate-300 text-slate-700 rounded text-xs hover:bg-white transition"
           >
             Cancel
           </button>
           <button
             onClick={onConfirm}
-            className="flex items-center gap-1 px-3 py-1 bg-[#A48C65] text-white rounded text-xs font-medium hover:bg-[#8B754E] transition"
+            className="flex items-center cursor-pointer gap-1 px-3 py-1 bg-[#0B1F3B] text-white rounded text-xs font-medium hover:bg-[#0B1F3B] transition"
           >
             <Archive className="w-3 h-3" />
             Archive

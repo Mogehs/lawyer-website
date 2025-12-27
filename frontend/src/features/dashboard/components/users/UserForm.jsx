@@ -14,7 +14,7 @@ const UserForm = ({
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-[9999]">
       <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200">
-        <h3 className="text-2xl font-bold text-[#BCB083] mb-6 text-center">
+        <h3 className="text-2xl font-bold text-[#0B1F3B] mb-6 text-center">
           Add New User
         </h3>
 
@@ -24,7 +24,7 @@ const UserForm = ({
             <FaUser className="absolute top-3 left-3 text-gray-400" />
             <input
               placeholder="Full Name"
-              className="w-full pl-10 pr-3 py-2 border border-[#BCB083] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BCB083] focus:border-[#BCB083] transition"
+              className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
@@ -39,7 +39,7 @@ const UserForm = ({
             <input
               placeholder="Email"
               type="email"
-              className="w-full pl-10 pr-3 py-2 border border-[#BCB083] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BCB083] focus:border-[#BCB083] transition"
+              className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -54,7 +54,7 @@ const UserForm = ({
             <input
               placeholder="Phone (e.g., 923120201709 without +)"
               type="text"
-              className="w-full pl-10 pr-3 py-2 border border-[#BCB083] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BCB083] focus:border-[#BCB083] transition"
+              className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
               value={formData.phone}
               onChange={(e) => {
                 // Remove any non-digit characters
@@ -76,7 +76,7 @@ const UserForm = ({
               onChange={(e) =>
                 setFormData({ ...formData, role: e.target.value })
               }
-              className="w-full pl-10 pr-3 py-2 border border-[#BCB083] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BCB083] focus:border-[#BCB083] transition"
+              className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
             >
               {roles.map((r) => (
                 <option key={r.value} value={r.value}>
@@ -92,7 +92,7 @@ const UserForm = ({
             <input
               type="password"
               placeholder="Password"
-              className="w-full pl-10 pr-3 py-2 border border-[#BCB083] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BCB083] focus:border-[#BCB083] transition"
+              className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
               value={formData.password}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
@@ -107,7 +107,7 @@ const UserForm = ({
             <input
               type="password"
               placeholder="Confirm Password"
-              className="w-full pl-10 pr-3 py-2 border border-[#BCB083] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BCB083] focus:border-[#BCB083] transition"
+              className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
               value={formData.confirmPassword}
               onChange={(e) =>
                 setFormData({ ...formData, confirmPassword: e.target.value })
@@ -121,13 +121,13 @@ const UserForm = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2 bg-[#BCB083] text-white rounded-lg hover:bg-[#A48C65] transition"
+              className="px-5 py-2 bg-[#0B1F3B] cursor-pointer text-white rounded-lg hover:bg-[#0B1F3B] transition"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2 bg-white border border-[#A48C65] text-gray-800 hover:bg-[#A48C65] hover:text-white transition-all duration-200 rounded-lg  transition shadow-md"
+              className="px-5 py-2 bg-white cursor-pointer border border-[#0B1F3B] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 rounded-lg  transition shadow-md"
             >
               Add
             </button>

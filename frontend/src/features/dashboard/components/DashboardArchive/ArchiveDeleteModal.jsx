@@ -15,12 +15,12 @@ const ArchiveDeleteModal = ({ isOpen, archive, onClose, onConfirm }) => {
                 {/* Header */}
                 <div className="flex items-center bg-[#24344f] justify-between border-b border-gray-200 p-5 rounded-t-2xl">
                     <h3 className="text-xl font-semibold flex items-center gap-2 text-white">
-                        <FileText className="w-5 h-5 text-[#BCB083]" />
+                        <FileText className="w-5 h-5 text-[#0B1F3B]" />
                         Delete Archive
                     </h3>
                     <button
                         onClick={onClose}
-                        className="text-gray-400 hover:text-[#BCB083] transition-colors"
+                        className="text-gray-400 hover:text-[#0B1F3B] transition-colors"
                     >
                         <X className="w-5 h-5" />
                     </button>
@@ -37,7 +37,7 @@ const ArchiveDeleteModal = ({ isOpen, archive, onClose, onConfirm }) => {
                                 Delete this archive?
                             </p>
                             <p className="text-sm text-gray-600 mt-1">
-                                Case ID: <strong className="text-[#BCB083]">{archive.id}</strong>
+                                Case ID: <strong className="text-[#0B1F3B]">{archive.id}</strong>
                             </p>
                         </div>
                     </div>
@@ -47,7 +47,7 @@ const ArchiveDeleteModal = ({ isOpen, archive, onClose, onConfirm }) => {
                             <span className="font-semibold text-red-600">Warning:</span> This action is{" "}
                             <span className="font-semibold">irreversible</span>. All associated case
                             files and data for{" "}
-                            <strong className="text-[#BCB083]">{archive.client}</strong> will be permanently removed.
+                            <strong className="text-[#0B1F3B]">{archive.client}</strong> will be permanently removed.
                         </p>
                     </div>
                 </div>

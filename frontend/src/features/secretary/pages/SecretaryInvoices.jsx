@@ -165,7 +165,7 @@ const SecretaryInvoices = () => {
           </div>
         ) : filteredInvoices.length > 0 ? (
           <>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto text-nowrap">
               <table className="w-full">
                 <thead className="bg-[#0B1F3B] text-white">
                   <tr>
@@ -229,7 +229,7 @@ const SecretaryInvoices = () => {
                         <div className="flex items-center justify-center gap-2">
                           <button
                             onClick={() => setSelectedInvoice(invoice)}
-                            className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-1.5 cursor-pointer text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             title="View Details"
                           >
                             <Eye size={16} />

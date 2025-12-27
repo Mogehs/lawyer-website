@@ -56,7 +56,7 @@ const CreateExpense = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[220px]">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
@@ -174,14 +174,14 @@ const CreateExpense = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="px-6 py-2 bg-[#0B1F3B] text-white rounded-lg font-medium transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2 bg-[#0B1F3B] cursor-pointer text-white rounded-lg font-medium transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Creating..." : "Add Expense"}
             </button>
             <button
               type="button"
               onClick={() => navigate("/accountant/expenses")}
-              className="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg font-medium transition-colors"
+              className="px-6 py-2 bg-gray-200 cursor-pointer hover:bg-gray-300 text-gray-800 rounded-lg font-medium transition-colors"
             >
               Cancel
             </button>

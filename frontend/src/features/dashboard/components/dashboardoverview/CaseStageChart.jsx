@@ -8,7 +8,7 @@ const CaseStageChart = () => {
 
   // Compute case distribution by status
   const statusColors = {
-    Draft: "#A48C65",
+    Draft: "#B0B4BD",
     "In Progress": "#fe9a00",
     Completed: "#22c55e",
     Closed: "#6b7280",
@@ -58,7 +58,7 @@ const CaseStageChart = () => {
           <h3 className="text-base sm:text-lg font-semibold text-[#0B1F3B] mb-4">
             Case Distribution
           </h3>
-          <div className="w-full h-[250px] sm:h-[280px] md:h-[300px]">
+          <div className="w-full h-[250px] cursor-pointer sm:h-[280px] md:h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -76,10 +76,10 @@ const CaseStageChart = () => {
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#0B1F3B",
+                    backgroundColor: "#FFFFFF",
                     borderRadius: "10px",
                     border: "1px solid #e5e7eb",
-                    color: "#",
+                    color: "#FFFFFF",
                   }}
                 />
               </PieChart>

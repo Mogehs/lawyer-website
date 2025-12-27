@@ -38,7 +38,7 @@ export default function ClientEditModal({
           </h2>
           <button
             onClick={onClose}
-            className="text-white hover:bg-[#0B1F3B] rounded p-1 transition"
+            className="text-white cursor-pointer hover:bg-[#0B1F3B] rounded p-1 transition"
           >
             <X size={16} />
           </button>
@@ -148,17 +148,17 @@ export default function ClientEditModal({
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-end gap-2 mt-4 pt-3 border-t border-slate-200">
+          <div className="flex cursor-pointer justify-end gap-2 mt-4 pt-3 border-t border-slate-200">
             <button
               type="button"
               onClick={onClose}
-              className="px-3 py-1.5 rounded border border-slate-300 hover:bg-[#0B1F3B] hover:text-white transition text-xs text-slate-700"
+              className="px-3 py-1.5 cursor-pointer rounded border border-slate-300 hover:bg-[#0B1F3B] hover:text-white transition text-xs text-slate-700"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-3 py-1.5 rounded bg-[#0B1F3B] hover:bg-[#ffff] hover:text-[#0B1F3B] text-white text-xs hover:border-[#0B1F3B] border transition"
+              className="px-3 py-1.5 cursor-pointer rounded bg-[#0B1F3B] hover:bg-[#ffff] hover:text-[#0B1F3B] text-white text-xs hover:border-[#0B1F3B] border transition"
             >
               Save
             </button>

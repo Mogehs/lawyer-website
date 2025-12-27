@@ -74,11 +74,11 @@ const SecretaryCreateInvoice = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[220px]">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <FileText size={28} className="text-[#A48C65]" />
+          <FileText size={28} className="text-[#0B1F3B]" />
           Create New Invoice
         </h1>
         <p className="text-sm text-gray-600 mt-1">إنشاء فاتورة جديدة</p>
@@ -98,7 +98,7 @@ const SecretaryCreateInvoice = () => {
               onChange={handleChange}
               required
               disabled={isLoadingClients}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent disabled:bg-gray-100"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent disabled:bg-gray-100"
             >
               <option value="">
                 {isLoadingClients ? "Loading clients..." : "Select Client"}
@@ -195,7 +195,7 @@ const SecretaryCreateInvoice = () => {
                 <button
                   type="button"
                   onClick={addInstallment}
-                  className="flex items-center gap-1 px-3 py-1 bg-[#A48C65] hover:bg-[#8B7355] text-white rounded-lg text-sm font-medium transition-colors"
+                  className="flex items-center gap-1 px-3 py-1 bg-[#0B1F3B] cursor-pointer hover:bg-[#0B1F3B] text-white rounded-lg text-sm font-medium transition-colors"
                 >
                   <Plus size={16} />
                   Add
@@ -280,14 +280,14 @@ const SecretaryCreateInvoice = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="px-6 py-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] hover:from-[#A48C65] hover:to-[#8B7355] text-white rounded-lg font-medium transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2 bg-[#0B1F3B] cursor-pointer text-white rounded-lg font-medium transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Creating..." : "Create Invoice"}
             </button>
             <button
               type="button"
               onClick={() => navigate("/invoices")}
-              className="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg font-medium transition-colors"
+              className="px-6 py-2 bg-gray-200 cursor-pointer hover:bg-gray-300 text-gray-800 rounded-lg font-medium transition-colors"
             >
               Cancel
             </button>

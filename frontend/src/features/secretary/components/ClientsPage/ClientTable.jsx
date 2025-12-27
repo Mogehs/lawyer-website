@@ -103,14 +103,14 @@ export default function ClientTable({
         <td className="px-3 py-2">
           <div className="flex justify-end gap-1">
             <button
-              className="p-1 text-[#0B1F3B] hover:text-[#0B1F3B]  rounded transition-colors"
+              className="p-1 cursor-pointer text-[#0B1F3B] hover:text-[#0B1F3B]  rounded transition-colors"
               onClick={() => handleEditClick(c)}
               title="Edit"
             >
               <Edit size={16} />
             </button>
             <button
-              className="p-1 text-[#0B1F3B] hover:text-[#0B1F3B]  rounded transition-colors"
+              className="p-1 text-[#0B1F3B] cursor-pointer hover:text-[#0B1F3B]  rounded transition-colors"
               onClick={() => handleDeleteClick(c)}
               title="Delete"
             >

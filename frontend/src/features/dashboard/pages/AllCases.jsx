@@ -82,12 +82,12 @@ const AllCases = () => {
 
       {/* Loading & Error */}
       {isLoading && (
-        <p className="text-center text-[#A48C65] py-10 text-xl">
+        <p className="text-center text-[#0B1F3B] py-10 text-xl">
           Loading cases...
         </p>
       )}
       {isError && (
-        <p className="text-center text-[#A48C65] py-10 text-xl">
+        <p className="text-center text-[#0B1F3B] py-10 text-xl">
           Failed to load cases
         </p>
       )}

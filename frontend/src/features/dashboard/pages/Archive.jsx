@@ -106,7 +106,7 @@ const Archive = () => {
   if (isLoading)
     return <p className="text-center text-[#494C52] mt-20">Loading archived cases...</p>;
   if (isError)
-    return <p className="text-center text-[#BCB083] mt-20">Failed to load archived cases.</p>;
+    return <p className="text-center text-[#0B1F3B] mt-20">Failed to load archived cases.</p>;
 
   return (
     <div className={`min-h-screen transition-all duration-300 ease-in-out pt-16 px-3 sm:px-4 md:px-6 lg:px-10
@@ -121,7 +121,7 @@ const Archive = () => {
         <div className="flex flex-wrap gap-2 mt-2 md:mt-0">
           <button
             onClick={exportToCSV}
-            className="flex items-center gap-2 px-4 py-2 text-[#0B1F3B] font-medium rounded-lg bg-white border border-[#A48C65] hover:bg-[#0B1F3B] hover:text-white transition-all duration-200"
+            className="flex items-center gap-2 px-4 py-2 text-[#0B1F3B] font-medium rounded-lg bg-white border border-[#0B1F3B] hover:bg-[#0B1F3B] hover:text-white transition-all duration-200"
           >
             Export CSV
           </button>
@@ -169,7 +169,7 @@ const Archive = () => {
         <button
           disabled={page >= totalPages}
           onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
-          className="px-4 py-2 bg-white border border-[#a48c654f] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 rounded disabled:opacity-50"
+          className="px-4 py-2 bg-white border border-[#0B1F3B] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 rounded disabled:opacity-50"
         >
           Next
         </button>

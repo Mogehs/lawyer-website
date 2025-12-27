@@ -37,14 +37,14 @@ const ViewInvoiceModal = ({ invoice, isOpen, onClose }) => {
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-xl">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-[#0B1F3B]/10 rounded-lg">
-              <FileText size={20} className="text-[#0B1F3B]" />
+            <div className="p-2 bg-[#0B1F3B] rounded-lg">
+              <FileText size={20} className="text-[white]" />
             </div>
             <h2 className="text-lg font-semibold text-gray-900">Invoice Details</h2>
           </div>
           <button
             onClick={onClose}
-            className="hover:bg-gray-100 rounded-full p-2 transition-colors"
+            className="hover:bg-gray-100 cursor-pointer rounded-full p-2 transition-colors"
           >
             <X size={20} className="text-gray-500" />
           </button>
@@ -204,7 +204,7 @@ const ViewInvoiceModal = ({ invoice, isOpen, onClose }) => {
         <div className="sticky bottom-0 bg-white px-6 py-4 flex justify-end gap-3 rounded-b-xl border-t border-gray-200">
           <button
             onClick={onClose}
-            className="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-all duration-200 text-sm"
+            className="px-6 py-2.5 cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-all duration-200 text-sm"
           >
             Close
           </button>

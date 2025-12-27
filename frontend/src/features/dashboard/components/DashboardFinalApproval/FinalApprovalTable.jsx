@@ -32,7 +32,7 @@ const FinalApprovalTable = ({ cases, onView, onDelete }) => {
 
   return (
     <div
-      className={` w-[320px] bg-white   shadow-2xl rounded-2xl border border-[#fe9a00]/20 overflow-hidden transition-all duration-300 ${
+      className={` w-[320px] bg-white   shadow-2xl rounded-2xl border border-[#0B1F3B]/20 overflow-hidden transition-all duration-300 ${
         sidebarOpen ? "lg:w-[980px] md:w-[420px]" : "lg:w-full md:w-[640px]"
       }`}
     >
@@ -40,7 +40,7 @@ const FinalApprovalTable = ({ cases, onView, onDelete }) => {
       <div className="block">
         <div className="overflow-x-auto">
           <table className="w-full table-auto text-sm min-w-[700px] border-collapse">
-            <thead className="bg-[#A48C65] text-white uppercase tracking-wide text-xs font-semibold">
+            <thead className="bg-[#0B1F3B] text-white uppercase tracking-wide text-xs font-semibold">
               <tr className="whitespace-nowrap">
                 <th className="px-4 py-3 text-left">Case #</th>
                 <th className="px-4 py-3 text-left">Client</th>
@@ -103,7 +103,7 @@ const FinalApprovalTable = ({ cases, onView, onDelete }) => {
      
 
       {/* Bottom Accent Line */}
-      <div className="h-[3px] w-full bg-gradient-to-r from-[#BCB083] to-[#A48C65]
+      <div className="h-[3px] w-full bg-[#0B1F3B]
 " />
     </div>
   );

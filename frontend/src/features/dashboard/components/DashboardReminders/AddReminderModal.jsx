@@ -23,10 +23,18 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 lg:top-14">
-      <div className="bg-[#BCB083] text-[#162030] p-6 rounded-xl shadow-2xl w-[90%] sm:w-[400px] border border-[#fe9a00]/30">
+    <div className="fixed inset-0 bg-black/60 flex justify-center items-center lg:top-14 z-50">
+      
+      {/* Modal Container */}
+      <div
+        className="bg-[#0B1F3B] text-[#f3f5f6] p-6 rounded-xl shadow-2xl
+                   w-[90%] sm:w-[400px]
+                   border border-[#0B1F3B]/30
+                   max-h-[90vh] sm:max-h-[80vh]
+                   overflow-y-auto"
+      >
 
-        <h3 className="text-lg font-semibold text-[#494C52] mb-4">
+        <h3 className="text-lg font-semibold text-white mb-4">
           Add New Reminder
         </h3>
 
@@ -39,7 +47,7 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
             placeholder="Case Name"
             value={form.caseName}
             onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-white border border-[#fe9a00]/30 focus:outline-none"
+            className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
           />
 
           {/* Lawyer */}
@@ -49,7 +57,7 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
             placeholder="Lawyer (optional depending on type)"
             value={form.lawyer}
             onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-white border border-[#fe9a00]/30 focus:outline-none"
+            className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
           />
 
           {/* Stage */}
@@ -57,26 +65,24 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
             name="stage"
             value={form.stage}
             onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-white border border-[#fe9a00]/30 focus:outline-none"
+            className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
           >
             <option>Main Case</option>
             <option>Appeal</option>
             <option>Cassation</option>
           </select>
 
-          {/* Reminder Type*/}
+          {/* Reminder Type */}
           <select
             name="type"
             value={form.type}
             onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-white border border-[#fe9a00]/30 focus:outline-none"
+            className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
           >
-            {/* Existing Types */}
             <option>Before Hearing</option>
             <option>Before Submission</option>
             <option>Before Judgment</option>
 
-            {/* Admin Level Types */}
             <option>Signature Pending</option>
             <option>Submission Deadline</option>
             <option>Approval Delay</option>
@@ -90,7 +96,7 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
             name="target"
             value={form.target}
             onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-white border border-[#fe9a00]/30 focus:outline-none"
+            className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
           >
             <option>Secretary</option>
             <option>Assigned Lawyer</option>
@@ -106,36 +112,38 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
             name="date"
             value={form.date}
             onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-white border border-[#fe9a00]/30 focus:outline-none"
+            className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
           />
 
-          {/* Optional Description */}
+          {/* Description */}
           <textarea
             name="description"
             placeholder="Additional notes (optional)"
             value={form.description}
             onChange={handleChange}
-            className="w-full p-2 rounded-lg bg-white border border-[#fe9a00]/30 focus:outline-none min-h-[80px]"
-          ></textarea>
+            className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none min-h-[80px]"
+          />
 
           {/* Buttons */}
           <div className="flex justify-end gap-3 mt-4">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2  border border-[#A48C65] text-gray-800 hover:bg-[#A48C65] hover:text-white transition-all duration-200 rounded-lg"
+              className="px-4 py-2 cursor-pointer border border-[#0B1F3B] text-gray-800 bg-white
+                         hover:bg-[#0B1F3B] hover:text-white transition-all rounded-lg"
             >
               Cancel
             </button>
+
             <button
               type="submit"
-              className="px-4 py-2 bg-[#A48C65] hover:bg-[#8c7a4e] rounded-lg text-white"
+              className="px-4 cursor-pointer text-[#0B1F3B] py-2 bg-[white] hover:bg-[#0B1F3B] rounded-lg hover:text-white"
             >
               Save
             </button>
           </div>
-        </form>
 
+        </form>
       </div>
     </div>
   );

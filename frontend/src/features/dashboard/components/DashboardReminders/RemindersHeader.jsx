@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 
 const RemindersHeader = ({ search, setSearch, onAddClick }) => {
   return (
-    <div className="mt-16 md:mt-20 mb-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pb-4 border-b border-[#fe9a00]/20">
+    <div className="mt-16 md:mt-20 mb-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pb-4 border-b border-[#0B1F3B]/20">
       {/* ===== Left Section ===== */}
       <div className="flex-1 min-w-0 text-center sm:text-left">
         <h1 className="text-2xl sm:text-3xl font-bold text-[#0B1F3B] tracking-tight">

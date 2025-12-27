@@ -54,13 +54,13 @@ const UserTable = ({ users, updateStatus, updateRole, onView, onDelete, roles })
                   <td className="py-3 px-4 flex gap-2 justify-center">
                     <button
                       onClick={() => onView(u)}
-                      className="bg-[#0B1F3B] text-white px-3 py-1 rounded-md hover:bg-transparent border hover:text-[#494C52] hover:border-[#0B1F3B] transition text-sm"
+                      className="bg-[#0B1F3B] cursor-pointer text-white px-3 py-1 rounded-md hover:bg-transparent border hover:text-[#494C52] hover:border-[#0B1F3B] transition text-sm"
                     >
                       View
                     </button>
                     <button
                       onClick={() => onDelete(u._id)}
-                      className="bg-[#0B1F3B] text-white px-3 py-1 rounded-md hover:bg-transparent border hover:text-[#494C52] hover:border-[#0B1F3B] transition text-sm"
+                      className="bg-[#0B1F3B] text-white cursor-pointer px-3 py-1 rounded-md hover:bg-transparent border hover:text-[#494C52] hover:border-[#0B1F3B] transition text-sm"
                     >
                       Delete
                     </button>

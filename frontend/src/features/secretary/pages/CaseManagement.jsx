@@ -187,7 +187,7 @@ const CaseManagement = () => {
         </div>
         <button
           onClick={handleOpenAddModal}
-          className="flex items-center gap-2 px-4 py-2 bg-[#0B1F3B]  text-white rounded-lg font-medium transition-all duration-200 shadow-md"
+          className="flex items-center cursor-pointer gap-2 px-4 py-2 bg-[#0B1F3B]  text-white rounded-lg font-medium transition-all duration-200 shadow-md"
         >
           <Plus size={20} />
           Add Case

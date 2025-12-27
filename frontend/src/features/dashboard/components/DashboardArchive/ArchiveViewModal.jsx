@@ -8,14 +8,14 @@ const ArchiveViewModal = ({ isOpen, archive, onClose }) => {
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50 p-4">
             <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-6xl max-h-[90vh] flex flex-col">
                 {/* Header */}
-                <div className="flex items-center bg-[#A48C65] justify-between border-b border-gray-200 p-5 rounded-t-2xl">
+                <div className="flex items-center bg-[#0B1F3B] justify-between border-b border-gray-200 p-5 rounded-t-2xl">
                     <h3 className="text-xl font-semibold flex items-center gap-2 text-white">
-                        <Archive className="w-5 h-5 text-[#A48C65]" />
+                        <Archive className="w-5 h-5 text-[#0B1F3B]" />
                         Archive Details - {archive.archiveId}
                     </h3>
                     <button
                         onClick={onClose}
-                        className="bg-white border border-[#A48C65] text-gray-800 hover:bg-[#A48C65] hover:text-white transition-all duration-200 rounded-full p-1"
+                        className="bg-white border border-[#0B1F3B] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 rounded-full p-1"
                     >
                         <X className="w-5 h-5" />
                     </button>
@@ -36,7 +36,7 @@ const ArchiveViewModal = ({ isOpen, archive, onClose }) => {
                                             ? "bg-blue-100 text-blue-800 border border-blue-200"
                                             : stage.stage === "Appeal"
                                                 ? "bg-purple-100 text-purple-800 border border-purple-200"
-                                                : "bg-orange-100 text-orange-800 border border-orange-200"
+                                                : "bg-orange-100 text-orange-800 border border-[#0B1F3B]"
                                         }`}
                                 >
                                     {/* Dynamic Icon */}

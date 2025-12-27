@@ -154,8 +154,8 @@ const LawyerSessionsPage = () => {
           <p className="text-gray-600 mt-1">Sessions unlocked for you to work on</p>
         </div>
         <div className="flex items-center gap-3">
-          <button onClick={() => refetch()} className="px-3 py-2 bg-white border rounded">Refresh</button>
-          <button onClick={() => setShowDebug((s) => !s)} className="px-3 py-2 bg-white border rounded">{showDebug? 'Hide' : 'Show'} Debug</button>
+          {/* <button onClick={() => refetch()} className="px-3 py-2 bg-white border rounded">Refresh</button> */}
+          {/* <button onClick={() => setShowDebug((s) => !s)} className="px-3 py-2 bg-white border rounded">{showDebug? 'Hide' : 'Show'} Debug</button> */}
           <div className="px-4 py-2 bg-[#0B1F3B] text-white rounded-lg font-semibold">
             {sessions.length} Active Session{sessions.length !== 1 ? "s" : ""}
           </div>
@@ -476,7 +476,7 @@ const LawyerSessionsPage = () => {
                         <div className="flex gap-2">
                           <button
                             onClick={() => setCompletingSession(null)}
-                            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+                            className="px-4 py-2 cursor-pointer bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
                           >
                             Cancel
                           </button>
@@ -486,7 +486,7 @@ const LawyerSessionsPage = () => {
                               // refresh list after completion
                               try { refetch(); } catch (e) {}
                             }}
-                            className="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md flex items-center justify-center gap-2"
+                            className="flex-1 px-4 py-2 cursor-pointer bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md flex items-center justify-center gap-2"
                             disabled={!canComplete}
                           >
                             <CheckCircle size={16} />
@@ -519,7 +519,7 @@ const LawyerSessionsPage = () => {
                               status: "CANCELLED",
                             });
                           }}
-                          className={`px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center gap-2 ${!canCancel ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          className={`px-4 py-3 cursor-pointer bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center gap-2 ${!canCancel ? 'opacity-50 cursor-not-allowed' : ''}`}
                           disabled={!canCancel}
                         >
                           <XCircle size={18} />

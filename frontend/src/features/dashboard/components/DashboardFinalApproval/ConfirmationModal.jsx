@@ -27,12 +27,12 @@ const ConfirmationModal = ({ message, onClose, type = "success" }) => {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
-        className="bg-white/60 text-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative border border-[#fe9a00]/20"
+        className="bg-white/60 text-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative border border-[#0B1F3B]/20"
       >
         {/* Icon + Title */}
         <div className="flex flex-col items-center text-center mb-4">
           <div className="mb-3">{icon}</div>
-          <h3 className="text-lg font-semibold text-[#162030] tracking-wide">
+          <h3 className="text-lg font-semibold text-[#0B1F3B] tracking-wide">
             {title}
           </h3>
         </div>

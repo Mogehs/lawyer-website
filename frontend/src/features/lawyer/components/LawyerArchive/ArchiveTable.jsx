@@ -38,8 +38,8 @@ const ArchiveTable = ({ cases, loading, onViewCase, onDeleteCase }) => {
    if (!cases.length)
      return (
        <div className="bg-white rounded border border-slate-200 p-8 text-center">
-         <ChevronRight size={40} className="text-[#A48D66] mx-auto mb-2" />
-         <h3 className="text-[22px] font-medium text-[#A48D66] mb-1">
+         <ChevronRight size={40} className="text-[#0B1F3B] mx-auto mb-2" />
+         <h3 className="text-[22px] font-medium text-[#0B1F3B] mb-1">
            No Archived Cases
          </h3>
          <p className="text-[14px] text-slate-500">

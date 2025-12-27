@@ -71,7 +71,7 @@ const CreateInvoice = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 lg:ml-[220px]">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">

@@ -168,14 +168,14 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
       <div className="bg-white rounded-lg shadow-2xl w-full max-w-5xl max-h-[95vh] flex flex-col">
         {/* Fixed Header */}
-        <div className="bg-gradient-to-r from-[#BCB083] to-[#A48C65] px-6 py-4 rounded-t-lg">
+        <div className="bg-[#0B1F3B] px-6 py-4 rounded-t-lg">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-white">
               {caseData ? "Edit Case" : "Add New Case"}
             </h2>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-white/20 rounded-lg transition"
+              className="p-2 hover:bg-white/20 cursor-pointer rounded-lg transition"
             >
               <X className="w-5 h-5 text-white" />
             </button>
@@ -198,7 +198,7 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
                 placeholder="Search by name, email, phone, or national ID..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
               />
             </div>
 
@@ -216,8 +216,8 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
                       onClick={() => setSelectedClientId(client._id)}
                       className={`p-3 border-2 rounded-lg cursor-pointer transition-all ${
                         selectedClientId === client._id
-                          ? "border-[#A48C65] bg-[#A48C65]/10"
-                          : "border-gray-200 hover:border-[#A48C65]/50 bg-white"
+                          ? "border-[#0B1F3B]/10"
+                          : "border-gray-200 hover:border-[#0B1F3B] bg-white"
                       }`}
                     >
                       <div className="flex items-start justify-between">
@@ -227,7 +227,7 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
                           <p className="text-sm text-gray-500">{client.contactNumber}</p>
                         </div>
                         {selectedClientId === client._id && (
-                          <div className="w-5 h-5 rounded-full bg-[#A48C65] flex items-center justify-center">
+                          <div className="w-5 h-5 rounded-full bg-[#0B1F3B] flex items-center justify-center">
                             <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                             </svg>
@@ -295,14 +295,14 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
           <div className="flex justify-end gap-3">
             <button
               onClick={onClose}
-              className="px-6 py-2.5 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+              className="px-6 py-2.5 cursor-pointer bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
             >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
               disabled={isCreating || isUpdating || (!caseData && !selectedClientId)}
-              className="px-6 py-2.5 bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white rounded-lg hover:from-[#A48C65] hover:to-[#8B7355] transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              className="px-6 py-2.5 cursor-pointer bg-[#0B1F3B] text-white rounded-lg  transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium"
             >
               {isCreating || isUpdating ? (
                 <span className="flex items-center gap-2">

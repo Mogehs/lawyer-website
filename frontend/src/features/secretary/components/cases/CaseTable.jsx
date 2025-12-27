@@ -74,12 +74,12 @@ const CaseTable = ({
     const canArchive = !isArchived;
 
     const actions = [
-      {
-        icon: Eye,
-        label: "View Details",
-        onClick: () => onViewCase?.(caseItem.id),
-        color: "text-blue-600 hover:bg-blue-50",
-      },
+      // {
+      //   icon: Eye,
+      //   label: "View Details",
+      //   onClick: () => onViewCase?.(caseItem.id),
+      //   color: "text-blue-600 hover:bg-blue-50",
+      // },
       {
         icon: Edit,
         label: "Edit Case",
@@ -128,7 +128,7 @@ const CaseTable = ({
             e.stopPropagation();
             onToggle();
           }}
-          className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+          className="p-1.5 hover:bg-gray-100 cursor-pointer rounded-lg transition-colors"
         >
           <MoreVertical size={16} className="text-gray-500" />
         </button>
@@ -161,7 +161,7 @@ const CaseTable = ({
                         if (!action.disabled) action.onClick();
                         setOpenDropdown(null);
                       }}
-                      className={`w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center gap-3 ${action.color} ${action.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                      className={`w-full cursor-pointer text-left px-3 py-2 hover:bg-gray-50 flex items-center gap-3 ${action.color} ${action.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
                       <Icon size={16} />
                       <span className="text-sm">{action.label}</span>
                     </button>

@@ -23,7 +23,7 @@ const UsersHeader = ({ search, setSearch, onAdd }) => {
       {/* Add User Button */}
       <button
         onClick={onAdd}
-        className="flex items-center gap-2 text-[#494C52] px-4 py-2 rounded-lg
+        className="flex items-center gap-2 cursor-pointer text-[#494C52] px-4 py-2 rounded-lg
                    bg-white border border-[#0B1F3B]  hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 shadow-sm"
       >
         <FaUserPlus /> Add User

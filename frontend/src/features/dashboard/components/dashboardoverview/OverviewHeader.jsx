@@ -8,7 +8,7 @@ const OverviewHeader = () => {
                  flex flex-col md:flex-row 
                  md:items-center md:justify-between 
                  gap-5 sm:gap-6 
-                 pb-4 border-b border-[#fe9a00]/20 
+                 pb-4 border-b border-[#0B1F3B]/20 
                  px-2 sm:px-0"
     >
       {/* ===== Left Section ===== */}

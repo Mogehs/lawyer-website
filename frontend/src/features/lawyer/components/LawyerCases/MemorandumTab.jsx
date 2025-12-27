@@ -112,7 +112,7 @@ export default function MemorandumTab({
               <button
                 onClick={handleUploadClick}
                 disabled={isUploading}
-                className="inline-flex items-center gap-1 px-2 py-1 border border-slate-300 rounded text-[10px] hover:bg-[#A48C65] hover:text-white disabled:opacity-50"
+                className="inline-flex items-center cursor-pointer gap-1 px-2 py-1 border border-slate-300 rounded text-[10px] hover:bg-[#0B1F3B] hover:text-white disabled:opacity-50"
               >
                 <FiUpload size={12} /> Choose
               </button>
@@ -202,8 +202,8 @@ export default function MemorandumTab({
 
           {/* File */}
           {memo.fileUrl && (
-            <div className="flex items-center gap-2 p-2 border border-[#A48C65] rounded bg-white">
-              <FiFileText size={14} className="text-[#A48C65] shrink-0" />
+            <div className="flex items-center gap-2 p-2 border border-[#0B1F3B] rounded bg-white">
+              <FiFileText size={14} className="text-[#0B1F3B] shrink-0" />
               <div className="flex-1 min-w-0">
                 <div className="text-[10px] font-medium text-slate-800">
                   Memorandum Document
@@ -220,14 +220,14 @@ export default function MemorandumTab({
                   href={memo.fileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-2 py-1 rounded border text-[10px] hover:bg-[#A48C65] hover:text-white"
+                  className="px-2 py-1 rounded cursor-pointer border text-[10px] hover:bg-[#0B1F3B] hover:text-white"
                 >
                   View
                 </a>
                 <a
                   href={memo.fileUrl}
                   download
-                  className="px-2 py-1 rounded border text-[10px] hover:bg-[#A48C65] hover:text-white"
+                  className="px-2 py-1 rounded cursor-pointer border text-[10px] hover:bg-[#0B1F3B] hover:text-white"
                 >
                   Download
                 </a>

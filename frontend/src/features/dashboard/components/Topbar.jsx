@@ -110,7 +110,7 @@ const Topbar = () => {
           </div>
           <ChevronDown
             size={14}
-            className={`text-slate-500 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""
+            className={`text-slate-500 transition-transform cursor-pointer duration-200 ${isDropdownOpen ? "rotate-180" : ""
               }`}
           />
         </button>

@@ -121,7 +121,7 @@ export default function LawyerNotifications() {
          {/* Header - Compact */}
          <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between mb-3 gap-2 ">
             <div>
-               <h2 className="text-2xl md:text-3xl font-bold text-[#A48D66]">
+               <h2 className="text-2xl md:text-3xl font-bold text-[#0B1F3B]">
                   Notifications
                </h2>
                <p className="text-[10px] sm:text-[18px] text-slate-600 mt-2">
@@ -149,14 +149,14 @@ export default function LawyerNotifications() {
                <input
                   type="text"
                   placeholder="Search notifications..."
-                  className="outline-none w-full rounded-md h-full pl-8   text-[18px] py-2  border-2 border-slate-200 focus:border-[#A48D66]"
+                  className="outline-none w-full rounded-md h-full pl-8   text-[18px] py-2  border-2 border-slate-200 focus:border-[#0B1F3B]"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                />
             </div>
 
             <select
-               className="border border-slate-300 rounded px-2 py-1.5 text-[16px] w-full md:w-auto focus:ring-1 focus:ring-[#A48D66]"
+               className="border border-slate-300 rounded px-2 py-1.5 text-[16px] w-full md:w-auto focus:ring-1 focus:ring-[#0B1F3B]"
                value={typeFilter}
                onChange={(e) => setTypeFilter(e.target.value)}
             >
@@ -168,7 +168,7 @@ export default function LawyerNotifications() {
             </select>
 
             <select
-               className="border border-slate-300 rounded px-2 py-1.5 text-[16px] w-full md:w-auto focus:ring-1 focus:ring-[#A48D66]"
+               className="border border-slate-300 rounded px-2 py-1.5 text-[16px] w-full md:w-auto focus:ring-1 focus:ring-[#0B1F3B]"
                value={stageFilter}
                onChange={(e) => setStageFilter(e.target.value)}
             >
@@ -191,13 +191,13 @@ export default function LawyerNotifications() {
                         }`}
                   >
                      <div className="flex flex-col md:flex-row md:items-center gap-2 flex-1">
-                        <span className="text-xs font-semibold text-[#A48D66]">
+                        <span className="text-xs font-semibold text-[#0B1F3B]">
                            {n.caseNumber}
                         </span>
-                        <span className="text-xs text-[#b39a70]">
+                        <span className="text-xs text-[#0B1F3B]">
                            {n.clientName}
                         </span>
-                        <span className="text-[10px] text-[#c5ab7d]">
+                        <span className="text-[10px] text-[#0B1F3B]">
                            {n.caseType}
                         </span>
                         <span className="text-[10px] font-medium px-1.5 py-0.5 bg-slate-100 rounded">

@@ -37,8 +37,8 @@ const ViewInvoiceModal = ({ invoice, isOpen, onClose }) => {
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-xl">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-[#A48C65]/10 rounded-lg">
-              <FileText size={20} className="text-[#A48C65]" />
+            <div className="p-2 bg-[#0B1F3B]/10 rounded-lg">
+              <FileText size={20} className="text-[#0B1F3B]" />
             </div>
             <h2 className="text-lg font-semibold text-gray-900">Invoice Details</h2>
           </div>
@@ -72,7 +72,7 @@ const ViewInvoiceModal = ({ invoice, isOpen, onClose }) => {
           {/* Client Information */}
           <div className="pt-4">
             <div className="flex items-center gap-2 mb-3">
-              <User size={18} className="text-[#A48C65]" />
+              <User size={18} className="text-[#0B1F3B]" />
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
                 Client Information
               </h3>
@@ -114,7 +114,7 @@ const ViewInvoiceModal = ({ invoice, isOpen, onClose }) => {
           {/* Financial Details */}
           <div className="pt-4">
             <div className="flex items-center gap-2 mb-3">
-              <DollarSign size={18} className="text-[#A48C65]" />
+              <DollarSign size={18} className="text-[#0B1F3B]" />
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
                 Financial Details
               </h3>
@@ -136,7 +136,7 @@ const ViewInvoiceModal = ({ invoice, isOpen, onClose }) => {
                 <span className="text-xs font-semibold text-gray-700">
                   Remaining Amount
                 </span>
-                <span className="text-lg font-bold text-[#A48C65]">
+                <span className="text-lg font-bold text-[#0B1F3B]">
                   {formatCurrency(invoice.remainingAmount)}
                 </span>
               </div>
@@ -146,7 +146,7 @@ const ViewInvoiceModal = ({ invoice, isOpen, onClose }) => {
           {/* Dates */}
           <div className="pt-4">
             <div className="flex items-center gap-2 mb-3">
-              <Calendar size={18} className="text-[#A48C65]" />
+              <Calendar size={18} className="text-[#0B1F3B]" />
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Dates</h3>
             </div>
             <div className="grid grid-cols-2 gap-3">

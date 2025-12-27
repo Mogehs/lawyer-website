@@ -92,7 +92,7 @@ const RecordPayment = () => {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <CreditCard size={28} className="text-[#A48C65]" />
+          <CreditCard size={28} className="text-[#0B1F3B]" />
           Record Payment
         </h1>
         <p className="text-sm text-gray-600 mt-1">تسجيل دفعة</p>
@@ -111,7 +111,7 @@ const RecordPayment = () => {
               value={formData.invoice}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             >
               <option value="">Select Invoice</option>
               {unpaidInvoices.map((invoice) => (
@@ -171,7 +171,7 @@ const RecordPayment = () => {
               max={selectedInvoice?.remainingAmount || undefined}
               step="0.01"
               placeholder="0.00"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
             {selectedInvoice && (
               <p className="text-xs text-gray-500 mt-1">
@@ -190,7 +190,7 @@ const RecordPayment = () => {
               value={formData.paymentMethod}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             >
               <option value="cash">Cash / نقدي</option>
               <option value="bank_transfer">Bank Transfer / تحويل بنكي</option>
@@ -215,7 +215,7 @@ const RecordPayment = () => {
                     onChange={handleChange}
                     required
                     placeholder="Enter check number"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -229,7 +229,7 @@ const RecordPayment = () => {
                     onChange={handleChange}
                     required
                     placeholder="Enter bank name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -242,7 +242,7 @@ const RecordPayment = () => {
                     value={formData.checkDepositDate}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
                   />
                 </div>
               </div>
@@ -265,7 +265,7 @@ const RecordPayment = () => {
                     onChange={handleChange}
                     required
                     placeholder="Enter transaction ID"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -279,7 +279,7 @@ const RecordPayment = () => {
                     onChange={handleChange}
                     required
                     placeholder="Enter bank name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
                   />
                 </div>
               </div>
@@ -297,7 +297,7 @@ const RecordPayment = () => {
               value={formData.paymentDate}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
 
@@ -312,7 +312,7 @@ const RecordPayment = () => {
               onChange={handleChange}
               rows={3}
               placeholder="Additional notes..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
 
@@ -321,7 +321,7 @@ const RecordPayment = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="px-6 py-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] hover:from-[#A48C65] hover:to-[#8B7355] text-white rounded-lg font-medium transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2 bg-[#0B1F3B] text-white rounded-lg font-medium transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Recording..." : "Record Payment"}
             </button>

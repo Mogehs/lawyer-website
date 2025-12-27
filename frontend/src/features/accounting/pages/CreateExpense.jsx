@@ -60,7 +60,7 @@ const CreateExpense = () => {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <TrendingDown size={28} className="text-[#A48C65]" />
+          <TrendingDown size={28} className="text-[#0B1F3B]" />
           Add New Expense
         </h1>
         <p className="text-sm text-gray-600 mt-1">إضافة مصروف جديد</p>
@@ -79,7 +79,7 @@ const CreateExpense = () => {
               value={formData.category}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             >
               <option value="">Select Category</option>
               {categories.map((cat) => (
@@ -102,7 +102,7 @@ const CreateExpense = () => {
               required
               rows={4}
               placeholder="Enter expense details..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
 
@@ -120,7 +120,7 @@ const CreateExpense = () => {
               min="0"
               step="0.01"
               placeholder="0.00"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
 
@@ -135,7 +135,7 @@ const CreateExpense = () => {
               value={formData.expenseDate}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
 
@@ -150,7 +150,7 @@ const CreateExpense = () => {
               value={formData.vendor}
               onChange={handleChange}
               placeholder="Enter vendor name (optional)"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
 
@@ -165,7 +165,7 @@ const CreateExpense = () => {
               onChange={handleChange}
               rows={3}
               placeholder="Additional notes..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
 
@@ -174,7 +174,7 @@ const CreateExpense = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="px-6 py-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] hover:from-[#A48C65] hover:to-[#8B7355] text-white rounded-lg font-medium transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2 bg-[#0B1F3B] text-white rounded-lg font-medium transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Creating..." : "Add Expense"}
             </button>

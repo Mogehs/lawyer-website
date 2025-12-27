@@ -82,10 +82,10 @@ const AccountingDashboard = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">
+          <h1 className="text-2xl font-bold text-[#0B1F3B]">
             Accounting Dashboard
           </h1>
-          <p className="text-sm text-gray-600 mt-1">
+          <p className="text-sm text-[#0B1F3B] mt-1">
             لوحة تحكم المحاسبة - Financial Overview
           </p>
         </div>
@@ -123,10 +123,10 @@ const AccountingDashboard = () => {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total Income */}
-        <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-6 text-white shadow-lg">
+        <div className="bg-[#F5F7FA] rounded-lg p-6 text-[#0B1F3B] shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <TrendingUp size={24} />
-            <DollarSign size={32} className="opacity-50" />
+            <TrendingUp size={24} className="text-[#1E1E1E]"/>
+            <DollarSign size={32} className="opacity-50 text-[#C9A24D]" />
           </div>
           <h3 className="text-sm font-medium opacity-90">Total Income</h3>
           <p className="text-3xl font-bold mt-2">
@@ -136,10 +136,10 @@ const AccountingDashboard = () => {
         </div>
 
         {/* Total Expenses */}
-        <div className="bg-gradient-to-br from-red-500 to-red-600 rounded-lg p-6 text-white shadow-lg">
+        <div className="bg-[#F5F7FA] rounded-lg p-6 text-[#0B1F3B] shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <TrendingDown size={24} />
-            <DollarSign size={32} className="opacity-50" />
+            <TrendingDown size={24} className="text-[#1E1E1E]"/>
+            <DollarSign size={32} className="opacity-50 text-[#C9A24D]" />
           </div>
           <h3 className="text-sm font-medium opacity-90">Total Expenses</h3>
           <p className="text-3xl font-bold mt-2">
@@ -150,19 +150,19 @@ const AccountingDashboard = () => {
 
         {/* Net Profit */}
         <div
-          className={`bg-gradient-to-br ${
+          className={`bg-[#F5F7FA] ${
             dashboard?.summary?.profit >= 0
               ? "from-blue-500 to-blue-600"
               : "from-orange-500 to-orange-600"
-          } rounded-lg p-6 text-white shadow-lg`}
+          } rounded-lg p-6 text-[#0B1F3B] shadow-lg`}
         >
           <div className="flex items-center justify-between mb-4">
             {dashboard?.summary?.profit >= 0 ? (
               <TrendingUp size={24} />
             ) : (
-              <TrendingDown size={24} />
+              <TrendingDown size={24} className="text-[#1E1E1E]"/>
             )}
-            <DollarSign size={32} className="opacity-50" />
+            <DollarSign size={32} className="opacity-50 text-[#C9A24D]" />
           </div>
           <h3 className="text-sm font-medium opacity-90">Net Profit</h3>
           <p className="text-3xl font-bold mt-2">
@@ -172,10 +172,10 @@ const AccountingDashboard = () => {
         </div>
 
         {/* Outstanding Invoices */}
-        <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg p-6 text-white shadow-lg">
+        <div className="bg-[#F5F7FA] rounded-lg p-6 text-[#0B1F3B] shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <AlertCircle size={24} />
-            <FileText size={32} className="opacity-50" />
+            <AlertCircle size={24} className="text-[#1E1E1E]"/>
+            <FileText size={32} className="opacity-50 text-[#C9A24D]" />
           </div>
           <h3 className="text-sm font-medium opacity-90">
             Outstanding Invoices
@@ -195,12 +195,12 @@ const AccountingDashboard = () => {
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-              <CreditCard size={20} className="text-[#A48C65]" />
-              Recent Payments
+              <CreditCard size={20} className="text-[#0B1F3B]" />
+             <p className="text-[#0B1F3B]" >Recent Payments</p>
             </h2>
             <Link
               to="/accountant/payments"
-              className="text-sm text-[#A48C65] hover:underline"
+              className="text-sm text-gray-500 hover:underline"
             >
               View All
             </Link>
@@ -243,12 +243,12 @@ const AccountingDashboard = () => {
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-              <FileText size={20} className="text-[#A48C65]" />
+              <FileText size={20} className="text-[#0B1F3B]" />
               Recent Invoices
             </h2>
             <Link
               to="/accountant/invoices"
-              className="text-sm text-[#A48C65] hover:underline"
+              className="text-sm text-gray-500 hover:underline"
             >
               View All
             </Link>

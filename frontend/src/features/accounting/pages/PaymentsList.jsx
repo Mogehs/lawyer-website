@@ -110,7 +110,7 @@ const PaymentsList = () => {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-            <CreditCard size={28} className="text-[#A48C65]" />
+            <CreditCard size={28} className="text-[#0B1F3B]" />
             Payments Management
           </h1>
           <p className="text-sm text-gray-600 mt-1">إدارة المدفوعات</p>
@@ -118,7 +118,7 @@ const PaymentsList = () => {
 
         <Link
           to="/accountant/payments/record"
-          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] hover:from-[#A48C65] hover:to-[#8B7355] text-white rounded-lg font-medium transition-all duration-200 shadow-md"
+          className="flex items-center gap-2 px-4 py-2 bg-[#0B1F3B] text-white rounded-lg font-medium transition-all duration-200 shadow-md"
         >
           <Plus size={20} />
           Record Payment
@@ -139,7 +139,7 @@ const PaymentsList = () => {
               placeholder="Search payments..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
 
@@ -149,7 +149,7 @@ const PaymentsList = () => {
             onChange={(e) =>
               setFilters({ ...filters, paymentMethod: e.target.value, page: 1 })
             }
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           >
             <option value="">All Methods</option>
             <option value="cash">Cash</option>
@@ -165,7 +165,7 @@ const PaymentsList = () => {
             onChange={(e) =>
               setFilters({ ...filters, startDate: e.target.value, page: 1 })
             }
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           />
 
           {/* End Date */}
@@ -175,7 +175,7 @@ const PaymentsList = () => {
             onChange={(e) =>
               setFilters({ ...filters, endDate: e.target.value, page: 1 })
             }
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           />
         </div>
 
@@ -190,7 +190,7 @@ const PaymentsList = () => {
                 limit: 10,
               })
             }
-            className="mt-3 text-sm text-[#A48C65] hover:underline"
+            className="mt-3 text-sm text-[#0B1F3B] hover:underline"
           >
             Clear Filters
           </button>
@@ -201,13 +201,13 @@ const PaymentsList = () => {
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         {isLoading ? (
           <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A48C65]"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0B1F3B]"></div>
           </div>
         ) : filteredPayments.length > 0 ? (
           <>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white">
+                <thead className="bg-[#0B1F3B] text-white">
                   <tr>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
                       Receipt #

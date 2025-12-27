@@ -1,0 +1,13 @@
+{
+  "title": "Case Timelines & Durations",
+  "caseNo": "Case No",
+  "stage": "Stage",
+  "startDate": "Start Date",
+  "endDate": "End Date",
+  "duration": "Duration",
+  "start": "Start",
+  "end": "End",
+  "mainCase": "Main Case",
+  "appeal": "Appeal",
+  "cassation": "Cassation"
+}

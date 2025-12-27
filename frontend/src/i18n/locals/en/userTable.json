@@ -1,0 +1,19 @@
+{
+  "tableHeaders": {
+    "name": "Name",
+    "role": "Role",
+    "email": "Email",
+    "phone": "Phone",
+    "status": "Status",
+    "assignedCases": "Assigned Cases",
+    "actions": "Actions"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "actions": {
+    "view": "View",
+    "delete": "Delete"
+  }
+}

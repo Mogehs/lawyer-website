@@ -1,0 +1,17 @@
+{
+  "pendingSessionsTitle": "Pending Sessions for Signature",
+  "pendingCount": "{{count}} pending",
+  "noPendingSessions": "No pending sessions",
+  "client": "Client",
+  "memorandum": "Memorandum",
+  "download": "Download",
+  "noMemorandum": "No memorandum file",
+  "uploadSignature": "Upload Signature / Final Document",
+  "notes": "Notes",
+  "approveButton": "Approve & Mark Ready",
+  "uploading": "Uploading...",
+  "loading": "Loading...",
+  "loadError": "Failed to load pending sessions",
+  "approveSuccess": "Session approved and marked ready for submission",
+  "approveError": "Failed to approve session"
+}

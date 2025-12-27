@@ -1,0 +1,21 @@
+{
+  "pendingSignatureCases": "Pending Signature Cases",
+  "reviewAndApprove": "Review and approve cases with signed documents",
+  "noPendingCases": "No Cases Pending Signature",
+  "allCasesReviewed": "All cases have been reviewed and approved.",
+  "caseNumber": "Case Number",
+  "client": "Client",
+  "caseType": "Case Type",
+  "assignedLawyer": "Assigned Lawyer",
+  "approvingLawyer": "Approving Lawyer",
+  "updated": "Updated",
+  "actions": "Actions",
+  "viewDetails": "View Details",
+  "approveWithSignedDocument": "Approve with Signed Document",
+  "approve": "Approve",
+  "pdfOnly": "Please upload a PDF file only",
+  "selectDocument": "Please select a signed document",
+  "caseApproved": "Case approved with signed document!",
+  "approveFailed": "Failed to approve case",
+  "unassigned": "Unassigned"
+}

@@ -1,0 +1,10 @@
+{
+  "archivedCasesTitle": "القضايا المؤرشفة",
+  "casesFound": "تم العثور على {{count}} قضية",
+  "loading": "جارٍ تحميل القضايا المؤرشفة...",
+  "loadError": "فشل في تحميل القضايا المؤرشفة.",
+  "exportCSV": "تصدير CSV",
+  "filters": "الفلاتر",
+  "previous": "السابق",
+  "next": "التالي"
+}

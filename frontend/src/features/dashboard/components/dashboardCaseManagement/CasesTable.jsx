@@ -1,6 +1,12 @@
+import React from "react";
 import { Eye, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18n/index";
 
 const CasesTable = ({ cases, onView, onDelete, sidebarOpen }) => {
+  const { t } = useTranslation("casesTable");
+  const isRTL = i18n.language === "ar";
+
   return (
     <div
       className={`bg-white max-w-4xl text-[#24344f] shadow-2xl rounded-t-xl
@@ -8,20 +14,21 @@ const CasesTable = ({ cases, onView, onDelete, sidebarOpen }) => {
         transition-all duration-300
         ${sidebarOpen ? "lg:w-[980px] md:w-[440px]" : "lg:w-full md:w-[640px]"}
       `}
+      dir={isRTL ? "rtl" : "ltr"}
     >
-      {/* ===== Desktop Table ===== */}
+      {/* Desktop Table */}
       <div className="overflow-x-auto">
         <table className="w-full table-auto text-sm min-w-[700px] border-collapse">
           {/* Header */}
           <thead className="bg-[#0B1F3B] text-white uppercase tracking-wide text-xs font-semibold">
-            <tr className="whitespace-nowrap">
-              <th className="px-6 py-4 text-left">Case #</th>
-              <th className="px-6 py-4 text-left">Client</th>
-              <th className="px-6 py-4 text-left">Lawyer</th>
-              <th className="px-6 py-4 text-left">Stage</th>
-              <th className="px-6 py-4 text-left">Status</th>
-              <th className="px-6 py-4 text-left">Last Updated</th>
-              <th className="px-6 py-4 text-center">Actions</th>
+            <tr>
+              <th className="px-6 py-4 text-left">{t("caseNumber")}</th>
+              <th className="px-6 py-4 text-left">{t("client")}</th>
+              <th className="px-6 py-4 text-left">{t("lawyer")}</th>
+              <th className="px-6 py-4 text-left">{t("stage")}</th>
+              <th className="px-6 py-4 text-left">{t("status")}</th>
+              <th className="px-6 py-4 text-left">{t("lastUpdated")}</th>
+              <th className="px-6 py-4 text-center">{t("actions")}</th>
             </tr>
           </thead>
 
@@ -34,22 +41,10 @@ const CasesTable = ({ cases, onView, onDelete, sidebarOpen }) => {
                   transition-all duration-300
                   hover:bg-[#0B1F3B]/5 hover:shadow-sm"
               >
-                <td className="px-6 py-4 font-mono font-medium">
-                  {c.caseNumber}
-                </td>
-
-                <td className="px-6 py-4 font-medium">
-                  {c.clientName}
-                </td>
-
-                <td className="px-6 py-4">
-                  {c.lawyer}
-                </td>
-
-                <td className="px-6 py-4 text-[#24344f]/80">
-                  {c.stage}
-                </td>
-
+                <td className="px-6 py-4 font-mono font-medium">{c.caseNumber}</td>
+                <td className="px-6 py-4 font-medium">{c.clientName}</td>
+                <td className="px-6 py-4">{c.lawyer}</td>
+                <td className="px-6 py-4 text-[#24344f]/80">{c.stage}</td>
                 <td className="px-6 py-4">
                   <span
                     className={`inline-flex items-center px-3 py-1 rounded-full
@@ -67,12 +62,7 @@ const CasesTable = ({ cases, onView, onDelete, sidebarOpen }) => {
                     {c.status}
                   </span>
                 </td>
-
-                <td className="px-6 py-4 text-[#24344f]/70">
-                  {c.lastUpdated}
-                </td>
-
-                {/* Actions */}
+                <td className="px-6 py-4 text-[#24344f]/70">{c.lastUpdated}</td>
                 <td className="px-6 py-4">
                   <div className="flex justify-center gap-2">
                     <button
@@ -84,9 +74,8 @@ const CasesTable = ({ cases, onView, onDelete, sidebarOpen }) => {
                         hover:bg-[#0B1F3B] hover:text-white hover:shadow-md"
                     >
                       <Eye className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
-                      View
+                      {t("view")}
                     </button>
-
                     <button
                       onClick={() => onDelete(c)}
                       className="group flex items-center gap-2
@@ -96,7 +85,7 @@ const CasesTable = ({ cases, onView, onDelete, sidebarOpen }) => {
                         hover:bg-[#0B1F3B] hover:text-white hover:shadow-md"
                     >
                       <Trash2 className="w-4 h-4 transition-transform duration-300 group-hover:rotate-6" />
-                      Delete
+                      {t("delete")}
                     </button>
                   </div>
                 </td>

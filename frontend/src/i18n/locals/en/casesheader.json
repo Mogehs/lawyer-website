@@ -1,0 +1,9 @@
+{
+  "title": "All Cases",
+  "description": "View, search, and manage all client cases.",
+  "searchPlaceholder": "Search cases...",
+  "filterAll": "All Stages",
+  "filterMainCase": "Main Case",
+  "filterAppeal": "Appeal",
+  "filterCassation": "Cassation"
+}

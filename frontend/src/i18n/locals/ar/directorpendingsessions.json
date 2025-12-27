@@ -1,0 +1,17 @@
+{
+  "pendingSessionsTitle": "الجلسات المعلقة للتوقيع",
+  "pendingCount": "{{count}} معلق",
+  "noPendingSessions": "لا توجد جلسات معلقة",
+  "client": "العميل",
+  "memorandum": "مذكرة",
+  "download": "تحميل",
+  "noMemorandum": "لا يوجد ملف مذكرة",
+  "uploadSignature": "تحميل التوقيع / المستند النهائي",
+  "notes": "ملاحظات",
+  "approveButton": "الموافقة ووضعها جاهزة",
+  "uploading": "جاري التحميل...",
+  "loading": "جار التحميل...",
+  "loadError": "فشل في تحميل الجلسات المعلقة",
+  "approveSuccess": "تمت الموافقة على الجلسة وجعلها جاهزة للتقديم",
+  "approveError": "فشل في الموافقة على الجلسة"
+}

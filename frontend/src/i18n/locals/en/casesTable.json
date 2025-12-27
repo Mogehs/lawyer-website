@@ -1,0 +1,11 @@
+{
+  "caseNumber": "Case #",
+  "client": "Client",
+  "lawyer": "Lawyer",
+  "stage": "Stage",
+  "status": "Status",
+  "lastUpdated": "Last Updated",
+  "actions": "Actions",
+  "view": "View",
+  "delete": "Delete"
+}

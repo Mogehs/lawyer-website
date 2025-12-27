@@ -1,0 +1,21 @@
+{
+  "addNewCase": "Add New Case",
+  "caseNumber": "Case Number",
+  "caseNumberPlaceholder": "e.g., C-2025-004",
+  "clientName": "Client Name",
+  "clientNamePlaceholder": "Enter client name",
+  "lawyer": "Lawyer",
+  "lawyerPlaceholder": "Assigned lawyer",
+  "stage": "Stage",
+  "mainCase": "Main Case",
+  "appeal": "Appeal",
+  "cassation": "Cassation",
+  "status": "Status",
+  "submitted": "Submitted",
+  "awaitingApproval": "Awaiting Approval",
+  "inProgress": "In Progress",
+  "closed": "Closed",
+  "hearingDate": "Hearing Date",
+  "cancel": "Cancel",
+  "addCaseButton": "Add Case"
+}

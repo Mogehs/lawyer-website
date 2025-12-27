@@ -1,0 +1,21 @@
+{
+  "pendingSignatureCases": "القضايا بانتظار التوقيع",
+  "reviewAndApprove": "راجع واعتمد القضايا مع المستندات الموقعة",
+  "noPendingCases": "لا توجد قضايا بانتظار التوقيع",
+  "allCasesReviewed": "تم مراجعة جميع القضايا واعتمادها.",
+  "caseNumber": "رقم القضية",
+  "client": "العميل",
+  "caseType": "نوع القضية",
+  "assignedLawyer": "المحامي المعين",
+  "approvingLawyer": "المحامي المعتمد",
+  "updated": "تم التحديث",
+  "actions": "إجراءات",
+  "viewDetails": "عرض التفاصيل",
+  "approveWithSignedDocument": "اعتماد مع المستند الموقع",
+  "approve": "اعتماد",
+  "pdfOnly": "يرجى تحميل ملف PDF فقط",
+  "selectDocument": "يرجى اختيار المستند الموقع",
+  "caseApproved": "تم اعتماد القضية مع المستند الموقع!",
+  "approveFailed": "فشل في اعتماد القضية",
+  "unassigned": "غير معين"
+}

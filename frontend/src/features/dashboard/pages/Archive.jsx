@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import ArchiveFilters from '../components/DashboardArchive/ArchiveFilters';
 import ArchiveTable from '../components/DashboardArchive/ArchiveTable';
 import ArchiveViewModal from '../components/DashboardArchive/ArchiveViewModal';
 import ArchiveDeleteModal from '../components/DashboardArchive/ArchiveDeleteModal';
 import { useGetAllArchieveQuery } from '../api/directorApi';
+import i18n from '../../../i18n/index';
 
 const Archive = () => {
+  const { t } = useTranslation('archive');
+  const isRTL = i18n.language === 'ar';
+
   const [filters, setFilters] = useState({
     searchClient: "",
     searchCaseId: "",
@@ -104,32 +109,36 @@ const Archive = () => {
   };
 
   if (isLoading)
-    return <p className="text-center text-[#494C52] mt-20">Loading archived cases...</p>;
+    return <p className={`text-center mt-20 ${isRTL ? 'text-right' : 'text-left'}`}>{t('loading')}</p>;
   if (isError)
-    return <p className="text-center text-[#0B1F3B] mt-20">Failed to load archived cases.</p>;
+    return <p className={`text-center mt-20 ${isRTL ? 'text-right' : 'text-left'}`}>{t('loadError')}</p>;
 
   return (
-    <div className={`min-h-screen transition-all duration-300 ease-in-out pt-16 px-3 sm:px-4 md:px-6 lg:px-10
-      ${sidebarOpen ? 'lg:ml-64 md:ml-64' : 'lg:ml-50 md:ml-15'}
-    `}>
+    <div
+      className={`min-h-screen pt-16 px-3 sm:px-4 md:px-6 lg:px-10 transition-all duration-300 ${
+        isRTL ? 'lg:mr-[190px] text-right' : 'lg:ml-[190px] text-left'
+      }`}
+    >
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
         <div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1F3B]">Archived Cases</h2>
-          <p className="text-slate-600 mt-1">{archives.length} case{archives.length !== 1 ? 's' : ''} found</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1F3B]">{t('archivedCasesTitle')}</h2>
+          <p className="text-slate-600 mt-1">
+            {t('casesFound', { count: archives.length, countPlural: archives.length !== 1 ? 's' : '' })}
+          </p>
         </div>
         <div className="flex flex-wrap gap-2 mt-2 md:mt-0">
           <button
             onClick={exportToCSV}
             className="flex items-center gap-2 px-4 py-2 text-[#0B1F3B] font-medium rounded-lg bg-white border border-[#0B1F3B] hover:bg-[#0B1F3B] hover:text-white transition-all duration-200"
           >
-            Export CSV
+            {t('exportCSV')}
           </button>
           <button
             onClick={() => setShowFilters(!showFilters)}
             className="flex items-center gap-2 px-4 py-2 bg-[#1C283C] text-[#fe9800e5] rounded-lg hover:bg-[#0B1F3B] hover:text-white transition-colors md:hidden"
           >
-            Filters
+            {t('filters')}
           </button>
         </div>
       </div>
@@ -140,6 +149,7 @@ const Archive = () => {
         onFilterChange={handleFilterChange}
         onClearFilters={clearFilters}
         showFilters={showFilters}
+        isRTL={isRTL} // pass RTL to filters
       />
 
       {/* Table */}
@@ -149,12 +159,13 @@ const Archive = () => {
           onView={openViewModal}
           onDelete={openDeleteModal}
           sidebarOpen={sidebarOpen}
+          isRTL={isRTL} // pass RTL to table
         />
       </div>
 
       {/* Modals */}
-      <ArchiveViewModal isOpen={isViewModalOpen} archive={selectedArchive} onClose={closeModals} />
-      <ArchiveDeleteModal isOpen={isDeleteModalOpen} archive={archiveToDelete} onClose={closeModals} onConfirm={handleDeleteConfirm} />
+      <ArchiveViewModal isOpen={isViewModalOpen} archive={selectedArchive} onClose={closeModals} isRTL={isRTL} />
+      <ArchiveDeleteModal isOpen={isDeleteModalOpen} archive={archiveToDelete} onClose={closeModals} onConfirm={handleDeleteConfirm} isRTL={isRTL} />
 
       {/* Pagination */}
       <div className="flex flex-wrap justify-end gap-2 mt-6">
@@ -163,7 +174,7 @@ const Archive = () => {
           onClick={() => setPage(prev => Math.max(prev - 1, 1))}
           className="px-4 py-2 bg-white border border-[#a48c654f] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 rounded disabled:opacity-50"
         >
-          Previous
+          {t('previous')}
         </button>
         <span className="px-4 py-2">{page} / {totalPages}</span>
         <button
@@ -171,7 +182,7 @@ const Archive = () => {
           onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
           className="px-4 py-2 bg-white border border-[#0B1F3B] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 rounded disabled:opacity-50"
         >
-          Next
+          {t('next')}
         </button>
       </div>
     </div>

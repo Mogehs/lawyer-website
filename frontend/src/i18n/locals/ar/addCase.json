@@ -1,0 +1,21 @@
+{
+  "addNewCase": "إضافة قضية جديدة",
+  "caseNumber": "رقم القضية",
+  "caseNumberPlaceholder": "مثال: C-2025-004",
+  "clientName": "اسم العميل",
+  "clientNamePlaceholder": "أدخل اسم العميل",
+  "lawyer": "المحامي",
+  "lawyerPlaceholder": "المحامي المعين",
+  "stage": "المرحلة",
+  "mainCase": "القضية الرئيسية",
+  "appeal": "استئناف",
+  "cassation": "نقض",
+  "status": "الحالة",
+  "submitted": "مقدمة",
+  "awaitingApproval": "في انتظار الموافقة",
+  "inProgress": "قيد التنفيذ",
+  "closed": "مغلقة",
+  "hearingDate": "تاريخ الجلسة",
+  "cancel": "إلغاء",
+  "addCaseButton": "إضافة القضية"
+}

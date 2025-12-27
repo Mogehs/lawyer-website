@@ -1,0 +1,11 @@
+{
+  "caseNumber": "رقم القضية",
+  "client": "العميل",
+  "lawyer": "المحامي",
+  "stage": "المرحلة",
+  "status": "الحالة",
+  "lastUpdated": "آخر تحديث",
+  "actions": "الإجراءات",
+  "view": "عرض",
+  "delete": "حذف"
+}

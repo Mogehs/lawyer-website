@@ -1,0 +1,10 @@
+{
+  "archivedCasesTitle": "Archived Cases",
+  "casesFound": "{{count}} case{{countPlural}} found",
+  "loading": "Loading archived cases...",
+  "loadError": "Failed to load archived cases.",
+  "exportCSV": "Export CSV",
+  "filters": "Filters",
+  "previous": "Previous",
+  "next": "Next"
+}

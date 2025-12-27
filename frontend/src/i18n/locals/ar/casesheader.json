@@ -1,0 +1,9 @@
+{
+  "title": "جميع القضايا",
+  "description": "عرض والبحث وإدارة جميع قضايا العملاء.",
+  "searchPlaceholder": "ابحث عن القضايا...",
+  "filterAll": "جميع المراحل",
+  "filterMainCase": "القضية الرئيسية",
+  "filterAppeal": "الاستئناف",
+  "filterCassation": "النقض"
+}

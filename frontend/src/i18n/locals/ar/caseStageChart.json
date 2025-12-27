@@ -1,0 +1,9 @@
+{
+  "overviewTitle": "نظرة عامة على المدير",
+  "caseDistributionTitle": "توزيع القضايا",
+  "lawyerPerformanceTitle": "أداء المحامين",
+  "unassigned": "غير مخصص",
+  "cases": "قضايا",
+  "loadingCharts": "جارٍ تحميل الرسوم البيانية...",
+  "errorLoadingCharts": "حدث خطأ أثناء تحميل الرسوم البيانية"
+}

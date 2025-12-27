@@ -1,0 +1,11 @@
+{
+  "totalUsers": "Total Users",
+  "allRegisteredUsers": "All registered users",
+  "lawyers": "Lawyers",
+  "registeredLawyers": "Registered lawyers",
+  "approvingLawyers": "Approving Lawyers",
+  "awaitingApproval": "Awaiting approval",
+  "activeUsers": "Active Users",
+  "currentlyActive": "Currently active",
+  "errorFetchingStats": "Error fetching stats"
+}

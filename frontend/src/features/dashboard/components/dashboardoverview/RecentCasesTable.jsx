@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { Search, ArrowRight } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useGetAllCasesQuery } from "../../api/directorApi";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18n/index";
 
 const RecentCasesTable = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const { t } = useTranslation("recentCases");
+  const isRTL = i18n.language === "ar";
 
+  const [searchTerm, setSearchTerm] = useState("");
   const { data, isLoading, isError } = useGetAllCasesQuery();
 
   const recentCases = data?.data || [];
-console.log(recentCases)
-  // Sort by createdAt descending (most recent first) and limit to 6
+
+  // Sort by createdAt descending and limit to 6
   const sortedCases = [...recentCases]
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 6);
@@ -37,24 +41,29 @@ console.log(recentCases)
       caseItem.caseType?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  if (isLoading) return <p>{t("loading")}</p>;
+  if (isError) return <p className="text-red-500">{t("error")}</p>;
+
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:mt-20 mt-10 transition-all duration-300 hover:shadow-xl">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
         <h2 className="text-xl sm:text-2xl font-bold text-[#1c283c]">
-          Recent Cases
+          {t("recentCases")}
         </h2>
 
         <div className="relative w-full sm:w-64">
           <Search
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#0B1F3B] opacity-80"
+            className={`absolute ${isRTL ? "right-3" : "left-3"} top-1/2 -translate-y-1/2 text-[#0B1F3B] opacity-80`}
             size={18}
           />
           <input
             type="text"
-            placeholder="Search cases..."
-            className="w-full bg-[#fff] text-black placeholder-black border border-[#0B1F3B] rounded-lg py-2 pl-10 pr-4 text-sm 
-                       focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] transition-all duration-300"
+            placeholder={t("searchPlaceholder")}
+            className={`w-full bg-[#fff] text-black placeholder-black border border-[#0B1F3B] rounded-lg py-2 pl-10 pr-4 text-sm 
+                       focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] transition-all duration-300 ${
+                         isRTL ? "text-right" : "text-left"
+                       }`}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -66,49 +75,40 @@ console.log(recentCases)
         <table className="w-full text-sm text-nowrap">
           <thead className="bg-[#0B1F3B] text-white">
             <tr>
-              <th className="text-left py-3 px-5 font-semibold">Case Number</th>
-              <th className="text-left py-3 px-5 font-semibold">Client</th>
-              <th className="text-left py-3 px-5 font-semibold">Assigned Lawyer</th>
-              <th className="text-left py-3 px-5 font-semibold">Type</th>
-              <th className="text-left py-3 px-5 font-semibold">Status</th>
+              <th className="text-left py-3 px-5 font-semibold">{t("caseNumber")}</th>
+              <th className="text-left py-3 px-5 font-semibold">{t("client")}</th>
+              <th className="text-left py-3 px-5 font-semibold">{t("assignedLawyer")}</th>
+              <th className="text-left py-3 px-5 font-semibold">{t("caseType")}</th>
+              <th className="text-left py-3 px-5 font-semibold">{t("status")}</th>
             </tr>
           </thead>
 
           <tbody className="divide-y divide-gray-100 bg-white">
             {filteredCases.map((caseItem, index) => (
-              <tr
-                key={index}
-                className=""
-              >
+              <tr key={index}>
                 <td className="py-4 px-5 text-[#1c283c]/80 font-medium font-mono">
                   {caseItem.caseNumber}
                 </td>
                 <td className="py-4 px-5">
                   <div>
-                    <p className="font-semibold text-[#1c283c]">
-                      {caseItem.clientId?.name}
-                    </p>
+                    <p className="font-semibold text-[#1c283c]">{caseItem.clientId?.name}</p>
                     <p className="text-xs text-gray-500">{caseItem.clientId?.email}</p>
                   </div>
                 </td>
                 <td className="py-4 px-5">
                   <div>
-                    <p className="font-semibold text-[#1c283c]">
-                      {caseItem.assignedLawyer?.name}
-                    </p>
-                    <p className="text-xs text-gray-500">{caseItem.clientId?.email}</p>
+                    <p className="font-semibold text-[#1c283c]">{caseItem.assignedLawyer?.name}</p>
+                    <p className="text-xs text-gray-500">{caseItem.assignedLawyer?.email}</p>
                   </div>
                 </td>
-                <td className="py-4 px-5 text-[#1c283c]/70">
-                  {caseItem.caseType}
-                </td>
+                <td className="py-4 px-5 text-[#1c283c]/70">{caseItem.caseType}</td>
                 <td className="py-4 px-5">
                   <span
                     className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
                       caseItem.status
                     )}`}
                   >
-                    {caseItem.status}
+                    {t(caseItem.status)}
                   </span>
                 </td>
               </tr>
@@ -133,17 +133,15 @@ console.log(recentCases)
                   caseItem.status
                 )}`}
               >
-                {caseItem.status}
+                {t(caseItem.status)}
               </span>
             </div>
-            <p className="font-semibold text-[#1c283c]">
-              {caseItem.clientId?.name}
-            </p>
+            <p className="font-semibold text-[#1c283c]">{caseItem.clientId?.name}</p>
             <p className="text-xs text-gray-500 mb-2">{caseItem.clientId?.email}</p>
             <div className="flex items-center justify-between mt-2 text-sm">
               <span className="text-[#1c283c]/70">{caseItem.caseType}</span>
               <button className="text-[#0B1F3B] hover:text-[#1c283c] text-xs font-medium flex items-center gap-1">
-                View <ArrowRight size={12} />
+                {t("view")} <ArrowRight size={12} />
               </button>
             </div>
           </div>
@@ -153,11 +151,13 @@ console.log(recentCases)
       {/* Footer */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between mt-6 pt-5 border-t border-gray-100 gap-2">
         <p className="text-sm text-gray-500">
-          Showing <b>{filteredCases.length}</b> of <b>{recentCases.length}</b> cases
+          {t("showing")} <b>{filteredCases.length}</b> {t("of")} <b>{recentCases.length}</b> {t("cases")}
         </p>
-        <Link to="all-cases" className="flex items-center gap-2 text-sm font-medium text-[#0B1F3B]">
-          View All Cases
-          <ArrowRight size={16} />
+        <Link
+          to="all-cases"
+          className="flex items-center gap-2 text-sm font-medium text-[#0B1F3B]"
+        >
+          {t("viewAllCases")} <ArrowRight size={16} />
         </Link>
       </div>
     </div>

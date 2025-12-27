@@ -1,0 +1,20 @@
+{
+  "recentCases": "Recent Cases",
+  "searchPlaceholder": "Search cases...",
+  "caseNumber": "Case Number",
+  "client": "Client",
+  "assignedLawyer": "Assigned Lawyer",
+  "caseType": "Type",
+  "status": "Status",
+  "In Progress": "In Progress",
+  "Pending Approval": "Pending Approval",
+  "Document Review": "Document Review",
+  "Completed": "Completed",
+  "view": "View",
+  "viewAllCases": "View All Cases",
+  "showing": "Showing",
+  "of": "of",
+  "cases": "cases",
+  "loading": "Loading cases...",
+  "error": "Error fetching cases"
+}

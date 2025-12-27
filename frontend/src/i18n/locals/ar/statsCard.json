@@ -1,0 +1,11 @@
+{
+  "totalUsers": "إجمالي المستخدمين",
+  "allRegisteredUsers": "جميع المستخدمين المسجلين",
+  "lawyers": "المحامون",
+  "registeredLawyers": "المحامون المسجلون",
+  "approvingLawyers": "المحامون قيد الموافقة",
+  "awaitingApproval": "في انتظار الموافقة",
+  "activeUsers": "المستخدمون النشطون",
+  "currentlyActive": "نشط حاليًا",
+  "errorFetchingStats": "حدث خطأ أثناء جلب الإحصائيات"
+}

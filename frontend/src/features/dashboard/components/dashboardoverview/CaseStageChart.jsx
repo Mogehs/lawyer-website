@@ -1,8 +1,13 @@
 import { useGetAllCasesQuery } from "../../api/directorApi";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import CountUp from "react-countup";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18n/index";
 
 const CaseStageChart = () => {
+  const { t } = useTranslation("caseStageChart");
+  const isRTL = i18n.language === "ar";
+
   const { data, isLoading, isError } = useGetAllCasesQuery();
   const cases = data?.data || [];
 
@@ -30,33 +35,44 @@ const CaseStageChart = () => {
 
   // Compute lawyer performance
   const lawyerMap = cases.reduce((acc, c) => {
-    const lawyer = c.assignedLawyer?.name || "Unassigned";
+    const lawyer = c.assignedLawyer?.name || t("unassigned");
     acc[lawyer] = (acc[lawyer] || 0) + 1;
     return acc;
   }, {});
 
-  const lawyerPerformance = Object.entries(lawyerMap).map(
-    ([name, cases]) => ({ name, cases })
-  );
+  const lawyerPerformance = Object.entries(lawyerMap).map(([name, cases]) => ({
+    name,
+    cases,
+  }));
 
-  if (isLoading) return <p>Loading charts...</p>;
-  if (isError) return <p>Error loading charts</p>;
+  if (isLoading) return <p>{t("loadingCharts")}</p>;
+  if (isError) return <p>{t("errorLoadingCharts")}</p>;
 
   return (
-    <div className="bg-white mt-10 p-5 sm:p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full space-y-8">
+    <div
+      className={`bg-white mt-10 p-5 sm:p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full space-y-8 ${
+        isRTL ? "text-right" : "text-left"
+      }`}
+    >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div
+        className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
+          isRTL ? "flex-row-reverse" : ""
+        }`}
+      >
         <h2 className="text-xl sm:text-2xl font-bold text-[#0B1F3B]">
-          Managing Director Overview
+          {t("overviewTitle")}
         </h2>
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-6">
+      <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-6`}>
         {/* Left - Donut Chart */}
-        <div className="bg-[#f9fafb] p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center">
+        <div
+          className="bg-[#f9fafb] p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center"
+        >
           <h3 className="text-base sm:text-lg font-semibold text-[#0B1F3B] mb-4">
-            Case Distribution
+            {t("caseDistributionTitle")}
           </h3>
           <div className="w-full h-[250px] cursor-pointer sm:h-[280px] md:h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -69,6 +85,9 @@ const CaseStageChart = () => {
                   outerRadius="80%"
                   paddingAngle={3}
                   dataKey="value"
+                  label={({ name, percent }) =>
+                    `${name} (${(percent * 100).toFixed(0)}%)`
+                  }
                 >
                   {caseDistribution.map((entry, index) => (
                     <Cell key={index} fill={entry.color} />
@@ -79,7 +98,7 @@ const CaseStageChart = () => {
                     backgroundColor: "#FFFFFF",
                     borderRadius: "10px",
                     border: "1px solid #e5e7eb",
-                    color: "#FFFFFF",
+                    color: "#000",
                   }}
                 />
               </PieChart>
@@ -103,9 +122,11 @@ const CaseStageChart = () => {
         </div>
 
         {/* Right - Lawyer Performance */}
-        <div className="bg-[#f9fafb] p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
+        <div
+          className="bg-[#f9fafb] p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100"
+        >
           <h3 className="text-base sm:text-lg font-semibold text-[#494C52] mb-6">
-            Lawyers Performance
+            {t("lawyerPerformanceTitle")}
           </h3>
           <div className="space-y-4 sm:space-y-5">
             {lawyerPerformance.map((lawyer, i) => (
@@ -113,15 +134,18 @@ const CaseStageChart = () => {
                 <div className="flex justify-between text-xs sm:text-sm mb-1">
                   <span className="font-medium text-[#1c283c]">{lawyer.name}</span>
                   <span className="text-gray-600">
-                    <CountUp end={lawyer.cases} duration={1.5} /> Cases
+                    <CountUp end={lawyer.cases} duration={1.5} /> {t("cases")}
                   </span>
                 </div>
                 <div className="h-2 sm:h-2.5 bg-gray-200 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-[#0B1F3B] rounded-full transition-all duration-1000"
                     style={{
-                      width: `${(lawyer.cases / Math.max(...lawyerPerformance.map(l => l.cases))) * 100}%`,
-                     
+                      width: `${
+                        (lawyer.cases /
+                          Math.max(...lawyerPerformance.map((l) => l.cases))) *
+                        100
+                      }%`,
                     }}
                   ></div>
                 </div>

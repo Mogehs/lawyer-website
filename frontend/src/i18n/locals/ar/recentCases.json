@@ -1,0 +1,20 @@
+{
+  "recentCases": "الحالات الأخيرة",
+  "searchPlaceholder": "ابحث عن الحالات...",
+  "caseNumber": "رقم الحالة",
+  "client": "العميل",
+  "assignedLawyer": "المحامي المكلف",
+  "caseType": "النوع",
+  "status": "الحالة",
+  "In Progress": "قيد التنفيذ",
+  "Pending Approval": "في انتظار الموافقة",
+  "Document Review": "مراجعة المستندات",
+  "Completed": "مكتمل",
+  "view": "عرض",
+  "viewAllCases": "عرض جميع الحالات",
+  "showing": "عرض",
+  "of": "من",
+  "cases": "الحالات",
+  "loading": "جارٍ تحميل الحالات...",
+  "error": "حدث خطأ أثناء جلب الحالات"
+}

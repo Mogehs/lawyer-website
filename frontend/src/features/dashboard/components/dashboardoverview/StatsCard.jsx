@@ -1,3 +1,4 @@
+// src/components/dashboardoverview/StatsCard.jsx
 import {
   Users,
   FileText,
@@ -7,8 +8,13 @@ import {
   ArrowDown,
 } from "lucide-react";
 import { useUserStatsQuery } from "../../api/directorApi";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18n";
 
 const StatsCard = () => {
+  const { t } = useTranslation("statsCard");
+  const isRTL = i18n.language === "ar";
+
   const { data, isLoading, error } = useUserStatsQuery();
   const userstats = data?.data;
 
@@ -24,45 +30,50 @@ const StatsCard = () => {
       </div>
     );
 
-  if (error) return <p className="text-red-500">Error fetching stats</p>;
+  if (error)
+    return <p className="text-red-500">{t("errorFetchingStats")}</p>;
 
   const statsData = [
     {
-      title: "Total Users",
+      title: t("totalUsers"),
       value: userstats?.totalUsers || 0,
       change: "+12%",
       trend: "up",
       icon: <Users size={26} />,
-      description: "All registered users",
+      description: t("allRegisteredUsers"),
     },
     {
-      title: "Lawyers",
+      title: t("lawyers"),
       value: userstats?.lawyers || 0,
       change: "+5%",
       trend: "up",
       icon: <FileText size={26} />,
-      description: "Registered lawyers",
+      description: t("registeredLawyers"),
     },
     {
-      title: "Approving Lawyers",
+      title: t("approvingLawyers"),
       value: userstats?.approvingLawyers || 0,
       change: "-2%",
       trend: "down",
       icon: <Clock size={26} />,
-      description: "Awaiting approval",
+      description: t("awaitingApproval"),
     },
     {
-      title: "Active Users",
+      title: t("activeUsers"),
       value: userstats?.activeUsers || 0,
       change: "+8%",
       trend: "up",
       icon: <Calendar size={26} />,
-      description: "Currently active",
+      description: t("currentlyActive"),
     },
   ];
 
   return (
-    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 px-2 mb-6">
+    <div
+      className={`mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 px-2 mb-6 ${
+        isRTL ? "text-right" : "text-left"
+      }`}
+    >
       {statsData.map((stat, index) => (
         <div
           key={index}
@@ -72,10 +83,10 @@ const StatsCard = () => {
             {/* Header */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className=" rounded-lg bg-white/20 backdrop-blur-sm">
+                <div className="rounded-lg bg-white/20 backdrop-blur-sm">
                   {stat.icon}
                 </div>
-                <h3 className="text-sm  sm:text-base font-semibold">
+                <h3 className="text-sm sm:text-base font-semibold">
                   {stat.title}
                 </h3>
               </div>
@@ -87,11 +98,7 @@ const StatsCard = () => {
                     : "bg-[#F59E0B]"
                 }`}
               >
-                {stat.trend === "up" ? (
-                  <ArrowUp size={14} />
-                ) : (
-                  <ArrowDown size={14} />
-                )}
+                {stat.trend === "up" ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
                 {stat.change}
               </div>
             </div>

@@ -1,0 +1,9 @@
+{
+  "overviewTitle": "Managing Director Overview",
+  "caseDistributionTitle": "Case Distribution",
+  "lawyerPerformanceTitle": "Lawyers Performance",
+  "unassigned": "Unassigned",
+  "cases": "Cases",
+  "loadingCharts": "Loading charts...",
+  "errorLoadingCharts": "Error loading charts"
+}

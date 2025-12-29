@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next"; // Assuming you're using react-i18next for translations
 
 import ArchiveHeader from "../components/LawyerArchive/ArchiveHeader";
 import ArchiveSearch from "../components/LawyerArchive/ArchiveSearch";
@@ -7,6 +8,7 @@ import ArchiveModal from "../components/LawyerArchive/ArchiveModal";
 import ArchiveDeleteModal from "../components/LawyerArchive/ArchiveDeleteModal";
 
 import { useGetMyArchiveQuery } from "../api/lawyerApi";
+import i18n from "../../../i18n";
 
 export default function LawyerArchive() {
   const [search, setSearch] = useState("");
@@ -14,6 +16,8 @@ export default function LawyerArchive() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [caseToDelete, setCaseToDelete] = useState(null);
 
+  const { t } = useTranslation("lawyerarchive"); // Initialize translation hook
+const isRTL = i18n.dir() === "rtl";
   const { data, isLoading, isError } = useGetMyArchiveQuery({
     search: search || undefined,
   });
@@ -44,16 +48,18 @@ export default function LawyerArchive() {
   };
 
   return (
-    <div className="space-y-6 lg:ml-[220px]">
+    <div  className={`space-y-6 ${isRTL ? "lg:mr-[220px]" : "lg:ml-[220px]"}`}>
       <ArchiveHeader caseCount={filteredCases.length} />
 
-      <ArchiveSearch search={search} onSearchChange={setSearch} />
+      <ArchiveSearch search={search} onSearchChange={setSearch} placeholder={t("archiveSearch.placeholder")} />
 
       <ArchiveTable
         cases={filteredCases}
         loading={isLoading}
         onViewCase={setSelectedCase}
         onDeleteCase={handleDeleteClick}
+        viewCaseLabel={t("archiveTable.viewCase")}
+        deleteCaseLabel={t("archiveTable.deleteCase")}
       />
 
       {/* View Modal */}
@@ -61,6 +67,10 @@ export default function LawyerArchive() {
         <ArchiveModal
           caseData={selectedCase}
           onClose={() => setSelectedCase(null)}
+          caseDetailsLabel={t("archiveModal.caseDetails")}
+          clientNameLabel={t("archiveModal.clientName")}
+          caseNumberLabel={t("archiveModal.caseNumber")}
+          archiveReferenceLabel={t("archiveModal.archiveReference")}
         />
       )}
 
@@ -70,13 +80,14 @@ export default function LawyerArchive() {
           caseToDelete={caseToDelete}
           onClose={() => setDeleteModalOpen(false)}
           onConfirm={handleConfirmDelete}
+          confirmDeleteLabel={t("archiveDeleteModal.confirmDelete")}
+          cancelLabel={t("archiveDeleteModal.cancel")}
+          confirmLabel={t("archiveDeleteModal.confirm")}
         />
       )}
 
       {isError && (
-        <p className="text-red-500 mt-4 text-center">
-          Failed to load archived cases.
-        </p>
+        <p className="text-red-500 mt-4 text-center">{t("error.loadingFailed")}</p>
       )}
     </div>
   );

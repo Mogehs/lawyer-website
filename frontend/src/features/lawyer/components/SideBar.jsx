@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Home,
   FileText,
@@ -14,6 +14,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../auth/api/authApi";
 import { useDispatch } from "react-redux";
 import { clearProfile } from "../../auth/authSlice";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,12 +22,15 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { t, i18n } = useTranslation("lawyersidebar");
+  const isRTL = i18n.dir() === "rtl";
+
   const links = [
-    { name: "Overview", icon: <Home size={22} />, path: "/" },
-    { name: "My Cases", icon: <FileText size={22} />, path: "my-cases" },
-    { name: "My Sessions", icon: <Calendar size={22} />, path: "sessions" },
-    { name: "Archive", icon: <Archive size={22} />, path: "archive" },
-    { name: "Notifications", icon: <Bell size={22} />, path: "notifications" },
+    { name: t("overview"), icon: <Home size={22} />, path: "/" },
+    { name: t("myCases"), icon: <FileText size={22} />, path: "my-cases" },
+    { name: t("mySessions"), icon: <Calendar size={22} />, path: "sessions" },
+    { name: t("archive"), icon: <Archive size={22} />, path: "archive" },
+    { name: t("notifications"), icon: <Bell size={22} />, path: "notifications" },
   ];
 
   const handleLogout = async () => {
@@ -58,17 +62,17 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full z-50 flex flex-col
-          bg-[#0B1F3B] border-r border-blue-100 shadow-lg
+        className={`fixed top-0 ${isRTL ? "right-0" : "left-0"} h-full z-50 flex flex-col
+          bg-[#0B1F3B] border-${isRTL ? "l" : "r"} border-blue-100 shadow-lg
           transition-transform duration-300 ease-in-out
           w-56
-          ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
+          ${mobileOpen ? "translate-x-0" : isRTL ? "translate-x-full" : "-translate-x-full"}
           lg:translate-x-0`}
       >
         {/* Mobile Close Button */}
         <button
           onClick={() => setMobileOpen(false)}
-          className="lg:hidden absolute top-4 right-4 text-white"
+          className="lg:hidden absolute top-4 left-4 text-white"
         >
           <X size={22} />
         </button>
@@ -79,8 +83,8 @@ const Sidebar = () => {
             <Scale size={24} className="text-[#0B1F3B]" />
           </div>
           <div>
-            <h2 className="text-sm font-semibold text-white">Lawyer Portal</h2>
-            <p className="text-sm text-blue-200">Case Management</p>
+            <h2 className="text-sm font-semibold text-white">{t("lawyerPortal")}</h2>
+            <p className="text-sm text-blue-200">{t("caseManagement")}</p>
           </div>
         </div>
 
@@ -101,7 +105,7 @@ const Sidebar = () => {
                       : "text-white hover:bg-white hover:text-[#0B1F3B]"}`}
                 >
                   <span
-                    className={`absolute left-0 top-0 h-full w-1 bg-white rounded-r
+                    className={`absolute ${isRTL ? "right-0" : "left-0"} top-0 h-full w-1 bg-white rounded-r
                       transition-opacity duration-300
                       ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
                   />
@@ -116,7 +120,7 @@ const Sidebar = () => {
         </nav>
 
         {/* Logout */}
-        <div className="px-4 mb-4">
+        <div className={`px-4 mb-4 mt-auto ${isRTL ? "text-right" : ""}`}>
           <button
             onClick={handleLogout}
             className="group flex items-center gap-3 px-4 py-3 w-full rounded-lg
@@ -125,7 +129,7 @@ const Sidebar = () => {
           >
             <LogOut size={22} className="group-hover:rotate-12 transition-transform" />
             <span className="text-sm font-medium">
-              {isLoading ? "Logging Out..." : "Logout"}
+              {isLoading ? t("loggingOut") : t("logout")}
             </span>
           </button>
         </div>

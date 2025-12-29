@@ -1,0 +1,41 @@
+{
+  "header": {
+    "title": "My Assigned Sessions",
+    "subtitle": "Sessions unlocked for you to work on",
+    "activeSessions": "Active Session",
+    "sessionsPlural": "Active Sessions"
+  },
+  "sessionCard": {
+    "sessionNumber": "Session #",
+    "caseNumber": "Case Number",
+    "caseType": "Case Type",
+    "client": "Client",
+    "secretary": "Secretary",
+    "date": "Date",
+    "time": "Time",
+    "location": "Location",
+    "memorandumRequired": "Memorandum Required",
+    "supportingDocumentsRequired": "Supporting Documents Required",
+    "note": "Note:",
+    "uploadMemorandum": "Upload Memorandum",
+    "uploading": "Uploading...",
+    "submitMemorandum": "Submit Memorandum",
+    "cancel": "Cancel",
+    "completeSession": "Complete Session",
+    "cancelSession": "Cancel Session",
+    "status": "Status",
+    "outcome": "Outcome",
+    "reasonForAdjournment": "Reason for Adjournment",
+    "nextSessionDate": "Next Session Date"
+  },
+  "alerts": {
+    "error": "Failed to load sessions",
+    "noSessions": "You don't have any unlocked sessions at the moment.",
+    "sessionNotReadyForSubmission": "Cannot complete session: Session must be approved by director first",
+    "missingOutcome": "Please provide session outcome",
+    "uploadError": "Failed to upload file",
+    "memorandumContentError": "Please provide memorandum content or upload a file",
+    "sessionCompleted": "Session completed successfully!",
+    "sessionCompletionError": "Failed to complete session"
+  }
+}

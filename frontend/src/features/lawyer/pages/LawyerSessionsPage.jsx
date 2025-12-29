@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useTransition, useMemo } from "react";
 import { Calendar, Clock, MapPin, FileText, CheckCircle, XCircle, Upload } from "lucide-react";
 import { toast } from "react-toastify";
 import {
@@ -6,8 +6,30 @@ import {
   useCompleteSessionMutation,
   useUploadSessionMemorandumMutation,
 } from "../api/lawyerApi";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n";
+
+// Reusable file upload function
+const uploadToCloudinary = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "lawyer_memorandums");
+
+  try {
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/upload`,
+      { method: "POST", body: formData }
+    );
+    const data = await response.json();
+    return data.secure_url;
+  } catch (error) {
+    console.error("Cloudinary upload error:", error);
+    throw new Error("Failed to upload file");
+  }
+};
 
 const LawyerSessionsPage = () => {
+  const { t } = useTranslation("lawyersession");
   const { data: sessionsData, isLoading, error, refetch } = useGetMyAssignedSessionsQuery();
   const [completeSession] = useCompleteSessionMutation();
   const [uploadMemorandum] = useUploadSessionMemorandumMutation();
@@ -28,56 +50,29 @@ const LawyerSessionsPage = () => {
   });
   const [showDebug, setShowDebug] = useState(false);
 
-  const sessions = sessionsData?.data || [];
-
+  const sessions = useMemo(() => sessionsData?.data || [], [sessionsData]);
+const isRTL = i18n.dir() === "rtl";
+  // Handle file selection
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setSelectedFile(file);
-    }
+    if (file) setSelectedFile(file);
   };
 
-  const uploadToCloudinary = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "lawyer_memorandums"); // You need to create this preset in Cloudinary
-
-    try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const data = await response.json();
-      return data.secure_url;
-    } catch (error) {
-      console.error("Cloudinary upload error:", error);
-      throw new Error("Failed to upload file");
-    }
-  };
-
+  // Complete session handler
   const handleCompleteSession = async (caseId, sessionId, session) => {
-    // Check if session is ready for submission (director approved)
     if (!session.isReadyForSubmission) {
-      toast.error("Cannot complete session: Session must be approved by director first");
+      toast.error(t("alerts.sessionNotReadyForSubmission"));
       return;
     }
 
     if (!completionData.outcome) {
-      toast.error("Please provide session outcome");
+      toast.error(t("alerts.missingOutcome"));
       return;
     }
 
     try {
-      await completeSession({
-        caseId,
-        sessionId,
-        completionData,
-      }).unwrap();
-
-      toast.success("Session completed successfully!");
+      await completeSession({ caseId, sessionId, completionData }).unwrap();
+      toast.success(t("alerts.sessionCompleted"));
       setCompletingSession(null);
       setCompletionData({
         status: "COMPLETED",
@@ -86,13 +81,14 @@ const LawyerSessionsPage = () => {
         nextSessionDate: "",
       });
     } catch (error) {
-      toast.error(error?.data?.message || "Failed to complete session");
+      toast.error(error?.data?.message || t("alerts.sessionCompletionError"));
     }
   };
 
+  // Memorandum upload handler
   const handleUploadMemorandum = async (caseId, sessionId) => {
     if (!memorandumData.content && !selectedFile) {
-      toast.error("Please provide memorandum content or upload a file");
+      toast.error(t("alerts.memorandumContentError"));
       return;
     }
 
@@ -100,7 +96,6 @@ const LawyerSessionsPage = () => {
       setUploadingFile(true);
       let fileUrl = memorandumData.fileUrl;
 
-      // Upload file to Cloudinary if selected
       if (selectedFile) {
         fileUrl = await uploadToCloudinary(selectedFile);
       }
@@ -108,26 +103,21 @@ const LawyerSessionsPage = () => {
       await uploadMemorandum({
         caseId,
         sessionId,
-        memorandumData: {
-          content: memorandumData.content,
-          fileUrl,
-        },
+        memorandumData: { content: memorandumData.content, fileUrl },
       }).unwrap();
 
-      toast.success("Memorandum uploaded successfully!");
+      toast.success(t("alerts.uploadSuccess"));
       setUploadingForSession(null);
       setSelectedFile(null);
-      setMemorandumData({
-        content: "",
-        fileUrl: "",
-      });
+      setMemorandumData({ content: "", fileUrl: "" });
     } catch (error) {
-      toast.error(error?.data?.message || "Failed to upload memorandum");
+      toast.error(error?.data?.message || t("alerts.uploadError"));
     } finally {
       setUploadingFile(false);
     }
   };
 
+  // Render loading state
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-12">
@@ -136,28 +126,28 @@ const LawyerSessionsPage = () => {
     );
   }
 
+  // Render error state
   if (error) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-600 font-medium">Failed to load sessions</p>
+        <p className="text-red-600 font-medium">{t("alerts.error")}</p>
         <p className="text-gray-500 text-sm mt-2">{error?.data?.message}</p>
       </div>
     );
   }
 
+  // Render content
   return (
-    <div className="space-y-6 p-6 lg:ml-[220px]">
+    <div  className={`space-y-6 ${isRTL ? "lg:mr-[220px]" : "lg:ml-[220px]"}`}>
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl text-[#0B1F3B] font-bold text-gray-900">My Assigned Sessions</h1>
-          <p className="text-gray-600 mt-1">Sessions unlocked for you to work on</p>
+          <h1 className="text-2xl text-[#0B1F3B] font-bold text-gray-900">{t("header.title")}</h1>
+          <p className="text-gray-600 mt-1">{t("header.subtitle")}</p>
         </div>
         <div className="flex items-center gap-3">
-          {/* <button onClick={() => refetch()} className="px-3 py-2 bg-white border rounded">Refresh</button> */}
-          {/* <button onClick={() => setShowDebug((s) => !s)} className="px-3 py-2 bg-white border rounded">{showDebug? 'Hide' : 'Show'} Debug</button> */}
           <div className="px-4 py-2 bg-[#0B1F3B] text-white rounded-lg font-semibold">
-            {sessions.length} Active Session{sessions.length !== 1 ? "s" : ""}
+            {sessions.length} {t("header.activeSessions")}
           </div>
         </div>
       </div>
@@ -173,29 +163,25 @@ const LawyerSessionsPage = () => {
       {sessions.length === 0 ? (
         <div className="bg-white rounded-lg shadow-md border border-gray-200 p-12 text-center">
           <Calendar size={64} className="mx-auto text-gray-400 mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No Active Sessions</h3>
-          <p className="text-gray-500">
-            You don't have any unlocked sessions at the moment.
-          </p>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">{t("alerts.noSessions")}</h3>
+          <p className="text-gray-500">{t("alerts.noSessionsMessage")}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6">
           {sessions.map(({ session, case: caseInfo }) => {
-            // Compute whether the session can be completed or cancelled by this lawyer
-            const isAlreadyFinalized = session.status === "COMPLETED" || session.status === "CANCELLED" || !!session.completedAt;
+            const isAlreadyFinalized =
+              session.status === "COMPLETED" ||
+              session.status === "CANCELLED" ||
+              !!session.completedAt;
             const canComplete = session.isReadyForSubmission && !isAlreadyFinalized;
             const canCancel = !isAlreadyFinalized;
 
             return (
-              <div
-                key={session._id}
-                className="bg-white rounded-lg shadow-md border-2 border-gray-200 overflow-hidden"
-              >
-                {/* Card Header */}
+              <div key={session._id} className="bg-white rounded-lg shadow-md border-2 border-gray-200 overflow-hidden">
                 <div className="bg-[#0B1F3B] text-white px-6 py-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-lg font-bold">Session #{session.sessionNumber}</h3>
+                      <h3 className="text-lg font-bold">{t("sessionCard.sessionNumber")} #{session.sessionNumber}</h3>
                       <p className="text-sm text-white/90">{caseInfo.caseNumber}</p>
                     </div>
                     <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-semibold">
@@ -204,21 +190,16 @@ const LawyerSessionsPage = () => {
                   </div>
                 </div>
 
-                {/* Card Body */}
                 <div className="p-6 space-y-4">
                   {/* Case & Client Info */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-blue-50 rounded-lg">
                     <div>
-                      <p className="text-xs font-medium text-gray-500 uppercase">Client</p>
-                      <p className="text-sm font-semibold text-gray-900">
-                        {caseInfo.clientId?.name}
-                      </p>
+                      <p className="text-xs font-medium text-gray-500 uppercase">{t("sessionCard.client")}</p>
+                      <p className="text-sm font-semibold text-gray-900">{caseInfo.clientId?.name}</p>
                     </div>
                     <div>
-                      <p className="text-xs font-medium text-gray-500 uppercase">Secretary</p>
-                      <p className="text-sm font-semibold text-gray-900">
-                        {caseInfo.secretary?.name}
-                      </p>
+                      <p className="text-xs font-medium text-gray-500 uppercase">{t("sessionCard.secretary")}</p>
+                      <p className="text-sm font-semibold text-gray-900">{caseInfo.secretary?.name}</p>
                     </div>
                   </div>
 
@@ -227,7 +208,7 @@ const LawyerSessionsPage = () => {
                     <div className="flex items-center gap-2">
                       <Calendar size={16} className="text-[#0B1F3B]" />
                       <div>
-                        <p className="text-xs text-gray-500">Date</p>
+                        <p className="text-xs text-gray-500">{t("sessionCard.date")}</p>
                         <p className="text-sm font-medium text-gray-900">
                           {new Date(session.sessionDate).toLocaleDateString("en-US", {
                             year: "numeric",
@@ -241,7 +222,7 @@ const LawyerSessionsPage = () => {
                       <div className="flex items-center gap-2">
                         <Clock size={16} className="text-[#0B1F3B]" />
                         <div>
-                          <p className="text-xs text-gray-500">Time</p>
+                          <p className="text-xs text-gray-500">{t("sessionCard.time")}</p>
                           <p className="text-sm font-medium text-gray-900">{session.sessionTime}</p>
                         </div>
                       </div>
@@ -250,7 +231,7 @@ const LawyerSessionsPage = () => {
                       <div className="flex items-center gap-2">
                         <MapPin size={16} className="text-[#0B1F3B]" />
                         <div>
-                          <p className="text-xs text-gray-500">Location</p>
+                          <p className="text-xs text-gray-500">{t("sessionCard.location")}</p>
                           <p className="text-sm font-medium text-gray-900">{session.location}</p>
                         </div>
                       </div>
@@ -258,28 +239,24 @@ const LawyerSessionsPage = () => {
                   </div>
 
                   {/* Requirements */}
-                  <div className="p-4 bg-[#0B1F3B]/5  rounded-lg">
-                    <p className="text-sm font-semibold text-[#0B1F3B] mb-2">
-                      Requirements from Approving Lawyer:
-                    </p>
+                  <div className="p-4 bg-[#0B1F3B]/5 rounded-lg">
+                    <p className="text-sm font-semibold text-[#0B1F3B] mb-2">{t("sessionCard.requirements")}</p>
                     <div className="space-y-1">
                       {session.memorandumRequired && (
                         <p className="text-sm text-amber-800 flex items-center gap-2">
                           <FileText size={14} />
-                          Memorandum Required
+                          {t("sessionCard.memorandumRequired")}
                         </p>
                       )}
                       {session.supportingDocumentsRequired && (
                         <p className="text-sm text-amber-800 flex items-center gap-2">
                           <FileText size={14} />
-                          Supporting Documents Required
+                          {t("sessionCard.supportingDocumentsRequired")}
                         </p>
                       )}
                     </div>
                     {session.reviewNotes && (
-                      <p className="text-xs text-amber-700 italic mt-2">
-                        Note: "{session.reviewNotes}"
-                      </p>
+                      <p className="text-xs text-amber-700 italic mt-2">{t("sessionCard.note")}: "{session.reviewNotes}"</p>
                     )}
                   </div>
 
@@ -288,12 +265,10 @@ const LawyerSessionsPage = () => {
                     <div className="border-t border-gray-200 pt-4">
                       {uploadingForSession === session._id ? (
                         <div className="space-y-4 p-4 bg-blue-50 rounded-lg">
-                          <h4 className="font-semibold ">Upload Memorandum</h4>
+                          <h4 className="font-semibold">{t("sessionCard.uploadMemorandum")}</h4>
 
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Memorandum Content
-                            </label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">{t("sessionCard.memorandumContent")}</label>
                             <textarea
                               value={memorandumData.content}
                               onChange={(e) =>
@@ -302,16 +277,14 @@ const LawyerSessionsPage = () => {
                                   content: e.target.value,
                                 })
                               }
-                              placeholder="Enter memorandum content..."
+                              placeholder={t("sessionCard.enterMemorandumContent")}
                               rows="4"
                               className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent resize-y"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Upload Memorandum File
-                            </label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">{t("sessionCard.uploadMemorandumFile")}</label>
                             <div className="flex items-center gap-2">
                               <input
                                 type="file"
@@ -328,7 +301,7 @@ const LawyerSessionsPage = () => {
                             </div>
                             {selectedFile && (
                               <p className="mt-2 text-sm text-green-600">
-                                ✓ Selected: {selectedFile.name}
+                                ✓ {t("sessionCard.selected")}: {selectedFile.name}
                               </p>
                             )}
                           </div>
@@ -342,7 +315,7 @@ const LawyerSessionsPage = () => {
                               className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
                               disabled={uploadingFile}
                             >
-                              Cancel
+                              {t("sessionCard.cancel")}
                             </button>
                             <button
                               onClick={() => handleUploadMemorandum(caseInfo._id, session._id)}
@@ -350,7 +323,7 @@ const LawyerSessionsPage = () => {
                               className="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                               <Upload size={16} />
-                              {uploadingFile ? "Uploading..." : "Submit Memorandum"}
+                              {uploadingFile ? t("sessionCard.uploading") : t("sessionCard.submitMemorandum")}
                             </button>
                           </div>
                         </div>
@@ -360,15 +333,9 @@ const LawyerSessionsPage = () => {
                           className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-md flex items-center justify-center gap-2"
                         >
                           <Upload size={18} />
-                          Upload Memorandum
+                          {t("sessionCard.uploadMemorandum")}
                         </button>
                       )}
-                    </div>
-                  )}
-
-                  {session.memorandum?.status === "SUBMITTED" && (
-                    <div className="p-3 bg-blue-50 rounded-lg text-sm text-blue-800">
-                      ⏳ Memorandum submitted - Awaiting approval from approving lawyer
                     </div>
                   )}
 
@@ -377,25 +344,21 @@ const LawyerSessionsPage = () => {
                     {/* Warning if not ready for submission (director hasn't approved) */}
                     {!session.isReadyForSubmission && !isAlreadyFinalized && (
                       <div className="mb-4 p-3 bg-amber-50 border border-amber-300 rounded-lg">
-                        <p className="text-sm font-semibold text-amber-800">
-                          ⚠️ Cannot Complete Session Yet
-                        </p>
+                        <p className="text-sm font-semibold text-amber-800">{t("sessionCard.warningTitle")}</p>
                         <p className="text-xs text-amber-700 mt-1">
                           {session.memorandum?.status !== "APPROVED"
-                            ? "Memorandum must be approved by the approving lawyer first."
-                            : "Session must be reviewed and approved by the director before you can complete it."}
+                            ? t("sessionCard.warningMessage1")
+                            : t("sessionCard.warningMessage2")}
                         </p>
                       </div>
                     )}
 
                     {completingSession === session._id ? (
                       <div className="space-y-4 p-4 bg-green-50 rounded-lg">
-                        <h4 className="font-semibold text-gray-900">Complete Session</h4>
+                        <h4 className="font-semibold text-gray-900">{t("sessionCard.completeSession")}</h4>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Status <span className="text-red-500">*</span>
-                          </label>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">{t("sessionCard.status")} *</label>
                           <select
                             value={completionData.status}
                             onChange={(e) =>
@@ -406,15 +369,13 @@ const LawyerSessionsPage = () => {
                             }
                             className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
                           >
-                            <option value="COMPLETED">Completed</option>
-                            <option value="CANCELLED">Cancelled</option>
+                            <option value="COMPLETED">{t("sessionCard.completed")}</option>
+                            <option value="CANCELLED">{t("sessionCard.cancelled")}</option>
                           </select>
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Outcome <span className="text-red-500">*</span>
-                          </label>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">{t("sessionCard.outcome")} *</label>
                           <select
                             value={completionData.outcome}
                             onChange={(e) =>
@@ -425,21 +386,19 @@ const LawyerSessionsPage = () => {
                             }
                             className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
                           >
-                            <option value="">Select Outcome</option>
-                            <option value="ADJOURNED">Adjourned</option>
-                            <option value="FINALIZED">Finalized</option>
-                            <option value="DISMISSED">Dismissed</option>
-                            <option value="SETTLED">Settled</option>
-                            <option value="WITHDRAWN">Withdrawn</option>
+                            <option value="">{t("sessionCard.selectOutcome")}</option>
+                            <option value="ADJOURNED">{t("sessionCard.adjourned")}</option>
+                            <option value="FINALIZED">{t("sessionCard.finalized")}</option>
+                            <option value="DISMISSED">{t("sessionCard.dismissed")}</option>
+                            <option value="SETTLED">{t("sessionCard.settled")}</option>
+                            <option value="WITHDRAWN">{t("sessionCard.withdrawn")}</option>
                           </select>
                         </div>
 
                         {completionData.outcome === "ADJOURNED" && (
                           <>
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Reason for Adjournment
-                              </label>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">{t("sessionCard.reasonForAdjournment")}</label>
                               <textarea
                                 value={completionData.reasonForAdjournment}
                                 onChange={(e) =>
@@ -448,16 +407,14 @@ const LawyerSessionsPage = () => {
                                     reasonForAdjournment: e.target.value,
                                   })
                                 }
-                                placeholder="e.g., Judge requested additional documents"
+                                placeholder={t("sessionCard.reasonForAdjournment")}
                                 rows="2"
                                 className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent resize-y"
                               />
                             </div>
 
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Next Session Date
-                              </label>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">{t("sessionCard.nextSessionDate")}</label>
                               <input
                                 type="date"
                                 value={completionData.nextSessionDate}
@@ -478,19 +435,20 @@ const LawyerSessionsPage = () => {
                             onClick={() => setCompletingSession(null)}
                             className="px-4 py-2 cursor-pointer bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
                           >
-                            Cancel
+                            {t("sessionCard.cancel")}
                           </button>
                           <button
                             onClick={async () => {
                               await handleCompleteSession(caseInfo._id, session._id, session);
-                              // refresh list after completion
-                              try { refetch(); } catch (e) {}
+                              try {
+                                refetch();
+                              } catch (e) {}
                             }}
                             className="flex-1 px-4 py-2 cursor-pointer bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md flex items-center justify-center gap-2"
                             disabled={!canComplete}
                           >
                             <CheckCircle size={16} />
-                            {uploadingFile ? "Uploading..." : "Mark as Completed"}
+                            {t("sessionCard.completeSessionButton")}
                           </button>
                         </div>
                       </div>
@@ -499,17 +457,17 @@ const LawyerSessionsPage = () => {
                         <button
                           onClick={() => setCompletingSession(session._id)}
                           disabled={!canComplete}
-                          className={`flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md flex items-center justify-center gap-2 ${!canComplete ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          className={`flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all shadow-md flex items-center justify-center gap-2 ${!canComplete ? "opacity-50 cursor-not-allowed" : ""}`}
                           title={
                             !canComplete
                               ? isAlreadyFinalized
-                                ? 'Session already finalized'
-                                : 'Session must be approved by director first'
-                              : 'Complete this session'
+                                ? t("sessionCard.alreadyFinalized")
+                                : t("sessionCard.mustBeApproved")
+                              : t("sessionCard.completeSession")
                           }
                         >
                           <CheckCircle size={18} />
-                          Complete Session
+                          {t("sessionCard.completeSession")}
                         </button>
                         <button
                           onClick={() => {
@@ -519,11 +477,11 @@ const LawyerSessionsPage = () => {
                               status: "CANCELLED",
                             });
                           }}
-                          className={`px-4 py-3 cursor-pointer bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center gap-2 ${!canCancel ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          className={`px-4 py-3 cursor-pointer bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center gap-2 ${!canCancel ? "opacity-50 cursor-not-allowed" : ""}`}
                           disabled={!canCancel}
                         >
                           <XCircle size={18} />
-                          Cancel Session
+                          {t("sessionCard.cancelSession")}
                         </button>
                       </div>
                     )}
@@ -539,4 +497,3 @@ const LawyerSessionsPage = () => {
 };
 
 export default LawyerSessionsPage;
-

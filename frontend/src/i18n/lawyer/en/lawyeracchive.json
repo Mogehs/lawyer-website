@@ -1,0 +1,27 @@
+{
+  "archiveHeader": {
+    "caseCount": "Total Archived Cases: {{count}}"
+  },
+  "archiveSearch": {
+    "placeholder": "Search by Case Number, Client Name, or Archive Reference"
+  },
+  "archiveTable": {
+    "viewCase": "View Case",
+    "deleteCase": "Delete Case"
+  },
+  "archiveModal": {
+    "caseDetails": "Case Details",
+    "clientName": "Client Name",
+    "caseNumber": "Case Number",
+    "archiveReference": "Archive Reference"
+  },
+  "archiveDeleteModal": {
+    "confirmDelete": "Are you sure you want to delete this case?",
+    "cancel": "Cancel",
+    "confirm": "Confirm Delete"
+  },
+  "error": {
+    "loadingFailed": "Failed to load archived cases."
+  }
+  
+}

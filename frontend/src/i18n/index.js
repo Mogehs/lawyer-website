@@ -63,8 +63,23 @@ import ar_secretaryDashboard from "./locals/ar/secretaryDashboard.json";
 import en_secretaryclient from "./locals/en/secretaryclient.json";
 import ar_secretaryclient from "./locals/ar/secretaryclient.json";
 
-
-
+//  lawyer website translations   
+import en_lawyertopbar from "../i18n/lawyer/en/lawyertopbr.json";
+import ar_lawyertopbarar from "../i18n/lawyer/ar/lawyertopbr.json";
+import en_lawyersidebar from "../i18n/lawyer/en/lawyersidebar.json"
+import ar_lawyersidebar from "../i18n/lawyer/ar/lawyersidebar.json";
+import en_lawyeroverview from "../i18n/lawyer/en/lawyeroverview.json";
+import ar_lawyeroverview from "../i18n/lawyer/ar/lawyeroverview.json";
+import en_lawyercases from "../i18n/lawyer/en/lawyercases.json";
+import ar_lawyercases from "../i18n/lawyer/ar/lawyercases.json";
+import en_lawyersession from "../i18n/lawyer/en/lawyersession.json";
+import ar_lawyersession from "../i18n/lawyer/ar/lawyersession.json";
+import en_lawyerarchive from "../i18n/lawyer/en/lawyeracchive.json";
+import ar_lawyerarchive from "../i18n/lawyer/ar/lawyeracchive.json";
+import en_archiveheader from "../i18n/lawyer/en/archiveheader.json"; 
+import ar_archiveheader from "../i18n/lawyer/ar/archiveheader.json";
+import en_LawyerNotificationsPage from "../i18n/lawyer/en/LawyerNotificationsPage.json";
+import ar_LawyerNotificationsPage from "../i18n/lawyer/ar/LawyerNotificationsPage.json";
 
 const resources = {
   en: {
@@ -95,6 +110,16 @@ const resources = {
     sidebar: en_sidebar1,
     secretaryDashboard: en_sesecretaryDashboard,
     secretaryclient: en_secretaryclient,
+    //  lawyer portal translations
+    lawyertopbr: en_lawyertopbar,
+    lawyersidebar: en_lawyersidebar,
+    lawyeroverview: en_lawyeroverview,
+    lawyercases: en_lawyercases,
+    lawyersession: en_lawyersession,
+    lawyerarchive: en_lawyerarchive,
+    archiveHeader: en_archiveheader,
+    LawyerNotificationsPage: en_LawyerNotificationsPage,
+
   },
   ar: {
     topbar: ar_topbar,
@@ -124,6 +149,15 @@ const resources = {
     sidebar: ar_sidebar1,
     secretaryDashboard: ar_secretaryDashboard,
     secretaryclient: ar_secretaryclient,
+    //  lawyer portal translations
+    lawyertopbr: ar_lawyertopbarar,
+    lawyersidebar: ar_lawyersidebar,
+    lawyeroverview: ar_lawyeroverview,
+    lawyercases: ar_lawyercases,
+    lawyersession: ar_lawyersession,
+    lawyerarchive: ar_lawyerarchive,
+    archiveHeader: ar_archiveheader,
+    LawyerNotificationsPage: ar_LawyerNotificationsPage,
   }
 };
 

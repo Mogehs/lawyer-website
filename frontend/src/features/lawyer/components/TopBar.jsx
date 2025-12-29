@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearProfile, selectUserProfile } from "../../auth/authSlice";
 import { useLogoutMutation } from "../../auth/api/authApi";
+import { useTranslation } from "react-i18next";
 
 const Topbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -11,10 +12,17 @@ const Topbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userProfile = useSelector(selectUserProfile);
-
   const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
 
-  // Handle window resize for responsiveness
+  const { t, i18n } = useTranslation("lawyertopbr");
+  const isRTL = i18n.dir() === "rtl";
+
+  // Apply RTL/LTR to the document
+  useEffect(() => {
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+  }, [isRTL]);
+
+  // Handle window resize
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
     window.addEventListener("resize", handleResize);
@@ -46,9 +54,14 @@ const Topbar = () => {
     }
   };
 
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "ar" : "en";
+    i18n.changeLanguage(newLang);
+  };
+
   const userName = userProfile?.name || "User";
   const userEmail = userProfile?.email || "user@example.com";
-  const userRole = userProfile?.role || "Lawyer";
+  const userRole = userProfile?.role || t("lawyer");
 
   return (
     <header
@@ -57,15 +70,26 @@ const Topbar = () => {
     >
       {/* Title */}
       <h2
-        className={`text-lg lg:ml-[240px] font-semibold text-white flex-1 text-center lg:text-left ${
-          isMobile ? "mx-auto" : ""
-        }`}
+        className={`text-lg font-semibold text-white flex-1 
+          ${isMobile ? "mx-auto" : ""}
+          ${!isMobile && isRTL ? "text-center" : "text-left"}
+          ${!isMobile && !isRTL ? "lg:ml-[240px]" : ""}
+          ${!isMobile && isRTL ? "lg:mr-[240px]" : ""}`}
       >
-        Lawyer Portal
+        {t("lawyerPortal")}
       </h2>
 
-      {/* Profile Dropdown */}
+      {/* Right Controls */}
       <div className="flex items-center gap-3">
+        {/* Language Toggle */}
+        <button
+          onClick={toggleLanguage}
+          className="px-3 py-1 border cursor-pointer border-blue-100 rounded-xl bg-white/80 hover:bg-white text-sm font-medium shadow-sm"
+        >
+          {i18n.language === "en" ? t("languageArabic") : t("languageEnglish")}
+        </button>
+
+        {/* Profile Dropdown */}
         <div className="relative dropdown-container">
           <button
             onClick={() => setDropdownOpen(!isDropdownOpen)}
@@ -90,11 +114,10 @@ const Topbar = () => {
             />
           </button>
 
-          {/* Dropdown Menu */}
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-50">
               <div className="px-4 py-2 border-b border-gray-200">
-                <p className="text-xs text-gray-500">Signed in as</p>
+                <p className="text-xs text-gray-500">{t("signedInAs")}</p>
                 <p className="text-sm font-semibold text-gray-800 truncate">
                   {userEmail}
                 </p>
@@ -106,7 +129,7 @@ const Topbar = () => {
                   className="flex items-center gap-2 w-full px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-[#A48C65] transition-colors duration-200 text-sm font-medium"
                   onClick={() => setDropdownOpen(false)}
                 >
-                  <User size={16} /> My Profile
+                  <User size={16} /> {t("myProfile")}
                 </Link>
               </div>
 
@@ -117,7 +140,7 @@ const Topbar = () => {
                   className="flex items-center gap-2 w-full px-4 py-2 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors duration-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <LogOut size={16} />
-                  {isLoggingOut ? "Signing Out..." : "Sign Out"}
+                  {isLoggingOut ? t("signingOut") : t("signOut")}
                 </button>
               </div>
             </div>

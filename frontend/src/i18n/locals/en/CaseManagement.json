@@ -1,0 +1,34 @@
+{
+  "caseManagement": {
+    "title": "Case Management",
+    "casesFound": "{{count}} case found",
+    "buttons": {
+      "addCase": "Add Case"
+    },
+    "loading": "Loading cases...",
+    "error": {
+      "title": "Error loading cases",
+      "message": "Something went wrong"
+    },
+    "filters": {
+      "search": "Search by client or case number",
+      "status": "Status",
+      "lawyer": "Assigned Lawyer",
+      "clear": "Clear Filters"
+    },
+    "deleteModal": {
+      "title": "Confirm Delete",
+      "message": "Are you sure you want to delete {{name}}? This action cannot be undone.",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "deleting": "Deleting..."
+    },
+    "archiveModal": {
+      "title": "Confirm Archive",
+      "message": "Are you sure you want to archive {{caseNumber}}?",
+      "cancel": "Cancel",
+      "archive": "Archive",
+      "archiving": "Archiving..."
+    }
+  }
+}

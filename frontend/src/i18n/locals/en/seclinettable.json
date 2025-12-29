@@ -1,0 +1,36 @@
+{
+  "clients": {
+    "noClientsTitle": "No Clients Found",
+    "noClientsDesc": "Clients will appear here once added.",
+
+    "table": {
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "contact": "Contact",
+      "nationalId": "National ID",
+      "address": "Address",
+      "info": "Info",
+      "actions": "Actions"
+    },
+
+    "mobile": {
+      "id": "ID",
+      "contact": "Contact",
+      "email": "Email",
+      "nationalId": "National ID",
+      "address": "Address",
+      "info": "Info"
+    },
+
+    "toast": {
+      "deleteSuccess": "Client deleted successfully",
+      "deleteError": "Failed to delete client"
+    },
+
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  }
+}

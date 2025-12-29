@@ -1,0 +1,46 @@
+{
+  "addCaseModal": {
+    "titles": {
+      "add": "Add New Case",
+      "edit": "Edit Case"
+    },
+    "sections": {
+      "selectClient": {
+        "title": "Select Client",
+        "searchPlaceholder": "Search by name, email, phone, or national ID...",
+        "noClients": "No clients available",
+        "noMatch": "No clients found matching your search",
+        "selectedClient": "Selected Client:"
+      },
+      "caseDetails": {
+        "title": "Case Details",
+        "fields": {
+          "caseType": "Case Type",
+          "description": "Description",
+          "assignedLawyer": "Assigned Lawyer",
+          "approvingLawyer": "Approving Lawyer"
+        }
+      },
+      "documents": {
+        "title": "Documents"
+      }
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "create": "Create Case",
+      "update": "Update Case",
+      "saving": "Saving..."
+    },
+    "validation": {
+      "selectClient": "Please select a client from the list",
+      "caseType": "Please select a case type",
+      "assignedLawyer": "Please assign a draft lawyer to the case",
+      "approvingLawyer": "Please assign an approving lawyer to the case",
+      "saveError": "Failed to save case"
+    },
+    "notifications": {
+      "createSuccess": "Case created successfully. WhatsApp notifications sent to assigned lawyer.",
+      "updateSuccess": "Case updated successfully!"
+    }
+  }
+}

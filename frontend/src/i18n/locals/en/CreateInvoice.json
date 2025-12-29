@@ -1,0 +1,30 @@
+{
+  "SecretaryCreateInvoice": {
+    "header": {
+      "title": "Create New Invoice",
+      "subtitle": "إنشاء فاتورة جديدة"
+    },
+    "form": {
+      "client": "Client",
+      "clientPlaceholder": "Select Client",
+      "serviceDescription": "Service Description",
+      "serviceDescriptionPlaceholder": "Enter service details...",
+      "totalAmount": "Total Amount",
+      "totalAmountPlaceholder": "0.00",
+      "dueDate": "Due Date",
+      "enableInstallment": "Enable Installment Payment",
+      "installmentSchedule": "Installment Schedule",
+      "addInstallment": "Add",
+      "installmentNumber": "Installment #{{index}}",
+      "amount": "Amount",
+      "notes": "Notes",
+      "submit": "Create Invoice",
+      "creating": "Creating...",
+      "cancel": "Cancel",
+      "remove": "Remove",
+      "loadingClients": "Loading clients...",
+      "noClients": "No clients found. Please add clients first.",
+      "clientsError": "Error loading clients. Please refresh the page."
+    }
+  }
+}

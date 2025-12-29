@@ -1,0 +1,27 @@
+{
+  "clientEditModal": {
+    "titleAdd": "Add New Client",
+    "titleEdit": "Edit Client",
+    "labels": {
+      "name": "Name",
+      "email": "Email",
+      "contact": "Contact",
+      "nationalId": "National ID",
+      "address": "Address",
+      "additionalInfo": "Additional Information"
+    },
+    "placeholders": {
+      "name": "Enter client name",
+      "email": "Enter email address",
+      "contact": "Enter contact number",
+      "nationalId": "Enter national ID",
+      "address": "Enter address",
+      "additionalInfo": "Enter any details"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "create": "Create"
+    }
+  }
+}

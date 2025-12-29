@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { X, Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import CaseDetailsForm from "./CaseDetailsForm";
 import DocumentDetailsForm from "./DocumentDetailsForm";
 import {
@@ -10,12 +11,11 @@ import {
 import { toast } from "react-toastify";
 
 const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
+  const { t } = useTranslation("AddCase2");
   const [selectedClientId, setSelectedClientId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Memoize caseData ID to prevent unnecessary re-renders
   const caseId = useMemo(() => caseData?._id || caseData?.id, [caseData]);
-
 
   const [caseInfo, setCaseInfo] = useState({
     caseType: "",
@@ -28,7 +28,6 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
     documents: [],
   });
 
-  // Reset state when modal opens/closes
   useEffect(() => {
     if (isOpen) {
       if (caseData) {
@@ -46,7 +45,7 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
             "",
         });
       } else {
-        // Creating new case - reset everything
+        // Creating new case
         setSelectedClientId(null);
         setSearchQuery("");
         setCaseInfo({
@@ -61,18 +60,14 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
         });
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen, caseId]);
+  }, [isOpen, caseId, caseData]);
 
   const handleCaseChange = (e) =>
     setCaseInfo({ ...caseInfo, [e.target.name]: e.target.value });
 
   const handleDocumentChange = (e) => {
     if (e.target.name === "documents") {
-      setCaseInfo((prev) => ({
-        ...prev,
-        documents: e.target.value,
-      }));
+      setCaseInfo((prev) => ({ ...prev, documents: e.target.value }));
     }
   };
 
@@ -80,7 +75,6 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
   const [updateCase, { isLoading: isUpdating }] = useUpdateCaseMutation();
   const { data: clientsData } = useGetAllClientsQuery();
 
-  // Filter clients based on search query
   const filteredClients = useMemo(() => {
     if (!clientsData?.clients) return [];
     if (!searchQuery.trim()) return clientsData.clients;
@@ -95,7 +89,6 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
     );
   }, [clientsData, searchQuery]);
 
-  // Get selected client details
   const selectedClient = useMemo(() => {
     if (!selectedClientId || !clientsData?.clients) return null;
     return clientsData.clients.find((c) => c._id === selectedClientId);
@@ -104,7 +97,7 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
   const handleSubmit = async () => {
     try {
       if (caseData) {
-        // Update existing case
+        // Update case
         const updatePayload = {
           id: caseData._id || caseData.id,
           data: {
@@ -115,31 +108,26 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
           },
         };
         await updateCase(updatePayload).unwrap();
-        toast.success("Case updated successfully!");
+        toast.success(t("addCaseModal.notifications.updateSuccess"));
       } else {
-        // Create new case - validate client selection
+        // Create new case validation
         if (!selectedClientId) {
-          toast.error("Please select a client from the list");
+          toast.error(t("addCaseModal.validation.selectClient"));
           return;
         }
-
-        // Validate required fields
         if (!caseInfo.caseType) {
-          toast.error("Please select a case type");
+          toast.error(t("addCaseModal.validation.caseType"));
           return;
         }
-
         if (!caseInfo.assignedLawyer) {
-          toast.error("Please assign a draft lawyer to the case");
+          toast.error(t("addCaseModal.validation.assignedLawyer"));
           return;
         }
-
         if (!caseInfo.approvingLawyer) {
-          toast.error("Please assign an approving lawyer to the case");
+          toast.error(t("addCaseModal.validation.approvingLawyer"));
           return;
         }
 
-        // Create the case
         await createCase({
           clientId: selectedClientId,
           caseType: caseInfo.caseType,
@@ -149,16 +137,14 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
           stage: caseInfo.stage,
           documents: caseInfo.documents || [],
         }).unwrap();
-        toast.success(
-          "Case created successfully. WhatsApp notifications sent to assigned lawyer."
-        );
+        toast.success(t("addCaseModal.notifications.createSuccess"));
       }
       onAddCase();
       onClose();
       setSelectedClientId(null);
       setSearchQuery("");
     } catch (error) {
-      toast.error(error?.data?.message || "Failed to save case");
+      toast.error(error?.data?.message || t("addCaseModal.validation.saveError"));
     }
   };
 
@@ -167,46 +153,44 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
       <div className="bg-white rounded-lg shadow-2xl w-full max-w-5xl max-h-[95vh] flex flex-col">
-        {/* Fixed Header */}
-        <div className="bg-[#0B1F3B] px-6 py-4 rounded-t-lg">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-white">
-              {caseData ? "Edit Case" : "Add New Case"}
-            </h2>
-            <button
-              onClick={onClose}
-              className="p-2 hover:bg-white/20 cursor-pointer rounded-lg transition"
-            >
-              <X className="w-5 h-5 text-white" />
-            </button>
-          </div>
+        {/* Header */}
+        <div className="bg-[#0B1F3B] px-6 py-4 rounded-t-lg flex justify-between items-center">
+          <h2 className="text-xl font-bold text-white">
+            {caseData ? t("addCaseModal.titles.edit") : t("addCaseModal.titles.add")}
+          </h2>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-white/20 cursor-pointer rounded-lg transition"
+          >
+            <X className="w-5 h-5 text-white" />
+          </button>
         </div>
 
-        {/* Scrollable Content */}
+        {/* Scrollable Body */}
         <div className="flex-1 overflow-y-auto px-6 py-6">
-          {/* Client Selection Section */}
+          {/* Client Section */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
-              Select Client
+              {t("addCaseModal.sections.selectClient.title")}
             </h3>
 
-            {/* Search Bar */}
             <div className="relative mb-4">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
                 type="text"
-                placeholder="Search by name, email, phone, or national ID..."
+                placeholder={t("addCaseModal.sections.selectClient.searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
               />
             </div>
 
-            {/* Client Selection Grid */}
             <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 max-h-48 overflow-y-auto">
               {filteredClients.length === 0 ? (
                 <p className="text-center text-gray-500 py-4">
-                  {searchQuery ? "No clients found matching your search" : "No clients available"}
+                  {searchQuery
+                    ? t("addCaseModal.sections.selectClient.noMatch")
+                    : t("addCaseModal.sections.selectClient.noClients")}
                 </p>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -240,36 +224,25 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
               )}
             </div>
 
-            {/* Selected Client Info */}
             {selectedClient && (
               <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-sm font-semibold text-gray-700 mb-2">Selected Client:</p>
+                <p className="text-sm font-semibold text-gray-700 mb-2">
+                  {t("addCaseModal.sections.selectClient.selectedClient")}
+                </p>
                 <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div>
-                    <span className="text-gray-600">Name:</span>
-                    <span className="ml-2 font-medium text-gray-800">{selectedClient.name}</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-600">Email:</span>
-                    <span className="ml-2 font-medium text-gray-800">{selectedClient.email}</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-600">Phone:</span>
-                    <span className="ml-2 font-medium text-gray-800">{selectedClient.contactNumber}</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-600">National ID:</span>
-                    <span className="ml-2 font-medium text-gray-800">{selectedClient.nationalId}</span>
-                  </div>
+                  <div><span className="text-gray-600">{t("addCaseModal.sections.selectClient.title")}:</span> <span className="ml-2 font-medium text-gray-800">{selectedClient.name}</span></div>
+                  <div><span className="text-gray-600">Email:</span> <span className="ml-2 font-medium text-gray-800">{selectedClient.email}</span></div>
+                  <div><span className="text-gray-600">Phone:</span> <span className="ml-2 font-medium text-gray-800">{selectedClient.contactNumber}</span></div>
+                  <div><span className="text-gray-600">National ID:</span> <span className="ml-2 font-medium text-gray-800">{selectedClient.nationalId}</span></div>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Case Details Section */}
+          {/* Case Details */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
-              Case Details
+              {t("addCaseModal.sections.caseDetails.title")}
             </h3>
             <CaseDetailsForm
               caseInfo={caseInfo}
@@ -278,10 +251,10 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
             />
           </div>
 
-          {/* Documents Section */}
+          {/* Documents */}
           <div>
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
-              Documents
+              {t("addCaseModal.sections.documents.title")}
             </h3>
             <DocumentDetailsForm
               caseInfo={caseInfo}
@@ -290,27 +263,27 @@ const AddCase = ({ isOpen, onClose, onAddCase, caseData }) => {
           </div>
         </div>
 
-        {/* Fixed Footer */}
+        {/* Footer */}
         <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4 rounded-b-lg">
           <div className="flex justify-end gap-3">
             <button
               onClick={onClose}
               className="px-6 py-2.5 cursor-pointer bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
             >
-              Cancel
+              {t("addCaseModal.buttons.cancel")}
             </button>
             <button
               onClick={handleSubmit}
               disabled={isCreating || isUpdating || (!caseData && !selectedClientId)}
-              className="px-6 py-2.5 cursor-pointer bg-[#0B1F3B] text-white rounded-lg  transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              className="px-6 py-2.5 cursor-pointer bg-[#0B1F3B] text-white rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium"
             >
               {isCreating || isUpdating ? (
                 <span className="flex items-center gap-2">
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Saving...
+                  {t("addCaseModal.buttons.saving")}
                 </span>
               ) : (
-                caseData ? "Update Case" : "Create Case"
+                caseData ? t("addCaseModal.buttons.update") : t("addCaseModal.buttons.create")
               )}
             </button>
           </div>

@@ -62,8 +62,22 @@ import en_sesecretaryDashboard from "./locals/en/secretaryDashboard.json";
 import ar_secretaryDashboard from "./locals/ar/secretaryDashboard.json";
 import en_secretaryclient from "./locals/en/secretaryclient.json";
 import ar_secretaryclient from "./locals/ar/secretaryclient.json";
-
-
+import en_seclinettable from "./locals/en/seclinettable.json";
+import ar_seclinettable from "./locals/ar/seclinettable.json";
+import en_Modeldelet from "./locals/en/Modeldelet.json";
+import ar_Modeldelet from "./locals/ar/Modeldelet.json";
+import en_EditModel from "./locals/en/EditModel.json";
+import ar_EditModel from "./locals/ar/EditModel.json";
+import en_CaseManagement from "./locals/en/CaseManagement.json";
+import ar_CaseManagement from "./locals/ar/CaseManagement.json";
+import en_AddCase2 from "./locals/en/AddCase2.json";
+import ar_AddCase2 from "./locals/ar/AddCase2.json";
+import en_SecretaryInvoices from "./locals/en/SecretaryInvoices.json";
+import ar_SecretaryInvoices from "./locals/ar/SecretaryInvoices.json";
+import en_CreateInvoice from "./locals/en/CreateInvoice.json";
+import ar_CreateInvoice from "./locals/ar/CreateInvoice.json";
+import en_SecReminders from "./locals/en/SecReminders.json";
+import ar_SecReminders from "./locals/ar/SecReminders.json";
 
 
 const resources = {
@@ -95,6 +109,15 @@ const resources = {
     sidebar: en_sidebar1,
     secretaryDashboard: en_sesecretaryDashboard,
     secretaryclient: en_secretaryclient,
+    seclinettable: en_seclinettable,
+    Modeldelet: en_Modeldelet,
+    EditModel: en_EditModel,
+    CaseManagement: en_CaseManagement,
+    AddCase2: en_AddCase2,
+    SecretaryInvoices: en_SecretaryInvoices,
+    CreateInvoice: en_CreateInvoice,
+    SecReminders: en_SecReminders,
+  
   },
   ar: {
     topbar: ar_topbar,
@@ -124,6 +147,14 @@ const resources = {
     sidebar: ar_sidebar1,
     secretaryDashboard: ar_secretaryDashboard,
     secretaryclient: ar_secretaryclient,
+    seclinettable: ar_seclinettable,
+    Modeldelet: ar_Modeldelet,
+    EditModel: ar_EditModel,
+    CaseManagement: ar_CaseManagement,
+    AddCase2: ar_AddCase2,
+    SecretaryInvoices: ar_SecretaryInvoices,
+    CreateInvoice: ar_CreateInvoice,
+    SecReminders: ar_SecReminders,
   }
 };
 

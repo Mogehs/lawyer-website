@@ -1,0 +1,30 @@
+{
+  "SecretaryCreateInvoice": {
+    "header": {
+      "title": "إنشاء فاتورة جديدة",
+      "subtitle": "Create New Invoice"
+    },
+    "form": {
+      "client": "العميل",
+      "clientPlaceholder": "اختر العميل",
+      "serviceDescription": "وصف الخدمة",
+      "serviceDescriptionPlaceholder": "أدخل تفاصيل الخدمة...",
+      "totalAmount": "المبلغ الإجمالي",
+      "totalAmountPlaceholder": "0.00",
+      "dueDate": "تاريخ الاستحقاق",
+      "enableInstallment": "تفعيل الدفع بالتقسيط",
+      "installmentSchedule": "جدول الأقساط",
+      "addInstallment": "إضافة",
+      "installmentNumber": "القسط رقم {{index}}",
+      "amount": "المبلغ",
+      "notes": "ملاحظات",
+      "submit": "إنشاء الفاتورة",
+      "creating": "جارٍ الإنشاء...",
+      "cancel": "إلغاء",
+      "remove": "حذف",
+      "loadingClients": "جارٍ تحميل العملاء...",
+      "noClients": "لا يوجد عملاء. يرجى إضافة عملاء أولاً.",
+      "clientsError": "حدث خطأ أثناء تحميل العملاء. يرجى تحديث الصفحة."
+    }
+  }
+}

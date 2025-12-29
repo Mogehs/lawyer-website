@@ -1,0 +1,9 @@
+{
+  "deleteModal": {
+    "title": "Confirm Delete",
+    "message": "Are you sure you want to delete {{name}}? This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deleting": "Deleting..."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "clientEditModal": {
+    "titleAdd": "إضافة عميل جديد",
+    "titleEdit": "تعديل العميل",
+    "labels": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "contact": "رقم الاتصال",
+      "nationalId": "الهوية الوطنية",
+      "address": "العنوان",
+      "additionalInfo": "معلومات إضافية"
+    },
+    "placeholders": {
+      "name": "أدخل اسم العميل",
+      "email": "أدخل البريد الإلكتروني",
+      "contact": "أدخل رقم الاتصال",
+      "nationalId": "أدخل الهوية الوطنية",
+      "address": "أدخل العنوان",
+      "additionalInfo": "أدخل أي تفاصيل"
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "create": "إنشاء"
+    }
+  }
+}

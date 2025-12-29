@@ -1,0 +1,36 @@
+{
+  "clients": {
+    "noClientsTitle": "لا يوجد عملاء",
+    "noClientsDesc": "سيظهر العملاء هنا بعد إضافتهم.",
+
+    "table": {
+      "id": "المعرف",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "contact": "رقم الاتصال",
+      "nationalId": "الرقم الوطني",
+      "address": "العنوان",
+      "info": "معلومات",
+      "actions": "الإجراءات"
+    },
+
+    "mobile": {
+      "id": "المعرف",
+      "contact": "رقم الاتصال",
+      "email": "البريد الإلكتروني",
+      "nationalId": "الرقم الوطني",
+      "address": "العنوان",
+      "info": "معلومات"
+    },
+
+    "toast": {
+      "deleteSuccess": "تم حذف العميل بنجاح",
+      "deleteError": "فشل في حذف العميل"
+    },
+
+    "actions": {
+      "edit": "تعديل",
+      "delete": "حذف"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "SecretaryReminders": {
+    "header": "التذكيرات",
+    "subHeader": "الجلسات القادمة والتنبيهات المطلوبة",
+    "loading": "جارٍ تحميل التذكيرات...",
+    "errorTitle": "حدث خطأ أثناء تحميل التذكيرات",
+    "errorMessage": "تعذر جلب التذكيرات. يرجى المحاولة مرة أخرى.",
+    "retry": "إعادة المحاولة",
+    "noRemindersTitle": "لا توجد تذكيرات",
+    "noRemindersMessage": "ستظهر التذكيرات هنا عند جدولة الجلسات أو التقديمات.",
+    "deleteConfirmation": "هل أنت متأكد أنك تريد حذف هذا التذكير؟",
+    "deleteSuccess": "تم حذف التذكير بنجاح",
+    "deleteFailed": "فشل في حذف التذكير",
+    "today": "اليوم",
+    "overdue": "متأخر",
+    "daysLeft": "متبقي {{count}} يوم",
+    "daysOverdue": "متأخر {{count}} يوم"
+  }
+}

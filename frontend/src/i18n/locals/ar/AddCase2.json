@@ -1,0 +1,46 @@
+{
+  "addCaseModal": {
+    "titles": {
+      "add": "إضافة قضية جديدة",
+      "edit": "تعديل القضية"
+    },
+    "sections": {
+      "selectClient": {
+        "title": "اختر العميل",
+        "searchPlaceholder": "ابحث بالاسم أو البريد الإلكتروني أو الهاتف أو الرقم الوطني",
+        "noClients": "لا يوجد عملاء متاحين",
+        "noMatch": "لم يتم العثور على عملاء يطابقون البحث",
+        "selectedClient": "العميل المختار:"
+      },
+      "caseDetails": {
+        "title": "تفاصيل القضية",
+        "fields": {
+          "caseType": "نوع القضية",
+          "description": "الوصف",
+          "assignedLawyer": "المحامي المكلف",
+          "approvingLawyer": "المحامي الموافق"
+        }
+      },
+      "documents": {
+        "title": "المستندات"
+      }
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "create": "إنشاء قضية",
+      "update": "تحديث القضية",
+      "saving": "جاري الحفظ..."
+    },
+    "validation": {
+      "selectClient": "يرجى اختيار عميل من القائمة",
+      "caseType": "يرجى اختيار نوع القضية",
+      "assignedLawyer": "يرجى تعيين محامي للمسودة",
+      "approvingLawyer": "يرجى تعيين محامي موافق للقضية",
+      "saveError": "فشل في حفظ القضية"
+    },
+    "notifications": {
+      "createSuccess": "تم إنشاء القضية بنجاح. تم إرسال إشعارات واتساب للمحامي المكلف",
+      "updateSuccess": "تم تحديث القضية بنجاح!"
+    }
+  }
+}

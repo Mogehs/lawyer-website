@@ -1,0 +1,19 @@
+{
+  "SecretaryReminders": {
+    "header": "Reminders",
+    "subHeader": "Upcoming hearings and action-required alerts",
+    "loading": "Loading reminders...",
+    "errorTitle": "Error Loading Reminders",
+    "errorMessage": "Unable to fetch reminders. Please try again.",
+    "retry": "Retry",
+    "noRemindersTitle": "No Reminders",
+    "noRemindersMessage": "Reminders will appear here when hearings or submissions are scheduled.",
+    "deleteConfirmation": "Are you sure you want to delete this reminder?",
+    "deleteSuccess": "Reminder deleted successfully",
+    "deleteFailed": "Failed to delete reminder",
+    "today": "TODAY",
+    "overdue": "OVERDUE",
+    "daysLeft": "{{count}}d left",
+    "daysOverdue": "{{count}}d overdue"
+  }
+}

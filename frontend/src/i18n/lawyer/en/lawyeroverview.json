@@ -1,0 +1,42 @@
+{
+  "overview": {
+    "title": "Overview",
+    "subtitle": "Track your cases, memorandums, approvals, and upcoming hearings."
+  },
+  "statCards": {
+    "cases": "Cases",
+    "memorandums": "Memorandums",
+    "approvals": "Approvals",
+    "hearings": "Upcoming Hearings"
+  },
+  "recentActivities": {
+    "title": "Recent Activities",
+    "noActivities": "No recent activities available",
+    "case": "Case",
+    "activity": "Activity",
+    "date": "Date",
+    "status": "Status",
+    "total": "{{count}} total",
+    "viewAll": "View All →",
+    "loading": "Loading activities...",
+    "error": "Failed to load activities. Please try refreshing the page.",
+    "status": {
+      "completed": "Completed",
+      "rejected": "Rejected",
+      "pending": "Pending",
+      "new": "New"
+    }
+  },
+  "overviewCharts": {
+    "casesByStatus": "Cases by Status",
+    "casesDistribution": "Cases Distribution",
+    "underReview": "Under Review",
+    "pendingApproval": "Pending Approval",
+    "pendingMyApproval": "Awaiting My Approval",
+    "approved": "Approved",
+    "noData": "No data available",
+    "count": "Count",
+    "error": "Failed to load chart data",
+    "tryRefresh": "Please try refreshing the page"
+  }
+}

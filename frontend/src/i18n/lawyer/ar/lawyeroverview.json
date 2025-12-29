@@ -1,0 +1,42 @@
+{
+  "overview": {
+    "title": "نظرة عامة",
+    "subtitle": "تتبع القضايا والمذكرات والموافقات والجلسات القادمة."
+  },
+  "statCards": {
+    "cases": "القضايا",
+    "memorandums": "المذكرات",
+    "approvals": "الموافقات",
+    "hearings": "الجلسات القادمة"
+  },
+  "recentActivities": {
+    "title": "أحدث الأنشطة",
+    "noActivities": "لا توجد أنشطة حديثة",
+    "case": "القضية",
+    "activity": "النشاط",
+    "date": "التاريخ",
+    "status": "الحالة",
+    "total": "إجمالي {{count}}",
+    "viewAll": "عرض الكل →",
+    "loading": "جاري تحميل الأنشطة...",
+    "error": "فشل في تحميل الأنشطة. يرجى تحديث الصفحة.",
+    "status": {
+      "completed": "مكتمل",
+      "rejected": "مرفوض",
+      "pending": "قيد الانتظار",
+      "new": "جديد"
+    }
+  },
+  "overviewCharts": {
+    "casesByStatus": "القضايا حسب الحالة",
+    "casesDistribution": "توزيع القضايا",
+    "underReview": "قيد المراجعة",
+    "pendingApproval": "قيد الموافقة",
+    "pendingMyApproval": "في انتظار موافقتي",
+    "approved": "تمت الموافقة",
+    "noData": "لا توجد بيانات متاحة",
+    "count": "العدد",
+    "error": "فشل في تحميل بيانات المخطط",
+    "tryRefresh": "يرجى إعادة تحميل الصفحة"
+  }
+}

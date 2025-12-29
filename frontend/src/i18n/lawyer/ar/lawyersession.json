@@ -1,0 +1,41 @@
+{
+  "header": {
+    "title": "جلساتي المعينة",
+    "subtitle": "الجلسات المفتوحة للعمل عليها",
+    "activeSessions": "جلسة نشطة",
+    "sessionsPlural": "جلسات نشطة"
+  },
+  "sessionCard": {
+    "sessionNumber": "الجلسة رقم",
+    "caseNumber": "رقم القضية",
+    "caseType": "نوع القضية",
+    "client": "العميل",
+    "secretary": "السكرتير",
+    "date": "التاريخ",
+    "time": "الوقت",
+    "location": "الموقع",
+    "memorandumRequired": "المذكرة مطلوبة",
+    "supportingDocumentsRequired": "المستندات الداعمة مطلوبة",
+    "note": "ملاحظة:",
+    "uploadMemorandum": "رفع المذكرة",
+    "uploading": "جارٍ التحميل...",
+    "submitMemorandum": "إرسال المذكرة",
+    "cancel": "إلغاء",
+    "completeSession": "إتمام الجلسة",
+    "cancelSession": "إلغاء الجلسة",
+    "status": "الحالة",
+    "outcome": "النتيجة",
+    "reasonForAdjournment": "سبب التأجيل",
+    "nextSessionDate": "تاريخ الجلسة القادمة"
+  },
+  "alerts": {
+    "error": "فشل في تحميل الجلسات",
+    "noSessions": "لا توجد لديك أي جلسات مفتوحة في الوقت الحالي.",
+    "sessionNotReadyForSubmission": "لا يمكن إتمام الجلسة: يجب أن يتم الموافقة على الجلسة من قبل المدير أولاً",
+    "missingOutcome": "يرجى تقديم نتيجة الجلسة",
+    "uploadError": "فشل في رفع الملف",
+    "memorandumContentError": "يرجى تقديم محتوى المذكرة أو رفع ملف",
+    "sessionCompleted": "تم إتمام الجلسة بنجاح!",
+    "sessionCompletionError": "فشل في إتمام الجلسة"
+  }
+}

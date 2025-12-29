@@ -1,0 +1,26 @@
+{
+  "archiveHeader": {
+    "caseCount": "إجمالي القضايا المؤرشفة: {{count}}"
+  },
+  "archiveSearch": {
+    "placeholder": "ابحث برقم القضية أو اسم العميل أو مرجع الأرشيف"
+  },
+  "archiveTable": {
+    "viewCase": "عرض القضية",
+    "deleteCase": "حذف القضية"
+  },
+  "archiveModal": {
+    "caseDetails": "تفاصيل القضية",
+    "clientName": "اسم العميل",
+    "caseNumber": "رقم القضية",
+    "archiveReference": "مرجع الأرشيف"
+  },
+  "archiveDeleteModal": {
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذه القضية؟",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد الحذف"
+  },
+  "error": {
+    "loadingFailed": "فشل تحميل القضايا المؤرشفة."
+  }
+}

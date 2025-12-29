@@ -1,0 +1,14 @@
+{
+  "dashboardTitle": "Secretary Dashboard",
+  "dashboardSubtitle": "Case Management",
+
+  "overview": "Overview",
+  "clients": "Clients",
+  "cases": "Cases",
+  "invoices": "Invoices",
+  "reminders": "Reminders",
+  "archive": "Archive",
+
+  "logout": "Logout",
+  "loggingOut": "Logging Out..."
+}

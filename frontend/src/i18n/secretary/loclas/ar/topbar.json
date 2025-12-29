@@ -1,0 +1,11 @@
+{
+  "dashboardTitle": "لوحة تحكم السكرتارية",
+  "languageArabic": "العربية",
+  "languageEnglish": "English",
+  "signedInAs": "تم تسجيل الدخول باسم",
+  "myProfile": "ملفي الشخصي",
+  "signOut": "تسجيل الخروج",
+  "signingOut": "جاري تسجيل الخروج...",
+  "defaultUser": "مستخدم",
+  "defaultRole": "سكرتير"
+}

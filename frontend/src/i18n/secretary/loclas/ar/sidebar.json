@@ -1,0 +1,14 @@
+{
+  "dashboardTitle": "لوحة تحكم السكرتارية",
+  "dashboardSubtitle": "إدارة القضايا",
+
+  "overview": "نظرة عامة",
+  "clients": "العملاء",
+  "cases": "القضايا",
+  "invoices": "الفواتير",
+  "reminders": "التذكيرات",
+  "archive": "الأرشيف",
+
+  "logout": "تسجيل الخروج",
+  "loggingOut": "جاري تسجيل الخروج..."
+}

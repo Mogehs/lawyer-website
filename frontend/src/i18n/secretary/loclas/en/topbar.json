@@ -1,0 +1,11 @@
+{
+  "dashboardTitle": "Secretary Dashboard",
+  "languageArabic": "Arabic",
+  "languageEnglish": "English",
+  "signedInAs": "Signed in as",
+  "myProfile": "My Profile",
+  "signOut": "Sign Out",
+  "signingOut": "Signing Out...",
+  "defaultUser": "User",
+  "defaultRole": "Secretary"
+}

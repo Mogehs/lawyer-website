@@ -5,7 +5,7 @@ import { clearProfile, selectUserProfile } from "../../auth/authSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../auth/api/authApi";
 import { useTranslation } from "react-i18next";
-
+import i18n from "../../../i18n/index";
 const Topbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUserProfile);

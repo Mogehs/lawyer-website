@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import { clearProfile } from "../../auth/authSlice";
 import { useLogoutMutation } from "../../auth/api/authApi";
 import { useTranslation } from "react-i18next";
-import i18n from "../../../i18n/secretary/index";
+import i18n from "../../../i18n/index";
 const Sidebar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
@@ -94,7 +94,7 @@ const Sidebar = () => {
             <Scale size={24} className="text-[#0B1F3B]" />
           </div>
           <div>
-            <h2 className="text-sm font-medium text-white">
+            <h2 className="text-xs font-medium text-white">
               {t("dashboardTitle")}
             </h2>
             <p className="text-xs text-blue-200">

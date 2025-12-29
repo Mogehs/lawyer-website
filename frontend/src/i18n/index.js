@@ -53,6 +53,17 @@ import en_usersPage from "./locals/en/usersPage.json";
 import ar_usersPage from "./locals/ar/usersPage.json";
 import ar_userTable from "./locals/ar/userTable.json";
 import en_userTable from "./locals/en/userTable.json";
+//---secretary translations end here---
+import en_topbar1 from "./locals/en/topbarsecretary.json";
+import ar_topbar1 from "./locals/ar/topbarsecretary.json";
+import en_sidebar1 from "./locals/en/sidebarsecretary.json";
+import ar_sidebar1 from "./locals/ar/sidebarsecretary.json";
+import en_sesecretaryDashboard from "./locals/en/secretaryDashboard.json";
+import ar_secretaryDashboard from "./locals/ar/secretaryDashboard.json";
+import en_secretaryclient from "./locals/en/secretaryclient.json";
+import ar_secretaryclient from "./locals/ar/secretaryclient.json";
+
+
 
 
 const resources = {
@@ -79,6 +90,11 @@ const resources = {
     remindersHeader: en_remindersHeader,
     usersPage: en_usersPage,
     userTable: en_userTable,
+    //---secretary translations end here---
+    topbar1: en_topbar1,
+    sidebar: en_sidebar1,
+    secretaryDashboard: en_sesecretaryDashboard,
+    secretaryclient: en_secretaryclient,
   },
   ar: {
     topbar: ar_topbar,
@@ -103,6 +119,11 @@ const resources = {
     remindersHeader: ar_remindersHeader,
     usersPage: ar_usersPage,
     userTable: ar_userTable,
+    //
+    topbar1: ar_topbar1,
+    sidebar: ar_sidebar1,
+    secretaryDashboard: ar_secretaryDashboard,
+    secretaryclient: ar_secretaryclient,
   }
 };
 

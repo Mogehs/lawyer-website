@@ -1,0 +1,11 @@
+{
+  "deleteTitle": "حذف القضية",
+  "deleteConfirmation": "حذف القضية {{id}}؟",
+  "caseDetails": "{{clientName}} - {{caseDescription}}",
+  "status": "الحالة",
+  "hearing": "الجلسة",
+  "warningTitle": "تحذير:",
+  "warningMessage": "هذا الإجراء لا يمكن التراجع عنه. سيتم حذف جميع بيانات القضية نهائيًا.",
+  "cancel": "إلغاء",
+  "delete": "حذف"
+}

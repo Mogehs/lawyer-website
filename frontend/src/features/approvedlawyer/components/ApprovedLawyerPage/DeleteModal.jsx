@@ -1,4 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 export default function DeleteModal({ selectedCase, isOpen, closeModal, handleDelete }) {
+  const { t } = useTranslation("appdelete");
+
   if (!isOpen || !selectedCase) return null;
 
   return (
@@ -10,13 +14,13 @@ export default function DeleteModal({ selectedCase, isOpen, closeModal, handleDe
 
       <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full z-50 p-6 sm:p-8 md:p-10">
         <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-3">
-          Confirm Delete
+          {t('modal.confirmDelete')}
         </h3>
 
         <p className="text-gray-600 text-sm sm:text-base mb-6">
-          Are you sure you want to delete case 
-          <span className="font-medium text-gray-800"> "{selectedCase?.clientId?.name}"</span>? 
-          This action cannot be undone.
+          {t('modal.confirmDeleteText')}
+          <span className="font-medium text-gray-800"> "{selectedCase?.clientId?.name}"</span>?
+          {t('modal.deleteWarning')}
         </p>
 
         <div className="flex flex-col sm:flex-row justify-end gap-3">
@@ -24,14 +28,14 @@ export default function DeleteModal({ selectedCase, isOpen, closeModal, handleDe
             className="px-5 py-2 sm:py-3 cursor-pointer bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
             onClick={closeModal}
           >
-            Cancel
+            {t('modal.cancel')}
           </button>
 
           <button
             className="px-5 py-2 sm:py-3 bg-red-600 cursor-pointer text-white rounded-lg hover:bg-red-700"
             onClick={() => handleDelete(selectedCase?._id)}
           >
-            Delete
+            {t('modal.delete')}
           </button>
         </div>
       </div>

@@ -1,0 +1,9 @@
+{
+  "modal": {
+    "confirmDelete": "تأكيد الحذف",
+    "confirmDeleteText": "هل أنت متأكد أنك تريد حذف القضية",
+    "deleteWarning": "هذه العملية لا يمكن التراجع عنها.",
+    "cancel": "إلغاء",
+    "delete": "حذف"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "modal": {
+    "caseType": "نوع القضية",
+    "caseNumber": "رقم القضية",
+    "clientInformation": "معلومات العميل",
+    "clientName": "اسم العميل",
+    "contactNumber": "رقم الاتصال",
+    "email": "البريد الإلكتروني",
+    "caseTeam": "فريق القضية",
+    "secretary": "السكرتير",
+    "draftLawyer": "محامي المسودة",
+    "currentStage": "المرحلة الحالية",
+    "status": "الحالة",
+    "courtSessions": "الجلسات القضائية",
+    "sessionStatus": "حالة الجلسة",
+    "sessionNumber": "الجلسة #",
+    "pendingReview": "قيد المراجعة",
+    "inProgress": "جاري التنفيذ",
+    "approved": "موافق عليه",
+    "reviewSession": "مراجعة الجلسة",
+    "reviewNotes": "ملاحظات المراجعة",
+    "memorandumRequired": "مذكرة مطلوبة",
+    "supportingDocumentsRequired": "الوثائق الداعمة مطلوبة",
+    "cancel": "إلغاء",
+    "approveUnlock": "موافقة وفتح",
+    "approve": "موافقة",
+    "reject": "رفض",
+    "reviewDecide": "مراجعة وقرار",
+    "documents": "الوثائق",
+    "generalDocuments": "الوثائق العامة",
+    "noDocumentsUploaded": "لم يتم تحميل أي مستندات بعد.",
+    "downloadMemorandum": "تحميل المذكرة",
+    "close": "إغلاق"
+  },
+  "toast": {
+    "errorReviewSession": "يرجى تحديد متطلب واحد على الأقل",
+    "successReviewSession": "تمت مراجعة الجلسة وفتحها للمحامي المسودة!",
+    "errorReviewMemorandum": "يرجى تقديم ملاحظات عند رفض المذكرة",
+    "successReviewMemorandum": "تمت مراجعة المذكرة بنجاح",
+    "error": "فشل في مراجعة الجلسة",
+    "errorMemoReview": "فشل في مراجعة المذكرة"
+  },
+  "sessionStatus": {
+    "approved": "✓ موافق عليه",
+    "pendingReview": "⏳ قيد المراجعة",
+    "inProgress": "جاري التنفيذ",
+    "locked": "قيد المراجعة"
+  }
+}

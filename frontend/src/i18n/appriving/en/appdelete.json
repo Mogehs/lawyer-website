@@ -1,0 +1,9 @@
+{
+  "modal": {
+    "confirmDelete": "Confirm Delete",
+    "confirmDeleteText": "Are you sure you want to delete case",
+    "deleteWarning": "This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  }
+}

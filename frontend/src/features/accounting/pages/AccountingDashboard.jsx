@@ -130,7 +130,7 @@ const AccountingDashboard = () => {
             <Coins size={32} className=" text-[#0B1F3B]" />
           </div>
           <h3 className="text-sm font-medium opacity-90">{t("totalIncome")}</h3>
-          <p className="text-3xl font-bold mt-2">
+          <p className="text-2xl font-bold mt-2">
             {formatCurrency(dashboard?.summary?.totalIncome)}
           </p>
           <p className="text-xs opacity-75 mt-1">إجمالي الدخل</p>
@@ -145,7 +145,7 @@ const AccountingDashboard = () => {
           <h3 className="text-sm font-medium opacity-90">
             {t("totalExpenses")}
           </h3>
-          <p className="text-3xl font-bold mt-2">
+          <p className="text-2xl font-bold mt-2">
             {formatCurrency(dashboard?.summary?.totalExpenses)}
           </p>
           <p className="text-xs opacity-75 mt-1">إجمالي المصروفات</p>
@@ -168,7 +168,7 @@ const AccountingDashboard = () => {
             <Coins size={32} className=" text-[#0B1F3B]" />
           </div>
           <h3 className="text-sm font-medium opacity-90">{t("netProfit")}</h3>
-          <p className="text-3xl font-bold mt-2">
+          <p className="text-2xl font-bold mt-2">
             {formatCurrency(dashboard?.summary?.profit)}
           </p>
           <p className="text-xs opacity-75 mt-1">صافي الربح</p>
@@ -183,7 +183,7 @@ const AccountingDashboard = () => {
           <h3 className="text-sm font-medium opacity-90">
             {t("outstandingInvoices")}
           </h3>
-          <p className="text-3xl font-bold mt-2">
+          <p className="text-2xl font-bold mt-2">
             {dashboard?.summary?.outstandingInvoices || 0}
           </p>
           <p className="text-xs opacity-75 mt-1">

@@ -1,0 +1,11 @@
+{
+  "searchClient": "Search Client",
+  "allStages": "All Stages",
+  "main": "Main",
+  "appeal": "Appeal",
+  "cassation": "Cassation",
+  "allStatus": "All Status",
+  "approved": "Approved",
+  "rejected": "Rejected",
+  "clearFilters": "Clear Filters"
+}

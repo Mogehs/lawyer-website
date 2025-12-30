@@ -3,8 +3,11 @@ import { CreditCard } from "lucide-react";
 import { useRecordPaymentMutation } from "../api/accountingApi";
 import { useNavigate } from "react-router-dom";
 import { useGetInvoicesQuery } from "../api/accountingApi";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n";
 
 const RecordPayment = () => {
+  const {t}=useTranslation("accPaymentList");
   const navigate = useNavigate();
   const [recordPayment, { isLoading }] = useRecordPaymentMutation();
   const { data: invoicesData } = useGetInvoicesQuery({ status: "" });
@@ -21,16 +24,16 @@ const RecordPayment = () => {
     bankName: "",
     notes: "",
   });
-
+const isRTL = i18n.dir() === "rtl";
   const [selectedInvoice, setSelectedInvoice] = useState(null);
 
   // Get unpaid/partially paid invoices
   const unpaidInvoices =
     invoicesData?.data?.filter(
       (inv) =>
-        inv.status === "unpaid" ||
-        inv.status === "partially_paid" ||
-        inv.status === "overdue"
+        inv.status === t("unpaid") ||
+        inv.status === t("partially_Paid") ||
+        inv.status === t("overdue")
     ) || [];
 
   useEffect(() => {
@@ -73,10 +76,10 @@ const RecordPayment = () => {
       }
 
       await recordPayment(payload).unwrap();
-      alert("Payment recorded successfully!");
+      alert(t("paymentRecordSuccessfully"));
       navigate("/accountant/payments");
     } catch (error) {
-      alert(error?.data?.message || "Failed to record payment");
+      alert(error?.data?.message || (t("failedPaymentRecord")));
     }
   };
 
@@ -88,12 +91,12 @@ const RecordPayment = () => {
   };
 
   return (
-    <div className="space-y-6 lg:ml-[220px]">
+    <div className={`space-y-6 ${isRTL ? "lg:mr-[220px]":"lg:ml-[220px]"} `}>
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
           <CreditCard size={28} className="text-[#0B1F3B]" />
-          Record Payment
+          {t("recordPayment")}
         </h1>
         <p className="text-sm text-gray-600 mt-1">تسجيل دفعة</p>
       </div>
@@ -126,28 +129,28 @@ const RecordPayment = () => {
           {/* Invoice Details */}
           {selectedInvoice && (
             <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <h3 className="font-semibold text-gray-800 mb-2">Invoice Details</h3>
+              <h3 className="font-semibold text-gray-800 mb-2">{t("invoiceDetail")}</h3>
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
-                  <span className="text-gray-600">Client:</span>
+                  <span className="text-gray-600">{t("client")}</span>
                   <span className="ml-2 font-medium">
                     {selectedInvoice.client?.name}
                   </span>
                 </div>
                 <div>
-                  <span className="text-gray-600">Total Amount:</span>
+                  <span className="text-gray-600">{t("totalAmount")}</span>
                   <span className="ml-2 font-medium">
                     {formatCurrency(selectedInvoice.totalAmount)}
                   </span>
                 </div>
                 <div>
-                  <span className="text-gray-600">Paid Amount:</span>
+                  <span className="text-gray-600">{t("paidAmount")}</span>
                   <span className="ml-2 font-medium text-green-600">
                     {formatCurrency(selectedInvoice.paidAmount)}
                   </span>
                 </div>
                 <div>
-                  <span className="text-gray-600">Remaining:</span>
+                  <span className="text-gray-600">{t("remaining")}</span>
                   <span className="ml-2 font-medium text-red-600">
                     {formatCurrency(selectedInvoice.remainingAmount)}
                   </span>
@@ -202,7 +205,7 @@ const RecordPayment = () => {
           {/* Check Details */}
           {formData.paymentMethod === "check" && (
             <div className="border border-gray-200 rounded-lg p-4 space-y-4">
-              <h3 className="font-semibold text-gray-800">Check Details</h3>
+              <h3 className="font-semibold text-gray-800">{t("checkDetail")}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -252,7 +255,7 @@ const RecordPayment = () => {
           {/* Bank Transfer Details */}
           {formData.paymentMethod === "bank_transfer" && (
             <div className="border border-gray-200 rounded-lg p-4 space-y-4">
-              <h3 className="font-semibold text-gray-800">Bank Transfer Details</h3>
+              <h3 className="font-semibold text-gray-800">{t("bankTransferDetails")}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -311,7 +314,7 @@ const RecordPayment = () => {
               value={formData.notes}
               onChange={handleChange}
               rows={3}
-              placeholder="Additional notes..."
+              placeholder={t("additonalNotes")}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
@@ -323,14 +326,14 @@ const RecordPayment = () => {
               disabled={isLoading}
               className="px-6 py-2 bg-[#0B1F3B] cursor-pointer text-white rounded-lg font-medium transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Recording..." : "Record Payment"}
+              {isLoading ? t("recording") : t("recordPayment")}
             </button>
             <button
               type="button"
               onClick={() => navigate("/accountant/payments")}
               className="px-6 py-2 bg-gray-200 cursor-pointer hover:bg-gray-300 text-gray-800 rounded-lg font-medium transition-colors"
             >
-              Cancel
+              {t("cancel")}
             </button>
           </div>
         </div>

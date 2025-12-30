@@ -2,6 +2,7 @@ import { ChevronDown, LogOut, User } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { clearProfile, selectUserProfile } from "../../auth/authSlice";
 import { useLogoutMutation } from "../../auth/api/authApi";
 
@@ -10,7 +11,9 @@ const Topbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation("apptopbar");
 
+  const isRTL = i18n.language === "ar";  // Set RTL based on selected language
   const userProfile = useSelector(selectUserProfile);
 
   // Logout mutation
@@ -26,11 +29,15 @@ const Topbar = () => {
     };
     document.addEventListener("click", handleClickOutside);
     document.addEventListener("keydown", handleEsc);
+
+    // Set the direction of the document when the language changes
+    document.documentElement.setAttribute("dir", isRTL ? "rtl" : "ltr");
+
     return () => {
       document.removeEventListener("click", handleClickOutside);
       document.removeEventListener("keydown", handleEsc);
     };
-  }, []);
+  }, [isRTL]);
 
   // Watch for sidebar changes
   useEffect(() => {
@@ -68,90 +75,88 @@ const Topbar = () => {
     }
   };
 
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "ar" : "en";
+    i18n.changeLanguage(newLang);
+  };
+
   const userName = userProfile?.name || "User";
   const userEmail = userProfile?.email || "user@example.com";
   const userRole = userProfile?.role || "Approved Lawyer";
 
   return (
     <header
-      className={`fixed top-0 right-0 h-16
-      bg-[#0B1F3B]
-      shadow-md border-b border-white
-      flex items-center justify-between
-      px-4 z-40
-      transition-all duration-300 ease-in-out
-      ${sidebarOpen ? "left-52" : "left-14"}
-      `}
+      className={`fixed top-0 w-full h-16 bg-[#0B1F3B] shadow-md border-b border-white flex items-center justify-between px-4 transition-all duration-300 ease-in-out
+        ${isRTL ? "text-right" : "text-left"}`}
     >
       {/* Title */}
-      <div className="flex items-center">
-        <h2 className="text-lg font-semibold text-white">
-          Lawyer Portal
-        </h2>
+      <div className="flex items-center ml-[210px]">
+        <h2 className="text-lg font-semibold text-white">{t("apptopbar.title")}</h2>
       </div>
 
-      {/* Profile Dropdown */}
-      <div className="relative dropdown-container">
+      <div className="flex items-center gap-4">
+        {/* Language Toggle */}
         <button
-          onClick={() => setDropdownOpen(!isDropdownOpen)}
-          className="flex items-center gap-2 p-2 rounded-lg
-             bg-white hover:bg-gray-50
-             border border-gray-200
-             transition-all duration-200"
+          onClick={toggleLanguage}
+          className={`px-3 py-1 border cursor-pointer border-blue-100 rounded-xl bg-white/80 hover:bg-white text-sm font-medium shadow-sm
+            ${isRTL ? "ml-0" : "lg:ml-[400px]"}`}
         >
-          <img
-            src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
-              userName
-            )}&background=3b82f6&color=fff&bold=true&size=128`}
-            alt="User Avatar"
-            className="w-9 h-9 rounded-full border-2 border-blue-500 object-cover"
-          />
-          <div className="hidden sm:block text-left">
-            <p className="text-sm font-semibold text-gray-800">{userName}</p>
-            <p className="text-xs text-gray-500 capitalize">{userRole}</p>
-          </div>
-          <ChevronDown
-            size={16}
-            className={`text-gray-600 transition-transform cursor-pointer duration-200 ${
-              isDropdownOpen ? "rotate-180" : ""
-            }`}
-          />
+          {i18n.language === "en" ? t("apptopbar.languageArabic") : t("apptopbar.languageEnglish")}
         </button>
 
-        {/* Dropdown Menu */}
-        {isDropdownOpen && (
-          <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-xl py-2 z-50">
-            <div className="px-4 py-2 border-b border-gray-100">
-              <p className="text-xs text-gray-500">Signed in as</p>
-              <p className="text-sm font-semibold text-gray-800 truncate">
-                {userEmail}
-              </p>
+        {/* Profile Dropdown */}
+        <div className="relative flex gap-5 dropdown-container">
+          <button
+            onClick={() => setDropdownOpen(!isDropdownOpen)}
+            className="flex items-center gap-2 p-2 rounded-lg bg-white hover:bg-gray-50 border border-gray-200 transition-all duration-200"
+          >
+            <img
+              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3b82f6&color=fff&bold=true&size=128`}
+              alt="User Avatar"
+              className="w-9 h-9 rounded-full border-2 border-blue-500 object-cover"
+            />
+            <div className="hidden sm:block text-left">
+              <p className="text-sm font-semibold text-gray-800">{userName}</p>
+              <p className="text-xs text-gray-500 capitalize">{userRole}</p>
             </div>
+            <ChevronDown
+              size={16}
+              className={`text-gray-600 transition-transform cursor-pointer duration-200 ${isDropdownOpen ? "rotate-180" : ""}`}
+            />
+          </button>
 
-            <div className="py-1">
-              <Link
-                to="/my-profile"
-                className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-              >
-                <User size={16} />
-                My Profile
-              </Link>
-            </div>
+          {/* Dropdown Menu */}
+          {isDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-xl py-2">
+              <div className="px-4 py-2 border-b border-gray-100">
+                <p className="text-xs text-gray-500">{t("apptopbar.signedInAs")}</p>
+                <p className="text-sm font-semibold text-gray-800 truncate">{userEmail}</p>
+              </div>
 
-            <div className="border-t border-gray-100 pt-1">
-              <button
-                onClick={handleLogout}
-                disabled={isLoggingOut}
-                className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
-              >
-                <LogOut size={16} />
-                {isLoggingOut ? "Logging out..." : "Sign Out"}
-              </button>
+              <div className="py-1">
+                <Link
+                  to="/my-profile"
+                  className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  <User size={16} />
+                  {t("apptopbar.myProfile")}
+                </Link>
+              </div>
+
+              <div className="border-t border-gray-100 pt-1">
+                <button
+                  onClick={handleLogout}
+                  disabled={isLoggingOut}
+                  className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
+                >
+                  <LogOut size={16} />
+                  {isLoggingOut ? t("apptopbar.loggingOut") : t("apptopbar.signOut")}
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-
     </header>
   );
 };

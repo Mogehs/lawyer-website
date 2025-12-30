@@ -1,0 +1,20 @@
+{
+  "caseDetail": {
+    "caseNumber": "Case Number",
+    "caseType": "Case Type",
+    "status": "Status",
+    "clientName": "Client Name",
+    "email": "Email",
+    "phone": "Phone",
+    "hearing": "Hearing",
+    "stages": "Stages",
+    "documents": "Documents",
+    "notes": "Notes",
+    "memorandumStatus": "Memorandum Status",
+    "noStages": "No stages available.",
+    "noDocuments": "No documents uploaded.",
+    "noNotes": "No notes available.",
+    "noMemorandum": "No memorandum submitted yet",
+    "stage": "Stage"
+  }
+}

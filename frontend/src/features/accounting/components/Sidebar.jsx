@@ -13,40 +13,25 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../auth/api/authApi";
 import { useDispatch } from "react-redux";
 import { clearProfile } from "../../auth/authSlice";
+import i18n from "../../../i18n/index";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = () => {
+  const { t } = useTranslation("accSidebar"); // translation namespace
+  const isRTL = i18n.language === "ar";
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [logout, { isLoading }] = useLogoutMutation();
 
+  // Menu items with keys only
   const menuItems = [
-    {
-      name: "Dashboard",
-      nameAr: "لوحة التحكم",
-      icon: LayoutDashboard,
-      path: "/accountant/dashboard",
-    },
-    {
-      name: "Invoices",
-      nameAr: "الفواتير",
-      icon: FileText,
-      path: "/accountant/invoices",
-    },
-    {
-      name: "Payments",
-      nameAr: "المدفوعات",
-      icon: CreditCard,
-      path: "/accountant/payments",
-    },
-    {
-      name: "Expenses",
-      nameAr: "المصروفات",
-      icon: TrendingDown,
-      path: "/accountant/expenses",
-    },
+    { key: "dashboard", icon: LayoutDashboard, path: "/accountant/dashboard" },
+    { key: "invoices", icon: FileText, path: "/accountant/invoices" },
+    { key: "payments", icon: CreditCard, path: "/accountant/payments" },
+    { key: "expenses", icon: TrendingDown, path: "/accountant/expenses" },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -64,13 +49,16 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Menu Button */}
-      <button
-        onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-[60] p-2 rounded-lg
-        bg-gradient-to-r from-[#0B1F3B] to-[#0B1F3B] text-white shadow-md"
-      >
-        <Menu size={22} />
-      </button>
+      {!mobileOpen && (
+        <button
+          onClick={() => setMobileOpen(true)}
+          className={`lg:hidden fixed top-4 z-[60] p-2 bg-white rounded-lg shadow-md ${
+            isRTL ? "right-4" : "left-4"
+          }`}
+        >
+          <Menu size={22} />
+        </button>
+      )}
 
       {/* Mobile Overlay */}
       {mobileOpen && (
@@ -82,17 +70,26 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full z-50 flex flex-col
-        bg-[#0B1F3B] border-r border-blue-100 shadow-lg
-        transition-transform duration-300 ease-in-out
-        w-56
-        ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
-        lg:translate-x-0`}
+        className={`fixed top-0 h-full z-50 flex flex-col
+          bg-[#0B1F3B] border-r border-blue-100 shadow-lg
+          transition-transform duration-300 ease-in-out
+          w-56
+          ${isRTL ? "right-0 border-l" : "left-0 border-r"}
+          ${
+            mobileOpen
+              ? "translate-x-0"
+              : isRTL
+              ? "translate-x-full"
+              : "-translate-x-full"
+          }
+          lg:translate-x-0`}
       >
         {/* Mobile Close */}
         <button
           onClick={() => setMobileOpen(false)}
-          className="lg:hidden absolute top-4 right-4 text-white"
+          className={`lg:hidden absolute top-4 text-white ${
+            isRTL ? "left-4" : "right-4"
+          }`}
         >
           <X size={22} />
         </button>
@@ -103,8 +100,8 @@ const Sidebar = () => {
             <Coins size={22} className="text-[#0B1F3B]" />
           </div>
           <div>
-            <h1 className="text-sm font-semibold text-white">Accounting</h1>
-            <p className="text-xs text-slate-200">Finance Portal</p>
+            <h1 className="text-sm font-semibold text-white">{t("title")}</h1>
+            <p className="text-xs text-slate-200">{t("subtitle")}</p>
           </div>
         </div>
 
@@ -126,12 +123,7 @@ const Sidebar = () => {
                   }`}
               >
                 <Icon size={18} />
-                <div className="flex flex-col">
-                  <span className="text-sm">{item.name}</span>
-                  <span className="text-[10px] opacity-70">
-                    {item.nameAr}
-                  </span>
-                </div>
+                <span className="text-sm font-medium">{t(item.key)}</span>
               </Link>
             );
           })}
@@ -150,7 +142,7 @@ const Sidebar = () => {
               className="group-hover:rotate-12 transition-transform"
             />
             <span className="text-sm font-medium">
-              {isLoading ? "Logging out..." : "Logout"}
+              {isLoading ? t("loading") : t("default")}
             </span>
           </button>
         </div>

@@ -1,158 +1,149 @@
 import { ChevronDown, LogOut, User } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearProfile, selectUserProfile } from "../../auth/authSlice";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../auth/api/authApi";
+import { useTranslation } from "react-i18next";
 
 const Topbar = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUserProfile);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const userProfile = useSelector(selectUserProfile);
   const [logout, { isLoading }] = useLogoutMutation();
+  const { t, i18n } = useTranslation("acctopbar");
+
+  const isRTL = i18n.dir() === "rtl";
 
   // Close dropdown on outside click or ESC
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (!e.target.closest(".dropdown-container")) {
-        setDropdownOpen(false);
-      }
+      if (!e.target.closest(".dropdown-container")) setDropdownOpen(false);
     };
-
     const handleEsc = (e) => {
       if (e.key === "Escape") setDropdownOpen(false);
     };
-
     document.addEventListener("click", handleClickOutside);
     document.addEventListener("keydown", handleEsc);
-
     return () => {
       document.removeEventListener("click", handleClickOutside);
       document.removeEventListener("keydown", handleEsc);
     };
   }, []);
 
-  // Logout handler
+  // RTL support
+  useEffect(() => {
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+  }, [isRTL]);
+
   const handleLogout = async () => {
     try {
       await logout().unwrap();
+    } catch (error) {
+      console.error("Logout error:", error);
     } finally {
       dispatch(clearProfile());
       navigate("/login");
     }
   };
 
-  const userName = userProfile?.name || "User";
-  const userEmail = userProfile?.email || "user@example.com";
-  const userRole = userProfile?.role || "Accountant";
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "ar" : "en";
+    i18n.changeLanguage(newLang);
+  };
 
   return (
     <header
-      className="
-        fixed top-0 right-0 left-0
-        lg:left-56
-        h-16 z-40
-        bg-[#0B1F3B]
-        border-b border-white
-        shadow-md
-        flex items-center
-        px-4
-      "
+      className="fixed top-0 z-30 left-0 right-0 h-16 flex items-center justify-between
+        px-4 sm:px-6 md:px-10 bg-[#0B1F3B] border-b border-white/20 shadow-md"
     >
-      {/* Centered Title (Mobile) */}
-      <h2
-        className="
-          absolute left-1/2 -translate-x-1/2
-          text-lg font-semi-bold text-nowrap text-white
-          lg:static lg:translate-x-0
-        "
+      {/* Left / Center: Quick Stats */}
+      <div
+        className={`flex items-center gap-6 flex-1 ${
+          isRTL ? "justify-center" : "lg:ml-[220px]"
+        }`}
       >
-        Accounting Management
-      </h2>
+        <div className="hidden sm:flex flex-col text-center">
+          <p className="text-sm sm:text-lg text-white">{t("title")}</p>
+          
+        </div>
+       
+      </div>
 
-      {/* Right Section */}
-      <div className="ml-auto relative dropdown-container">
+      {/* Right Controls */}
+      <div className="flex items-center gap-3 sm:gap-4">
+        {/* Language Toggle */}
         <button
-          onClick={() => setDropdownOpen((prev) => !prev)}
-          className="
-            flex items-center gap-2 p-2 rounded-lg
-            bg-white hover:bg-gray-50
-            border border-gray-200
-            transition-all duration-200
-          "
+          onClick={toggleLanguage}
+          className="px-3 py-1 border cursor-pointer border-blue-100 rounded-xl bg-white/80 hover:bg-white
+            text-sm font-medium shadow-sm"
         >
-          <img
-            src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
-              userName
-            )}&background=11408b&color=fff&bold=true`}
-            alt="User Avatar"
-            className="w-8 h-8 rounded-full object-cover"
-          />
-
-          <div className="hidden md:block text-left">
-            <p className="text-sm font-semibold text-gray-800">{userName}</p>
-            <p className="text-xs text-gray-500 capitalize">{userRole}</p>
-          </div>
-
-          <ChevronDown
-            size={16}
-            className={`text-gray-500 transition-transform cursor-pointer duration-200 ${
-              isDropdownOpen ? "rotate-180" : ""
-            }`}
-          />
+          {i18n.language === "en" ? t("Arabic") || "Arabic" : t("English") || "English"}
         </button>
 
-        {/* Dropdown */}
-        {isDropdownOpen && (
-          <div
-            className="
-              absolute right-0 mt-2 w-48
-              bg-white border border-gray-200
-              rounded-lg shadow-lg
-              py-2 z-50
-            "
+        {/* Profile Dropdown */}
+        <div className="relative dropdown-container">
+          <button
+            onClick={() => setDropdownOpen(!isDropdownOpen)}
+            className="flex items-center gap-2 sm:gap-3 p-1.5 rounded-xl
+              bg-white/80 hover:bg-white border border-blue-100 shadow-sm"
           >
-            <div className="px-4 py-2 border-b border-gray-200">
-              <p className="text-xs text-gray-500">Signed in as</p>
-              <p className="text-sm font-semibold text-gray-800 truncate">
-                {userEmail}
+            <img
+              src={`https://ui-avatars.com/api/?name=${user?.name || "User"}&background=3b82f6&color=fff&bold=true&size=128`}
+              alt="Avatar"
+              className="w-8 h-8 rounded-full border-2 border-[#0B1F3B]"
+            />
+            <div className="hidden sm:block text-left">
+              <p className="text-sm font-semibold text-slate-800 truncate">
+                {user?.name || ""}
+              </p>
+              <p className="text-xs text-slate-500">
+                {user?.role
+                  ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
+                  : ""}
               </p>
             </div>
+            <ChevronDown
+              size={14}
+              className={`text-slate-500 transition-transform ${
+                isDropdownOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
 
-            <Link
-              to="/my-profile"
-              onClick={() => setDropdownOpen(false)}
-              className="
-                flex items-center gap-2 px-4 py-2
-                text-sm text-gray-600
-                hover:bg-gray-50 hover:text-[#A48C65]
-                transition-colors
-              "
+          {isDropdownOpen && (
+            <div
+              className="absolute right-0 mt-3 w-44 sm:w-52 bg-white/95
+              border border-blue-100 rounded-2xl shadow-xl py-3 z-50"
             >
-              <User size={16} />
-              My Profile
-            </Link>
+              <div className="px-4 py-2 border-b border-blue-100">
+                <p className="text-xs text-slate-500">{t("signedInAs")}</p>
+                <p className="text-sm font-semibold text-slate-800 truncate">
+                  {user?.email}
+                </p>
+              </div>
 
-            <div className="border-t border-gray-200 mt-1">
+              <NavLink
+                to="/my-profile"
+                className="flex items-center gap-3 px-4 py-2 text-slate-600
+                  hover:bg-blue-50 hover:text-[#A48C65] text-sm font-medium"
+              >
+                <User size={16} /> {t("myProfile")}
+              </NavLink>
+
               <button
                 onClick={handleLogout}
                 disabled={isLoading}
-                className="
-                  flex items-center gap-2 w-full px-4 py-2
-                  text-sm text-gray-600
-                  hover:bg-red-50 hover:text-red-600
-                  transition-colors
-                  disabled:opacity-50 disabled:cursor-not-allowed
-                "
+                className="flex items-center gap-3 w-full px-4 py-2 text-slate-600
+                  hover:bg-blue-50 hover:text-[#A48C65] text-sm font-medium"
               >
                 <LogOut size={16} />
-                {isLoading ? "Signing Out..." : "Sign Out"}
+                {isLoading ? t("signingOut") : t("signOut")}
               </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </header>
   );

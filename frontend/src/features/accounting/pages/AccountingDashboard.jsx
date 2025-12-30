@@ -9,8 +9,11 @@ import {
 } from "lucide-react";
 import { useGetDashboardQuery } from "../api/accountingApi";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n";
 
 const AccountingDashboard = () => {
+  const { t } = useTranslation("accountingDashboard");
   const [dateRange, setDateRange] = useState({
     startDate: "",
     endDate: "",
@@ -21,7 +24,7 @@ const AccountingDashboard = () => {
   );
 
   const dashboard = data?.data;
-
+  const isRTL = i18n.dir() === "rtl";
   // Format currency
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
@@ -42,10 +45,10 @@ const AccountingDashboard = () => {
   // Get payment method label
   const getPaymentMethodLabel = (method) => {
     const labels = {
-      cash: "Cash",
-      bank_transfer: "Bank Transfer",
-      card: "Card",
-      check: "Check",
+      cash: t("cash"),
+      bank_transfer: t("bankTransfer"),
+      card: t("card"),
+      check: t("check"),
     };
     return labels[method] || method;
   };
@@ -71,22 +74,20 @@ const AccountingDashboard = () => {
       <div className="flex justify-center items-center h-full">
         <div className="text-red-600 flex items-center gap-2">
           <AlertCircle size={20} />
-          <span>Failed to load dashboard data</span>
+          <span>{t("noData")}</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 lg:ml-[220px]">
+    <div className={`space-y-6 ${isRTL ? "lg:mr-[220px]" : "lg:ml-[220px]"}`}>
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#0B1F3B]">
-            Accounting Dashboard
-          </h1>
+          <h1 className="text-2xl font-bold text-[#0B1F3B]">{t("title")}</h1>
           <p className="text-sm text-[#0B1F3B] mt-1">
-            لوحة تحكم المحاسبة - Financial Overview
+            لوحة تحكم المحاسبة - {t("subtitle")}
           </p>
         </div>
 
@@ -100,7 +101,7 @@ const AccountingDashboard = () => {
             }
             className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
           />
-          <span className="text-gray-500">to</span>
+          <span className="text-gray-500">{t("to")}</span>
           <input
             type="date"
             value={dateRange.endDate}
@@ -114,7 +115,7 @@ const AccountingDashboard = () => {
               onClick={() => setDateRange({ startDate: "", endDate: "" })}
               className="px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-sm font-medium transition-colors"
             >
-              Clear
+              {t("clear")}
             </button>
           )}
         </div>
@@ -125,10 +126,10 @@ const AccountingDashboard = () => {
         {/* Total Income */}
         <div className="bg-[#F5F7FA] rounded-lg p-6 text-[#0B1F3B] shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <TrendingUp size={24} className="text-[#1E1E1E]"/>
+            <TrendingUp size={24} className="text-[#1E1E1E]" />
             <Coins size={32} className=" text-[#0B1F3B]" />
           </div>
-          <h3 className="text-sm font-medium opacity-90">Total Income</h3>
+          <h3 className="text-sm font-medium opacity-90">{t("totalIncome")}</h3>
           <p className="text-3xl font-bold mt-2">
             {formatCurrency(dashboard?.summary?.totalIncome)}
           </p>
@@ -138,10 +139,12 @@ const AccountingDashboard = () => {
         {/* Total Expenses */}
         <div className="bg-[#F5F7FA] rounded-lg p-6 text-[#0B1F3B] shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <TrendingDown size={24} className="text-[#1E1E1E]"/>
+            <TrendingDown size={24} className="text-[#1E1E1E]" />
             <Coins size={32} className=" text-[#0B1F3B]" />
           </div>
-          <h3 className="text-sm font-medium opacity-90">Total Expenses</h3>
+          <h3 className="text-sm font-medium opacity-90">
+            {t("totalExpenses")}
+          </h3>
           <p className="text-3xl font-bold mt-2">
             {formatCurrency(dashboard?.summary?.totalExpenses)}
           </p>
@@ -160,11 +163,11 @@ const AccountingDashboard = () => {
             {dashboard?.summary?.profit >= 0 ? (
               <TrendingUp size={24} />
             ) : (
-              <TrendingDown size={24} className="text-[#1E1E1E]"/>
+              <TrendingDown size={24} className="text-[#1E1E1E]" />
             )}
             <Coins size={32} className=" text-[#0B1F3B]" />
           </div>
-          <h3 className="text-sm font-medium opacity-90">Net Profit</h3>
+          <h3 className="text-sm font-medium opacity-90">{t("netProfit")}</h3>
           <p className="text-3xl font-bold mt-2">
             {formatCurrency(dashboard?.summary?.profit)}
           </p>
@@ -174,11 +177,11 @@ const AccountingDashboard = () => {
         {/* Outstanding Invoices */}
         <div className="bg-[#F5F7FA] rounded-lg p-6 text-[#0B1F3B] shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <AlertCircle size={24} className="text-[#1E1E1E]"/>
+            <AlertCircle size={24} className="text-[#1E1E1E]" />
             <FileText size={32} className=" text-[#0B1F3B]" />
           </div>
           <h3 className="text-sm font-medium opacity-90">
-            Outstanding Invoices
+            {t("outstandingInvoices")}
           </h3>
           <p className="text-3xl font-bold mt-2">
             {dashboard?.summary?.outstandingInvoices || 0}
@@ -196,13 +199,13 @@ const AccountingDashboard = () => {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
               <CreditCard size={20} className="text-[#0B1F3B]" />
-             <p className="text-[#0B1F3B]" >Recent Payments</p>
+              <p className="text-[#0B1F3B]">{t("recentPayments")}</p>
             </h2>
             <Link
               to="/accountant/payments"
               className="text-sm text-gray-500 hover:underline"
             >
-              View All
+              {t("viewAll")}
             </Link>
           </div>
           <div className="space-y-3">
@@ -233,7 +236,7 @@ const AccountingDashboard = () => {
               ))
             ) : (
               <p className="text-gray-500 text-center py-4">
-                No recent payments
+                {t("noRecentPayments")}
               </p>
             )}
           </div>
@@ -244,13 +247,13 @@ const AccountingDashboard = () => {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
               <FileText size={20} className="text-[#0B1F3B]" />
-              Recent Invoices
+              {t("recentInvoices")}
             </h2>
             <Link
               to="/accountant/invoices"
               className="text-sm text-gray-500 hover:underline"
             >
-              View All
+              {t("viewAll")}
             </Link>
           </div>
           <div className="space-y-3">
@@ -290,7 +293,7 @@ const AccountingDashboard = () => {
               ))
             ) : (
               <p className="text-gray-500 text-center py-4">
-                No recent invoices
+                {t("noRecentInvoices")}
               </p>
             )}
           </div>
@@ -302,7 +305,7 @@ const AccountingDashboard = () => {
         {/* Income by Payment Method */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-lg font-semibold text-gray-800 mb-4">
-            Income by Payment Method
+            {t("incomeByPaymentMethod")}
           </h2>
           <div className="space-y-3">
             {dashboard?.incomeByMethod?.length > 0 ? (
@@ -325,7 +328,7 @@ const AccountingDashboard = () => {
                 </div>
               ))
             ) : (
-              <p className="text-gray-500 text-center py-4">No data available</p>
+              <p className="text-gray-500 text-center py-4">{t("noData")}</p>
             )}
           </div>
         </div>
@@ -333,7 +336,7 @@ const AccountingDashboard = () => {
         {/* Expenses by Category */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-lg font-semibold text-gray-800 mb-4">
-            Expenses by Category
+            {t("expensesByCategory")}
           </h2>
           <div className="space-y-3">
             {dashboard?.expensesByCategory?.length > 0 ? (
@@ -356,7 +359,7 @@ const AccountingDashboard = () => {
                 </div>
               ))
             ) : (
-              <p className="text-gray-500 text-center py-4">No data available</p>
+              <p className="text-gray-500 text-center py-4">{t("noData")}</p>
             )}
           </div>
         </div>
@@ -369,18 +372,16 @@ const AccountingDashboard = () => {
             <AlertCircle size={24} className="text-red-600" />
             <div>
               <p className="font-semibold text-red-800">
-                {dashboard.summary.overdueInvoices} Overdue Invoice
+                {dashboard.summary.overdueInvoices} {t("overdueAlert")}
                 {dashboard.summary.overdueInvoices !== 1 ? "s" : ""}
               </p>
-              <p className="text-sm text-red-700">
-                Please follow up on overdue payments
-              </p>
+              <p className="text-sm text-red-700">{t("overdueAlertMessage")}</p>
             </div>
             <Link
               to="/accountant/invoices?status=overdue"
               className="ml-auto px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors"
             >
-              View Overdue
+              {t("viewAll")}
             </Link>
           </div>
         </div>
@@ -390,4 +391,3 @@ const AccountingDashboard = () => {
 };
 
 export default AccountingDashboard;
-

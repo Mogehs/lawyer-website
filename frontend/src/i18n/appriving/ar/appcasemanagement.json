@@ -1,0 +1,32 @@
+{
+  "caseManagement": "إدارة القضايا",
+  "pageDescription": "مراجعة والموافقة على القضايا المخصصة لك من قبل السكرتير.",
+  "searchPlaceholder": "ابحث برقم القضية، اسم العميل، البريد الإلكتروني أو الهاتف...",
+  "allStages": "جميع المراحل",
+  "stages": {
+    "main": "الرئيسية",
+    "appeal": "الاستئناف",
+    "cassation": "النقض"
+  },
+  "loading": "جاري التحميل...",
+  "failedToLoad": "فشل تحميل البيانات.",
+  "modificationMessage": "تم طلب التعديل",
+  "modificationRequestSuccess": "تم إرسال طلب التعديل.",
+  "noCasesAssigned": "لا توجد قضايا مخصصة",
+  "noCasesMessage": "لا توجد قضايا مخصصة لك للمراجعة في الوقت الحالي.",
+  "caseNumber": "رقم القضية",
+  "client": "العميل",
+  "contact": "التواصل",
+  "caseType": "نوع القضية",
+  "stage": "المرحلة",
+  "secretary": "السكرتير",
+  "draftLawyer": "المحامي المُقترح",
+  "status": "الحالة",
+  "actions": "الإجراءات",
+  "viewCaseDetails": "عرض تفاصيل القضية",
+  "deleteCase": "حذف القضية",
+  "view": "عرض",
+  "delete": "حذف",
+  "assignedTo": "مخصص إلى",
+  "unassigned": "غير مخصص"
+}

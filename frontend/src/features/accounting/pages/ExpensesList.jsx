@@ -15,8 +15,13 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserProfile } from "../../auth/authSlice";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n";
 
 const ExpensesList = () => {
+  const {t} = useTranslation("accexpensesList")
+  
   const [filters, setFilters] = useState({
     category: "",
     startDate: "",
@@ -42,6 +47,7 @@ const ExpensesList = () => {
       currency: "QAR",
     }).format(amount || 0);
   };
+  const isRTL = i18n.dir() === "rtl";
 
   // Format date
   const formatDate = (date) => {
@@ -95,13 +101,13 @@ const ExpensesList = () => {
   }
 
   return (
-    <div className="space-y-6 lg:ml-[220px]">
+    <div className={`space-y-6 ${isRTL ? "lg:mr-[220px]":"lg:ml-[220px]" } `}>
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
             <TrendingDown size={28} className="text-[#0B1F3B]" />
-            Expenses Management
+            {t("expensesManagement")}
           </h1>
           <p className="text-sm text-gray-600 mt-1">إدارة المصروفات</p>
         </div>
@@ -111,7 +117,7 @@ const ExpensesList = () => {
           className="flex items-center gap-2 px-4 py-2 bg-[#0B1F3B] text-white rounded-lg font-medium transition-all duration-200 shadow-md"
         >
           <Plus size={20} />
-          Add Expense
+        {t("addExpense")}
         </Link>
       </div>
 
@@ -126,7 +132,7 @@ const ExpensesList = () => {
             />
             <input
               type="text"
-              placeholder="Search expenses..."
+              placeholder={t("searchExpenses")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
@@ -141,18 +147,18 @@ const ExpensesList = () => {
             }
             className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           >
-            <option value="">All Categories</option>
-            <option value="office_rent">Office Rent</option>
-            <option value="utilities">Utilities</option>
-            <option value="salaries">Salaries</option>
-            <option value="supplies">Supplies</option>
-            <option value="marketing">Marketing</option>
-            <option value="legal_fees">Legal Fees</option>
-            <option value="court_fees">Court Fees</option>
-            <option value="transportation">Transportation</option>
-            <option value="technology">Technology</option>
-            <option value="maintenance">Maintenance</option>
-            <option value="other">Other</option>
+            <option value="">{t("allCategories")}</option>
+            <option value="office_rent">{t("office_rent")}</option>
+            <option value="utilities">{t("utilities")}</option>
+            <option value="salaries">{t("salaries")}</option>
+            <option value="supplies"></option>
+            <option value="marketing">{t("supplies")}</option>
+            <option value="legal_fees">{t("legal_fees")}</option>
+            <option value="court_fees">{t(  "court_fees")}</option>
+            <option value="transportation">{t("transportation")}</option>
+            <option value="technology">{t( "technology")}</option>
+            <option value="maintenance">{t("maintenance")}</option>
+            <option value="other">{t("other")}</option>
           </select>
 
           {/* Start Date */}
@@ -189,7 +195,7 @@ const ExpensesList = () => {
             }
             className="mt-3 text-sm text-[#0B1F3B] hover:underline"
           >
-            Clear Filters
+           {t("clearFilter")}
           </button>
         )}
       </div>
@@ -207,25 +213,25 @@ const ExpensesList = () => {
                 <thead className="bg-[#0B1F3B] text-white">
                   <tr>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Expense #
+                      {t("expenseNumber")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Category
+                      {t("category")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Description
+                      {t("description")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Vendor
+                      {t( "vendor")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Amount
+                      {t("amount")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Date
+                      {t( "date")}
                     </th>
                     <th className="px-4 py-3 text-center text-sm font-semibold">
-                      Actions
+                      {t(  "actions")}
                     </th>
                   </tr>
                 </thead>
@@ -328,9 +334,9 @@ const ExpensesList = () => {
         ) : (
           <div className="text-center py-12">
             <TrendingDown size={48} className="mx-auto text-gray-400 mb-4" />
-            <p className="text-gray-600 font-medium">No expenses found</p>
+            <p className="text-gray-600 font-medium">{t("noExpenseFound")}</p>
             <p className="text-sm text-gray-500 mt-1">
-              Try adjusting your filters or add a new expense
+              {t("noExpenseFoundMsg")}
             </p>
           </div>
         )}

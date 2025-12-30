@@ -1,0 +1,32 @@
+{
+  "caseManagement": "Case Management",
+  "pageDescription": "Review and approve cases assigned to you by the secretary.",
+  "searchPlaceholder": "Search by case #, client name, email, or phone...",
+  "allStages": "All Stages",
+  "stages": {
+    "main": "Main",
+    "appeal": "Appeal",
+    "cassation": "Cassation"
+  },
+  "loading": "Loading...",
+  "failedToLoad": "Failed to load data.",
+  "modificationMessage": "Modification requested",
+  "modificationRequestSuccess": "Modification request sent.",
+  "noCasesAssigned": "No Cases Assigned",
+  "noCasesMessage": "There are no cases assigned to you for review at this time.",
+  "caseNumber": "Case #",
+  "client": "Client",
+  "contact": "Contact",
+  "caseType": "Case Type",
+  "stage": "Stage",
+  "secretary": "Secretary",
+  "draftLawyer": "Draft Lawyer",
+  "status": "Status",
+  "actions": "Actions",
+  "viewCaseDetails": "View Case Details",
+  "deleteCase": "Delete Case",
+  "view": "View",
+  "delete": "Delete",
+  "assignedTo": "Assigned To",
+  "unassigned": "Unassigned"
+}

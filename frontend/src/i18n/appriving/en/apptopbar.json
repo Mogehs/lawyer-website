@@ -1,0 +1,11 @@
+{
+  "apptopbar": {
+    "languageEnglish": "English",
+    "languageArabic": "عربي",
+    "signedInAs": "Signed in as",
+    "myProfile": "My Profile",
+    "signOut": "Sign Out",
+    "loggingOut": "Logging out...",
+    "title": "Approving Portal"
+  }
+}

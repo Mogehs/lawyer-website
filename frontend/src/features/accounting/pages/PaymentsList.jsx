@@ -11,8 +11,11 @@ import { useGetPaymentsQuery, useDeletePaymentMutation } from "../api/accounting
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserProfile } from "../../auth/authSlice";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n";
 
 const PaymentsList = () => {
+  const {t} = useTranslation("accPaymentList")
   const [filters, setFilters] = useState({
     paymentMethod: "",
     startDate: "",
@@ -21,6 +24,7 @@ const PaymentsList = () => {
     limit: 10,
   });
   const [searchTerm, setSearchTerm] = useState("");
+  const isRTL = i18n.dir() === "rtl";
 
   const userProfile = useSelector(selectUserProfile);
   const isDirector = userProfile?.role === "director";
@@ -98,20 +102,20 @@ const PaymentsList = () => {
       <div className="flex justify-center items-center h-full">
         <div className="text-red-600 flex items-center gap-2">
           <AlertCircle size={20} />
-          <span>Failed to load payments</span>
+          <span>{t("failedToLoadPayment")}</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 lg:ml-[220px]">
+    <div className={`space-y-6 ${isRTL ?"lg:mr-[220px]": "lg:ml-[220px]"} `}>
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
             <CreditCard size={28} className="text-[#0B1F3B]" />
-            Payments Management
+            {t("paymentsManagement")}
           </h1>
           <p className="text-sm text-gray-600 mt-1">إدارة المدفوعات</p>
         </div>
@@ -121,7 +125,7 @@ const PaymentsList = () => {
           className="flex items-center gap-2 px-4 py-2 bg-[#0B1F3B] text-white rounded-lg font-medium transition-all duration-200 shadow-md"
         >
           <Plus size={20} />
-          Record Payment
+          {t("recordPayment")}
         </Link>
       </div>
 
@@ -136,7 +140,7 @@ const PaymentsList = () => {
             />
             <input
               type="text"
-              placeholder="Search payments..."
+              placeholder={t("searchPayments")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
@@ -151,11 +155,11 @@ const PaymentsList = () => {
             }
             className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           >
-            <option value="">All Methods</option>
-            <option value="cash">Cash</option>
-            <option value="bank_transfer">Bank Transfer</option>
-            <option value="card">Card</option>
-            <option value="check">Check</option>
+            <option value="">{t("allMethods")}</option>
+            <option value="cash">{t( "cash")}</option>
+            <option value="bank_transfer">{t("bankTransfer")}</option>
+            <option value="card">{t( "card")}</option>
+            <option value="check">{t("check")}</option>
           </select>
 
           {/* Start Date */}
@@ -192,7 +196,7 @@ const PaymentsList = () => {
             }
             className="mt-3 text-sm text-[#0B1F3B] hover:underline"
           >
-            Clear Filters
+            {t("clearFilter")}
           </button>
         )}
       </div>
@@ -210,25 +214,25 @@ const PaymentsList = () => {
                 <thead className="bg-[#0B1F3B] text-white">
                   <tr>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Receipt #
+                      {t("receiptNumber")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Invoice #
+                      {t( "invoiceNumber")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Client
+                      {t("client")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Amount
+                      {t("amount")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Payment Method
+                      {t("paymentMethod")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Payment Date
+                      {t("paymentDate")}
                     </th>
                     <th className="px-4 py-3 text-center text-sm font-semibold">
-                      Actions
+                      {t("actions")}
                     </th>
                   </tr>
                 </thead>
@@ -328,9 +332,9 @@ const PaymentsList = () => {
         ) : (
           <div className="text-center py-12">
             <CreditCard size={48} className="mx-auto text-gray-400 mb-4" />
-            <p className="text-gray-600 font-medium">No payments found</p>
+            <p className="text-gray-600 font-medium">{t("noPaymentFoud")}</p>
             <p className="text-sm text-gray-500 mt-1">
-              Try adjusting your filters or record a new payment
+              {t("noPaymentFoudMsg")}
             </p>
           </div>
         )}

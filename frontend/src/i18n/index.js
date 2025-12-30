@@ -95,6 +95,21 @@ import en_archiveheader from "../i18n/lawyer/en/archiveheader.json";
 import ar_archiveheader from "../i18n/lawyer/ar/archiveheader.json";
 import en_LawyerNotificationsPage from "../i18n/lawyer/en/LawyerNotificationsPage.json";
 import ar_LawyerNotificationsPage from "../i18n/lawyer/ar/LawyerNotificationsPage.json";
+// add accountant path
+import en_acctopbar from "../i18n/accountant/en/acctopbar.json"
+import ar_acctopbar from "../i18n/accountant/ar/acctopbar.json"
+import en_accSidebar from "../i18n/accountant/en/accSidebar.json"
+import ar_accSidebar from "../i18n/accountant/ar/accSidebar.json"
+import en_accountingDashboard from "../i18n/accountant/en/sidebar/accountingDashboard.json"
+import ar_accountingDashboard from "../i18n/accountant/ar/sidebar/accountingDashboard.json"
+import en_createInvoice from "../i18n/accountant/en/sidebar/createInvoice.json"
+import ar_createInvoice from "../i18n/accountant/ar/sidebar/createInvoice.json"
+import ar_paymentsList from "../i18n/accountant/ar/sidebar/paymentsList.json"
+import en_paymentsList from "../i18n/accountant/en/sidebar/paymentsList.json"
+import ar_accexpensesList from "../i18n/accountant/ar/sidebar/accexpensesList.json"
+import en_accexpensesList from "../i18n/accountant/en/sidebar/accexpensesList.json"
+
+
 
 const resources = {
   en: {
@@ -142,7 +157,13 @@ const resources = {
     lawyerarchive: en_lawyerarchive,
     archiveheader: en_archiveheader,
     LawyerNotificationsPage: en_LawyerNotificationsPage,
-    
+    // add path of accountant 
+    acctopbar:en_acctopbar,
+    accSidebar:en_accSidebar,
+    accountingDashboard:en_accountingDashboard,
+    accInvoice:en_createInvoice,
+    accPaymentList:en_paymentsList,
+    accexpensesList:en_accexpensesList
   
   },
   ar: {
@@ -190,6 +211,13 @@ const resources = {
     lawyerarchive: ar_lawyerarchive,
     archiveheader: ar_archiveheader,
     LawyerNotificationsPage: ar_LawyerNotificationsPage,
+     // add path of accountant 
+    acctopbar:ar_acctopbar,
+    accSidebar:ar_accSidebar,
+    accountingDashboard:ar_accountingDashboard,
+    accInvoice:ar_createInvoice,
+    accPaymentList:ar_paymentsList,
+    accexpensesList:ar_accexpensesList
 
   }
 };

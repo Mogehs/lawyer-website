@@ -43,6 +43,16 @@ import en_addReminderModal from './locals/en/addReminderModal.json';
 import ar_addReminderModal from './locals/ar/addReminderModal.json';
 import en_teamviewmodel from "./locals/en/teamviewmodel.json";
 import ar_teamviewmodel from "./locals/ar/teamviewmodel.json";
+import en_caseDetail from "../i18n/lawyer/en/caseDetail.json";
+import ar_caseDetail from "../i18n/lawyer/ar/caseDetail.json";
+
+// add appriving dashboard translations here
+import en_apptopbar from "../i18n/appriving/en/apptopbar.json";
+import ar_apptopbar from "../i18n/appriving/ar/apptopbar.json";
+import en_appsidebar from "../i18n/appriving/en/appsidebar.json";
+import ar_appsidebar from "../i18n/appriving/ar/appsidebar.json";
+import en_appcasemanagement from "../i18n/appriving/en/appcasemanagement.json";
+import ar_appcasemanagement from "../i18n/appriving/ar/appcasemanagement.json";
 //---secretary translations start here---
 import en_reportsHeader from "./locals/en/reportsHeader.json";
 import ar_reportsHeader from "./locals/ar/reportsHeader.json";
@@ -87,6 +97,11 @@ import en_SecReminders from "./locals/en/SecReminders.json";
 import ar_SecReminders from "./locals/ar/SecReminders.json";
 import en_CaseReminder from "./locals/en/CaseReminder.json";
 import ar_CaseReminder from "./locals/ar/CaseReminder.json";
+import en_CaseDelete from "./locals/en/CaseDelete.json";
+import ar_CaseDelete from "./locals/ar/CaseDelete.json";
+import en_ArchiveCase from "./locals/en/ArchiveCase.json";
+import ar_ArchiveCase from "./locals/ar/ArchiveCase.json";
+
 //  lawyer website translations   
 import en_lawyertopbar from "../i18n/lawyer/en/lawyertopbr.json";
 import ar_lawyertopbarar from "../i18n/lawyer/ar/lawyertopbr.json";
@@ -147,6 +162,7 @@ const resources = {
   archivefilter: en_archivefilter,
     addReminderModal: en_addReminderModal,
     teamviewmodel: en_teamviewmodel,
+
     //---secretary translations end here---
     topbar1: en_topbar1,
     sidebar: en_sidebar1,
@@ -163,6 +179,7 @@ const resources = {
     CaseDelete: en_CaseDelete,
     ArchiveCase: en_ArchiveCase,
     CaseReminder: en_CaseReminder,
+
     // lawyer website translations
     lawyertopbr: en_lawyertopbar,
     lawyersidebar: en_lawyersidebar,
@@ -178,8 +195,13 @@ const resources = {
     accountingDashboard:en_accountingDashboard,
     accInvoice:en_createInvoice,
     accPaymentList:en_paymentsList,
-    accexpensesList:en_accexpensesList
-  
+    accexpensesList:en_accexpensesList,
+    //appriving dashboard translations
+    apptopbar:en_apptopbar,
+    appsidebar:en_appsidebar,
+    appcasemanagement:en_appcasemanagement,
+
+
   },
   ar: {
     topbar: ar_topbar,
@@ -223,7 +245,7 @@ const resources = {
     CaseDelete: ar_CaseDelete,
     ArchiveCase: ar_ArchiveCase,
     CaseReminder: ar_CaseReminder,
-    // lawyer website translations
+   // lawyer website translations,
     lawyertopbr: ar_lawyertopbarar,
     lawyersidebar: ar_lawyersidebar,
     lawyeroverview: ar_lawyeroverview,
@@ -238,7 +260,11 @@ const resources = {
     accountingDashboard:ar_accountingDashboard,
     accInvoice:ar_createInvoice,
     accPaymentList:ar_paymentsList,
-    accexpensesList:ar_accexpensesList
+    accexpensesList:ar_accexpensesList,
+    //appriving dashboard translations
+    apptopbar:ar_apptopbar,
+    appsidebar:ar_appsidebar,
+    appcasemanagement:ar_appcasemanagement,
 
   }
 };

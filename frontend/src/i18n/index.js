@@ -143,7 +143,10 @@ import ar_paymentsList from "../i18n/accountant/ar/sidebar/paymentsList.json"
 import en_paymentsList from "../i18n/accountant/en/sidebar/paymentsList.json"
 import ar_accexpensesList from "../i18n/accountant/ar/sidebar/accexpensesList.json"
 import en_accexpensesList from "../i18n/accountant/en/sidebar/accexpensesList.json"
-
+import en_CaseDelete from "./locals/en/CaseDelete.json";
+import ar_CaseDelete from "./locals/ar/CaseDelete.json";
+import en_ArchiveCase from "./locals/en/ArchiveCase.json";
+import ar_ArchiveCase from "./locals/ar/ArchiveCase.json";
 
 
 const resources = {
@@ -207,6 +210,17 @@ const resources = {
     lawyerarchive: en_lawyerarchive,
     archiveHeader: en_archiveheader,
     LawyerNotificationsPage: en_LawyerNotificationsPage,
+    // add path of accountant 
+    acctopbar:en_acctopbar,
+    accSidebar:en_accSidebar,
+    accountingDashboard:en_accountingDashboard,
+    accInvoice:en_createInvoice,
+    accPaymentList:en_paymentsList,
+    accexpensesList:en_accexpensesList,
+    //appriving dashboard translations
+    apptopbar:en_apptopbar,
+    appsidebar:en_appsidebar,
+    appcasemanagement:en_appcasemanagement,
     
 
   },

@@ -38,7 +38,7 @@ const Signup = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-gradient-to-r from-[#BCB083] to-[#A48C65]"
+      className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-white"
     >
       {/* Background Pattern */}
       <div
@@ -54,7 +54,7 @@ const Signup = () => {
         className="relative bg-white backdrop-blur-md p-10 rounded-2xl shadow-xl 
                     w-full max-w-md border border-slate-200"
       >
-        <h1 className="text-3xl font-extrabold text-center mb-2 text-[#b48c65]">
+        <h1 className="text-3xl font-extrabold text-center mb-2 text-[#0B1F3B]">
           Create Account
         </h1>
 
@@ -77,7 +77,7 @@ const Signup = () => {
               value={formData.fullName}
               onChange={handleChange}
               placeholder="Enter your full name"
-              className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#BCB083] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#BCB083] transition-all"
+              className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#0B1F3B] transition-all"
               required
             />
           </div>
@@ -93,7 +93,7 @@ const Signup = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter email address"
-              className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#BCB083] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#BCB083] transition-all"
+              className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#0B1F3B] transition-all"
               required
             />
           </div>
@@ -109,7 +109,7 @@ const Signup = () => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="97412345678 (without + sign)"
-              className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#BCB083] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#BCB083] transition-all"
+              className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#0B1F3B] transition-all"
               required
             />
             <p className="text-xs text-[#494C52] mt-1">
@@ -131,7 +131,7 @@ const Signup = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter password"
-              className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#BCB083] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#BCB083] transition-all"
+              className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#0B1F3B] transition-all"
               required
             />
           </div>
@@ -139,17 +139,17 @@ const Signup = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full text-[#A48C65] py-3 rounded-xl text-lg font-medium transition-all shadow-md ${
+            className={`w-full text-[#0B1F3B] py-3 rounded-xl text-lg font-medium transition-all shadow-md ${
               isLoading
                 ? "bg-[#494C52] text-white cursor-not-allowed"
-                : "bg-white border border-[#A48C65] text-gray-800 hover:bg-[#A48C65] hover:text-white transition-all duration-200 hover:shadow-lg"
+                : "bg-white border border-[#0B1F3B] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 hover:shadow-lg"
             }`}
           >
             {isLoading ? "Creating..." : "Sign Up"}
           </button>
 
           {error && (
-            <p className="text-[#b48c65] text-center mt-2 text-sm">
+            <p className="text-[#0B1F3B] text-center mt-2 text-sm">
               {error?.data?.message || "Something went wrong"}
             </p>
           )}

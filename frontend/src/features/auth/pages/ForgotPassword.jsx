@@ -20,7 +20,7 @@ const ForgotPassword = () => {
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden 
-                 bg-gradient-to-r from-[#BCB083] to-[#A48C65]"
+                 bg-white"
     >
       <div className="absolute inset-0 opacity-10 select-none pointer-events-none 
                       flex items-center justify-center text-[120px] font-extrabold 
@@ -31,7 +31,7 @@ const ForgotPassword = () => {
       <div className="relative bg-white/90 backdrop-blur-md p-10 rounded-2xl shadow-xl 
                       w-full max-w-md border border-slate-200">
 
-        <h1 className="text-3xl font-extrabold text-center mb-3 text-[#A48C65]">
+        <h1 className="text-3xl font-extrabold text-center mb-3 text-[#0B1F3B]">
           Forgot Password
         </h1>
 
@@ -51,20 +51,20 @@ const ForgotPassword = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-[#A48C65] rounded-xl bg-slate-50 
-                         focus:outline-none focus:ring-2 focus:ring-[#A48C65] transition-all"
+              className="w-full px-4 py-3 border border-[#0B1F3B] rounded-xl bg-slate-50 
+                         focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] transition-all"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full text-white py-3 rounded-xl text-lg px-3  bg-[#A48C65] hover:bg-[#ffff] hover:text-[#A48C65]  hover:border-[#A48C65]  border transition font-medium shadow-md hover:shadow-lg"
+            className="w-full text-white py-3 rounded-xl text-lg px-3  bg-[#0B1F3B] hover:bg-[#ffff] hover:text-[#0B1F3B]  hover:border-[#0B1F3B]  border transition font-medium shadow-md hover:shadow-lg"
           >
             Send Reset Link
           </button>
 
           <p className="text-center text-sm mt-4 text-[#A48C65]">
-            <a href="/login" className="text-[#A48C65] hover:underline font-semibold">
+            <a href="/login" className="text-[#0B1F3B] hover:underline font-semibold">
               Back to Login
             </a>
           </p>

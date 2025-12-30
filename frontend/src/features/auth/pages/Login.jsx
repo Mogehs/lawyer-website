@@ -67,7 +67,7 @@ const Login = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-gradient-to-r from-[#BCB083] to-[#A48C65]"
+      className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-white"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 select-none pointer-events-none 
@@ -80,7 +80,7 @@ const Login = () => {
       <div className="relative bg-white backdrop-blur-md p-10 rounded-2xl shadow-xl 
                       w-full max-w-md border border-slate-200">
 
-        <h1 className="text-3xl font-extrabold text-center mb-2 text-[#A48C65]">
+        <h1 className="text-3xl font-extrabold text-center mb-2 text-[#0B1F3B]">
           Welcome Back
         </h1>
 
@@ -106,7 +106,7 @@ const Login = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#BCB083] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#BCB083] transition-all"
+              className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#0B1F3B] transition-all"
             />
           </div>
 
@@ -128,7 +128,7 @@ const Login = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#BCB083] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#BCB083] transition-all"
+                className="w-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] rounded-xl bg-[#ffff] text-black placeholder-[#494C52] border border-[#0B1F3B] transition-all"
               />
 
               {/* Icon Toggle */}
@@ -151,7 +151,7 @@ const Login = () => {
           <div className="text-right -mt-2">
             <a
               href="/forgot-password"
-              className="text-[#A48C65] hover:underline text-sm font-medium"
+              className="text-[#0B1F3B] hover:underline text-sm font-medium"
             >
               Forgot Password?
             </a>
@@ -161,9 +161,9 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full text-[#A48C65] py-3 rounded-xl text-lg font-medium shadow-md transition-all ${isLoading
+            className={`w-full text-[#0B1F3B] py-3 rounded-xl text-lg font-medium shadow-md transition-all ${isLoading
               ? "bg-[#494C52] text-white cursor-not-allowed"
-              : "bg-white border border-[#A48C65] text-gray-800 hover:bg-[#A48C65] hover:text-white transition-all duration-200 hover:shadow-lg"
+              : "bg-white border border-[#0B1F3B] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 hover:shadow-lg"
               }`}
           >
             {isLoading ? "Logging in..." : "Login"}
@@ -175,7 +175,7 @@ const Login = () => {
               Don’t have an account?{" "}
               <a
                 href="/signup"
-                className="text-[#A48C65] hover:underline font-semibold"
+                className="text-[#0B1F3B] hover:underline font-semibold"
               >
                 Sign up
               </a>

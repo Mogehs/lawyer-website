@@ -1,0 +1,19 @@
+{
+  "archiveCase": {
+    "title": "Archive Case",
+    "confirmTitle": "Archive Case {{id}}?",
+    "caseLine": "{{clientName}} - {{caseDescription}}",
+    "defaultCase": "Case",
+    "status": "Status",
+    "hearing": "Hearing",
+    "info": {
+      "moved": "Moved to archives",
+      "preserved": "Data preserved",
+      "restore": "Can be restored anytime"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "archive": "Archive"
+    }
+  }
+}

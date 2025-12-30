@@ -1,0 +1,36 @@
+{
+  "addReminder": {
+    "title": "إضافة تذكير",
+    "subtitle": "{{caseNumber}} - {{clientName}}",
+
+    "labels": {
+      "type": "النوع",
+      "date": "التاريخ",
+      "message": "الرسالة (اختياري)"
+    },
+
+    "types": {
+      "hearing": "جلسة",
+      "submission": "تقديم"
+    },
+
+    "placeholders": {
+      "message": "أدخل رسالة تذكير مخصصة..."
+    },
+
+    "buttons": {
+      "cancel": "إلغاء",
+      "create": "إنشاء",
+      "creating": "جاري الإنشاء..."
+    },
+
+    "errors": {
+      "selectDate": "يرجى اختيار تاريخ التذكير",
+      "failed": "فشل في إنشاء التذكير"
+    },
+
+    "success": {
+      "created": "تم إنشاء التذكير بنجاح"
+    }
+  }
+}

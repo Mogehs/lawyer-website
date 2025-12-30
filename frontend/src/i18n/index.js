@@ -85,6 +85,8 @@ import en_CreateInvoice from "./locals/en/CreateInvoice.json";
 import ar_CreateInvoice from "./locals/ar/CreateInvoice.json";
 import en_SecReminders from "./locals/en/SecReminders.json";
 import ar_SecReminders from "./locals/ar/SecReminders.json";
+import en_CaseReminder from "./locals/en/CaseReminder.json";
+import ar_CaseReminder from "./locals/ar/CaseReminder.json";
 //  lawyer website translations   
 import en_lawyertopbar from "../i18n/lawyer/en/lawyertopbr.json";
 import ar_lawyertopbarar from "../i18n/lawyer/ar/lawyertopbr.json";
@@ -102,16 +104,22 @@ import en_archiveheader from "../i18n/lawyer/en/archiveheader.json";
 import ar_archiveheader from "../i18n/lawyer/ar/archiveheader.json";
 import en_LawyerNotificationsPage from "../i18n/lawyer/en/LawyerNotificationsPage.json";
 import ar_LawyerNotificationsPage from "../i18n/lawyer/ar/LawyerNotificationsPage.json";
-import en_caseDetail from "../i18n/lawyer/en/caseDetail.json";
-import ar_caseDetail from "../i18n/lawyer/ar/caseDetail.json";
+// add accountant path
+import en_acctopbar from "../i18n/accountant/en/acctopbar.json"
+import ar_acctopbar from "../i18n/accountant/ar/acctopbar.json"
+import en_accSidebar from "../i18n/accountant/en/accSidebar.json"
+import ar_accSidebar from "../i18n/accountant/ar/accSidebar.json"
+import en_accountingDashboard from "../i18n/accountant/en/sidebar/accountingDashboard.json"
+import ar_accountingDashboard from "../i18n/accountant/ar/sidebar/accountingDashboard.json"
+import en_createInvoice from "../i18n/accountant/en/sidebar/createInvoice.json"
+import ar_createInvoice from "../i18n/accountant/ar/sidebar/createInvoice.json"
+import ar_paymentsList from "../i18n/accountant/ar/sidebar/paymentsList.json"
+import en_paymentsList from "../i18n/accountant/en/sidebar/paymentsList.json"
+import ar_accexpensesList from "../i18n/accountant/ar/sidebar/accexpensesList.json"
+import en_accexpensesList from "../i18n/accountant/en/sidebar/accexpensesList.json"
 
-// add appriving dashboard translations here
-import en_apptopbar from "../i18n/appriving/en/apptopbar.json";
-import ar_apptopbar from "../i18n/appriving/ar/apptopbar.json";
-import en_appsidebar from "../i18n/appriving/en/appsidebar.json";
-import ar_appsidebar from "../i18n/appriving/ar/appsidebar.json";
-import en_appcasemanagement from "../i18n/appriving/en/appcasemanagement.json";
-import ar_appcasemanagement from "../i18n/appriving/ar/appcasemanagement.json";
+
+
 const resources = {
   en: {
     topbar: en_topbar,
@@ -152,6 +160,9 @@ const resources = {
     SecretaryInvoices: en_SecretaryInvoices,
     CreateInvoice: en_CreateInvoice,
     SecReminders: en_SecReminders,
+    CaseDelete: en_CaseDelete,
+    ArchiveCase: en_ArchiveCase,
+    CaseReminder: en_CaseReminder,
     // lawyer website translations
     lawyertopbr: en_lawyertopbar,
     lawyersidebar: en_lawyersidebar,
@@ -161,11 +172,13 @@ const resources = {
     lawyerarchive: en_lawyerarchive,
     archiveHeader: en_archiveheader,
     LawyerNotificationsPage: en_LawyerNotificationsPage,
-    caseDetail: en_caseDetail,
-// approving dashboard translations
-    apptopbar: en_apptopbar,
-    appsidebar: en_appsidebar,
-    appcasemanagement: en_appcasemanagement,
+    // add path of accountant 
+    acctopbar:en_acctopbar,
+    accSidebar:en_accSidebar,
+    accountingDashboard:en_accountingDashboard,
+    accInvoice:en_createInvoice,
+    accPaymentList:en_paymentsList,
+    accexpensesList:en_accexpensesList
   
   },
   ar: {
@@ -207,6 +220,9 @@ const resources = {
     SecretaryInvoices: ar_SecretaryInvoices,
     CreateInvoice: ar_CreateInvoice,
     SecReminders: ar_SecReminders,
+    CaseDelete: ar_CaseDelete,
+    ArchiveCase: ar_ArchiveCase,
+    CaseReminder: ar_CaseReminder,
     // lawyer website translations
     lawyertopbr: ar_lawyertopbarar,
     lawyersidebar: ar_lawyersidebar,
@@ -216,11 +232,13 @@ const resources = {
     lawyerarchive: ar_lawyerarchive,
     archiveHeader: ar_archiveheader,
     LawyerNotificationsPage: ar_LawyerNotificationsPage,
-    caseDetail: ar_caseDetail,
-// approving dashboard translations
-    apptopbar: ar_apptopbar,
-    appsidebar: ar_appsidebar,
-    appcasemanagement: ar_appcasemanagement,
+     // add path of accountant 
+    acctopbar:ar_acctopbar,
+    accSidebar:ar_accSidebar,
+    accountingDashboard:ar_accountingDashboard,
+    accInvoice:ar_createInvoice,
+    accPaymentList:ar_paymentsList,
+    accexpensesList:ar_accexpensesList
 
   }
 };

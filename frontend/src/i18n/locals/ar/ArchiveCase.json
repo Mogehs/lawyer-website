@@ -1,0 +1,19 @@
+{
+  "archiveCase": {
+    "title": "أرشفة القضية",
+    "confirmTitle": "هل تريد أرشفة القضية {{id}}؟",
+    "caseLine": "{{clientName}} - {{caseDescription}}",
+    "defaultCase": "قضية",
+    "status": "الحالة",
+    "hearing": "جلسة",
+    "info": {
+      "moved": "تم نقل القضية إلى الأرشيف",
+      "preserved": "تم الاحتفاظ بجميع البيانات",
+      "restore": "يمكن استرجاعها في أي وقت"
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "archive": "أرشفة"
+    }
+  }
+}

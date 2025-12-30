@@ -2,8 +2,12 @@ import { useState } from "react";
 import { TrendingDown } from "lucide-react";
 import { useCreateExpenseMutation } from "../api/accountingApi";
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n";
 
 const CreateExpense = () => {
+  const {t} = useTranslation("accexpensesList")
   const navigate = useNavigate();
   const [createExpense, { isLoading }] = useCreateExpenseMutation();
 
@@ -15,6 +19,7 @@ const CreateExpense = () => {
     vendor: "",
     notes: "",
   });
+  const isRTL = i18n.dir() === "rtl";
 
   const categories = [
     { value: "office_rent", label: "Office Rent / إيجار المكتب" },
@@ -51,17 +56,17 @@ const CreateExpense = () => {
       alert("Expense created successfully!");
       navigate("/accountant/expenses");
     } catch (error) {
-      alert(error?.data?.message || "Failed to create expense");
+      alert(error?.data?.message || t("failedToCreateExpense"));
     }
   };
 
   return (
-    <div className="space-y-6 lg:ml-[220px]">
+    <div className={`space-y-6 ${isRTL ? "lg:mr-[220px]":"lg:ml-[220px]" } `}>
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
           <TrendingDown size={28} className="text-[#0B1F3B]" />
-          Add New Expense
+          {t("addNewExpense")}
         </h1>
         <p className="text-sm text-gray-600 mt-1">إضافة مصروف جديد</p>
       </div>
@@ -81,7 +86,7 @@ const CreateExpense = () => {
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             >
-              <option value="">Select Category</option>
+              <option value="">{t("selectCategory")}</option>
               {categories.map((cat) => (
                 <option key={cat.value} value={cat.value}>
                   {cat.label}
@@ -101,7 +106,7 @@ const CreateExpense = () => {
               onChange={handleChange}
               required
               rows={4}
-              placeholder="Enter expense details..."
+              placeholder={t("expenseDetails")}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
@@ -149,7 +154,7 @@ const CreateExpense = () => {
               name="vendor"
               value={formData.vendor}
               onChange={handleChange}
-              placeholder="Enter vendor name (optional)"
+              placeholder={t("vendorName")}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
@@ -164,7 +169,7 @@ const CreateExpense = () => {
               value={formData.notes}
               onChange={handleChange}
               rows={3}
-              placeholder="Additional notes..."
+              placeholder={t("additonalNotes")}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
             />
           </div>
@@ -176,14 +181,14 @@ const CreateExpense = () => {
               disabled={isLoading}
               className="px-6 py-2 bg-[#0B1F3B] cursor-pointer text-white rounded-lg font-medium transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Creating..." : "Add Expense"}
+              {isLoading ? t("creating") : t("addExpense")}
             </button>
             <button
               type="button"
               onClick={() => navigate("/accountant/expenses")}
               className="px-6 py-2 bg-gray-200 cursor-pointer hover:bg-gray-300 text-gray-800 rounded-lg font-medium transition-colors"
             >
-              Cancel
+              {t("cancel")}
             </button>
           </div>
         </div>

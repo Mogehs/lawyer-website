@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState,  } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FileText,
   Plus,
@@ -14,8 +15,10 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserProfile } from "../../auth/authSlice";
 import ViewInvoiceModal from "../../secretary/components/ViewInvoiceModal";
+import i18n from "../../../i18n";
 
 const InvoicesList = () => {
+  const {t} = useTranslation("accInvoice")
   const [filters, setFilters] = useState({
     status: "",
     startDate: "",
@@ -25,6 +28,8 @@ const InvoicesList = () => {
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedInvoice, setSelectedInvoice] = useState(null);
+  const isRTL = i18n.dir() === "rtl";
+   
 
   const userProfile = useSelector(selectUserProfile);
   const isDirector = userProfile?.role === "director";
@@ -69,9 +74,9 @@ const InvoicesList = () => {
     if (window.confirm("Are you sure you want to delete this invoice?")) {
       try {
         await deleteInvoice(id).unwrap();
-        alert("Invoice deleted successfully");
+        alert(t("invoiceDeleteSuccess"));
       } catch (error) {
-        alert(error?.data?.message || "Failed to delete invoice");
+        alert(error?.data?.message || t("FailedtoDeleteInvoice"));
       }
     }
   };
@@ -92,20 +97,21 @@ const InvoicesList = () => {
       <div className="flex justify-center items-center h-full">
         <div className="text-red-600 flex items-center gap-2">
           <AlertCircle size={20} />
-          <span>Failed to load invoices</span>
+          <span>{t("faildInvoice")}</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 lg:ml-[220px]">
+   <div className={`space-y-6 ${isRTL ? "lg:mr-[220px]" : "lg:ml-[220px]"}`}>
+
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
             <FileText size={28} className="text-[#0B1F3B]" />
-            Invoices Management
+            {t("invoicesManagement")}
           </h1>
           <p className="text-sm text-[#0B1F3B] mt-1">إدارة الفواتير</p>
         </div>
@@ -116,7 +122,7 @@ const InvoicesList = () => {
             className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#BCB083] to-[#A48C65] hover:from-[#A48C65] hover:to-[#8B7355] text-white rounded-lg font-medium transition-all duration-200 shadow-md"
           >
             <Plus size={20} />
-            Create Invoice
+            {t("createInvoice")}
           </Link>
         )}
       </div>
@@ -132,7 +138,7 @@ const InvoicesList = () => {
             />
             <input
               type="text"
-              placeholder="Search invoices..."
+              placeholder={t("searchInvoice")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
@@ -145,11 +151,11 @@ const InvoicesList = () => {
             onChange={(e) => setFilters({ ...filters, status: e.target.value, page: 1 })}
             className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           >
-            <option value="">All Status</option>
-            <option value="paid">Paid</option>
-            <option value="partially_paid">Partially Paid</option>
-            <option value="unpaid">Unpaid</option>
-            <option value="overdue">Overdue</option>
+            <option value="">{t("allStatus")}</option>
+            <option value="paid">{t("paid")}</option>
+            <option value="partially_paid">{t("partiallyPaid")}</option>
+            <option value="unpaid">{t("unpaid")}</option>
+            <option value="overdue">{t("overdue")}</option>
           </select>
 
           {/* Start Date */}
@@ -174,7 +180,7 @@ const InvoicesList = () => {
             onClick={() => setFilters({ status: "", startDate: "", endDate: "", page: 1, limit: 10 })}
             className="mt-3 text-sm text-[#A48C65] hover:underline"
           >
-            Clear Filters
+            {t("clearFilter")}
           </button>
         )}
       </div>
@@ -192,28 +198,28 @@ const InvoicesList = () => {
                 <thead className="bg-[#0B1F3B] text-white">
                   <tr>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Invoice #
+                      {t("invoiceNumber")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Client
+                      {t("client")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Service
+                      {t("service")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Total Amount
+                      {t("totalAmount")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Paid Amount
+                      {t("paidAmount")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Status
+                      {t("status")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Due Date
+                      {t("dueDate")}
                     </th>
                     <th className="px-4 py-3 text-center text-sm font-semibold">
-                      Actions
+                      {t("actions")}
                     </th>
                   </tr>
                 </thead>
@@ -322,9 +328,9 @@ const InvoicesList = () => {
         ) : (
           <div className="text-center py-12">
             <FileText size={48} className="mx-auto text-gray-400 mb-4" />
-            <p className="text-gray-600 font-medium">No invoices found</p>
+            <p className="text-gray-600 font-medium">{t("noIvnoice")}</p>
             <p className="text-sm text-gray-500 mt-1">
-              Try adjusting your filters or create a new invoice
+              {t("noIvnoiceMsg")}
             </p>
           </div>
         )}
@@ -340,4 +346,3 @@ const InvoicesList = () => {
 };
 
 export default InvoicesList;
-

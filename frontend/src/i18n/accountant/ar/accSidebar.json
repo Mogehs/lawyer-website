@@ -1,0 +1,10 @@
+{
+  "title": "Accounting",
+  "subtitle": "Finance Portal",
+  "dashboard": "لوحة التحكم",
+  "invoices": "الفواتير",
+  "payments": "المدفوعات",
+  "expenses": "المصروفات",
+  "default": "Logout",
+  "loading": "Logging out..."
+}

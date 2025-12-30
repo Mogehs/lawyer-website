@@ -1,0 +1,10 @@
+{
+  "title": "Accounting",
+  "subtitle": "Finance Portal",
+  "dashboard": "Dashboard",
+  "invoices": "Invoices",
+  "payments": "Payments",
+  "expenses": "Expenses",
+  "default": "Logout",
+  "loading": "Logging out..."
+}

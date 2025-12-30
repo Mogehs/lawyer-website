@@ -1,0 +1,11 @@
+{
+  "deleteTitle": "Delete Case",
+  "deleteConfirmation": "Delete Case {{id}}?",
+  "caseDetails": "{{clientName}} - {{caseDescription}}",
+  "status": "Status",
+  "hearing": "Hearing",
+  "warningTitle": "Warning:",
+  "warningMessage": "This action is irreversible. All case data will be permanently deleted.",
+  "cancel": "Cancel",
+  "delete": "Delete"
+}

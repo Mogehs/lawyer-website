@@ -78,6 +78,8 @@ import en_CreateInvoice from "./locals/en/CreateInvoice.json";
 import ar_CreateInvoice from "./locals/ar/CreateInvoice.json";
 import en_SecReminders from "./locals/en/SecReminders.json";
 import ar_SecReminders from "./locals/ar/SecReminders.json";
+import en_CaseReminder from "./locals/en/CaseReminder.json";
+import ar_CaseReminder from "./locals/ar/CaseReminder.json";
 //  lawyer website translations   
 import en_lawyertopbar from "../i18n/lawyer/en/lawyertopbr.json";
 import ar_lawyertopbarar from "../i18n/lawyer/ar/lawyertopbr.json";
@@ -148,6 +150,9 @@ const resources = {
     SecretaryInvoices: en_SecretaryInvoices,
     CreateInvoice: en_CreateInvoice,
     SecReminders: en_SecReminders,
+    CaseDelete: en_CaseDelete,
+    ArchiveCase: en_ArchiveCase,
+    CaseReminder: en_CaseReminder,
     // lawyer website translations
     lawyertopbr: en_lawyertopbar,
     lawyersidebar: en_lawyersidebar,
@@ -202,6 +207,9 @@ const resources = {
     SecretaryInvoices: ar_SecretaryInvoices,
     CreateInvoice: ar_CreateInvoice,
     SecReminders: ar_SecReminders,
+    CaseDelete: ar_CaseDelete,
+    ArchiveCase: ar_ArchiveCase,
+    CaseReminder: ar_CaseReminder,
     // lawyer website translations
     lawyertopbr: ar_lawyertopbarar,
     lawyersidebar: ar_lawyersidebar,

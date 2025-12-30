@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
-import { X, Archive, AlertCircle, Briefcase } from "lucide-react";
+import { X, Archive, AlertCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const ArchiveCaseModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
+  const { t } = useTranslation("ArchiveCase");
+
   if (!isOpen || !caseItem) return null;
 
   return (
@@ -16,11 +19,12 @@ const ArchiveCaseModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
         <div className="flex items-center bg-[#0B1F3B] justify-between p-3 rounded-t-lg">
           <h3 className="text-sm font-semibold flex items-center gap-1.5 text-white">
             <Archive className="w-4 h-4" />
-            Archive Case
+            {t("archiveCase.title")}
           </h3>
+
           <button
             onClick={onClose}
-            className="text-white hover:text-white hover:bg-[#0B1F3B] cursor-pointer transition-colors p-1 rounded"
+            className="text-white cursor-pointer transition-colors p-1 rounded"
           >
             <X className="w-4 h-4" />
           </button>
@@ -33,29 +37,38 @@ const ArchiveCaseModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
               className="text-[#0B1F3B] flex-shrink-0 mt-0.5"
               size={16}
             />
+
             <div>
               <p className="font-semibold text-slate-800 text-xs">
-                Archive Case {caseItem.id}?
+                {t("archiveCase.confirmTitle", { id: caseItem.id })}
               </p>
+
               <p className="text-[10px] text-slate-600 mt-0.5">
-                {caseItem.client?.name} - {caseItem.case?.description || "Case"}
+                {t("archiveCase.caseLine", {
+                  clientName: caseItem.client?.name || "",
+                  caseDescription:
+                    caseItem.case?.description ||
+                    t("archiveCase.defaultCase")
+                })}
               </p>
             </div>
           </div>
 
+          {/* Case Info */}
           <div className="bg-slate-50 border border-slate-200 rounded p-2">
             <div className="space-y-1 text-[10px] text-slate-600">
               {caseItem.case?.status && (
                 <p>
-                  Status:{" "}
+                  {t("archiveCase.status")}:{" "}
                   <span className="font-medium text-slate-800">
                     {caseItem.case.status}
                   </span>
                 </p>
               )}
+
               {caseItem.case?.hearingDate && (
                 <p>
-                  Hearing:{" "}
+                  {t("archiveCase.hearing")}:{" "}
                   <span className="font-medium text-slate-800">
                     {caseItem.case.hearingDate}
                   </span>
@@ -64,6 +77,7 @@ const ArchiveCaseModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
             </div>
           </div>
 
+          {/* Info Box */}
           <div className="bg-purple-50 border border-purple-200 rounded p-2">
             <div className="flex items-start gap-1.5">
               <AlertCircle
@@ -71,9 +85,9 @@ const ArchiveCaseModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
                 size={12}
               />
               <ul className="text-[10px] text-slate-700 space-y-0.5">
-                <li>• Moved to archives</li>
-                <li>• Data preserved</li>
-                <li>• Can be restored anytime</li>
+                <li>• {t("archiveCase.info.moved")}</li>
+                <li>• {t("archiveCase.info.preserved")}</li>
+                <li>• {t("archiveCase.info.restore")}</li>
               </ul>
             </div>
           </div>
@@ -85,14 +99,15 @@ const ArchiveCaseModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
             onClick={onClose}
             className="px-3 py-1 cursor-pointer border border-slate-300 text-slate-700 rounded text-xs hover:bg-white transition"
           >
-            Cancel
+            {t("archiveCase.buttons.cancel")}
           </button>
+
           <button
             onClick={onConfirm}
             className="flex items-center cursor-pointer gap-1 px-3 py-1 bg-[#0B1F3B] text-white rounded text-xs font-medium hover:bg-[#0B1F3B] transition"
           >
             <Archive className="w-3 h-3" />
-            Archive
+            {t("archiveCase.buttons.archive")}
           </button>
         </div>
       </motion.div>

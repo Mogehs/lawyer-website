@@ -1,0 +1,36 @@
+{
+  "addReminder": {
+    "title": "Add Reminder",
+    "subtitle": "{{caseNumber}} - {{clientName}}",
+
+    "labels": {
+      "type": "Type",
+      "date": "Date",
+      "message": "Message (Optional)"
+    },
+
+    "types": {
+      "hearing": "Hearing",
+      "submission": "Submission"
+    },
+
+    "placeholders": {
+      "message": "Enter a custom reminder message..."
+    },
+
+    "buttons": {
+      "cancel": "Cancel",
+      "create": "Create",
+      "creating": "Creating..."
+    },
+
+    "errors": {
+      "selectDate": "Please select a reminder date",
+      "failed": "Failed to create reminder"
+    },
+
+    "success": {
+      "created": "Reminder created successfully"
+    }
+  }
+}

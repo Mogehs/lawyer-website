@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
-import { X, Trash2, AlertTriangle, Briefcase } from "lucide-react";
+import { X, Trash2, AlertTriangle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
+  const { t } = useTranslation("CaseDelete");
+
   if (!isOpen || !caseItem) return null;
 
   return (
@@ -16,7 +19,7 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
         <div className="flex items-center bg-[#0B1F3B] justify-between p-3 rounded-t-lg">
           <h3 className="text-sm font-semibold flex items-center gap-1.5 text-white">
             <Trash2 className="w-4 h-4" />
-            Delete Case
+            {t("deleteTitle")}
           </h3>
           <button
             onClick={onClose}
@@ -35,19 +38,23 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
             />
             <div>
               <p className="font-semibold text-slate-800 text-xs">
-                Delete Case {caseItem.id}?
+                {t("deleteConfirmation", { id: caseItem.id })}
               </p>
               <p className="text-[10px] text-slate-600 mt-0.5">
-                {caseItem.client?.name} - {caseItem.case?.description || "Case"}
+                {t("caseDetails", {
+                  clientName: caseItem.client?.name,
+                  caseDescription: caseItem.case?.description || t("defaultCase")
+                })}
               </p>
             </div>
           </div>
 
+          {/* Case Info */}
           <div className="bg-slate-50 border border-slate-200 rounded p-2">
             <div className="space-y-1 text-[10px] text-slate-600">
               {caseItem.case?.status && (
                 <p>
-                  Status:{" "}
+                  {t("status")}:{" "}
                   <span className="font-medium text-slate-800">
                     {caseItem.case.status}
                   </span>
@@ -55,7 +62,7 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
               )}
               {caseItem.case?.hearingDate && (
                 <p>
-                  Hearing:{" "}
+                  {t("hearing")}:{" "}
                   <span className="font-medium text-slate-800">
                     {caseItem.case.hearingDate}
                   </span>
@@ -64,10 +71,13 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
             </div>
           </div>
 
+          {/* Warning */}
           <div className="bg-red-50 border border-red-200 rounded p-2">
             <p className="text-[10px] text-slate-700 leading-relaxed">
-              <span className="font-semibold text-[#0B1F3B]">Warning:</span> This
-              action is irreversible. All case data will be permanently deleted.
+              <span className="font-semibold text-[#0B1F3B]">
+                {t("warningTitle")}
+              </span>{" "}
+              {t("warningMessage")}
             </p>
           </div>
         </div>
@@ -78,14 +88,14 @@ const CaseDeleteModal = ({ isOpen, caseItem, onClose, onConfirm }) => {
             onClick={onClose}
             className="px-3 py-1 border cursor-pointer border-slate-300 text-slate-700 rounded text-xs hover:bg-white transition"
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button
             onClick={onConfirm}
             className="flex items-center cursor-pointer gap-1 px-3 py-1 bg-[#0B1F3B] text-white rounded text-xs font-medium hover:bg-white hover:text-[#0B1F3B] transition"
           >
             <Trash2 className="w-3 h-3" />
-            Delete
+            {t("delete")}
           </button>
         </div>
       </motion.div>

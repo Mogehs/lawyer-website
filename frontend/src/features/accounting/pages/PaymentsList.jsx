@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import i18n from "../../../i18n";
 
 const PaymentsList = () => {
-  const {t} = useTranslation("accPaymentList")
+  const { t } = useTranslation("accPaymentList");
   const [filters, setFilters] = useState({
     paymentMethod: "",
     startDate: "",
@@ -34,6 +34,10 @@ const PaymentsList = () => {
 
   const payments = data?.data || [];
   const pagination = data?.pagination || {};
+
+  // State for Modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPayment, setSelectedPayment] = useState(null);
 
   // Format currency
   const formatCurrency = (amount) => {
@@ -55,10 +59,10 @@ const PaymentsList = () => {
   // Get payment method label
   const getPaymentMethodLabel = (method) => {
     const labels = {
-      cash: "Cash",
-      bank_transfer: "Bank Transfer",
-      card: "Card",
-      check: "Check",
+      cash: t("cash"),
+      bank_transfer: t("bankTransfer"),
+      card: t("card"),
+      check: t("check"),
     };
     return labels[method] || method;
   };
@@ -76,12 +80,12 @@ const PaymentsList = () => {
 
   // Handle delete
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this payment?")) {
+    if (window.confirm(t("areYouSure"))) {
       try {
         await deletePayment(id).unwrap();
-        alert("Payment deleted successfully");
+        alert(t("paymentRecordSuccessfully"));
       } catch (error) {
-        alert(error?.data?.message || "Failed to delete payment");
+        alert(error?.data?.message || t("failedPaymentRecord"));
       }
     }
   };
@@ -97,6 +101,51 @@ const PaymentsList = () => {
     );
   });
 
+  // Handle opening the modal
+  const handleOpenModal = (payment) => {
+    setSelectedPayment(payment);
+    setIsModalOpen(true);
+  };
+
+  // Handle closing the modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedPayment(null);
+  };
+
+  // Modal Component
+  const PaymentDetailModal = ({ isOpen, onClose, payment }) => {
+    if (!payment) return null;
+
+    return (
+      <div
+        className={`fixed inset-0 z-50 bg-black/60 bg-opacity-50 flex items-center justify-center ${isOpen ? 'block' : 'hidden'}`}
+        onClick={onClose}
+      >
+        <div
+          className="bg-white p-6 rounded-lg w-96"
+          onClick={(e) => e.stopPropagation()} // Prevent click from closing the modal
+        >
+          <h2 className="text-xl font-bold text-gray-800 mb-4">{t("invoiceDetail")}</h2>
+          <p><strong>{t("receiptNumber")}:</strong> {payment.receiptNumber}</p>
+          <p><strong>{t("invoiceNumber")}:</strong> {payment.invoice?.invoiceNumber || "N/A"}</p>
+          <p><strong>{t("client")}:</strong> {payment.invoice?.client?.name || "N/A"}</p>
+          <p><strong>{t("amount")}:</strong> {formatCurrency(payment.amount)}</p>
+          <p><strong>{t("paymentMethod")}:</strong> {getPaymentMethodLabel(payment.paymentMethod)}</p>
+          <p><strong>{t("paymentDate")}:</strong> {formatDate(payment.paymentDate)}</p>
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 bg-[#0B1F3B] text-white rounded-lg"
+            >
+              {t("cancel")}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   if (error) {
     return (
       <div className="flex justify-center items-center h-full">
@@ -109,7 +158,7 @@ const PaymentsList = () => {
   }
 
   return (
-    <div className={`space-y-6 ${isRTL ?"lg:mr-[220px]": "lg:ml-[220px]"} `}>
+    <div className={`space-y-6 ${isRTL ? "lg:mr-[220px]" : "lg:ml-[220px]"}`}>
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
@@ -117,7 +166,7 @@ const PaymentsList = () => {
             <CreditCard size={28} className="text-[#0B1F3B]" />
             {t("paymentsManagement")}
           </h1>
-          <p className="text-sm text-gray-600 mt-1">إدارة المدفوعات</p>
+          <p className="text-sm text-gray-600 mt-1">{t("paymentsManagement")}</p>
         </div>
 
         <Link
@@ -156,9 +205,9 @@ const PaymentsList = () => {
             className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           >
             <option value="">{t("allMethods")}</option>
-            <option value="cash">{t( "cash")}</option>
+            <option value="cash">{t("cash")}</option>
             <option value="bank_transfer">{t("bankTransfer")}</option>
-            <option value="card">{t( "card")}</option>
+            <option value="card">{t("card")}</option>
             <option value="check">{t("check")}</option>
           </select>
 
@@ -217,7 +266,7 @@ const PaymentsList = () => {
                       {t("receiptNumber")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      {t( "invoiceNumber")}
+                      {t("invoiceNumber")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
                       {t("client")}
@@ -269,9 +318,10 @@ const PaymentsList = () => {
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-center gap-2">
                           <Link
-                            to={`/accountant/payments/${payment._id}`}
+                            to="#"
                             className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                            title="View"
+                            title={t("view")}
+                            onClick={() => handleOpenModal(payment)}
                           >
                             <Eye size={18} />
                           </Link>
@@ -279,7 +329,7 @@ const PaymentsList = () => {
                             <button
                               onClick={() => handleDelete(payment._id)}
                               className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                              title="Delete"
+                              title={t("delete")}
                             >
                               <Trash2 size={18} />
                             </button>
@@ -296,12 +346,15 @@ const PaymentsList = () => {
             {pagination.pages > 1 && (
               <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200">
                 <div className="text-sm text-gray-600">
-                  Showing {(pagination.page - 1) * pagination.limit + 1} to{" "}
+                  {t("showing")}{" "}
+                  {(pagination.page - 1) * pagination.limit + 1}{" "}
+                  {t("to")}{" "}
                   {Math.min(
                     pagination.page * pagination.limit,
                     pagination.total
                   )}{" "}
-                  of {pagination.total} payments
+                  {t("of")} {pagination.total}{" "}
+                  {t("payments")}
                 </div>
                 <div className="flex gap-2">
                   <button
@@ -311,10 +364,10 @@ const PaymentsList = () => {
                     disabled={pagination.page === 1}
                     className="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
-                    Previous
+                    {t("previous")}
                   </button>
                   <span className="px-3 py-1 text-sm font-medium text-gray-700">
-                    Page {pagination.page} of {pagination.pages}
+                    {t("page")} {pagination.page} {t("of")} {pagination.pages}
                   </span>
                   <button
                     onClick={() =>
@@ -323,7 +376,7 @@ const PaymentsList = () => {
                     disabled={pagination.page === pagination.pages}
                     className="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
-                    Next
+                    {t("next")}
                   </button>
                 </div>
               </div>
@@ -332,16 +385,22 @@ const PaymentsList = () => {
         ) : (
           <div className="text-center py-12">
             <CreditCard size={48} className="mx-auto text-gray-400 mb-4" />
-            <p className="text-gray-600 font-medium">{t("noPaymentFoud")}</p>
+            <p className="text-gray-600 font-medium">{t("noPaymentFound")}</p>
             <p className="text-sm text-gray-500 mt-1">
-              {t("noPaymentFoudMsg")}
+              {t("noPaymentFoundMsg")}
             </p>
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      <PaymentDetailModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        payment={selectedPayment}
+      />
     </div>
   );
 };
 
 export default PaymentsList;
-

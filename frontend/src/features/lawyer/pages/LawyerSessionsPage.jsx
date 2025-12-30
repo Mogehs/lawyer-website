@@ -367,10 +367,10 @@ const isRTL = i18n.dir() === "rtl";
                                 status: e.target.value,
                               })
                             }
-                            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+                            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
                           >
-                            <option value="COMPLETED">{t("sessionCard.completed")}</option>
-                            <option value="CANCELLED">{t("sessionCard.cancelled")}</option>
+                            <option value="COMPLETED">{t("sessionCard.completeSession")}</option>
+                            <option value="CANCELLED">{t("sessionCard.cancelSession")}</option>
                           </select>
                         </div>
 
@@ -384,12 +384,12 @@ const isRTL = i18n.dir() === "rtl";
                                 outcome: e.target.value,
                               })
                             }
-                            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent"
+                            className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
                           >
-                            <option value="">{t("sessionCard.selectOutcome")}</option>
+                            <option value="">{t("sessionCard.SelectOutcome")}</option>
                             <option value="ADJOURNED">{t("sessionCard.adjourned")}</option>
-                            <option value="FINALIZED">{t("sessionCard.finalized")}</option>
-                            <option value="DISMISSED">{t("sessionCard.dismissed")}</option>
+                            <option value="FINALIZED">{t("sessionCard.fanalized")}</option>
+                            <option value="DISMISSED">{t("sessionCard.dissmissed")}</option>
                             <option value="SETTLED">{t("sessionCard.settled")}</option>
                             <option value="WITHDRAWN">{t("sessionCard.withdrawn")}</option>
                           </select>
@@ -409,7 +409,7 @@ const isRTL = i18n.dir() === "rtl";
                                 }
                                 placeholder={t("sessionCard.reasonForAdjournment")}
                                 rows="2"
-                                className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent resize-y"
+                                className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent resize-y"
                               />
                             </div>
 
@@ -448,7 +448,7 @@ const isRTL = i18n.dir() === "rtl";
                             disabled={!canComplete}
                           >
                             <CheckCircle size={16} />
-                            {t("sessionCard.completeSessionButton")}
+                            {t("sessionCard.completeSession")}
                           </button>
                         </div>
                       </div>

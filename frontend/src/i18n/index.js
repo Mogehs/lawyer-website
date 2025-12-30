@@ -143,12 +143,15 @@ import ar_paymentsList from "../i18n/accountant/ar/sidebar/paymentsList.json"
 import en_paymentsList from "../i18n/accountant/en/sidebar/paymentsList.json"
 import ar_accexpensesList from "../i18n/accountant/ar/sidebar/accexpensesList.json"
 import en_accexpensesList from "../i18n/accountant/en/sidebar/accexpensesList.json"
+
 import en_CaseDelete from "./locals/en/CaseDelete.json";
 import ar_CaseDelete from "./locals/ar/CaseDelete.json";
 import en_ArchiveCase from "./locals/en/ArchiveCase.json";
 import ar_ArchiveCase from "./locals/ar/ArchiveCase.json";
-
-
+import en_appmodel from "../i18n/appriving/en/aapmodel.json";
+import ar_appmodel from "../i18n/appriving/ar/aapmodel.json";
+import en_appdelete from "../i18n/appriving/en/appdelete.json";
+import ar_appdelete from "../i18n/appriving/ar/appdelete.json";
 const resources = {
   en: {
     topbar: en_topbar,
@@ -176,7 +179,7 @@ const resources = {
   archivefilter: en_archivefilter,
     addReminderModal: en_addReminderModal,
     teamviewmodel: en_teamviewmodel,
-
+caseDetail: en_caseDetail,
     //---secretary translations end here---
     topbar1: en_topbar1,
     sidebar: en_sidebar1,
@@ -221,6 +224,8 @@ const resources = {
     apptopbar:en_apptopbar,
     appsidebar:en_appsidebar,
     appcasemanagement:en_appcasemanagement,
+    appmodel:en_appmodel,
+    appdelete:en_appdelete,
     
 
   },
@@ -294,7 +299,9 @@ const resources = {
     apptopbar:ar_apptopbar,
     appsidebar:ar_appsidebar,
     appcasemanagement:ar_appcasemanagement,
-
+caseDetail: ar_caseDetail,
+    appmodel:ar_appmodel,
+    appdelete:ar_appdelete,
   }
 };
 

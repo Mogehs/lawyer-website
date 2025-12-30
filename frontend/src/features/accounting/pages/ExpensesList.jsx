@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   TrendingDown,
   Plus,
@@ -11,17 +11,18 @@ import {
 import {
   useGetExpensesQuery,
   useDeleteExpenseMutation,
+  useCreateExpenseMutation,
+  useUpdateExpenseMutation,
 } from "../api/accountingApi";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserProfile } from "../../auth/authSlice";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../i18n";
 
 const ExpensesList = () => {
-  const {t} = useTranslation("accexpensesList")
-  
+  const { t } = useTranslation("accexpensesList");
+
   const [filters, setFilters] = useState({
     category: "",
     startDate: "",
@@ -30,12 +31,17 @@ const ExpensesList = () => {
     limit: 10,
   });
   const [searchTerm, setSearchTerm] = useState("");
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [selectedExpense, setSelectedExpense] = useState(null);
 
   const userProfile = useSelector(selectUserProfile);
   const isDirector = userProfile?.role === "director";
-
   const { data, isLoading, error } = useGetExpensesQuery(filters);
   const [deleteExpense] = useDeleteExpenseMutation();
+  const [createExpense] = useCreateExpenseMutation();
+  const [updateExpense] = useUpdateExpenseMutation();
 
   const expenses = data?.data || [];
   const pagination = data?.pagination || {};
@@ -51,16 +57,20 @@ const ExpensesList = () => {
 
   // Format date
   const formatDate = (date) => {
+    const validDate = new Date(date);
+    if (isNaN(validDate)) {
+      return "Invalid Date";  // Return a fallback if the date is invalid
+    }
     return new Intl.DateTimeFormat("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
-    }).format(new Date(date));
+    }).format(validDate);
   };
 
   // Get category label
   const getCategoryLabel = (category) => {
-    return category
+    return (category ?? "N/A")
       .split("_")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
@@ -68,12 +78,12 @@ const ExpensesList = () => {
 
   // Handle delete
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this expense?")) {
+    if (window.confirm(t("expenseModal.areYouSureDelete"))) {
       try {
         await deleteExpense(id).unwrap();
-        alert("Expense deleted successfully");
+        alert(t("expenseModal.expenseSuccessfullyDeleted"));
       } catch (error) {
-        alert(error?.data?.message || "Failed to delete expense");
+        alert(error?.data?.message || t("expenseModal.failedToCreateExpense"));
       }
     }
   };
@@ -89,19 +99,263 @@ const ExpensesList = () => {
     );
   });
 
+  // Handle modal open/close
+  const handleOpenCreateModal = () => {
+    setIsCreateModalOpen(true);
+  };
+
+  const handleOpenEditModal = (expense) => {
+    setSelectedExpense(expense);
+    setIsEditModalOpen(true);
+  };
+
+  const handleOpenViewModal = (expense) => {
+    setSelectedExpense(expense);
+    setIsViewModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsCreateModalOpen(false);
+    setIsEditModalOpen(false);
+    setIsViewModalOpen(false);
+    setSelectedExpense(null);
+  };
+
+  // Create expense modal
+  const CreateExpenseModal = () => {
+    const [expenseData, setExpenseData] = useState({
+      expenseNumber: "",
+      category: "",
+      description: "",
+      vendor: "",
+      amount: "",
+      expenseDate: "",
+    });
+
+    const handleCreate = async () => {
+      try {
+        await createExpense(expenseData).unwrap();
+        alert(t("expenseModal.expenseSuccessfullyCreated"));
+        handleCloseModal();
+      } catch (error) {
+        alert(error?.data?.message || t("expenseModal.failedToCreateExpense"));
+      }
+    };
+
+    return (
+      <div
+        className={`fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center ${isCreateModalOpen ? 'block' : 'hidden'}`}
+        onClick={handleCloseModal}
+      >
+        <div
+          className="bg-white p-6 rounded-lg w-96"
+          onClick={(e) => e.stopPropagation()} // Prevent click from closing the modal
+        >
+          <h2 className="text-xl font-bold text-gray-800 mb-4">{t("expenseModal.createExpense")}</h2>
+          <div className="space-y-4">
+            <input
+              type="text"
+              placeholder={t("expenseModal.expenseNumberLabel")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={expenseData.expenseNumber}
+              onChange={(e) => setExpenseData({ ...expenseData, expenseNumber: e.target.value })}
+            />
+            <select
+              value={expenseData.category}
+              onChange={(e) => setExpenseData({ ...expenseData, category: e.target.value })}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            >
+              <option value="">{t("expenseModal.selectCategory")}</option>
+              <option value="office_rent">{t("office_rent")}</option>
+              <option value="utilities">{t("utilities")}</option>
+              <option value="salaries">{t("salaries")}</option>
+              <option value="marketing">{t("marketing")}</option>
+              <option value="other">{t("other")}</option>
+            </select>
+            <input
+              type="text"
+              placeholder={t("expenseModal.expenseDetailsLabel")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={expenseData.description}
+              onChange={(e) => setExpenseData({ ...expenseData, description: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder={t("expenseModal.vendorNameLabel")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={expenseData.vendor}
+              onChange={(e) => setExpenseData({ ...expenseData, vendor: e.target.value })}
+            />
+            <input
+              type="number"
+              placeholder={t("expenseModal.amountLabel")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={expenseData.amount}
+              onChange={(e) => setExpenseData({ ...expenseData, amount: e.target.value })}
+            />
+            <input
+              type="date"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={expenseData.expenseDate}
+              onChange={(e) => setExpenseData({ ...expenseData, expenseDate: e.target.value })}
+            />
+          </div>
+          <div className="flex justify-end mt-4 gap-4">
+            <button
+              onClick={handleCreate}
+              className="px-4 py-2 bg-[#0B1F3B] text-white rounded-lg"
+            >
+              {t("expenseModal.createExpense")}
+            </button>
+            <button
+              onClick={handleCloseModal}
+              className="px-4 py-2 bg-gray-500 text-white rounded-lg"
+            >
+              {t("cancel")}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Edit expense modal
+  const EditExpenseModal = () => {
+    const [expenseData, setExpenseData] = useState({ ...selectedExpense });
+
+    const handleUpdate = async () => {
+      try {
+        await updateExpense(expenseData).unwrap();
+        alert(t("expenseModal.expenseSuccessfullyUpdated"));
+        handleCloseModal();
+      } catch (error) {
+        alert(error?.data?.message || t("expenseModal.failedToCreateExpense"));
+      }
+    };
+
+    return (
+      <div
+        className={`fixed inset-0 z-50 bg-black/60 bg-opacity-50 flex items-center justify-center ${isEditModalOpen ? 'block' : 'hidden'}`}
+        onClick={handleCloseModal}
+      >
+        <div
+          className="bg-white p-6 rounded-lg w-96"
+          onClick={(e) => e.stopPropagation()} // Prevent click from closing the modal
+        >
+          <h2 className="text-xl font-bold text-gray-800 mb-4">{t("expenseModal.editExpense")}</h2>
+          <div className="space-y-4">
+            <input
+              type="text"
+              placeholder={t("expenseModal.expenseNumberLabel")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={expenseData.expenseNumber}
+              onChange={(e) => setExpenseData({ ...expenseData, expenseNumber: e.target.value })}
+            />
+            <select
+              value={expenseData.category}
+              onChange={(e) => setExpenseData({ ...expenseData, category: e.target.value })}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            >
+              <option value="">{t("expenseModal.selectCategory")}</option>
+              <option value="office_rent">{t("office_rent")}</option>
+              <option value="utilities">{t("utilities")}</option>
+              <option value="salaries">{t("salaries")}</option>
+              <option value="marketing">{t("marketing")}</option>
+              <option value="other">{t("other")}</option>
+            </select>
+            <input
+              type="text"
+              placeholder={t("expenseModal.expenseDetailsLabel")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={expenseData.description}
+              onChange={(e) => setExpenseData({ ...expenseData, description: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder={t("expenseModal.vendorNameLabel")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={expenseData.vendor}
+              onChange={(e) => setExpenseData({ ...expenseData, vendor: e.target.value })}
+            />
+            <input
+              type="number"
+              placeholder={t("expenseModal.amountLabel")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={expenseData.amount}
+              onChange={(e) => setExpenseData({ ...expenseData, amount: e.target.value })}
+            />
+            <input
+              type="date"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={expenseData.expenseDate}
+              onChange={(e) => setExpenseData({ ...expenseData, expenseDate: e.target.value })}
+            />
+          </div>
+          <div className="flex justify-end mt-4 gap-4">
+            <button
+              onClick={handleUpdate}
+              className="px-4 py-2 bg-[#0B1F3B] text-white rounded-lg"
+            >
+              {t("expenseModal.saveChanges")}
+            </button>
+            <button
+              onClick={handleCloseModal}
+              className="px-4 py-2 bg-gray-500 text-white rounded-lg"
+            >
+              {t("cancel")}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // View expense modal
+  const ViewExpenseModal = () => {
+    return (
+      <div
+        className={`fixed inset-0 z-50 bg-black/60 bg-opacity-50 flex items-center justify-center ${isViewModalOpen ? 'block' : 'hidden'}`}
+        onClick={handleCloseModal}
+      >
+        <div
+          className="bg-white p-6 rounded-lg w-96"
+          onClick={(e) => e.stopPropagation()} // Prevent click from closing the modal
+        >
+          <h2 className="text-xl font-bold text-gray-800 mb-4">{t("expenseModal.viewExpense")}</h2>
+          <div className="space-y-4">
+            <div className="text-sm">{t("expenseModal.expenseNumberLabel")}: {selectedExpense?.expenseNumber}</div>
+            <div className="text-sm">{t("category")}: {getCategoryLabel(selectedExpense?.category)}</div>
+            <div className="text-sm">{t("description")}: {selectedExpense?.description}</div>
+            <div className="text-sm">{t("vendor")}: {selectedExpense?.vendor}</div>
+            <div className="text-sm">{t("expenseModal.amountLabel")}: {formatCurrency(selectedExpense?.amount)}</div>
+            <div className="text-sm">{t("date")}: {formatDate(selectedExpense?.expenseDate)}</div>
+          </div>
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={handleCloseModal}
+              className="px-4 py-2 bg-gray-500 text-white rounded-lg"
+            >
+              {t("close")}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   if (error) {
     return (
       <div className="flex justify-center items-center h-full">
         <div className="text-red-600 flex items-center gap-2">
           <AlertCircle size={20} />
-          <span>Failed to load expenses</span>
+          <span>{t("expenseModal.failedToCreateExpense")}</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={`space-y-6 ${isRTL ? "lg:mr-[220px]":"lg:ml-[220px]" } `}>
+    <div className={`space-y-6 ${isRTL ? "lg:mr-[220px]" : "lg:ml-[220px]"}`}>
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
@@ -109,15 +363,16 @@ const ExpensesList = () => {
             <TrendingDown size={28} className="text-[#0B1F3B]" />
             {t("expensesManagement")}
           </h1>
-          <p className="text-sm text-gray-600 mt-1">إدارة المصروفات</p>
+          <p className="text-sm text-gray-600 mt-1">{t("expensesManagement")}</p>
         </div>
 
         <Link
-          to="/accountant/expenses/create"
+          to="#"
           className="flex items-center gap-2 px-4 py-2 bg-[#0B1F3B] text-white rounded-lg font-medium transition-all duration-200 shadow-md"
+          onClick={handleOpenCreateModal}
         >
           <Plus size={20} />
-        {t("addExpense")}
+          {t("addExpense")}
         </Link>
       </div>
 
@@ -151,13 +406,7 @@ const ExpensesList = () => {
             <option value="office_rent">{t("office_rent")}</option>
             <option value="utilities">{t("utilities")}</option>
             <option value="salaries">{t("salaries")}</option>
-            <option value="supplies"></option>
-            <option value="marketing">{t("supplies")}</option>
-            <option value="legal_fees">{t("legal_fees")}</option>
-            <option value="court_fees">{t(  "court_fees")}</option>
-            <option value="transportation">{t("transportation")}</option>
-            <option value="technology">{t( "technology")}</option>
-            <option value="maintenance">{t("maintenance")}</option>
+            <option value="marketing">{t("marketing")}</option>
             <option value="other">{t("other")}</option>
           </select>
 
@@ -195,7 +444,7 @@ const ExpensesList = () => {
             }
             className="mt-3 text-sm text-[#0B1F3B] hover:underline"
           >
-           {t("clearFilter")}
+            {t("clearFilter")}
           </button>
         )}
       </div>
@@ -222,16 +471,16 @@ const ExpensesList = () => {
                       {t("description")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      {t( "vendor")}
+                      {t("vendor")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
                       {t("amount")}
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
-                      {t( "date")}
+                      {t("date")}
                     </th>
                     <th className="px-4 py-3 text-center text-sm font-semibold">
-                      {t(  "actions")}
+                      {t("actions")}
                     </th>
                   </tr>
                 </thead>
@@ -263,20 +512,20 @@ const ExpensesList = () => {
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-center gap-2">
-                          <Link
-                            to={`/accountant/expenses/${expense._id}`}
-                            className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          <button
+                            onClick={() => handleOpenViewModal(expense)}
+                            className="p-1.5 cursor-pointer text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             title="View"
                           >
                             <Eye size={18} />
-                          </Link>
-                          <Link
-                            to={`/accountant/expenses/${expense._id}/edit`}
-                            className="p-1.5 text-yellow-600 hover:bg-yellow-50 rounded-lg transition-colors"
+                          </button>
+                          <button
+                            onClick={() => handleOpenEditModal(expense)}
+                            className="p-1.5 cursor-pointer text-yellow-600 hover:bg-yellow-50 rounded-lg transition-colors"
                             title="Edit"
                           >
                             <Edit size={18} />
-                          </Link>
+                          </button>
                           {isDirector && (
                             <button
                               onClick={() => handleDelete(expense._id)}
@@ -299,10 +548,7 @@ const ExpensesList = () => {
               <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200">
                 <div className="text-sm text-gray-600">
                   Showing {(pagination.page - 1) * pagination.limit + 1} to{" "}
-                  {Math.min(
-                    pagination.page * pagination.limit,
-                    pagination.total
-                  )}{" "}
+                  {Math.min(pagination.page * pagination.limit, pagination.total)}{" "}
                   of {pagination.total} expenses
                 </div>
                 <div className="flex gap-2">
@@ -313,10 +559,10 @@ const ExpensesList = () => {
                     disabled={pagination.page === 1}
                     className="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
-                    Previous
+                    {t("previous")}
                   </button>
                   <span className="px-3 py-1 text-sm font-medium text-gray-700">
-                    Page {pagination.page} of {pagination.pages}
+                    {t("page")} {pagination.page} {t("of")} {pagination.pages}
                   </span>
                   <button
                     onClick={() =>
@@ -325,7 +571,7 @@ const ExpensesList = () => {
                     disabled={pagination.page === pagination.pages}
                     className="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
-                    Next
+                    {t("next")}
                   </button>
                 </div>
               </div>
@@ -341,9 +587,13 @@ const ExpensesList = () => {
           </div>
         )}
       </div>
+
+      {/* Modals */}
+      <CreateExpenseModal />
+      <EditExpenseModal />
+      <ViewExpenseModal />
     </div>
   );
 };
 
 export default ExpensesList;
-

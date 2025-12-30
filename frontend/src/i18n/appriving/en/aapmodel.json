@@ -1,0 +1,49 @@
+{
+  "modal": {
+    "caseType": "Case Type",
+    "caseNumber": "Case Number",
+    "clientInformation": "Client Information",
+    "clientName": "Client Name",
+    "contactNumber": "Contact Number",
+    "email": "Email",
+    "caseTeam": "Case Team",
+    "secretary": "Secretary",
+    "draftLawyer": "Draft Lawyer",
+    "currentStage": "Current Stage",
+    "status": "Status",
+    "courtSessions": "Court Sessions",
+    "sessionStatus": "Session Status",
+    "sessionNumber": "Session #",
+    "pendingReview": "Pending Review",
+    "inProgress": "In Progress",
+    "approved": "Approved",
+    "reviewSession": "Review Session",
+    "reviewNotes": "Review Notes",
+    "memorandumRequired": "Memorandum Required",
+    "supportingDocumentsRequired": "Supporting Documents Required",
+    "cancel": "Cancel",
+    "approveUnlock": "Approve & Unlock",
+    "approve": "Approve",
+    "reject": "Reject",
+    "reviewDecide": "Review & Decide",
+    "documents": "Documents",
+    "generalDocuments": "General Documents",
+    "noDocumentsUploaded": "No documents uploaded yet.",
+    "downloadMemorandum": "Download Memorandum",
+    "close": "Close"
+  },
+  "toast": {
+    "errorReviewSession": "Please select at least one requirement",
+    "successReviewSession": "Session reviewed and unlocked for draft lawyer!",
+    "errorReviewMemorandum": "Please provide feedback when rejecting a memorandum",
+    "successReviewMemorandum": "Memorandum successfully reviewed",
+    "error": "Failed to review session",
+    "errorMemoReview": "Failed to review memorandum"
+  },
+  "sessionStatus": {
+    "approved": "✓ Approved",
+    "pendingReview": "⏳ Pending Review",
+    "inProgress": "In Progress",
+    "locked": "Pending Review"
+  }
+}

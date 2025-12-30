@@ -30,5 +30,24 @@
   "selectCategory": "اختر الفئة",
   "failedToCreateExpense": "فشل في إنشاء المصروف",
   "expenseDetails": "أدخل تفاصيل المصروف...",
-  "vendorName": "أدخل اسم المورد (اختياري)"
+  "vendorName": "أدخل اسم المورد (اختياري)",
+
+  "expenseModal": {
+    "createExpense": "إنشاء مصروف",
+    "editExpense": "تعديل المصروف",
+    "viewExpense": "عرض المصروف",
+    "expenseDetailsLabel": "تفاصيل المصروف",
+    "vendorNameLabel": "اسم المورد (اختياري)",
+    "categoryLabel": "الفئة",
+    "amountLabel": "المبلغ",
+    "dateLabel": "التاريخ",
+    "saveChanges": "حفظ التعديلات",
+    "cancelChanges": "إلغاء التعديلات",
+    "addNotes": "إضافة ملاحظات",
+    "deleteExpense": "حذف المصروف",
+    "areYouSureDelete": "هل أنت متأكد أنك تريد حذف هذا المصروف؟",
+    "expenseSuccessfullyCreated": "تم إنشاء المصروف بنجاح!",
+    "expenseSuccessfullyUpdated": "تم تحديث المصروف بنجاح!",
+    "expenseSuccessfullyDeleted": "تم حذف المصروف بنجاح!"
+  }
 }

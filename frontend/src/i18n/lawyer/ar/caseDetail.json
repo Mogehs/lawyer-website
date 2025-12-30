@@ -1,0 +1,20 @@
+{
+  "caseDetail": {
+    "caseNumber": "رقم القضية",
+    "caseType": "نوع القضية",
+    "status": "الحالة",
+    "clientName": "اسم العميل",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "hearing": "الجلسة",
+    "stages": "المراحل",
+    "documents": "المستندات",
+    "notes": "الملاحظات",
+    "memorandumStatus": "حالة المذكرة",
+    "noStages": "لا توجد مراحل متاحة.",
+    "noDocuments": "لا توجد مستندات مرفوعة.",
+    "noNotes": "لا توجد ملاحظات متاحة.",
+    "noMemorandum": "لم يتم تقديم مذكرة بعد",
+    "stage": "المرحلة"
+  }
+}

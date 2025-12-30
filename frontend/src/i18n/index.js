@@ -37,6 +37,13 @@ import en_directorpendingsessions from "./locals/en/directorpendingsessions.json
 import ar_directorpendingsessions from "./locals/ar/directorpendingsessions.json";
 import ar_archive from "./locals/ar/archive.json";
 import en_archive from "./locals/en/archive.json";
+import en_archivefilter from "./locals/en/archivefilter.json";
+import ar_archivefilter from "./locals/ar/archivefilter.json";
+import en_addReminderModal from './locals/en/addReminderModal.json';
+import ar_addReminderModal from './locals/ar/addReminderModal.json';
+import en_teamviewmodel from "./locals/en/teamviewmodel.json";
+import ar_teamviewmodel from "./locals/ar/teamviewmodel.json";
+//---secretary translations start here---
 import en_reportsHeader from "./locals/en/reportsHeader.json";
 import ar_reportsHeader from "./locals/ar/reportsHeader.json";
 import ar_reportsStats from "./locals/ar/reportsStats.json";
@@ -95,7 +102,16 @@ import en_archiveheader from "../i18n/lawyer/en/archiveheader.json";
 import ar_archiveheader from "../i18n/lawyer/ar/archiveheader.json";
 import en_LawyerNotificationsPage from "../i18n/lawyer/en/LawyerNotificationsPage.json";
 import ar_LawyerNotificationsPage from "../i18n/lawyer/ar/LawyerNotificationsPage.json";
+import en_caseDetail from "../i18n/lawyer/en/caseDetail.json";
+import ar_caseDetail from "../i18n/lawyer/ar/caseDetail.json";
 
+// add appriving dashboard translations here
+import en_apptopbar from "../i18n/appriving/en/apptopbar.json";
+import ar_apptopbar from "../i18n/appriving/ar/apptopbar.json";
+import en_appsidebar from "../i18n/appriving/en/appsidebar.json";
+import ar_appsidebar from "../i18n/appriving/ar/appsidebar.json";
+import en_appcasemanagement from "../i18n/appriving/en/appcasemanagement.json";
+import ar_appcasemanagement from "../i18n/appriving/ar/appcasemanagement.json";
 const resources = {
   en: {
     topbar: en_topbar,
@@ -120,6 +136,9 @@ const resources = {
     remindersHeader: en_remindersHeader,
     usersPage: en_usersPage,
     userTable: en_userTable,
+  archivefilter: en_archivefilter,
+    addReminderModal: en_addReminderModal,
+    teamviewmodel: en_teamviewmodel,
     //---secretary translations end here---
     topbar1: en_topbar1,
     sidebar: en_sidebar1,
@@ -140,9 +159,13 @@ const resources = {
     lawyercases: en_lawyercases,
     lawyersession: en_lawyersession,
     lawyerarchive: en_lawyerarchive,
-    archiveheader: en_archiveheader,
+    archiveHeader: en_archiveheader,
     LawyerNotificationsPage: en_LawyerNotificationsPage,
-    
+    caseDetail: en_caseDetail,
+// approving dashboard translations
+    apptopbar: en_apptopbar,
+    appsidebar: en_appsidebar,
+    appcasemanagement: en_appcasemanagement,
   
   },
   ar: {
@@ -168,6 +191,9 @@ const resources = {
     remindersHeader: ar_remindersHeader,
     usersPage: ar_usersPage,
     userTable: ar_userTable,
+  archivefilter: ar_archivefilter,
+    addReminderModal: ar_addReminderModal,
+    teamviewmodel: ar_teamviewmodel,
     //
     topbar1: ar_topbar1,
     sidebar: ar_sidebar1,
@@ -188,8 +214,13 @@ const resources = {
     lawyercases: ar_lawyercases,
     lawyersession: ar_lawyersession,
     lawyerarchive: ar_lawyerarchive,
-    archiveheader: ar_archiveheader,
+    archiveHeader: ar_archiveheader,
     LawyerNotificationsPage: ar_LawyerNotificationsPage,
+    caseDetail: ar_caseDetail,
+// approving dashboard translations
+    apptopbar: ar_apptopbar,
+    appsidebar: ar_appsidebar,
+    appcasemanagement: ar_appcasemanagement,
 
   }
 };

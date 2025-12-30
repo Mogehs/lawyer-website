@@ -1,40 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Scale, FileText, LogOut, Menu, X } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../auth/api/authApi";
 import { useDispatch } from "react-redux";
 import { clearProfile } from "../../auth/authSlice";
+import i18n from "../../../i18n/index"; // Ensure i18n is imported
+import { useTranslation } from "react-i18next"; // Import translation hook
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(window.innerWidth >= 1024);
+  const { t } = useTranslation("appsidebar");
+  const isRTL = i18n.language === "ar"; // Check if the language is Arabic for RTL support
+
   const [logout, { isLoading }] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleResize = () => {
-      const desktop = window.innerWidth >= 1024;
-      setIsOpen(desktop);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = [
-    { name: "Case Management", icon: <FileText size={20} />, path: "" },
+    { name: t("caseManagement"), icon: <FileText size={20} />, path: "" },
+    // Add more links here as needed
   ];
-
-  const toggleSidebar = () => setIsOpen((prev) => !prev);
 
   const handleLogout = async () => {
     try {
       await logout().unwrap();
-      dispatch(clearProfile());
-      navigate("/login");
-    } catch (error) {
-      console.error("Logout error:", error);
-      // Clear profile and navigate even if API fails
+    } finally {
       dispatch(clearProfile());
       navigate("/login");
     }
@@ -43,73 +33,107 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Menu Button */}
-      <button
-        onClick={toggleSidebar}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-[#0B1F3B] text-white shadow-md"
-      >
-        {isOpen ? <X size={20} /> : <Menu size={20} />}
-      </button>
+      {!mobileOpen && (
+        <button
+          onClick={() => setMobileOpen(true)}
+          className={`lg:hidden fixed top-4 z-[60] p-2 bg-white rounded-lg shadow-md
+            ${isRTL ? "right-4" : "left-4"}`}
+        >
+          <Menu size={22} />
+        </button>
+      )}
+
+      {/* Mobile Overlay */}
+      {mobileOpen && (
+        <div
+          onClick={() => setMobileOpen(false)}
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
+        />
+      )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-40 bg-[#0B1F3B] backdrop-blur-xl text-slate-700 border-r border-blue-100 shadow-lg transition-all duration-300 ease-in-out ${
-          isOpen ? "w-52" : "w-14"
-        } overflow-hidden`}
+        className={`fixed top-0 h-full z-50 flex flex-col
+          bg-[#0B1F3B] shadow-lg transition-transform duration-300 ease-in-out
+          w-55
+          ${isRTL ? "right-0 border-l" : "left-0 border-r"}
+          ${
+            mobileOpen
+              ? "translate-x-0"
+              : isRTL
+              ? "translate-x-full"
+              : "-translate-x-full"
+          }
+          lg:translate-x-0`}
       >
+        {/* Mobile Close Button */}
+        <button
+          onClick={() => setMobileOpen(false)}
+          className={`lg:hidden absolute top-8 text-[#0B1F3B] rounded bg-white
+            ${isRTL ? "left-4" : "right-1"}`}
+        >
+          <X size={25} />
+        </button>
+
         {/* Header */}
-        <div className="h-16 flex items-center justify-center border-b border-blue-100 px-2">
-          {isOpen ? (
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-[white] rounded-lg shadow-sm">
-                <Scale className="text-[#0B1F3B]" size={20} />
-              </div>
-              <div>
-                <h1 className="text-sm font-semibold text-[#f8f9fd]">Approving Lawyer</h1>
-                <p className="text-[10px] text-white">Case Management</p>
-              </div>
-            </div>
-          ) : (
-            <div className="p-1.5 bg-[#0B1F3B] rounded-lg shadow-sm">
-              <Scale className="text-white" size={20} />
-            </div>
-          )}
+        <div className="flex items-center gap-3 px-5 py-3 border-b border-blue-100">
+          <div className="p-2 bg-white rounded-xl shadow-md transition-all duration-300 hover:scale-110 hover:rotate-3">
+            <Scale size={24} className="text-[#0B1F3B]" />
+          </div>
+          <div>
+            <h2 className="text-sm font-semibold text-white">{t("title")}</h2>
+            <p className="text-sm text-blue-200">{t("caseManagement")}</p>
+          </div>
         </div>
 
-        {/* Navigation Links */}
-        <nav className="flex-1 overflow-y-auto py-4">
+        {/* Navigation */}
+        <nav className="flex-1 py-4 overflow-y-auto">
           {links.map((link, i) => (
             <NavLink
               key={i}
               to={link.path}
-              end
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-3 rounded-lg mx-2 my-1 transition-all duration-200
-                  ${
-                    isActive
-                      ? "bg-[white] text-[#0B1F3B] font-medium shadow-sm"
-                      : "text-slate-700 hover:bg-white/80 hover:text-[#0B1F3B] hover:shadow-sm"
-                  }
-                  ${isOpen ? "justify-start" : "justify-center"}
-                `
-              }
+              onClick={() => setMobileOpen(false)}
             >
-              {link.icon}
-              {isOpen && <span className="text-sm">{link.name}</span>}
+              {({ isActive }) => (
+                <div
+                  className={`group relative flex items-center gap-3 px-5 py-2 mx-2 my-1 rounded-lg
+                    overflow-hidden transition-all duration-300
+                    ${
+                      isActive
+                        ? "bg-white text-[#0B1F3B] shadow-lg"
+                        : "text-white hover:bg-white hover:text-[#0B1F3B]"
+                    }`}
+                >
+                  <span
+                    className={`absolute top-0 h-full w-1 bg-white
+                      ${isRTL ? "right-0 rounded-l" : "left-0 rounded-r"}
+                      ${
+                        isActive
+                          ? "opacity-100"
+                          : "opacity-0 group-hover:opacity-100"
+                      }`}
+                  />
+                  <span className="transition-transform duration-300 group-hover:scale-110">
+                    {link.icon}
+                  </span>
+                  <span className="text-sm font-medium">{link.name}</span>
+                </div>
+              )}
             </NavLink>
           ))}
         </nav>
 
-        {/* Logout Button */}
-        <div className="border-t border-blue-100 p-2">
+        {/* Logout */}
+        <div className="px-4 mb-4">
           <button
             onClick={handleLogout}
-            disabled={isLoading}
-            className={`flex w-full items-center gap-3 px-4 py-3 text-white hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200
-              ${isOpen ? "justify-start" : "justify-center"}
-            `}
+            className="group flex items-center gap-3 px-4 py-3 w-full rounded-lg
+              transition-all duration-300 text-white hover:bg-red-500 hover:shadow-lg"
           >
-            <LogOut size={20} />
-            {isOpen && <span className="text-sm font-medium">{isLoading ? "Logging out..." : "Logout"}</span>}
+            <LogOut size={22} className="group-hover:rotate-12 transition-transform" />
+            <span className="text-sm font-medium">
+              {isLoading ? t("loggingOut") : t("logout")}
+            </span>
           </button>
         </div>
       </aside>

@@ -1,0 +1,32 @@
+{
+  "addReminderModal": {
+    "title": "إضافة تذكير جديد",
+    "caseName": "اسم القضية",
+    "lawyer": "المحامي (اختياري حسب النوع)",
+    "stage": "المرحلة",
+    "mainCase": "القضية الرئيسية",
+    "appeal": "استئناف",
+    "cassation": "نقض",
+    "reminderType": "نوع التذكير",
+    "beforeHearing": "قبل الجلسة",
+    "beforeSubmission": "قبل التقديم",
+    "beforeJudgment": "قبل الحكم",
+    "signaturePending": "التوقيع قيد الانتظار",
+    "submissionDeadline": "مهلة التقديم",
+    "approvalDelay": "تأخير الموافقة",
+    "archivingPending": "أرشفة قيد الانتظار",
+    "notificationFailure": "فشل في توصيل الإشعار",
+    "performanceAlert": "تنبيه الأداء",
+    "targetRecipient": "المستلم المستهدف",
+    "secretary": "سكرتير",
+    "assignedLawyer": "المحامي المعين",
+    "allLawyers": "جميع المحاميين",
+    "approvingLawyer": "رجب (المحامي الموافق)",
+    "managingDirector": "المدير العام فقط",
+    "everyone": "الجميع",
+    "date": "التاريخ",
+    "description": "ملاحظات إضافية (اختياري)",
+    "cancelButton": "إلغاء",
+    "saveButton": "حفظ"
+  }
+}

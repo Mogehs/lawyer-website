@@ -1,0 +1,31 @@
+{
+  "viewUserModal": {
+    "title": "User Details",
+    "name": "Name",
+    "role": "Role",
+    "email": "Email",
+    "phone": "Phone",
+    "status": "Status",
+    "assignedCases": "Assigned Cases",
+    "createdOn": "Created On",
+    "closeButton": "Close"
+  },
+  "userDeleteModal": {
+    "title": "Confirm Deletion",
+    "message": "Are you sure you want to delete this user? This action cannot be undone.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
+  },
+  "userForm": {
+    "title": "Add New User",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone (e.g., 923120201709 without +)",
+    "role": "Role",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "cancelButton": "Cancel",
+    "addButton": "Add",
+    "phoneFormat": "📱 Format: 923120201709 (country code + number, no + sign)"
+  }
+}

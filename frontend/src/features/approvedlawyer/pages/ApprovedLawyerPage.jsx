@@ -2,18 +2,21 @@ import { useState, useMemo, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import { FileText } from "lucide-react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";  // Import i18n hook
 
 import ApprovedLawyerCasesTable from "../components/ApprovedLawyerPage/ApprovedLawyerCasesTable";
 import ApprovedLawyerViewModal from "../components/ApprovedLawyerPage/ApprovedLawyerViewModal";
 import ModificationModal from "../components/ApprovedLawyerPage/ModificationModal";
 import DeleteModal from "../components/ApprovedLawyerPage/DeleteModal";
 import { usePendingApprovalsQuery, useRequestModificationBALMutation } from "../api/approvedLawyerApi";
+import i18n from "../../../i18n";
+
 export default function ApprovedLawyerPage() {
+  const { t } = useTranslation("appcasemanagement"); // Use the translation hook
   const { data, error, isLoading } = usePendingApprovalsQuery();
   const [requestModificationBAL] = useRequestModificationBALMutation();
 
   const [cases, setCases] = useState([]);
-
   const [selectedCase, setSelectedCase] = useState(null);
   const [caseToDelete, setCaseToDelete] = useState(null);
 
@@ -22,17 +25,15 @@ export default function ApprovedLawyerPage() {
 
   const [filterStage, setFilterStage] = useState("");
   const [search, setSearch] = useState("");
-
   const [modificationMessage, setModificationMessage] = useState("");
-
-  const STAGES = ["Main", "Appeal", "Cassation"];
+const isRTL = i18n.dir() === "rtl";
+  const STAGES = [t("stages.main"), t("stages.appeal"), t("stages.cassation")];
 
   useEffect(() => {
     if (data?.data) {
       setCases(data.data);
     }
   }, [data]);
-
 
   const filteredCases = useMemo(() => {
     return cases.filter((c) => {
@@ -67,21 +68,20 @@ export default function ApprovedLawyerPage() {
     setIsDeleteModalOpen(false);
   };
 
-  const sendModificationRequest = async() => {
+  const sendModificationRequest = async () => {
     const msg =
       modificationMessage.trim() === ""
-        ? "Modification requested"
+        ? t("modificationMessage")
         : modificationMessage;
 
     const res = await requestModificationBAL({
       id: selectedCase._id,
       modificationData: { note: msg },
     });
-    toast.success(res?.data?.message || "Modification request sent.");
+    toast.success(res?.data?.message || t("modificationRequestSuccess"));
     closeModal();
     closeModificationModal();
   };
-
 
   const handleDelete = (id) => {
     setCases((prev) => prev.filter((c) => c.id !== id));
@@ -93,7 +93,7 @@ export default function ApprovedLawyerPage() {
       <div className="flex justify-center items-center h-full">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#0B1F3B]"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <p className="mt-4 text-gray-600">{t("loading")}</p>
         </div>
       </div>
     );
@@ -103,22 +103,22 @@ export default function ApprovedLawyerPage() {
     return (
       <div className="flex justify-center items-center h-full">
         <div className="text-red-600 flex items-center gap-2">
-          <p className="text-center text-red-500 text-xl">Failed to load data.</p>
+          <p className="text-center text-red-500 text-xl">{t("failedToLoad")}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className={`space-y-6 ${isRTL ? "lg:mr-[220px]" : "lg:ml-[220px]"}`}>
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
             <FileText size={28} className="text-[#0B1F3B]" />
-            Case Management
+            {t("caseManagement")}
           </h1>
-          <p className="text-sm text-gray-600 mt-1">Review and approve cases assigned to you by the secretary.</p>
+          <p className="text-sm text-gray-600 mt-1">{t("pageDescription")}</p>
         </div>
       </div>
 
@@ -130,7 +130,7 @@ export default function ApprovedLawyerPage() {
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
             <input
               type="text"
-              placeholder="Search by case #, client name, email, or phone..."
+              placeholder={t("searchPlaceholder")}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -143,7 +143,7 @@ export default function ApprovedLawyerPage() {
             onChange={(e) => setFilterStage(e.target.value)}
             className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-transparent"
           >
-            <option value="">All Stages</option>
+            <option value="">{t("allStages")}</option>
             {STAGES.map((s) => (
               <option key={s} value={s}>
                 {s}

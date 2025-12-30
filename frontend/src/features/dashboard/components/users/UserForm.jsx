@@ -1,5 +1,5 @@
-import React from "react";
 import { FaUser, FaEnvelope, FaPhone, FaLock, FaUserTag } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const UserForm = ({
   show,
@@ -9,13 +9,15 @@ const UserForm = ({
   setFormData,
   roles,
 }) => {
+  const { t } = useTranslation("teamviewmodel");
+
   if (!show) return null;
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-[9999]">
       <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200">
         <h3 className="text-2xl font-bold text-[#0B1F3B] mb-6 text-center">
-          Add New User
+          {t("userForm.title")}
         </h3>
 
         <form onSubmit={onSubmit} className="space-y-4">
@@ -23,7 +25,7 @@ const UserForm = ({
           <div className="relative">
             <FaUser className="absolute top-3 left-3 text-gray-400" />
             <input
-              placeholder="Full Name"
+              placeholder={t("userForm.fullName")}
               className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
               value={formData.name}
               onChange={(e) =>
@@ -37,7 +39,7 @@ const UserForm = ({
           <div className="relative">
             <FaEnvelope className="absolute top-3 left-3 text-gray-400" />
             <input
-              placeholder="Email"
+              placeholder={t("userForm.email")}
               type="email"
               className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
               value={formData.email}
@@ -52,7 +54,7 @@ const UserForm = ({
           <div className="relative">
             <FaPhone className="absolute top-3 left-3 text-gray-400" />
             <input
-              placeholder="Phone (e.g., 923120201709 without +)"
+              placeholder={t("userForm.phone")}
               type="text"
               className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
               value={formData.phone}
@@ -64,7 +66,7 @@ const UserForm = ({
               required
             />
             <p className="text-xs text-gray-500 mt-1">
-              📱 Format: 923120201709 (country code + number, no + sign)
+              {t("userForm.phoneFormat")}
             </p>
           </div>
 
@@ -91,7 +93,7 @@ const UserForm = ({
             <FaLock className="absolute top-3 left-3 text-gray-400" />
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t("userForm.password")}
               className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
               value={formData.password}
               onChange={(e) =>
@@ -106,7 +108,7 @@ const UserForm = ({
             <FaLock className="absolute top-3 left-3 text-gray-400" />
             <input
               type="password"
-              placeholder="Confirm Password"
+              placeholder={t("userForm.confirmPassword")}
               className="w-full pl-10 pr-3 py-2 border border-[#0B1F3B] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] transition"
               value={formData.confirmPassword}
               onChange={(e) =>
@@ -123,13 +125,13 @@ const UserForm = ({
               onClick={onClose}
               className="px-5 py-2 bg-[#0B1F3B] cursor-pointer text-white rounded-lg hover:bg-[#0B1F3B] transition"
             >
-              Cancel
+              {t("userForm.cancelButton")}
             </button>
             <button
               type="submit"
-              className="px-5 py-2 bg-white cursor-pointer border border-[#0B1F3B] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 rounded-lg  transition shadow-md"
+              className="px-5 py-2 bg-white cursor-pointer border border-[#0B1F3B] text-gray-800 hover:bg-[#0B1F3B] hover:text-white transition-all duration-200 rounded-lg transition shadow-md"
             >
-              Add
+              {t("userForm.addButton")}
             </button>
           </div>
         </form>

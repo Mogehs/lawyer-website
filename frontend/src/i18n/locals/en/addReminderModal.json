@@ -1,0 +1,32 @@
+{
+  "addReminderModal": {
+    "title": "Add New Reminder",
+    "caseName": "Case Name",
+    "lawyer": "Lawyer (optional depending on type)",
+    "stage": "Stage",
+    "mainCase": "Main Case",
+    "appeal": "Appeal",
+    "cassation": "Cassation",
+    "reminderType": "Reminder Type",
+    "beforeHearing": "Before Hearing",
+    "beforeSubmission": "Before Submission",
+    "beforeJudgment": "Before Judgment",
+    "signaturePending": "Signature Pending",
+    "submissionDeadline": "Submission Deadline",
+    "approvalDelay": "Approval Delay",
+    "archivingPending": "Archiving Pending",
+    "notificationFailure": "Notification Delivery Failure",
+    "performanceAlert": "Performance Alert",
+    "targetRecipient": "Target Recipient",
+    "secretary": "Secretary",
+    "assignedLawyer": "Assigned Lawyer",
+    "allLawyers": "All Lawyers",
+    "approvingLawyer": "Ragab (Approving Lawyer)",
+    "managingDirector": "Managing Director Only",
+    "everyone": "Everyone",
+    "date": "Date",
+    "description": "Additional notes (optional)",
+    "cancelButton": "Cancel",
+    "saveButton": "Save"
+  }
+}

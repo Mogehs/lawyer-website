@@ -1,7 +1,8 @@
-// src/components/DashboardReminders/AddReminderModal.jsx
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const AddReminderModal = ({ onClose, onSubmit }) => {
+  const { t } = useTranslation("addReminderModal");
   const [form, setForm] = useState({
     caseName: "",
     stage: "Main Case",
@@ -24,7 +25,6 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 flex justify-center items-center lg:top-14 z-50">
-      
       {/* Modal Container */}
       <div
         className="bg-[#0B1F3B] text-[#f3f5f6] p-6 rounded-xl shadow-2xl
@@ -33,10 +33,7 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
                    max-h-[90vh] sm:max-h-[80vh]
                    overflow-y-auto"
       >
-
-        <h3 className="text-lg font-semibold text-white mb-4">
-          Add New Reminder
-        </h3>
+        <h3 className="text-lg font-semibold text-white mb-4">{t("addReminderModal.title")}</h3>
 
         <form onSubmit={handleSubmit} className="space-y-3">
 
@@ -44,7 +41,7 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
           <input
             type="text"
             name="caseName"
-            placeholder="Case Name"
+            placeholder={t("addReminderModal.caseName")}
             value={form.caseName}
             onChange={handleChange}
             className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
@@ -54,7 +51,7 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
           <input
             type="text"
             name="lawyer"
-            placeholder="Lawyer (optional depending on type)"
+            placeholder={t("addReminderModal.lawyer")}
             value={form.lawyer}
             onChange={handleChange}
             className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
@@ -67,9 +64,9 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
             onChange={handleChange}
             className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
           >
-            <option>Main Case</option>
-            <option>Appeal</option>
-            <option>Cassation</option>
+            <option>{t("addReminderModal.mainCase")}</option>
+            <option>{t("addReminderModal.appeal")}</option>
+            <option>{t("addReminderModal.cassation")}</option>
           </select>
 
           {/* Reminder Type */}
@@ -79,16 +76,15 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
             onChange={handleChange}
             className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
           >
-            <option>Before Hearing</option>
-            <option>Before Submission</option>
-            <option>Before Judgment</option>
-
-            <option>Signature Pending</option>
-            <option>Submission Deadline</option>
-            <option>Approval Delay</option>
-            <option>Archiving Pending</option>
-            <option>Notification Delivery Failure</option>
-            <option>Performance Alert</option>
+            <option>{t("addReminderModal.beforeHearing")}</option>
+            <option>{t("addReminderModal.beforeSubmission")}</option>
+            <option>{t("addReminderModal.beforeJudgment")}</option>
+            <option>{t("addReminderModal.signaturePending")}</option>
+            <option>{t("addReminderModal.submissionDeadline")}</option>
+            <option>{t("addReminderModal.approvalDelay")}</option>
+            <option>{t("addReminderModal.archivingPending")}</option>
+            <option>{t("addReminderModal.notificationFailure")}</option>
+            <option>{t("addReminderModal.performanceAlert")}</option>
           </select>
 
           {/* Target Recipient */}
@@ -98,12 +94,12 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
             onChange={handleChange}
             className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none"
           >
-            <option>Secretary</option>
-            <option>Assigned Lawyer</option>
-            <option>All Lawyers</option>
-            <option>Ragab (Approving Lawyer)</option>
-            <option>Managing Director Only</option>
-            <option>Everyone</option>
+            <option>{t("addReminderModal.secretary")}</option>
+            <option>{t("addReminderModal.assignedLawyer")}</option>
+            <option>{t("addReminderModal.allLawyers")}</option>
+            <option>{t("addReminderModal.approvingLawyer")}</option>
+            <option>{t("addReminderModal.managingDirector")}</option>
+            <option>{t("addReminderModal.everyone")}</option>
           </select>
 
           {/* Date */}
@@ -118,7 +114,7 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
           {/* Description */}
           <textarea
             name="description"
-            placeholder="Additional notes (optional)"
+            placeholder={t("addReminderModal.description")}
             value={form.description}
             onChange={handleChange}
             className="w-full p-2 rounded-lg text-[#0B1F3B] bg-white border border-[#0B1F3B]/30 focus:outline-none min-h-[80px]"
@@ -132,14 +128,14 @@ const AddReminderModal = ({ onClose, onSubmit }) => {
               className="px-4 py-2 cursor-pointer border border-[#0B1F3B] text-gray-800 bg-white
                          hover:bg-[#0B1F3B] hover:text-white transition-all rounded-lg"
             >
-              Cancel
+              {t("addReminderModal.cancelButton")}
             </button>
 
             <button
               type="submit"
               className="px-4 cursor-pointer text-[#0B1F3B] py-2 bg-[white] hover:bg-[#0B1F3B] rounded-lg hover:text-white"
             >
-              Save
+              {t("addReminderModal.saveButton")}
             </button>
           </div>
 

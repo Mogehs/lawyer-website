@@ -80,6 +80,22 @@ import en_SecReminders from "./locals/en/SecReminders.json";
 import ar_SecReminders from "./locals/ar/SecReminders.json";
 import en_CaseReminder from "./locals/en/CaseReminder.json";
 import ar_CaseReminder from "./locals/ar/CaseReminder.json";
+import en_Sessionmange from "./locals/en/Sessionmange.json";
+import ar_Sessionmange from "./locals/ar/Sessionmange.json";
+import en_Updatecourt from "./locals/en/Updatecourt.json";
+import ar_Updatecourt from "./locals/ar/Updatecourt.json";
+import en_Casemaintable from "./locals/en/Casemaintable.json";
+import ar_Casemaintable from "./locals/ar/Casemaintable.json";
+import en_Casemainfilter from "./locals/en/Casemainfilter.json";
+import ar_Casemainfilter from "./locals/ar/Casemainfilter.json";
+import en_ViewInvoiceModal from "./locals/en/ViewInvoiceModal.json";
+import ar_ViewInvoiceModal from "./locals/ar/ViewInvoiceModal.json";
+import en_SecretaryArchiveCases from "./locals/en/SecretaryArchiveCases.json";
+import ar_SecretaryArchiveCases from "./locals/ar/SecretaryArchiveCases.json";
+import en_ArchiveTable from "./locals/en/ArchiveTable.json";
+import ar_ArchiveTable from "./locals/ar/ArchiveTable.json";
+import en_ArchiveDeletemodal from "./locals/en/ArchiveDeletemodal.json";
+import ar_ArchiveDeletemodal from "./locals/ar/ArchiveDeletemodal.json";
 //  lawyer website translations   
 import en_lawyertopbar from "../i18n/lawyer/en/lawyertopbr.json";
 import ar_lawyertopbarar from "../i18n/lawyer/ar/lawyertopbr.json";
@@ -142,6 +158,14 @@ const resources = {
     CaseDelete: en_CaseDelete,
     ArchiveCase: en_ArchiveCase,
     CaseReminder: en_CaseReminder,
+    Sessionmange: en_Sessionmange,
+    Updatecourt: en_Updatecourt,
+    Casemaintable: en_Casemaintable,
+    Casemainfilter: en_Casemainfilter,
+    ViewInvoiceModal: en_ViewInvoiceModal,
+    SecretaryArchiveCases: en_SecretaryArchiveCases,
+    ArchiveTable: en_ArchiveTable,
+    ArchiveDeletemodal: en_ArchiveDeletemodal,
     // lawyer website translations
     lawyertopbr: en_lawyertopbar,
     lawyersidebar: en_lawyersidebar,
@@ -152,7 +176,7 @@ const resources = {
     archiveheader: en_archiveheader,
     LawyerNotificationsPage: en_LawyerNotificationsPage,
     
-  
+
   },
   ar: {
     topbar: ar_topbar,
@@ -193,6 +217,14 @@ const resources = {
     CaseDelete: ar_CaseDelete,
     ArchiveCase: ar_ArchiveCase,
     CaseReminder: ar_CaseReminder,
+    Sessionmange: ar_Sessionmange,
+    Updatecourt: ar_Updatecourt,
+    Casemaintable: ar_Casemaintable,
+    Casemainfilter: ar_Casemainfilter,
+    ViewInvoiceModal: ar_ViewInvoiceModal,
+    SecretaryArchiveCases: ar_SecretaryArchiveCases,
+    ArchiveTable: ar_ArchiveTable,
+    ArchiveDeletemodal: ar_ArchiveDeletemodal,
     // lawyer website translations
     lawyertopbr: ar_lawyertopbarar,
     lawyersidebar: ar_lawyersidebar,

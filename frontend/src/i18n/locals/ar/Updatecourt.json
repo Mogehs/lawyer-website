@@ -1,0 +1,26 @@
+{
+  "updateCourtCaseId": {
+    "title": "تحديث رقم القضية في المحكمة",
+    "caseLabel": "القضية",
+    "caseType": "نوع القضية",
+    "client": "العميل",
+    "status": "الحالة",
+
+    "courtCaseIdLabel": "رقم القضية في المحكمة",
+    "courtCaseIdPlaceholder": "أدخل رقم القضية المعتمد من المحكمة (مثال: CC-2025-1234)",
+    "courtCaseIdHint": "أدخل رقم القضية الذي تم تعيينه من المحكمة بعد التقديم",
+
+    "currentCourtCaseId": "رقم القضية الحالي في المحكمة",
+    "replaceWarning": "سيؤدي التحديث إلى استبدال رقم القضية الحالي",
+
+    "cancel": "إلغاء",
+    "update": "تحديث رقم القضية",
+    "updating": "جارٍ التحديث...",
+
+    "validationRequired": "يرجى إدخال رقم القضية في المحكمة",
+    "updateSuccess": "تم تحديث رقم القضية في المحكمة بنجاح!",
+    "updateFailed": "فشل في تحديث رقم القضية في المحكمة",
+
+    "notAvailable": "غير متوفر"
+  }
+}

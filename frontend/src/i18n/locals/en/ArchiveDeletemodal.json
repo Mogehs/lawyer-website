@@ -1,0 +1,8 @@
+{
+  "archiveDeleteModal": {
+    "title": "Delete Case?",
+    "message": "Are you sure you want to permanently delete <caseNumber>? This action cannot be undone.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
+  }
+}

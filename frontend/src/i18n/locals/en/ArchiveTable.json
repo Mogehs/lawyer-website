@@ -1,0 +1,19 @@
+{
+  "archiveTable": {
+    "id": "ID",
+    "caseNumber": "Case #",
+    "client": "Client",
+    "phone": "Phone",
+    "email": "Email",
+    "type": "Type",
+    "lawyer": "Lawyer",
+    "date": "Date",
+    "stages": "Stages",
+    "actions": "Actions",
+    "viewButton": "View",
+    "deleteButton": "Delete",
+    "noCasesTitle": "No Archived Cases",
+    "noCasesDescription": "Completed cases will appear here once archived.",
+    "archived": "Archived"
+  }
+}

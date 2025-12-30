@@ -1,0 +1,44 @@
+{
+  "cases": {
+    "noCasesFound": "لا توجد قضايا",
+    "adjustFilters": "حاول تعديل عوامل التصفية أو البحث",
+
+    "table": {
+      "courtId": "رقم القضية",
+      "client": "العميل",
+      "contact": "رقم الاتصال",
+      "type": "نوع القضية",
+      "lawyer": "المحامي",
+      "stage": "المرحلة",
+      "status": "الحالة",
+      "unassigned": "غير مخصص",
+      "notAssigned": "غير مسجل"
+    },
+
+    "stages": {
+      "main": "أساسية",
+      "appeal": "استئناف",
+      "cassation": "نقض"
+    },
+
+    "status": {
+      "pending": "قيد الانتظار",
+      "approved": "موافق عليه",
+      "rejected": "مرفوض",
+      "closed": "مغلقة",
+      "mainStageOngoing": "المرحلة الأساسية جارية",
+      "archived": "مؤرشفة",
+      "readyForSubmission": "جاهزة للتقديم"
+    },
+
+    "actions": {
+      "editCase": "تعديل القضية",
+      "addCourtId": "إضافة رقم القضية",
+      "updateCourtId": "تحديث رقم القضية",
+      "manageSessions": "إدارة الجلسات",
+      "addReminder": "إضافة تذكير",
+      "archiveCase": "أرشفة القضية",
+      "deleteCase": "حذف القضية"
+    }
+  }
+}

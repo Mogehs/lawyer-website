@@ -1,0 +1,23 @@
+{
+  "filters": {
+    "searchLabel": "بحث",
+    "searchPlaceholder": "اسم العميل أو رقم القضية",
+    "statusLabel": "الحالة",
+    "statusOptions": {
+      "all": "كل الحالات",
+      "approved": "معتمدة",
+      "pending": "قيد الانتظار",
+      "rejected": "مرفوضة",
+      "closed": "مغلقة",
+      "mainStageOngoing": "المرحلة الرئيسية جارية",
+      "archived": "مؤرشفة"
+    },
+    "lawyerLabel": "المحامي",
+    "lawyerOptions": {
+      "all": "كل المحامين",
+      "loading": "جارٍ التحميل...",
+      "none": "لا يوجد محامون"
+    },
+    "clearButton": "مسح الفلاتر"
+  }
+}

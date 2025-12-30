@@ -1,0 +1,46 @@
+{
+  "sessionManagement": "Session Management",
+  "createNewSession": "Create New Session",
+  "cannotCreateSession": "Cannot Create New Session",
+  "pendingSessionWarning": "Session #{{number}} is still pending. The assigned lawyer must complete or cancel it before you can create a new session.",
+  "sessionDate": "Session Date",
+  "sessionTime": "Session Time",
+  "location": "Location",
+  "notes": "Notes",
+  "locationPlaceholder": "e.g., Court Room 3, District Court",
+  "notesPlaceholder": "Additional notes about this session...",
+  "createSession": "Create Session",
+  "creating": "Creating...",
+  "previousSessionMustComplete": "Previous Session Must Be Completed",
+
+  "existingSessions": "Existing Sessions",
+  "loadingSessions": "Loading sessions...",
+  "noSessions": "No sessions created yet",
+
+  "sessionNumber": "Session #{{number}}",
+
+  "completed": "Completed",
+  "cancelled": "Cancelled",
+  "memoApproved": "Memo Approved",
+  "underReview": "Under Review",
+  "inProgress": "In Progress",
+  "pendingReview": "Pending Review",
+
+  "reviewedByLawyer": "Reviewed by approving lawyer",
+  "memorandumRequired": "Memorandum required",
+
+  "sessionOutcome": "Session Outcome",
+  "reason": "Reason",
+  "nextSession": "Next Session",
+
+  "delete": "Delete",
+  "deleteConfirm": "Are you sure you want to delete this session?",
+  "deleteNotAllowed": "Cannot delete completed or cancelled sessions",
+  "sessionDeleted": "Session deleted successfully",
+  "sessionCreated": "Session created successfully",
+  "createFailed": "Failed to create session",
+  "deleteFailed": "Failed to delete session",
+
+  "selectSessionDate": "Please select a session date",
+  "close": "Close"
+}

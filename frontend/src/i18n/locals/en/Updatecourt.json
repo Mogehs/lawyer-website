@@ -1,0 +1,26 @@
+{
+  "updateCourtCaseId": {
+    "title": "Update Court Case ID",
+    "caseLabel": "Case",
+    "caseType": "Case Type",
+    "client": "Client",
+    "status": "Status",
+
+    "courtCaseIdLabel": "Court Case ID",
+    "courtCaseIdPlaceholder": "Enter court-assigned case ID (e.g., CC-2025-1234)",
+    "courtCaseIdHint": "Enter the case ID assigned by the court after submission",
+
+    "currentCourtCaseId": "Current Court Case ID",
+    "replaceWarning": "Updating will replace the existing Court Case ID",
+
+    "cancel": "Cancel",
+    "update": "Update Court Case ID",
+    "updating": "Updating...",
+
+    "validationRequired": "Please enter the Court Case ID",
+    "updateSuccess": "Court Case ID updated successfully!",
+    "updateFailed": "Failed to update Court Case ID",
+
+    "notAvailable": "N/A"
+  }
+}

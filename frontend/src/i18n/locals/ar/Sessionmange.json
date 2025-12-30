@@ -1,0 +1,46 @@
+{
+  "sessionManagement": "إدارة الجلسات",
+  "createNewSession": "إنشاء جلسة جديدة",
+  "cannotCreateSession": "لا يمكن إنشاء جلسة جديدة",
+  "pendingSessionWarning": "الجلسة رقم {{number}} ما زالت قيد الانتظار. يجب على المحامي المعيّن إكمالها أو إلغاؤها قبل إنشاء جلسة جديدة.",
+  "sessionDate": "تاريخ الجلسة",
+  "sessionTime": "وقت الجلسة",
+  "location": "الموقع",
+  "notes": "ملاحظات",
+  "locationPlaceholder": "مثال: قاعة المحكمة رقم 3",
+  "notesPlaceholder": "ملاحظات إضافية حول هذه الجلسة...",
+  "createSession": "إنشاء جلسة",
+  "creating": "جارٍ الإنشاء...",
+  "previousSessionMustComplete": "يجب إنهاء الجلسة السابقة أولاً",
+
+  "existingSessions": "الجلسات الحالية",
+  "loadingSessions": "جارٍ تحميل الجلسات...",
+  "noSessions": "لم يتم إنشاء أي جلسات بعد",
+
+  "sessionNumber": "الجلسة رقم {{number}}",
+
+  "completed": "مكتملة",
+  "cancelled": "ملغاة",
+  "memoApproved": "تم اعتماد المذكرة",
+  "underReview": "قيد المراجعة",
+  "inProgress": "قيد التنفيذ",
+  "pendingReview": "بانتظار المراجعة",
+
+  "reviewedByLawyer": "تمت المراجعة من قبل المحامي المعتمد",
+  "memorandumRequired": "المذكرة مطلوبة",
+
+  "sessionOutcome": "نتيجة الجلسة",
+  "reason": "السبب",
+  "nextSession": "الجلسة القادمة",
+
+  "delete": "حذف",
+  "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذه الجلسة؟",
+  "deleteNotAllowed": "لا يمكن حذف الجلسات المكتملة أو الملغاة",
+  "sessionDeleted": "تم حذف الجلسة بنجاح",
+  "sessionCreated": "تم إنشاء الجلسة بنجاح",
+  "createFailed": "فشل في إنشاء الجلسة",
+  "deleteFailed": "فشل في حذف الجلسة",
+
+  "selectSessionDate": "يرجى اختيار تاريخ الجلسة",
+  "close": "إغلاق"
+}

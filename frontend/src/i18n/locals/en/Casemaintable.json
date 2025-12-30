@@ -1,0 +1,44 @@
+{
+  "cases": {
+    "noCasesFound": "No cases found",
+    "adjustFilters": "Try adjusting your filters or search terms",
+
+    "table": {
+      "courtId": "Court ID",
+      "client": "Client",
+      "contact": "Contact",
+      "type": "Type",
+      "lawyer": "Lawyer",
+      "stage": "Stage",
+      "status": "Status",
+      "unassigned": "Unassigned",
+      "notAssigned": "Not Assigned"
+    },
+
+    "stages": {
+      "main": "Main",
+      "appeal": "Appeal",
+      "cassation": "Cassation"
+    },
+
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "closed": "Closed",
+      "mainStageOngoing": "Main Stage Ongoing",
+      "archived": "Archived",
+      "readyForSubmission": "Ready For Submission"
+    },
+
+    "actions": {
+      "editCase": "Edit Case",
+      "addCourtId": "Add Court ID",
+      "updateCourtId": "Update Court ID",
+      "manageSessions": "Manage Sessions",
+      "addReminder": "Add Reminder",
+      "archiveCase": "Archive Case",
+      "deleteCase": "Delete Case"
+    }
+  }
+}

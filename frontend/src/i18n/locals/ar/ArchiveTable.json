@@ -1,0 +1,19 @@
+{
+  "archiveTable": {
+    "id": "المعرف",
+    "caseNumber": "رقم القضية",
+    "client": "العميل",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "type": "النوع",
+    "lawyer": "المحامي",
+    "date": "التاريخ",
+    "stages": "المراحل",
+    "actions": "الإجراءات",
+    "viewButton": "عرض",
+    "deleteButton": "حذف",
+    "noCasesTitle": "لا توجد قضايا مؤرشفة",
+    "noCasesDescription": "ستظهر القضايا المكتملة هنا بعد أرشفتها.",
+    "archived": "مؤرشف"
+  }
+}

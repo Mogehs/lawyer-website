@@ -1,0 +1,8 @@
+{
+  "archiveDeleteModal": {
+    "title": "حذف القضية؟",
+    "message": "هل أنت متأكد من حذف <caseNumber> نهائياً؟ لا يمكن التراجع عن هذا الإجراء.",
+    "cancelButton": "إلغاء",
+    "deleteButton": "حذف"
+  }
+}

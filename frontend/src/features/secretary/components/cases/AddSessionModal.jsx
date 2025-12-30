@@ -1,6 +1,7 @@
 import { X, Calendar, Clock, MapPin, Plus } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 import {
   useCreateSessionMutation,
   useGetSessionsQuery,
@@ -8,6 +9,10 @@ import {
 } from "../../api/secretaryApi";
 
 const AddSessionModal = ({ isOpen, onClose, caseId }) => {
+  const { t, i18n } = useTranslation("Sessionmange");
+
+  const isRTL = i18n.language === "ar";
+
   const [sessionData, setSessionData] = useState({
     sessionDate: "",
     sessionTime: "",
@@ -15,35 +20,34 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
     notes: "",
   });
 
-  const [createSession, { isLoading: creating }] = useCreateSessionMutation();
-  const { data: sessionsData, isLoading: loadingSessions } = useGetSessionsQuery(caseId, {
-    skip: !isOpen,
-  });
+  const [createSession, { isLoading: creating }] =
+    useCreateSessionMutation();
+
+  const { data: sessionsData, isLoading: loadingSessions } =
+    useGetSessionsQuery(caseId, { skip: !isOpen });
+
   const [deleteSession] = useDeleteSessionMutation();
 
   const sessions = sessionsData?.data || [];
 
-  // Check if there's a pending session (not completed or cancelled)
   const hasPendingSession = sessions.some(
-    (session) => session.status !== "COMPLETED" && session.status !== "CANCELLED"
+    (s) => s.status !== "COMPLETED" && s.status !== "CANCELLED"
   );
-  const lastSession = sessions.length > 0 ? sessions[sessions.length - 1] : null;
+
+  const lastSession =
+    sessions.length > 0 ? sessions[sessions.length - 1] : null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!sessionData.sessionDate) {
-      toast.error("Please select a session date");
+      toast.error(t("selectSessionDate"));
       return;
     }
 
     try {
-      await createSession({
-        caseId,
-        sessionData,
-      }).unwrap();
-
-      toast.success("Session created successfully!");
+      await createSession({ caseId, sessionData }).unwrap();
+      toast.success(t("sessionCreated"));
       setSessionData({
         sessionDate: "",
         sessionTime: "",
@@ -51,62 +55,59 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
         notes: "",
       });
     } catch (error) {
-      toast.error(error?.data?.message || "Failed to create session");
+      toast.error(error?.data?.message || t("createFailed"));
     }
   };
 
   const handleDelete = async (sessionId) => {
-    if (!window.confirm("Are you sure you want to delete this session?")) {
-      return;
-    }
+    if (!window.confirm(t("deleteConfirm"))) return;
 
     try {
       await deleteSession({ caseId, sessionId }).unwrap();
-      toast.success("Session deleted successfully!");
+      toast.success(t("sessionDeleted"));
     } catch (error) {
-      toast.error(error?.data?.message || "Failed to delete session");
+      toast.error(error?.data?.message || t("deleteFailed"));
     }
   };
 
   const getStatusBadge = (session) => {
-    if (session.status === "COMPLETED") {
+    const map = {
+      COMPLETED: "completed",
+      CANCELLED: "cancelled",
+    };
+
+    if (map[session.status]) {
       return (
         <span className="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
-          ✓ Completed
+          {t(map[session.status])}
         </span>
       );
     }
-    if (session.status === "CANCELLED") {
-      return (
-        <span className="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-700">
-          ✗ Cancelled
-        </span>
-      );
-    }
-    if (session.memorandum?.status === "APPROVED") {
+
+    if (session.memorandum?.status === "APPROVED")
       return (
         <span className="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
-          ✓ Memo Approved
+          {t("memoApproved")}
         </span>
       );
-    }
-    if (session.memorandum?.status === "SUBMITTED") {
+
+    if (session.memorandum?.status === "SUBMITTED")
       return (
         <span className="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-700">
-          ⏳ Under Review
+          {t("underReview")}
         </span>
       );
-    }
-    if (!session.isLocked) {
+
+    if (!session.isLocked)
       return (
         <span className="px-2 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-700">
-          🔓 In Progress
+          {t("inProgress")}
         </span>
       );
-    }
+
     return (
       <span className="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-700">
-        🔒 Pending Review
+        {t("pendingReview")}
       </span>
     );
   };
@@ -114,238 +115,149 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-xl shadow-2xl">
+    <div
+      dir={isRTL ? "rtl" : "ltr"}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-4"
+    >
+      <div className="bg-white w-full max-w-4xl rounded-xl shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="bg-[#0B1F3B] text-white px-6 py-4 flex justify-between items-center">
-          <h2 className="text-xl font-bold">Session Management</h2>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-white/20 cursor-pointer rounded-lg transition-colors"
-          >
-            <X size={20} />
+        <div className="bg-[#0B1F3B] text-white px-6 py-4 flex justify-between">
+          <h2 className="text-xl font-bold">
+            {t("sessionManagement")}
+          </h2>
+          <button onClick={onClose}>
+            <X />
           </button>
         </div>
 
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-180px)]">
-          {/* Create Session Form */}
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 mb-6 border-2 border-[#0B1F3B]">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Plus size={20} className="text-[#0B1F3B]" />
-              Create New Session
+        <div className="p-6 overflow-y-auto max-h-[70vh]">
+          {/* Create Session */}
+          <div className="border-2 border-[#0B1F3B] rounded-lg p-6 mb-6 bg-blue-50">
+            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <Plus /> {t("createNewSession")}
             </h3>
 
             {hasPendingSession && (
-              <div className="mb-4 p-4 bg-amber-50 border-2 border-amber-400 rounded-lg">
-                <p className="text-sm font-semibold text-amber-800 mb-1">
-                  ⚠️ Cannot Create New Session
-                </p>
-                <p className="text-sm text-amber-700">
-                  Session #{lastSession?.sessionNumber} is still pending. The assigned lawyer must
-                  complete or cancel it before you can create a new session.
+              <div className="mb-4 p-4 bg-amber-100 border border-amber-400 rounded">
+                <strong>{t("cannotCreateSession")}</strong>
+                <p className="text-sm">
+                  {t("pendingSessionWarning", {
+                    number: lastSession?.sessionNumber,
+                  })}
                 </p>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Session Date */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <Calendar size={16} className="inline mr-2" />
-                    Session Date <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="date"
-                    value={sessionData.sessionDate}
-                    onChange={(e) =>
-                      setSessionData({ ...sessionData, sessionDate: e.target.value })
-                    }
-                    className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
-                    required
-                    disabled={hasPendingSession}
-                  />
-                </div>
+              <input
+                type="date"
+                value={sessionData.sessionDate}
+                onChange={(e) =>
+                  setSessionData({
+                    ...sessionData,
+                    sessionDate: e.target.value,
+                  })
+                }
+                disabled={hasPendingSession}
+                className="w-full border rounded p-3"
+              />
 
-                {/* Session Time */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <Clock size={16} className="inline mr-2" />
-                    Session Time
-                  </label>
-                  <input
-                    type="time"
-                    value={sessionData.sessionTime}
-                    onChange={(e) =>
-                      setSessionData({ ...sessionData, sessionTime: e.target.value })
-                    }
-                    className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
-                    disabled={hasPendingSession}
-                  />
-                </div>
-              </div>
+              <input
+                type="time"
+                value={sessionData.sessionTime}
+                onChange={(e) =>
+                  setSessionData({
+                    ...sessionData,
+                    sessionTime: e.target.value,
+                  })
+                }
+                disabled={hasPendingSession}
+                className="w-full border rounded p-3"
+              />
 
-              {/* Location */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  <MapPin size={16} className="inline mr-2" />
-                  Location
-                </label>
-                <input
-                  type="text"
-                  value={sessionData.location}
-                  onChange={(e) =>
-                    setSessionData({ ...sessionData, location: e.target.value })
-                  }
-                  placeholder="e.g., Court Room 3, District Court"
-                  className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
-                  disabled={hasPendingSession}
-                />
-              </div>
+              <input
+                type="text"
+                placeholder={t("locationPlaceholder")}
+                value={sessionData.location}
+                onChange={(e) =>
+                  setSessionData({
+                    ...sessionData,
+                    location: e.target.value,
+                  })
+                }
+                disabled={hasPendingSession}
+                className="w-full border rounded p-3"
+              />
 
-              {/* Notes */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Notes
-                </label>
-                <textarea
-                  value={sessionData.notes}
-                  onChange={(e) =>
-                    setSessionData({ ...sessionData, notes: e.target.value })
-                  }
-                  placeholder="Additional notes about this session..."
-                  rows="3"
-                  className="w-full rounded-lg px-4 py-3 text-base border border-gray-300 bg-white focus:ring-2 focus:ring-[#A48C65] focus:border-transparent resize-y disabled:bg-gray-100 disabled:cursor-not-allowed"
-                  disabled={hasPendingSession}
-                />
-              </div>
+              <textarea
+                rows="3"
+                placeholder={t("notesPlaceholder")}
+                value={sessionData.notes}
+                onChange={(e) =>
+                  setSessionData({
+                    ...sessionData,
+                    notes: e.target.value,
+                  })
+                }
+                disabled={hasPendingSession}
+                className="w-full border rounded p-3"
+              />
 
               <button
-                type="submit"
                 disabled={creating || hasPendingSession}
-                className="w-full py-3 bg-gradient-to-r from-[#BCB083] to-[#A48C65] text-white rounded-lg font-semibold hover:from-[#A48C65] hover:to-[#8B7355] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                className="w-full bg-[#A48C65] text-white py-3 rounded"
               >
-                {creating ? "Creating..." : hasPendingSession ? "Previous Session Must Be Completed" : "Create Session"}
+                {creating
+                  ? t("creating")
+                  : hasPendingSession
+                  ? t("previousSessionMustComplete")
+                  : t("createSession")}
               </button>
             </form>
           </div>
 
-          {/* Existing Sessions */}
-          <div>
-            <h3 className="text-lg font-semibold text-[#0B1F3B] mb-4">
-              Existing Sessions ({sessions.length})
-            </h3>
+          {/* Sessions List */}
+          <h3 className="font-bold mb-3">
+            {t("existingSessions")} ({sessions.length})
+          </h3>
 
-            {loadingSessions ? (
-              <div className="text-center py-8">
-                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#0B1F3B]"></div>
-                <p className="mt-2 text-gray-600">Loading sessions...</p>
+          {loadingSessions ? (
+            <p>{t("loadingSessions")}</p>
+          ) : sessions.length === 0 ? (
+            <p>{t("noSessions")}</p>
+          ) : (
+            sessions.map((session) => (
+              <div
+                key={session._id}
+                className="border p-4 rounded mb-3"
+              >
+                <div className="flex justify-between">
+                  <strong>
+                    {t("sessionNumber", {
+                      number: session.sessionNumber,
+                    })}
+                  </strong>
+                  {getStatusBadge(session)}
+                </div>
+
+                <button
+                  disabled={session.status !== "UPCOMING"}
+                  onClick={() => handleDelete(session._id)}
+                  className="mt-3 bg-red-500 text-white px-4 py-1 rounded disabled:opacity-50"
+                >
+                  {t("delete")}
+                </button>
               </div>
-            ) : sessions.length === 0 ? (
-              <div className="text-center py-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                <Calendar size={48} className="mx-auto text-gray-400 mb-2" />
-                <p className="text-gray-500">No sessions created yet</p>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {sessions.map((session) => (
-                  <div
-                    key={session._id}
-                    className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-[#0B1F3B] transition-all"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h4 className="text-lg font-bold text-gray-900">
-                            Session #{session.sessionNumber}
-                          </h4>
-                          {getStatusBadge(session)}
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-600">
-                          <div className="flex items-center gap-2">
-                            <Calendar size={14} className="text-[#0B1F3B]" />
-                            <span>
-                              {new Date(session.sessionDate).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                              })}
-                            </span>
-                          </div>
-                          {session.sessionTime && (
-                            <div className="flex items-center gap-2">
-                              <Clock size={14} className="text-[#0B1F3B]" />
-                              <span>{session.sessionTime}</span>
-                            </div>
-                          )}
-                          {session.location && (
-                            <div className="flex items-center gap-2">
-                              <MapPin size={14} className="text-[#0B1F3B]" />
-                              <span>{session.location}</span>
-                            </div>
-                          )}
-                        </div>
-
-                        {session.notes && (
-                          <p className="mt-2 text-sm text-gray-600 italic">
-                            "{session.notes}"
-                          </p>
-                        )}
-
-                        {session.reviewedBy && (
-                          <div className="mt-3 p-2 bg-blue-50 rounded text-xs text-blue-800">
-                            ✓ Reviewed by approving lawyer
-                            {session.memorandumRequired && " • Memorandum required"}
-                          </div>
-                        )}
-
-                        {session.outcome && (
-                          <div className="mt-3 p-3 bg-purple-50 rounded-lg border border-purple-200">
-                            <p className="text-sm font-semibold text-purple-900 mb-1">
-                              Session Outcome: {session.outcome}
-                            </p>
-                            {session.reasonForAdjournment && (
-                              <p className="text-xs text-purple-700 mb-1">
-                                Reason: {session.reasonForAdjournment}
-                              </p>
-                            )}
-                            {session.nextSessionDate && (
-                              <p className="text-xs text-purple-700">
-                                Next Session: {new Date(session.nextSessionDate).toLocaleDateString("en-US", {
-                                  year: "numeric",
-                                  month: "long",
-                                  day: "numeric",
-                                })}
-                              </p>
-                            )}
-                          </div>
-                        )}
-                      </div>
-
-                      <button
-                        onClick={() => handleDelete(session._id)}
-                        disabled={session.status !== "UPCOMING"}
-                        className="ml-4 px-3 py-1.5 cursor-pointer bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        title={session.status !== "UPCOMING" ? "Cannot delete completed/cancelled sessions" : "Delete session"}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+            ))
+          )}
         </div>
 
-        {/* Footer */}
-        <div className="border-t border-gray-200 bg-white px-6 py-4">
+        <div className="p-4 border-t">
           <button
             onClick={onClose}
-            className="w-full py-2.5 cursor-pointer border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+            className="w-full border py-2 rounded"
           >
-            Close
+            {t("close")}
           </button>
         </div>
       </div>
@@ -354,4 +266,3 @@ const AddSessionModal = ({ isOpen, onClose, caseId }) => {
 };
 
 export default AddSessionModal;
-

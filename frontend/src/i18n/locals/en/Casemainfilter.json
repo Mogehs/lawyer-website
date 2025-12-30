@@ -1,0 +1,23 @@
+{
+  "filters": {
+    "searchLabel": "Search",
+    "searchPlaceholder": "Client name or Case ID",
+    "statusLabel": "Status",
+    "statusOptions": {
+      "all": "All Status",
+      "approved": "Approved",
+      "pending": "Pending",
+      "rejected": "Rejected",
+      "closed": "Closed",
+      "mainStageOngoing": "Main Stage Ongoing",
+      "archived": "Archived"
+    },
+    "lawyerLabel": "Lawyer",
+    "lawyerOptions": {
+      "all": "All Lawyers",
+      "loading": "Loading...",
+      "none": "No lawyers available"
+    },
+    "clearButton": "Clear Filters"
+  }
+}

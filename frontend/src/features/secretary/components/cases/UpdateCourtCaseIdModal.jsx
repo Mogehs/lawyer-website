@@ -2,15 +2,21 @@ import React, { useState, useEffect } from "react";
 import { X, FileText } from "lucide-react";
 import { useUpdateCourtCaseIdMutation } from "../../api/secretaryApi";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const UpdateCourtCaseIdModal = ({ isOpen, onClose, caseData }) => {
-  const [courtCaseId, setCourtCaseId] = useState("");
-  const [updateCourtCaseId, { isLoading }] = useUpdateCourtCaseIdMutation();
+  const { t, i18n } = useTranslation("Updatecourt");
+  const isRTL = i18n.language === "ar";
 
-  // Update state when modal opens or caseData changes
+  const [courtCaseId, setCourtCaseId] = useState("");
+  const [updateCourtCaseId, { isLoading }] =
+    useUpdateCourtCaseIdMutation();
+
   useEffect(() => {
     if (isOpen && caseData) {
-      setCourtCaseId(caseData.courtCaseId || caseData.case?.courtCaseId || "");
+      setCourtCaseId(
+        caseData.courtCaseId || caseData.case?.courtCaseId || ""
+      );
     }
   }, [isOpen, caseData]);
 
@@ -20,7 +26,7 @@ const UpdateCourtCaseIdModal = ({ isOpen, onClose, caseData }) => {
     e.preventDefault();
 
     if (!courtCaseId.trim()) {
-      toast.error("Please enter the Court Case ID");
+      toast.error(t("updateCourtCaseId.validationRequired"));
       return;
     }
 
@@ -30,15 +36,21 @@ const UpdateCourtCaseIdModal = ({ isOpen, onClose, caseData }) => {
         courtCaseId: courtCaseId.trim(),
       }).unwrap();
 
-      toast.success("Court Case ID updated successfully!");
+      toast.success(t("updateCourtCaseId.updateSuccess"));
       onClose();
     } catch (error) {
-      toast.error(error?.data?.message || "Failed to update Court Case ID");
+      toast.error(
+        error?.data?.message ||
+          t("updateCourtCaseId.updateFailed")
+      );
     }
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+    <div
+      dir={isRTL ? "rtl" : "ltr"}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+    >
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden">
         {/* Header */}
         <div className="bg-[#0B1F3B] px-6 py-4 flex items-center justify-between">
@@ -48,13 +60,15 @@ const UpdateCourtCaseIdModal = ({ isOpen, onClose, caseData }) => {
             </div>
             <div>
               <h2 className="text-white font-semibold text-lg">
-                Update Court Case ID
+                {t("updateCourtCaseId.title")}
               </h2>
               <p className="text-blue-100 text-xs">
-                Case: {caseData?.caseNumber}
+                {t("updateCourtCaseId.caseLabel")}:{" "}
+                {caseData?.caseNumber}
               </p>
             </div>
           </div>
+
           <button
             onClick={onClose}
             className="text-white/80 cursor-pointer hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"
@@ -69,48 +83,68 @@ const UpdateCourtCaseIdModal = ({ isOpen, onClose, caseData }) => {
             {/* Case Information */}
             <div className="bg-[#fffff] border border-[#0B1F3B] rounded-lg p-4 space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-slate-600 font-medium">Case Type:</span>
-                <span className="text-slate-800">{caseData?.caseType}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-600 font-medium">Client:</span>
+                <span className="text-slate-600 font-medium">
+                  {t("updateCourtCaseId.caseType")}:
+                </span>
                 <span className="text-slate-800">
-                  {caseData?.clientId?.name || "N/A"}
+                  {caseData?.caseType}
                 </span>
               </div>
+
               <div className="flex justify-between">
-                <span className="text-slate-600 font-medium">Status:</span>
-                <span className="text-slate-800">{caseData?.status}</span>
+                <span className="text-slate-600 font-medium">
+                  {t("updateCourtCaseId.client")}:
+                </span>
+                <span className="text-slate-800">
+                  {caseData?.clientId?.name ||
+                    t("updateCourtCaseId.notAvailable")}
+                </span>
+              </div>
+
+              <div className="flex justify-between">
+                <span className="text-slate-600 font-medium">
+                  {t("updateCourtCaseId.status")}:
+                </span>
+                <span className="text-slate-800">
+                  {caseData?.status}
+                </span>
               </div>
             </div>
 
             {/* Court Case ID Input */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-slate-700">
-                Court Case ID <span className="text-[#A48C65]">*</span>
+                {t("updateCourtCaseId.courtCaseIdLabel")}{" "}
+                <span className="text-[#A48C65]">*</span>
               </label>
+
               <input
                 type="text"
                 value={courtCaseId}
                 onChange={(e) => setCourtCaseId(e.target.value)}
-                placeholder="Enter court-assigned case ID (e.g., CC-2025-1234)"
+                placeholder={t(
+                  "updateCourtCaseId.courtCaseIdPlaceholder"
+                )}
                 className="w-full px-4 py-2.5 border border-[#0B1F3B] rounded-lg focus:ring-2 focus:ring-[#0B1F3B] focus:border-[#0B1F3B] outline-none transition-all text-sm"
                 required
               />
+
               <p className="text-xs text-[#0B1F3B]">
-                💡 Enter the case ID assigned by the court after submission
+                💡 {t("updateCourtCaseId.courtCaseIdHint")}
               </p>
             </div>
 
-            {/* Current Court Case ID (if exists) */}
+            {/* Current Court Case ID */}
             {caseData?.courtCaseId && (
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
                 <p className="text-xs text-yellow-800 font-medium">
-                  Current Court Case ID:{" "}
-                  <span className="font-bold">{caseData.courtCaseId}</span>
+                  {t("updateCourtCaseId.currentCourtCaseId")}:{" "}
+                  <span className="font-bold">
+                    {caseData.courtCaseId}
+                  </span>
                 </p>
                 <p className="text-xs text-yellow-700 mt-1">
-                  ⚠️ Updating will replace the existing Court Case ID
+                  ⚠️ {t("updateCourtCaseId.replaceWarning")}
                 </p>
               </div>
             )}
@@ -121,25 +155,26 @@ const UpdateCourtCaseIdModal = ({ isOpen, onClose, caseData }) => {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2.5 bg-[#F3F1E7] cursor-pointer text-[#0B1F3B] rounded-lg hover:bg-[#E6E2D9] transition-colors font-medium text-sm"
               disabled={isLoading}
+              className="flex-1 px-4 py-2.5 bg-[#F3F1E7] text-[#0B1F3B] rounded-lg hover:bg-[#E6E2D9] transition-colors font-medium text-sm cursor-pointer"
             >
-              Cancel
+              {t("updateCourtCaseId.cancel")}
             </button>
+
             <button
               type="submit"
               disabled={isLoading}
-              className="flex-1 px-4 py-2.5 bg-[#0B1F3B] cursor-pointer text-white rounded-lg  transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="flex-1 px-4 py-2.5 bg-[#0B1F3B] text-white rounded-lg transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
             >
               {isLoading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Updating...
+                  {t("updateCourtCaseId.updating")}
                 </>
               ) : (
                 <>
                   <FileText size={16} />
-                  Update Court Case ID
+                  {t("updateCourtCaseId.update")}
                 </>
               )}
             </button>

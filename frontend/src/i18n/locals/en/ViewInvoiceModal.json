@@ -1,0 +1,30 @@
+{
+  "invoice": {
+    "title": "Invoice Details",
+    "invoiceNumber": "Invoice Number",
+    "status": {
+      "paid": "Paid",
+      "partially_paid": "Partially Paid",
+      "unpaid": "Unpaid",
+      "overdue": "Overdue"
+    },
+    "clientInfo": "Client Information",
+    "client": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "serviceDescription": "Service Description",
+    "financialDetails": "Financial Details",
+    "totalAmount": "Total Amount",
+    "paidAmount": "Paid Amount",
+    "remainingAmount": "Remaining Amount",
+    "dates": "Dates",
+    "createdDate": "Created Date",
+    "dueDate": "Due Date",
+    "installmentInfo": "This invoice has an installment payment plan",
+    "notes": "Notes",
+    "createdBy": "Created by",
+    "closeButton": "Close"
+  }
+}
